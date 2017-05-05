@@ -1,10 +1,11 @@
 #' TODO
+#' 
 #'@param 
 #'
 #'@author Chariff Alkhassim
 #'
-#'@export 
-
+#'@export
+#
 
 plot_nodes <- function(CytomeTreeObj, nodes=NULL)
 {

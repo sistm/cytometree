@@ -16,6 +16,4 @@ Depends:
     ggplot2,
     Rcpp (>= 0.12.4),
     RcppArmadillo (>= 0.4.320.0)
-RoxygenNote: 5.0.1
-
-
+RoxygenNote: 6.0.1
