@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "GaussMix <- function(x, mu1, mu2, sd1, sd2, pi1, pi2)\n{\n  comp1 <- pi1*dnorm(x, mu1, sd1)\n  comp2 <- pi2*dnorm(x, mu2, sd2)\n  return(comp1 + comp2)\n}",
+    "created" : 1479033718015.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3898254113",
+    "id" : "5ED183AE",
+    "lastKnownWriteTime" : 1479036392,
+    "last_content_update" : 1479036392357,
+    "path" : "~/Cytometree/GaussMix.R",
+    "project_path" : "GaussMix.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

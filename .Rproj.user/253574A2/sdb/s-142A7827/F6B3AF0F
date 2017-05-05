@@ -1,0 +1,16 @@
+{
+    "contents" : "#' TODO\n#'@param \n#'\n#'@author Chariff Alkhassim\n#'\n#'@export \n\n\nplot_nodes <- function(CytomeTreeObj, nodes=NULL)\n{\n  if(class(CytomeTreeObj) != \"CytomeTree\")\n  {\n    stop(\"CytomeTreeObj must be of class CytomeTree\")\n  }\n  if(!is.null(nodes))\n  {\n    if(class(nodes)!=\"character\")\n    {\n      stop(\"nodes must be of class character\")\n    }\n  }\n  pl_list <- CytomeTreeObj$pl_list\n  if(is.null(nodes))\n  {\n    nn<- length(res$pl_list[[1]])\n    for (n in 1:nn)\n    {\n      minxinf <- min(res$pl_list[[1]][[n]]$x)\n      minxsup <- min(res$pl_list[[3]][[n]]$x)  \n      maxxinf <- max(res$pl_list[[1]][[n]]$x)\n      maxxsup <- max(res$pl_list[[3]][[n]]$y)\n      minyinf <- min(res$pl_list[[1]][[n]]$y)\n      minysup <- min(res$pl_list[[3]][[n]]$y)\n      maxyinf <- max(res$pl_list[[1]][[n]]$y)\n      maxysup <- max(res$pl_list[[3]][[n]]$y)\n      plot(res$pl_list[[3]][[n]], \n           xlim=c(min(c(minxinf, minxsup)), max(c(maxxinf, maxxsup))),\n           ylim=c(min(c(minyinf, minysup)), max(c(maxyinf, maxysup))),\n           yaxt = 'n',\n           main =res$pl_list[[2]][[n]],\n           xlab = res$pl_list[[4]][[n]],\n           ylab = \"Density\",\n           col = \"blue\", lwd=2, type=\"l\")\n      lines(res$pl_list[[1]][[n]], col='red', lwd = 2)\n    }\n  }\n  else\n  {\n    treenodes <- unlist(pl_list[[2]])\n    if(sum(nodes%in%treenodes)!=length(nodes))\n    {\n      wstr <- paste(\"nodes\",paste(c(nodes[as.logical(1-nodes%in%treenodes)]), \n                                  collapse=\", \"),\n                    \"are not in the tree\", sep = \" \")\n      stop(wstr)\n    }\n    inds <- which(treenodes%in%nodes)\n    for(ind in inds)\n    {\n      df <- data.frame(x1 = res$pl_list[[3]][[ind]]$x,\n                       y1 = res$pl_list[[3]][[ind]]$y,\n                       x2 = res$pl_list[[1]][[ind]]$x,\n                       y2 = res$pl_list[[1]][[ind]]$y,\n                       Marker = paste0(res$pl_list[[2]][[ind]], \n                                       \"\\n\", res$pl_list[[4]][[ind]]))                           \n      p <- ggplot(df, aes(x = x1, y =  y1,col = \"1\")) +\n        geom_line(lwd = 1)+\n        geom_line(data = df, aes(x = x2, y =  y2, col = \"2\"),\n                  lwd = 1)+  \n        scale_colour_manual(name = \"\",\n                            values = c(\"blue\",\"red\"),\n                            labels = c(\"GM\", \"KDE\"))+ \n        facet_wrap(~ Marker)+\n        theme_bw()+\n        ylab(\"Density\")+\n        xlab(\"Fluorescence\")+\n        theme(legend.position=\"bottom\",\n              axis.text.y=element_blank(),\n              axis.ticks.y=element_blank())\n      print(p)\n    }\n  }\n}\n\n\n\n\n\n",
+    "created" : 1493972889010.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3962037552",
+    "id" : "F6B3AF0F",
+    "lastKnownWriteTime" : 1493970630,
+    "path" : "P:/Git/Cytometree/R/plot_nodes.R",
+    "project_path" : "R/plot_nodes.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

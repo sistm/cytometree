@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\nres <- AnalyseDaliaW26TcellsBtf_new\n\n# res <- get(load(\"AnalyseDaliaW26TcellsBtf_graphCD3.Rdata\"))\n\nfor (i in 1:16)\n{\n  print(clusTag(res[[i]]$labels, res[[i]]$combinations, minCard = 1))\n}\n\nn\n\nres <- AnalyseDaliaW26TcellsBtf_graphCD3[[5]]\n# plot_graph(res$marker_tree, \"Tcells pat 16 w26\")\nclusTag(res$labels, res$combinations, minCard = 1)\n\n\nplot(res$plot_list[[1]][[1]], main = res$plot_list[[2]][[1]])\n\n\nres[[1]]$plot_list\n\npar(mfrow=c(2,2))\n\nlen <- length(res$plot_list[[1]])\nfor (ii in 1:len)\n{\n  pl <- plot(res$plot_list[[3]][[ii]], \n             xlim=c(min(c(min(res$plot_list[[1]][[ii]]$x),min(res$plot_list[[3]][[ii]]$x))),\n                    \n                    max(max(res$plot_list[[1]][[ii]]$x),max(res$plot_list[[3]][[ii]]$x))),\n             ylim=c(min(min(res$plot_list[[1]][[ii]]$y),min(res$plot_list[[3]][[ii]]$y)),\n                    max(max(res$plot_list[[1]][[ii]]$y),max(res$plot_list[[3]][[ii]]$y))),\n             main = res$plot_list[[2]][[ii]],\n             xlab = res$plot_list[[4]][[ii]],ylab = \"Density\",\n             col = \"blue\", lwd=2,type=\"l\")\n  \n  lines(res$plot_list[[1]][[ii]], col='red', lwd = 2)\n  \n  \n}\n\nmin(res$plot_list[[1]][[ii]]$x)\n\n\n\nplot_list[[1]] <- list()\nplot_list[[1]][[label_graph]] <- density(data[,root_ind])\nplot_list[[2]] <- list()\nplot_list[[2]][[label_graph]] <- paste0(col_names[root_ind],\".\",label_graph)\nplot_list[[3]] <- list()\nplot_list[[3]][[label_graph]] <- pl1\nplot_list[[4]] <- list()\nplot_list[[4]][[label_graph]] <- paste(\"N = \", length(data[,root_ind]),\", normICL = \",\n                                       round(EmIclRes$entropie[1],2), sep =\" \")\n\n\n\n\n\n\n\n\nlibrary(igraph)\nplot_graph(res[[1]]$marker_tree, main=\"Tcyto w26 pat 1\")\nc <- clusTag(res[[1]]$labels, res$combinations, minCard = 1)\nc[,9] <- round(c[,9]*100 /sum(c[,9]),4)\nc\n\nplot_graph <- function(marker_tree, main)\n{\n  adj_list <- c()\n  Tree <- marker_tree\n  Tree_level <- length(Tree)\n  for(level in 1:(Tree_level - 1))\n  {\n    cpt <- 1\n    NnodeLevel <- length(Tree[[level]] )\n    \n    for(Nnode in 1:NnodeLevel)\n    {\n      \n      L_son <- Tree[[level + 1]][[cpt]] \n      R_son <- Tree[[level + 1]][[cpt + 1]] \n      cpt <- cpt + 2\n      adj_list <- rbind(adj_list, cbind(Tree[[level]][[Nnode]], c(L_son, R_son),c(\"-\",\"+\")))\n    }\n  }\n  \n  rm <- which(rowSums(is.na(adj_list))>0)\n  adj_list_ <- adj_list[-c(rm),]\n  \n  dat <- data.frame(parent=as.character(adj_list_[,1]), \n                    node=as.character(adj_list_[,2]),text=adj_list_[,3])\n  g <- graph.data.frame(dat)\n  # browser()\n  E(g)$label.cex = 0.4\n  V(g)$label.cex = 0.35\n  plot(g, layout = layout.reingold.tilford, \n       edge.label=E(g)$text, vertex.size=0,\n       vertex.label.dist=-0.15, edge.arrow.size=0.1, main = main)\n}",
+    "created" : 1479037412631.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2522584773",
+    "id" : "3F289093",
+    "lastKnownWriteTime" : 1479038182,
+    "last_content_update" : 1479038182979,
+    "path" : "~/Cytometree/graph3.R",
+    "project_path" : "graph3.R",
+    "properties" : {
+    },
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

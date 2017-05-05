@@ -1,0 +1,16 @@
+{
+    "contents" : "#' TODO\n#'@param \n#'\n#'@author Chariff Alkhassim\n#'\n#'@export \n# \nplot_graph <- function(CytomeTreeObj, Ecex, Ecolor, Vcex, Vcolor, ...)\n{\n  if(class(CytomeTreeObj) != \"CytomeTree\")\n  {\n    stop(\"CytomeTreeObj must be of class CytomeTree\")\n  }\n  Signtree <- unlist(CytomeTreeObj$Signtree)\n  Tree <- CytomeTreeObj$mark_tree\n  Tree_level <- length(Tree)\n  adj_list <- c()\n  for(level in 1:(Tree_level - 1))\n  {\n    cpt <- 1\n    NnodeLevel <- length(Tree[[level]])\n    for(Nnode in 1:NnodeLevel)\n    {\n      L_son <- Tree[[level + 1]][[cpt]] \n      R_son <- Tree[[level + 1]][[cpt + 1]] \n      cpt <- cpt + 2\n      adj_list <- rbind(adj_list, cbind(Tree[[level]][[Nnode]], \n                                        c(L_son, R_son)))\n    }\n  }\n  rm <- which(rowSums(is.na(adj_list))>0)\n  if(length(rm))\n  {\n    adj_list_ <- adj_list[-c(rm),] \n  }\n  else\n  {\n    adj_list_ <- adj_list\n  }\n  rm2 <- which(is.na(Signtree))\n  if(length(rm2))\n  {\n    Signtree_ <- Signtree[-c(rm2)]\n  }\n  else\n  {\n    Signtree_ <- Signtree\n  }\n  g <- graph.data.frame(data.frame(parent=as.character(adj_list_[,1]), \n                                   node=as.character(adj_list_[,2]),\n                                   text=Signtree_[-c(1)]))\n  E(g)$label.cex = Ecex\n  E(g)$color <- Ecolor\n  V(g)$label.cex = Vcex\n  V(g)$color <- Vcolor  \n  plot(g, layout = layout.reingold.tilford(g), ...)\n}\n",
+    "created" : 1493972886544.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3667637353",
+    "id" : "2A77B5C2",
+    "lastKnownWriteTime" : 1493910904,
+    "path" : "P:/Git/Cytometree/R/plot_graph.r",
+    "project_path" : "R/plot_graph.r",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

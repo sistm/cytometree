@@ -1,0 +1,16 @@
+{
+    "contents" : "#'@param \n#'\n#'@author Chariff Alkhassim\n#'\n#'@export \n#'\n\nbootstrapCI <- function(stat,n,alpha){\n  x_bar <- mean(stat)\n  m <- length(stat)\n  x_bar_star <- rowMeans(matrix(sample(stat,m*n,replace=TRUE),ncol=m))\n  delta_star <- sort(x_bar_star) - x_bar\n  percentile_sup <- floor(n*(1-alpha))\n  percentile_inf <- n - percentile_sup\n  inf_val <- x_bar - delta_star[percentile_sup]\n  sup_val <- x_bar - delta_star[percentile_inf]\n  return(list(\"inf\"= inf_val,\"sup\"= sup_val))\n}\n\n\n\n",
+    "created" : 1493972854939.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1263811900",
+    "id" : "DE5BBEEB",
+    "lastKnownWriteTime" : 1493984995,
+    "path" : "P:/Git/Cytometree/R/bootstrapCI.R",
+    "project_path" : "R/bootstrapCI.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

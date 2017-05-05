@@ -1,0 +1,16 @@
+{
+    "contents" : "#' TODO\n#'@param \n#'\n#'@author Chariff Alkhassim\n#'\n#'@export \nKmeansOPT<- function(groups, leaves, labels, data, K)\n{\n  KK <- length(groups)\n  N <- length(labels)\n  varKK <- rep(NA, KK)\n  if(K == 2)\n  {\n    for(kk in 1:KK)\n    {\n      ind1 <- labels%in%leaves[which(groups[[kk]] == 1)]\n      ind2 <- as.logical(1-ind1)\n      n1 <- sum(ind1)\n      n2 <- N-n1\n      g1 <- data[ind1]\n      g2 <- data[ind2]\n      d1 <- sum((mean(g1)-g1)**2)\n      d2 <- sum((mean(g2)-g2)**2)\n      varKK[kk] <- sum(d1, d2) \n    }\n    return(list(\"ind\" = which.min(varKK), \"val\" = min(varKK[kk])))\n  }\n  else if (K == 3)\n  {\n    for(kk in 1:KK)\n    {\n      ind1 <- labels%in%leaves[which(groups[[kk]] == 1)]\n      ind2 <- labels%in%leaves[which(groups[[kk]] == 2)]\n      ind3 <- labels%in%leaves[which(groups[[kk]] == 3)]\n      n1 <- length(ind1)\n      n2 <- length(ind2)\n      n3 <- length(ind3)\n      g1 <- data[ind1]\n      g2 <- data[ind2]\n      g3 <- data[ind3]\n      d1 <- sum((mean(g1)-g1)**2)\n      d2 <- sum((mean(g2)-g2)**2)\n      d3 <- sum((mean(g3)-g3)**2)\n      varKK[kk] <- sum(d1, d2, d3)\n    }\n    return(list(\"ind\" = which.min(varKK), \"val\" = min(varKK[kk])))\n  }\n}",
+    "created" : 1493972844672.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2869566190",
+    "id" : "C121B8E7",
+    "lastKnownWriteTime" : 1493973103,
+    "path" : "P:/Git/Cytometree/R/KmeansOPT.R",
+    "project_path" : "R/KmeansOPT.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

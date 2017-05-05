@@ -1,0 +1,66 @@
+{
+    "debugBreakpointsState" : {
+        "breakpoints" : [
+            {
+                "editor_line_number" : 333,
+                "editor_state" : 2,
+                "function_name" : "BruteForce",
+                "function_steps" : "",
+                "id" : 1,
+                "is_package_breakpoint" : false,
+                "is_pending_debug_completion" : false,
+                "line_number" : 333,
+                "needs_updated_steps" : true,
+                "package_name" : "",
+                "path" : "~/Cytometree/bruteforce.R",
+                "state" : 2,
+                "type" : 0
+            },
+            {
+                "editor_line_number" : 245,
+                "editor_state" : 2,
+                "function_name" : "BruteForce",
+                "function_steps" : "",
+                "id" : 2,
+                "is_package_breakpoint" : false,
+                "is_pending_debug_completion" : false,
+                "line_number" : 245,
+                "needs_updated_steps" : true,
+                "package_name" : "",
+                "path" : "~/Cytometree/bruteforce.R",
+                "state" : 2,
+                "type" : 0
+            },
+            {
+                "editor_line_number" : 260,
+                "editor_state" : 2,
+                "function_name" : "EmSplit",
+                "function_steps" : "",
+                "id" : 4,
+                "is_package_breakpoint" : false,
+                "is_pending_debug_completion" : false,
+                "line_number" : 260,
+                "needs_updated_steps" : true,
+                "package_name" : "",
+                "path" : "~/Cytometree/EmSplit.r",
+                "state" : 2,
+                "type" : 0
+            },
+            {
+                "editor_line_number" : 163,
+                "editor_state" : 1,
+                "function_name" : "toplevel",
+                "function_steps" : "",
+                "id" : 7,
+                "is_package_breakpoint" : false,
+                "is_pending_debug_completion" : false,
+                "line_number" : 163,
+                "needs_updated_steps" : true,
+                "package_name" : "",
+                "path" : "~/BTTF2/Cytometree/flowcap.R",
+                "state" : 1,
+                "type" : 1
+            }
+        ]
+    }
+}

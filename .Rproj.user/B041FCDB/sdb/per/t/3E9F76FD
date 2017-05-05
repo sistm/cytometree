@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "setwd(\"~/GvHD\")\n# ech = iter\nech = 1\n\nsample <- read.csv(paste(\"0\",as.character(ech),\".csv\",sep=\"\"))[,-c(1,2)]\nlabel <- read.csv(paste(\"_0\",as.character(ech),\".csv\",sep=\"\"))[,1]     \nres <- CytomeTree(sample,plot=FALSE,minleaf = 1)\n\nnames(res)\nres$marker_tree\n\ncT<- clusTag(res$labels, res$combinations, minCard = 1)\ncT\n\n\ng <- graph.data.frame(cbind(c(1,1,3,3,2,2),c(2,3,4,6,5,7)))\nplot(g, layout = layout.reingold.tilford, \n     edge.label=E(g)$text)\nplot(g, layout = layout.reingold.tilford, \n     edge.label=E(g)$text)\ndev.off()",
+    "created" : 1479037386007.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "929236316",
+    "id" : "3E9F76FD",
+    "lastKnownWriteTime" : 1477322126,
+    "last_content_update" : 1477322126,
+    "path" : "~/Cytometree/graph2.R",
+    "project_path" : "graph2.R",
+    "properties" : {
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

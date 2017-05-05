@@ -1,0 +1,16 @@
+{
+    "contents" : "\nexport(Annotation)\nexport(bootstrapCI)\nexport(CytomeTree)\nexport(clusTag)\nexport(CytEM)\nexport(FmeasureC)\nexport(FmeasureC_no0)\nexport(Fmeasure_costC)\nexport(Fmeasure_costC_arma)\nexport(KmeansOPT)\nexport(LeafCenters)\nexport(mvnpdfC)\nexport(nmixpdfC)\nexport(Partition2gr)\nexport(Partition3gr)\nexport(plot_graph)\nexport(plot_nodes)\nimport(RcppArmadillo)\nimportFrom(Rcpp,sourceCpp)\nuseDynLib(Cytometree)\n\n",
+    "created" : 1493973233011.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4246467308",
+    "id" : "A6FC0384",
+    "lastKnownWriteTime" : 1493976391,
+    "path" : "P:/Git/Cytometree/NAMESPACE",
+    "project_path" : "NAMESPACE",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_namespace"
+}

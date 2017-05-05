@@ -1,0 +1,44 @@
+[
+    {
+        "definitions" : [
+            {
+                "column" : 8,
+                "file" : "C:/Users/Chariff/Documents/Cytometree/src/FmeasureC.cpp",
+                "kind" : 6,
+                "line" : 30,
+                "name" : "FmeasureC(int, int)",
+                "parent_name" : "",
+                "usr" : "c:@F@FmeasureC#I#I#"
+            },
+            {
+                "column" : 8,
+                "file" : "C:/Users/Chariff/Documents/Cytometree/src/FmeasureC.cpp",
+                "kind" : 6,
+                "line" : 100,
+                "name" : "FmeasureC_no0(int, int)",
+                "parent_name" : "",
+                "usr" : "c:@F@FmeasureC_no0#I#I#"
+            },
+            {
+                "column" : 6,
+                "file" : "C:/Users/Chariff/Documents/Cytometree/src/FmeasureC.cpp",
+                "kind" : 6,
+                "line" : 171,
+                "name" : "Fmeasure_costC(int)",
+                "parent_name" : "",
+                "usr" : "c:@F@Fmeasure_costC#I#"
+            },
+            {
+                "column" : 6,
+                "file" : "C:/Users/Chariff/Documents/Cytometree/src/FmeasureC.cpp",
+                "kind" : 6,
+                "line" : 205,
+                "name" : "Fmeasure_costC_arma(int)",
+                "parent_name" : "",
+                "usr" : "c:@F@Fmeasure_costC_arma#I#"
+            }
+        ],
+        "file" : "C:/Users/Chariff/Documents/Cytometree/src/FmeasureC.cpp",
+        "file_last_write" : 1474285030
+    }
+]

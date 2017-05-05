@@ -1,0 +1,16 @@
+{
+    "contents" : "#' TODO\n#'@param \n#'\n#'@author Chariff Alkhassim\n#'\n#'@export \nPartition2gr <- function(N)\n{\n  Partitions <- list()\n  labelgr1 <- 1\n  labelgr2 <- 2\n  partition <- rep(labelgr2, N)\n  for(i in 1:(N-1))\n  {\n    temp <- partition\n    temp[1:i] <- labelgr1\n    Partitions[[i]] <- temp\n  }\n  Partitions\n}\n",
+    "created" : 1493972842422.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2963788998",
+    "id" : "BF397BB2",
+    "lastKnownWriteTime" : 1490088401,
+    "path" : "P:/Git/Cytometree/R/Partition2gr.r",
+    "project_path" : "R/Partition2gr.r",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
