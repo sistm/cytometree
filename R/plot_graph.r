@@ -5,9 +5,8 @@
 #'
 #'@export 
 # 
-plot_graph <- function(CytomeTreeObj, Ecex = 1, Ecolor = 8, 
-                       Vcex = .8, Vcolor = 2, 
-                       edge.arrow.size=.1, ...)
+plot_graph <- function(CytomeTreeObj, Ecex = 1, Ecolor = 8,
+                       Vcex = .8, Vcolor = 0, ...)
 {
   if(class(CytomeTreeObj) != "CytomeTree")
   {
