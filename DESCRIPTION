@@ -1,4 +1,4 @@
-Package: Cytometree
+Package: cytometree
 Type: Package
 Title: Automated cytometry gating
 Version: 1.0
