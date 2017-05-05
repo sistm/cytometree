@@ -34,6 +34,7 @@ CytomeTree <- function(M, minleaf, D)
   root <- tree <- Signtree <- mark_tree <- marks_left <- rootmarks <- list()
   labels <- rep(0, n)
   label_counter <- label_graph <- level <- 1
+  S_Comp1 <- S_Comp2 <- Mu_Comp1 <- Mu_Comp2 <- vecMar <- vecMarNode <- c()
   CytEMRes <- CytEM(M, 1:n, minleaf, level, D)
   if(is.null(CytEMRes$ind))
   {
