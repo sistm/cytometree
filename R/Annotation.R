@@ -22,7 +22,7 @@ Annotation<- function(CytomeTreeObj, K3markers, plot)
   } 
   M <- CytomeTreeObj$M
   labels <- CytomeTreeObj$labels
-  lc <- LeafCenters(CytomeTreeObj, M)
+  lc <- LeafCenters(CytomeTreeObj)
   len_lab <- length(labels)
   dlc <- dim(lc)
   n <- dlc[1]
