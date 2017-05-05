@@ -26,11 +26,11 @@ CytomeTree <- function(M, minleaf, D)
     stop("M contains NAs")
   }
   combinations <- matrix(NA, n, p)   
-  col_names <- colnames(M)
-  if(is.null(col_names))
+  if(is.null(colnames(M)))
   {
     colnames(M) <- paste0(rep("M",p), 1:p)
   }
+  col_names <- colnames(M)
   colnames(combinations) <- col_names
   root <- tree <- Signtree <- mark_tree <- marks_left <- rootmarks <- list()
   labels <- rep(0, n)
