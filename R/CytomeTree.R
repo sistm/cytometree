@@ -118,7 +118,6 @@ CytomeTree <- function(M, minleaf, D)
         {
           CytEMRes <- CytEM(M[temp_node,mark_left], temp_node, 
                             minleaf, level, D)
-          
           if(is.null(CytEMRes$ind))
           {
             stopping_flag <- stopping_flag + 1
