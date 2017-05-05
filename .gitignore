@@ -48,3 +48,6 @@ Temporary Items
 .Rproj.user
 *.Rproj
 .Rhistory
+*.o
+*.so
+*.dll
