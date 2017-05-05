@@ -5,7 +5,9 @@
 #'
 #'@export 
 # 
-plot_graph <- function(CytomeTreeObj, Ecex, Ecolor, Vcex, Vcolor, ...)
+plot_graph <- function(CytomeTreeObj, Ecex = 1, Ecolor = 8, 
+                       Vcex = .8, Vcolor = 2, 
+                       edge.arrow.size=.1, ...)
 {
   if(class(CytomeTreeObj) != "CytomeTree")
   {
@@ -49,9 +51,9 @@ plot_graph <- function(CytomeTreeObj, Ecex, Ecolor, Vcex, Vcolor, ...)
   g <- graph.data.frame(data.frame(parent=as.character(adj_list_[,1]), 
                                    node=as.character(adj_list_[,2]),
                                    text=Signtree_[-c(1)]))
-  E(g)$label.cex = Ecex
+  E(g)$label.cex <- Ecex
   E(g)$color <- Ecolor
-  V(g)$label.cex = Vcex
+  V(g)$label.cex <- Vcex
   V(g)$color <- Vcolor  
-  plot(g, layout = layout.reingold.tilford(g), ...)
+  plot(g, layout = layout.reingold.tilford(g),edge.label=E(g)$text, ...)
 }
