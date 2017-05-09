@@ -1,10 +1,3 @@
-#' TODO
-#'@param 
-#'
-#'@author Chariff Alkhassim
-#'
-#'@export 
-#
 Partition2gr <- function(N)
 {
   Partitions <- list()

@@ -4,11 +4,15 @@
         "-IC:/RBuildTools/3.1/mingw_64/x86_64-w64-mingw32/include",
         "-IC:/RBuildTools/3.1/mingw_64/x86_64-w64-mingw32/include/c++",
         "-IC:/RBuildTools/3.1/mingw_64/x86_64-w64-mingw32/include/c++/x86_64-w64-mingw32",
+        "-IC:/Users/Chariff/Documents/R/win-library/3.3/Rcpp/include",
+        "-IC:/Users/Chariff/Documents/R/win-library/3.3/RcppArmadillo/include",
         "-IC:/PROGRA~1/R/R-33~1.1/include",
+        "-DNDEBUG",
+        "-fopenmp",
         "-DNDEBUG",
         "-Id:/Compiler/gcc-4.9.3/local330/include"
     ],
-    "hash" : "1474286602",
+    "hash" : "149399863014546665021454666502",
     "is_cpp" : true,
-    "pch" : ""
+    "pch" : "Rcpp"
 }

@@ -1,6 +1,11 @@
-#' TODO
+#' Plot the distribution of the observed cells at each node 
+#' of the binary tree built using CytomeTree.
 #' 
-#'@param 
+#'@param CytomeTreeObj An object of class CytomeTree.
+#'
+#'@param nodes A vector of class character containing the name of
+#'nodes for which the distribution is to be plotted. Default is 
+#'\code{NULL}, and plots the distribution of each node.  
 #'
 #'@author Chariff Alkhassim
 #'

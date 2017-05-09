@@ -1,9 +1,3 @@
-#' TODO
-#'@param 
-#'
-#'@author Chariff Alkhassim
-#'
-#'@export 
 KmeansOPT<- function(groups, leaves, labels, data, K)
 {
   KK <- length(groups)

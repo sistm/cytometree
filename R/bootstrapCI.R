@@ -1,11 +1,13 @@
-#'Bootstrapped Confidence Interval
+#'Bootstrapped Confidence Interval.
 #'
-#'@param stat
+#'@param stat A numeric vector of statistics for which to compute a 
+#'Confidence Interval.
 #'
-#'@param alpha bewteen 0 and 1 : 1 - desired confidence level
+#'@param alpha A real number comprised in ]0, 1[ : 
+#'1 - desired confidence level.
 #'
-#'@param n an integer giving the number of bootstrap sample to use for computing 
-#'the CI  
+#'@param n An integer giving the number of bootstrap sample to use for computing 
+#'the CI.
 #'
 #'@author Chariff Alkhassim
 #'

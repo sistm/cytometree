@@ -40,5 +40,77 @@
         ],
         "file" : "C:/Users/Chariff/Documents/Cytometree/src/FmeasureC.cpp",
         "file_last_write" : 1474285030
+    },
+    {
+        "definitions" : [
+            {
+                "column" : 8,
+                "file" : "C:/Users/Chariff/Documents/Git/Cytometree/src/FmeasureC.cpp",
+                "kind" : 6,
+                "line" : 30,
+                "name" : "FmeasureC(NumericVector, NumericVector)",
+                "parent_name" : "",
+                "usr" : "c:@F@FmeasureC#$@N@Rcpp@C@Vector>#VI14#@N@Rcpp@CT>1#T@PreserveStorage#S0_#"
+            },
+            {
+                "column" : 8,
+                "file" : "C:/Users/Chariff/Documents/Git/Cytometree/src/FmeasureC.cpp",
+                "kind" : 6,
+                "line" : 100,
+                "name" : "FmeasureC_no0(NumericVector, NumericVector)",
+                "parent_name" : "",
+                "usr" : "c:@F@FmeasureC_no0#$@N@Rcpp@C@Vector>#VI14#@N@Rcpp@CT>1#T@PreserveStorage#S0_#"
+            },
+            {
+                "column" : 6,
+                "file" : "C:/Users/Chariff/Documents/Git/Cytometree/src/FmeasureC.cpp",
+                "kind" : 6,
+                "line" : 171,
+                "name" : "Fmeasure_costC(NumericMatrix)",
+                "parent_name" : "",
+                "usr" : "c:@F@Fmeasure_costC#$@N@Rcpp@C@Matrix>#VI14#@N@Rcpp@CT>1#T@PreserveStorage#"
+            },
+            {
+                "column" : 6,
+                "file" : "C:/Users/Chariff/Documents/Git/Cytometree/src/FmeasureC.cpp",
+                "kind" : 6,
+                "line" : 205,
+                "name" : "Fmeasure_costC_arma(arma::mat)",
+                "parent_name" : "",
+                "usr" : "c:@F@Fmeasure_costC_arma#$@N@arma@C@Mat>#d#"
+            }
+        ],
+        "file" : "C:/Users/Chariff/Documents/Git/Cytometree/src/FmeasureC.cpp",
+        "file_last_write" : 1474285030
+    },
+    {
+        "definitions" : [
+            {
+                "column" : 15,
+                "file" : "C:/Users/Chariff/Documents/Git/Cytometree/src/mvnpdfC.cpp",
+                "kind" : 6,
+                "line" : 7,
+                "name" : "mvnpdfC(NumericVector, double, double, bool)",
+                "parent_name" : "",
+                "usr" : "c:@F@mvnpdfC#$@N@Rcpp@C@Vector>#VI14#@N@Rcpp@CT>1#T@PreserveStorage#d#d#b#"
+            }
+        ],
+        "file" : "C:/Users/Chariff/Documents/Git/Cytometree/src/mvnpdfC.cpp",
+        "file_last_write" : 1493997432
+    },
+    {
+        "definitions" : [
+            {
+                "column" : 15,
+                "file" : "C:/Users/Chariff/Documents/Git/Cytometree/src/nmixpdfC.cpp",
+                "kind" : 6,
+                "line" : 7,
+                "name" : "nmixpdfC(NumericVector, NumericVector, NumericVector, NumericVector, bool)",
+                "parent_name" : "",
+                "usr" : "c:@F@nmixpdfC#$@N@Rcpp@C@Vector>#VI14#@N@Rcpp@CT>1#T@PreserveStorage#S0_#S0_#S0_#b#"
+            }
+        ],
+        "file" : "C:/Users/Chariff/Documents/Git/Cytometree/src/nmixpdfC.cpp",
+        "file_last_write" : 1493997432
     }
 ]

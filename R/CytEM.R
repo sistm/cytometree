@@ -1,11 +1,3 @@
-#' TODO
-#'@param 
-#'
-#'@author Chariff Alkhassim
-#'
-#'@export 
-# 
-
 CytEM <- function(M, indices, minleaf, level, D)
 {
   if(class(M)!="matrix")

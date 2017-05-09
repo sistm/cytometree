@@ -1,18 +1,33 @@
-#' TODO
+#' Annotates cell populations found using CytomeTree. 
 #' 
-#'@param 
+#'@param CytomeTreeObj An object of class CytomeTree
+#'
+#'@param K3markers A vector of class character where names of the markers
+#'for which 3 levels of expression are seeked can be specified.
+#'Default is \code{NULL} i.e. 2 levels of expression per marker. 
+#'
+#'@param plot A logical value indicating whether or not to plot the 
+#'partitioning in 2 or 3 groups for each marker. Default is \code{TRUE}.
+#'
+#'@return A \code{data.frame} containing the annotation of each 
+#'cell population. 
+#'
+#'@details The algorithm is set to find the partitioning in 2 or
+#' 3 groups of cell populations found using CytomeTree. It minimize 
+#' the within-cluster sum of squares of the observed values on each
+#' marker. 
 #'
 #'@author Chariff Alkhassim
 #'
 #'@export 
-# 
 
 
-Annotation<- function(CytomeTreeObj, K3markers, plot)
+
+Annotation<- function(CytomeTreeObj, K3markers = NULL, plot = TRUE)
 {
   if(class(CytomeTreeObj) != "CytomeTree")
   {
-    stop("CytomeTreeObj must be of class CytomeTree")
+    stop("CytometreeObj must be of class CytomeTree")
   }
   if(!is.null(K3markers))
   {
@@ -33,7 +48,7 @@ Annotation<- function(CytomeTreeObj, K3markers, plot)
   combinations <- cbind(matrix(0, ncol = (p-1), nrow = n), 1:n)
   if(n == 1) 
   {
-    stop("CytomeTree didn't find any population")
+    stop("cytomeTree didn't find any population")
   }
   else 
   {
@@ -78,7 +93,8 @@ Annotation<- function(CytomeTreeObj, K3markers, plot)
                                  Fluorescence, 
                                  fill = Expression ))
           suppressWarnings(print(p + ggtitle(cnames[j]) + 
-                                   geom_boxplot(outlier.shape = NA, alpha = 1/3)+
+                                   geom_boxplot(outlier.shape = NA, 
+                                                alpha = 1/3)+
                                    scale_fill_manual(values = c("red","blue"),
                                                      name = "Annotation",
                                                      labels = c("Hi","Low"))))
@@ -118,7 +134,8 @@ Annotation<- function(CytomeTreeObj, K3markers, plot)
   tblabels <- table(labels)
   combinations <- cbind(combinations, table(labels), round(tblabels/len_lab,4))
   colnames(combinations) <- c(cnames, "leaves", "count", "prop")
-  as.data.frame(combinations)
+  as.data.frame(combinations[sort(combinations[,"count"], TRUE,
+                                  index.return=TRUE)$ix,])
 }
 
 

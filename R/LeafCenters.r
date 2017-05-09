@@ -1,15 +1,7 @@
-#' TODO
-#'@param 
-#'
-#'@author Chariff Alkhassim
-#'
-#'@export 
-# 
-
-LeafCenters <- function(CytomeTreeObj)
+LeafCenters <- function(cytomeTreeObj)
 {
-  M <- CytomeTreeObj$M 
-  labels <- CytomeTreeObj$labels
+  M <- cytomeTreeObj$M 
+  labels <- cytomeTreeObj$labels
   nmar <- ncol(M)
   out <- c()
   Labels <- sort(unique(labels))

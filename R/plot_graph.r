@@ -1,5 +1,18 @@
-#' TODO
-#'@param 
+#' Plot the binary tree built using CytomeTree.
+#' 
+#'@param CytomeTreeObj An object of class CytomeTree.
+#'
+#'@param Ecex Number indicating the amount by which plotting text
+#'on the edges should be scaled. Default is \code{1}.
+#'
+#'@param Ecolor An intger or a string of character
+#'to color edges of the graph.  Default is \code{8}.
+#'
+#'@param Vcex Number indicating the amount by which plotting text
+#'in the vertices should be scaled.  Default is \code{.8}.  
+#'
+#'@param Vcolor A vector of class numeric or character to color
+#'vertices of the graph. Default is \code{0}.
 #'
 #'@author Chariff Alkhassim
 #'
@@ -12,7 +25,6 @@ plot_graph <- function(CytomeTreeObj, Ecex = 1, Ecolor = 8,
   {
     stop("CytomeTreeObj must be of class CytomeTree")
   }
-  Signtree <- unlist(CytomeTreeObj$Signtree)
   Tree <- CytomeTreeObj$mark_tree
   Tree_level <- length(Tree)
   adj_list <- c()
@@ -22,11 +34,12 @@ plot_graph <- function(CytomeTreeObj, Ecex = 1, Ecolor = 8,
     NnodeLevel <- length(Tree[[level]])
     for(Nnode in 1:NnodeLevel)
     {
-      L_son <- Tree[[level + 1]][[cpt]] 
-      R_son <- Tree[[level + 1]][[cpt + 1]] 
+      L_child <- Tree[[level + 1]][[cpt]] 
+      R_child <- Tree[[level + 1]][[cpt + 1]] 
       cpt <- cpt + 2
       adj_list <- rbind(adj_list, cbind(Tree[[level]][[Nnode]], 
-                                        c(L_son, R_son)))
+                                        c(L_child, R_child),
+                                        c("-","+")))
     }
   }
   rm <- which(rowSums(is.na(adj_list))>0)
@@ -38,18 +51,9 @@ plot_graph <- function(CytomeTreeObj, Ecex = 1, Ecolor = 8,
   {
     adj_list_ <- adj_list
   }
-  rm2 <- which(is.na(Signtree))
-  if(length(rm2))
-  {
-    Signtree_ <- Signtree[-c(rm2)]
-  }
-  else
-  {
-    Signtree_ <- Signtree
-  }
   g <- graph.data.frame(data.frame(parent=as.character(adj_list_[,1]), 
                                    node=as.character(adj_list_[,2]),
-                                   text=Signtree_[-c(1)]))
+                                   text=adj_list_[,3]))
   E(g)$label.cex <- Ecex
   E(g)$color <- Ecolor
   V(g)$label.cex <- Vcex
