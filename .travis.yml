@@ -1,0 +1,23 @@
+language: R
+
+cache: packages
+
+r: 
+  - release
+- devel
+
+
+r_packages:
+  - ggplot2
+- igraph
+- mclust
+- Rcpp
+- RcppArmadillo
+
+
+r_build_args: "--html"
+
+r_check_args: "--as-cran --timings"
+
+
+
