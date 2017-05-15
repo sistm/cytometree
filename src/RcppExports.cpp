@@ -30,28 +30,6 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// Fmeasure_costC
-List Fmeasure_costC(NumericMatrix c);
-RcppExport SEXP cytometree_Fmeasure_costC(SEXP cSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< NumericMatrix >::type c(cSEXP);
-    __result = Rcpp::wrap(Fmeasure_costC(c));
-    return __result;
-END_RCPP
-}
-// Fmeasure_costC_arma
-List Fmeasure_costC_arma(arma::mat c);
-RcppExport SEXP cytometree_Fmeasure_costC_arma(SEXP cSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< arma::mat >::type c(cSEXP);
-    __result = Rcpp::wrap(Fmeasure_costC_arma(c));
-    return __result;
-END_RCPP
-}
 // mvnpdfC
 NumericVector mvnpdfC(NumericVector x, double mean, double var, bool Log);
 RcppExport SEXP cytometree_mvnpdfC(SEXP xSEXP, SEXP meanSEXP, SEXP varSEXP, SEXP LogSEXP) {

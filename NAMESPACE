@@ -3,9 +3,23 @@ export(Annotation)
 export(CytomeTree)
 export(FmeasureC)
 export(FmeasureC_no0)
-export(Fmeasure_costC)
-export(Fmeasure_costC_arma)
 export(bootstrapCI)
 export(plot_graph)
 export(plot_nodes)
+import(ggplot2)
+import(igraph)
+import(mclust)
+import(Rcpp)
+import(RcppArmadillo)
+importFrom(graphics, lines)
+importFrom(graphics, plot)
+importFrom(stats, density)
+importFrom(stats, dnorm)
+importFrom(stats, var)
+
 useDynLib(cytometree, .registration = TRUE)
+
+
+
+
+
