@@ -6,8 +6,8 @@ Date: 2017-05-17
 Author: Alkhassim Chariff
 Maintainer: Alkhassim Chariff <chariff.alkhassim@gmail.com>
 LinkingTo: Rcpp, RcppArmadillo
-Description: TODO
-License: GPL (>= 2)
+Description: Implementation of a binary tree, the nodes of which are subpopulations of cells.
+License: LGPL-3 | file LICENSE
 LazyData: true
 Depends:
     R (>= 3.1.0),
