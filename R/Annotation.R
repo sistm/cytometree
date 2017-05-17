@@ -38,7 +38,7 @@ Annotation<- function(CytomeTreeObj, K3markers = NULL, plot = TRUE)
   } 
   M <- CytomeTreeObj$M
   labels <- CytomeTreeObj$labels
-  lc <- LeafCenters(CytomeTreeObj)
+  lc <- LeavesCenters(CytomeTreeObj)
   len_lab <- length(labels)
   dlc <- dim(lc)
   n <- dlc[1]
@@ -89,9 +89,9 @@ Annotation<- function(CytomeTreeObj, K3markers = NULL, plot = TRUE)
                                                 as.character(leavesSort)), 
                               Fluorescence = M[,j], 
                               Expression = as.factor(Expression))
-          p <- ggplot(dfbox, aes(Leaves, 
-                                 Fluorescence, 
-                                 fill = Expression ))
+          p <- ggplot(dfbox, aes_string("Leaves", 
+                                 "Fluorescence", 
+                                 fill = "Expression" ))
           suppressWarnings(print(p + ggtitle(cnames[j]) + 
                                    geom_boxplot(outlier.shape = NA, 
                                                 alpha = 1/3)+
@@ -115,9 +115,9 @@ Annotation<- function(CytomeTreeObj, K3markers = NULL, plot = TRUE)
                                                 as.character(leavesSort)), 
                               Fluorescence = M[,j], 
                               Expression = as.factor(Expression))
-          p <- ggplot(dfbox, aes(Leaves, 
-                                 Fluorescence, 
-                                 fill = Expression ))
+          p <- ggplot(dfbox, aes_string("Leaves", 
+                                 "Fluorescence", 
+                                 fill = "Expression" ))
           suppressWarnings(print(p + ggtitle(cnames[j]) + 
                                    geom_boxplot(outlier.shape = NA, 
                                                 alpha = 1/3)+

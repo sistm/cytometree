@@ -21,6 +21,8 @@ in the vertices should be scaled.  Default is \code{.8}.}
 
 \item{Vcolor}{A vector of class numeric or character to color
 vertices of the graph. Default is \code{0}.}
+
+\item{...}{additional arguments to be passed to \code{\link{plot_graph}}}
 }
 \description{
 Plot the binary tree built using CytomeTree.

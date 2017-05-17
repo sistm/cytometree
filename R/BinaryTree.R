@@ -1,4 +1,4 @@
-BinaryTree <- function(M, minleaf = 1, D = .1)
+BinaryTree <- function(M, minleaf = 1, t = .1)
 {
   n <- nrow(M)
   p <- ncol(M)
@@ -13,7 +13,7 @@ BinaryTree <- function(M, minleaf = 1, D = .1)
   labels <- rep(0, n)
   label_counter <- label_graph <- level <- 1
   S_Comp1 <- S_Comp2 <- Mu_Comp1 <- Mu_Comp2 <- vecMar <- vecMarNode <- c()
-  CytEMRes <- CytEM(M, 1:n, minleaf, level, D)
+  CytEMRes <- CytEM(M, 1:n, minleaf, level, t)
   if(is.null(CytEMRes$ind))
   {
     return(list("labels"= rep(1, n), "Signtree" = Signtree))
@@ -38,7 +38,7 @@ BinaryTree <- function(M, minleaf = 1, D = .1)
   pl_list[[1]][[label_graph]] <- KDE
   pl_list[[2]][[label_graph]] <- paste0(col_names[root_ind],".",label_graph)
   pl_list[[3]][[label_graph]] <- GMM
-  pl_list[[4]][[label_graph]] <- paste("n =", n,"nAIC =",
+  pl_list[[4]][[label_graph]] <- paste(paste0("n",label_graph), "=", n,"D =",
                                        round(CytEMRes$nAIC[1],2), sep =" ")
   cste1maxlevel <- log(n + 1)
   cste2maxlevel <- log(2)
@@ -58,8 +58,8 @@ BinaryTree <- function(M, minleaf = 1, D = .1)
       if(level==1)
       {
         flag_child <- 1
-        L_child <- CytEMRes$child$G
-        R_child <- CytEMRes$child$D
+        L_child <- CytEMRes$child$L
+        R_child <- CytEMRes$child$R
         combinations[L_child,root_ind] <- 0
         combinations[R_child,root_ind] <- 1 
       }
@@ -91,7 +91,7 @@ BinaryTree <- function(M, minleaf = 1, D = .1)
         else
         {
           CytEMRes <- CytEM(M[temp_node,mark_left], temp_node, 
-                            minleaf, level, D)
+                            minleaf, level, t)
           if(is.null(CytEMRes$ind))
           {
             stopping_flag <- stopping_flag + 1
@@ -123,8 +123,8 @@ BinaryTree <- function(M, minleaf = 1, D = .1)
             mark_left <- mark_left[temp_mar_res]
             flag_mark_left <- length(mark_left)
             flag_child <- 1
-            L_child <- CytEMRes$child$G
-            R_child <- CytEMRes$child$D
+            L_child <- CytEMRes$child$L
+            R_child <- CytEMRes$child$R
             combinations[L_child,ind] <- 0
             combinations[R_child,ind] <- 1
             KDE <- density(M[temp_node,ind], n = len_data_plot)
@@ -134,10 +134,11 @@ BinaryTree <- function(M, minleaf = 1, D = .1)
                                 sqrt(CytEMRes$Var1), sqrt(CytEMRes$Var2),
                                 CytEMRes$pi1, CytEMRes$pi2)
             pl_list[[1]][[label_graph]] <- KDE
-            pl_list[[2]][[label_graph]] <- paste0(col_names[ind],".",label_graph)
+            pl_list[[2]][[label_graph]] <- paste0(col_names[ind],".",
+                                                  label_graph)
             pl_list[[3]][[label_graph]] <- GMM
-            pl_list[[4]][[label_graph]] <- paste("n =", length(temp_node),
-                                                 "nAIC =", 
+            pl_list[[4]][[label_graph]] <- paste(paste0("n",label_graph), "=", 
+                                                 length(temp_node),"D =",
                                                  round(CytEMRes$nAIC[1],2), 
                                                  sep =" ")
           } 

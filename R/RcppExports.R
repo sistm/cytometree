@@ -26,11 +26,3 @@ FmeasureC_no0 <- function(pred, ref) {
     .Call('cytometree_FmeasureC_no0', PACKAGE = 'cytometree', pred, ref)
 }
 
-mvnpdfC <- function(x, mean, var, Log = TRUE) {
-    .Call('cytometree_mvnpdfC', PACKAGE = 'cytometree', x, mean, var, Log)
-}
-
-nmixpdfC <- function(x, mu, Sigma, Pi, Log = TRUE) {
-    .Call('cytometree_nmixpdfC', PACKAGE = 'cytometree', x, mu, Sigma, Pi, Log)
-}
-

@@ -4,7 +4,7 @@
 \alias{CytomeTree}
 \title{Binary tree algorithm for cytometry data analysis.}
 \usage{
-CytomeTree(M, minleaf = 1, D = 0.1)
+CytomeTree(M, minleaf = 1, t = 0.1)
 }
 \arguments{
 \item{M}{A matrix of size n x p containing cytometry measures
@@ -13,7 +13,7 @@ of n cells on p markers.}
 \item{minleaf}{An integer indicating the minimum number of cell
 per population. Default is \code{1}.}
 
-\item{D}{A real positive-or-null number used for comparison with
+\item{t}{A real positive-or-null number used for comparison with
 the normalized AIC computed at each node of the tree.
 A higher values limits the height of the tree.}
 }

@@ -1,7 +1,7 @@
 clusTag <- function(labels, combinations, Annotate)
 {  
-  unilabels <- sort(unique(labels))
   out <- c()
+  unilabels <- sort(unique(labels))
   for(label in unilabels)
   {
     ind <- labels==label

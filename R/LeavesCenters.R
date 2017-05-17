@@ -1,9 +1,9 @@
-LeafCenters <- function(cytomeTreeObj)
+LeavesCenters <- function(cytomeTreeObj)
 {
+  out <- c()
   M <- cytomeTreeObj$M 
   labels <- cytomeTreeObj$labels
   nmar <- ncol(M)
-  out <- c()
   Labels <- sort(unique(labels))
   for(mar in 1:nmar)
   {

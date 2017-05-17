@@ -14,6 +14,8 @@
 #'@param Vcolor A vector of class numeric or character to color
 #'vertices of the graph. Default is \code{0}.
 #'
+#'@param ... additional arguments to be passed to \code{\link{plot_graph}}
+#'
 #'@author Chariff Alkhassim
 #'
 #'@export 

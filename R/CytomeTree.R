@@ -6,7 +6,7 @@
 #'@param minleaf An integer indicating the minimum number of cell
 #'per population. Default is \code{1}.
 #'
-#'@param D A real positive-or-null number used for comparison with
+#'@param t A real positive-or-null number used for comparison with
 #'the normalized AIC computed at each node of the tree.
 #'A higher values limits the height of the tree. 
 #'
@@ -31,7 +31,7 @@
 #'
 #'@export 
 # 
-CytomeTree <- function(M, minleaf = 1, D = .1)
+CytomeTree <- function(M, minleaf = 1, t = .1)
 {
   if((class(M) != "matrix") & (class(M) != "data.frame"))
   {
@@ -50,7 +50,7 @@ CytomeTree <- function(M, minleaf = 1, D = .1)
   {
     stop("M contains NAs")
   }
-  BT <- BinaryTree(M, minleaf, D)
+  BT <- BinaryTree(M, minleaf, t)
   Tree <- list("M" = M, "labels" = BT$labels,
                "pl_list"= BT$pl_list,
                "mark_tree" = BT$mark_tree,

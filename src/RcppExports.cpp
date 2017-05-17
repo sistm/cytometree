@@ -30,32 +30,3 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// mvnpdfC
-NumericVector mvnpdfC(NumericVector x, double mean, double var, bool Log);
-RcppExport SEXP cytometree_mvnpdfC(SEXP xSEXP, SEXP meanSEXP, SEXP varSEXP, SEXP LogSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< double >::type mean(meanSEXP);
-    Rcpp::traits::input_parameter< double >::type var(varSEXP);
-    Rcpp::traits::input_parameter< bool >::type Log(LogSEXP);
-    __result = Rcpp::wrap(mvnpdfC(x, mean, var, Log));
-    return __result;
-END_RCPP
-}
-// nmixpdfC
-NumericVector nmixpdfC(NumericVector x, NumericVector mu, NumericVector Sigma, NumericVector Pi, bool Log);
-RcppExport SEXP cytometree_nmixpdfC(SEXP xSEXP, SEXP muSEXP, SEXP SigmaSEXP, SEXP PiSEXP, SEXP LogSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type mu(muSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type Sigma(SigmaSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type Pi(PiSEXP);
-    Rcpp::traits::input_parameter< bool >::type Log(LogSEXP);
-    __result = Rcpp::wrap(nmixpdfC(x, mu, Sigma, Pi, Log));
-    return __result;
-END_RCPP
-}

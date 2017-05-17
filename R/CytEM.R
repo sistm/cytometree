@@ -1,4 +1,4 @@
-CytEM <- function(M, indices, minleaf, level, D)
+CytEM <- function(M, indices, minleaf, level, t)
 {
   if(class(M)!="matrix")
   {
@@ -22,7 +22,7 @@ CytEM <- function(M, indices, minleaf, level, D)
     ind1 <- which(mc_mix$classification == 1)
     ind2 <- which(mc_mix$classification == 2)
     m_zeros <- 0
-    thresh_zeros <- .25   # tz parameter
+    thresh_zeros <- .25   # empirically determined
     if(length(which(!M_j)) > length(M_j) * thresh_zeros)
     {
       m_zeros <- 1
@@ -38,7 +38,7 @@ CytEM <- function(M, indices, minleaf, level, D)
     aic_mix <- 2*mc_mix$df - 2*mc_mix$loglik
     aic_norm <- (aic_uni - aic_mix)/n
     flagComp <- 0      
-    if(flag_uni | aic_norm < D)
+    if(flag_uni | aic_norm < t)
     {
       mark_not_dis <- append(mark_not_dis, j)
     }
@@ -78,15 +78,15 @@ CytEM <- function(M, indices, minleaf, level, D)
       lve <- length(Resaic)
       if(!lve)
       {
-        child$G <-  indices[which(label == 0)]
-        child$D <-  indices[which(label == 1)]
+        child$L <-  indices[which(label == 0)]
+        child$R <-  indices[which(label == 1)]
       } 
       else 
       {
         if(max(Resaic) < aic_norm)
         {
-          child$G <-  indices[which(label == 0)]
-          child$D <-  indices[which(label == 1)]
+          child$L <-  indices[which(label == 0)]
+          child$R <-  indices[which(label == 1)]
         }
       }
       Resaic <-  append(Resaic, aic_norm)
