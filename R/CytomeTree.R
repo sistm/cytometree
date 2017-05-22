@@ -30,7 +30,46 @@
 #'@author Chariff Alkhassim
 #'
 #'@export 
+#'
+#'@examples
+#'head(DLBCL)
+#'# number of cell event
+#'N <- nrow(DLBCL)
+#'# Build the binary tree 
+#'Tree <- CytomeTree(DLBCL, minleaf = 1 ,t=.1)
+#' 
+#'# Plot node distributions
+#'par(mfrow=c(1,2))
+#'plot_nodes(Tree)
+#'# Choose a node to plot
+#'plot_nodes(Tree,"FL4.1")
 # 
+#'# Plot a graph of the tree
+#'par(mfrow=c(1,1))
+#'plot_graph(Tree,edge.arrow.size=.3, Vcex =.5, vertex.size = 30)
+#'# Run the annotation algorithm
+#'Annot <- Annotation(Tree,plot=TRUE)
+#'Annot$combinations
+# 
+#'# Exemple of seeked phenotypes 
+# 
+#'# variable in which seeked phenotypes can be entered in the form 
+#'# of matrices.
+#'phenotypes <- list()
+# 
+#'# seeked phenotypes
+# 
+#'phenotypes[[1]] <-  rbind(c("FL1", 0), c("FL2", 1), c("FL4", 0))
+# 
+#'phenotypes[[2]] <-  rbind(c("FL1", 1), c("FL2", 0), c("FL4", 1))
+# 
+#'phenotypes[[3]] <-  rbind(c("FL1", 1), c("FL2", 1), c("FL4", 1))
+# 
+#'# Retreive cell populations found using Annotation
+#'PhenoInfos <- RetrievePops(Annot, phenotypes)
+#'PhenoInfos$phenotypesinfo
+
+
 CytomeTree <- function(M, minleaf = 1, t = .1)
 {
   if((class(M) != "matrix") & (class(M) != "data.frame"))
@@ -50,7 +89,7 @@ CytomeTree <- function(M, minleaf = 1, t = .1)
   {
     stop("M contains NAs")
   }
-  BT <- BinaryTree(M, minleaf, t)
+  BT <- BinaryTree(M, floor(minleaf), t)
   Tree <- list("M" = M, "labels" = BT$labels,
                "pl_list"= BT$pl_list,
                "mark_tree" = BT$mark_tree,

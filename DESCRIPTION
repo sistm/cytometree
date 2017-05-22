@@ -19,5 +19,5 @@ Imports:
     mclust,
     stats  
 RoxygenNote: 5.0.1
-
+BugReports: https://github.com/chariff/Cytometree/issues
 

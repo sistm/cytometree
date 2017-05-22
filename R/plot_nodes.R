@@ -55,9 +55,19 @@ plot_nodes <- function(CytomeTreeObj, nodes=NULL)
     treenodes <- unlist(pl_list[[2]])
     if(sum(nodes%in%treenodes)!=length(nodes))
     {
-      wstr <- paste("nodes",paste(c(nodes[as.logical(1-nodes%in%treenodes)]), 
-                                  collapse=", "),
-                    "are not in the tree", sep = " ")
+      logicalind <- as.logical(1-nodes%in%treenodes)
+      if(length(logicalind) >1)
+      {
+        wstr <- paste("nodes",paste(c(nodes[]), 
+                                    collapse=", "),
+                      "are not in the tree", sep = " ")
+      }
+      else
+      {
+        wstr <- paste("node",paste(c(nodes[]), 
+                                    collapse=", "),
+                      "is not in the tree", sep = " ")
+      }
       stop(wstr)
     }
     inds <- which(treenodes%in%nodes)

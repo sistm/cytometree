@@ -134,8 +134,12 @@ Annotation<- function(CytomeTreeObj, K3markers = NULL, plot = TRUE)
   tblabels <- table(labels)
   combinations <- cbind(combinations, table(labels), round(tblabels/len_lab,4))
   colnames(combinations) <- c(cnames, "leaves", "count", "prop")
-  as.data.frame(combinations[sort(combinations[,"count"], TRUE,
-                                  index.return=TRUE)$ix,])
+  outCombinations <- as.data.frame(combinations[sort(combinations[,"count"], TRUE,
+                                  index.return=TRUE)$ix,])  
+  
+  out <- list("combinations" = outCombinations, "labels" = labels)
+  class(out) <- "Annotation"
+  out
 }
 
 
