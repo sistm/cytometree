@@ -1,3 +1,8 @@
+#'Kmeans optimization
+#'
+#'Estimate partition minimizing intra-leaves variability
+#'
+#'@keywords internal
 KmeansOPT<- function(groups, leaves, labels, dat, K)
 {
   KK <- length(groups)
@@ -15,7 +20,7 @@ KmeansOPT<- function(groups, leaves, labels, dat, K)
       g2 <- dat[ind2]
       d1 <- sum((mean(g1)-g1)**2)
       d2 <- sum((mean(g2)-g2)**2)
-      varKK[kk] <- sum(d1, d2) 
+      varKK[kk] <- sum(d1, d2)
     }
     winind <- which.min(varKK)
     wcss <- varKK[kk]

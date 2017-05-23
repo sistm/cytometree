@@ -1,3 +1,9 @@
+#'E-M algorithm
+#'
+#'@import mclust
+#'@importFrom stats var
+#'@keywords internal
+
 CytEM <- function(M, indices, minleaf, level, t)
 {
   if(class(M)!="matrix")
@@ -16,7 +22,7 @@ CytEM <- function(M, indices, minleaf, level, t)
     minleaf <- nEMdegenerate
   }
   parameters <- aic_norm_old <- mark_not_dis <- c()
-  t_zer <- .25  
+  t_zer <- .25
   child <- list()
   for(j in 1:p)
   {
@@ -37,7 +43,7 @@ CytEM <- function(M, indices, minleaf, level, t)
     aic_uni <- 2*mc_uni$df - 2*mc_uni$loglik
     aic_mix <- 2*mc_mix$df - 2*mc_mix$loglik
     aic_norm_new <- (aic_uni - aic_mix)/n
-    flagComp <- 0      
+    flagComp <- 0
     if(flag_uni | aic_norm_new < t)
     {
       mark_not_dis <- append(mark_not_dis, j)
@@ -48,28 +54,28 @@ CytEM <- function(M, indices, minleaf, level, t)
       mean_M1 <- mean(M1)
       mean_M2 <- mean(M2)
       pi_M1 <- length(M1)/n
-      pi_M2 <- 1 - pi_M1 
+      pi_M2 <- 1 - pi_M1
       if(mean_M1 > mean_M2)
-      {        
+      {
         label[ind1] <- 1
-        label[ind2] <- 0  
+        label[ind2] <- 0
         temparameters <- c(aic_norm_new, j, mean_M2, mean_M1,
-                           var(M2), var(M1), pi_M2, pi_M1)
+                           stats::var(M2), stats::var(M1), pi_M2, pi_M1)
       }
       else
       {
         label[ind1] <- 0
         label[ind2] <- 1
         temparameters <- c(aic_norm_new, j, mean_M1, mean_M2,
-                           var(M1), var(M2), pi_M1, pi_M2)
+                           stats::var(M1), stats::var(M2), pi_M1, pi_M2)
       }
       if(is.null(aic_norm_old))
       {
         child$L <-  indices[which(label == 0)]
         child$R <-  indices[which(label == 1)]
         aic_norm_old <- aic_norm_new
-      } 
-      else 
+      }
+      else
       {
         if(aic_norm_old < aic_norm_new)
         {
@@ -79,7 +85,7 @@ CytEM <- function(M, indices, minleaf, level, t)
         }
       }
       parameters <- rbind(parameters, temparameters)
-    } 
+    }
   }
   nnrowpara <- nrow(parameters)
   if(is.null(nnrowpara))
@@ -90,8 +96,8 @@ CytEM <- function(M, indices, minleaf, level, t)
   {
     parameters <- parameters[order(parameters[,1],decreasing = TRUE),]
   }
-  return(list("mark_not_dis" = mark_not_dis, "child" = child, 
-              "nAIC" = parameters[,1], "ind" = parameters[,2], 
+  return(list("mark_not_dis" = mark_not_dis, "child" = child,
+              "nAIC" = parameters[,1], "ind" = parameters[,2],
               "mu1"= parameters[1,3], "mu2"= parameters[1,4],
               "Var1" = parameters[1,5], "Var2" = parameters[1,6],
               "pi1"= parameters[1,7], "pi2" = parameters[1,8]))

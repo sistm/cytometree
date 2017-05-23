@@ -15,4 +15,3 @@ DLBCL
 Diffuse large B-cell lymphoma data set from the flowcap challenge.
 }
 \keyword{datasets}
-

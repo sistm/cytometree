@@ -18,6 +18,8 @@
 #'
 #'@author Chariff Alkhassim
 #'
+#'@import igraph
+#'
 #'@export 
 # 
 plot_graph <- function(CytomeTreeObj, Ecex = 1, Ecolor = 8,

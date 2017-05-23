@@ -19,13 +19,13 @@ A higher values limits the height of the tree.}
 }
 \value{
 An object of class 'cytomeTree' providing a partitioning
-of the set of n cells. 
+of the set of n cells.
 \itemize{
-\item{\code{combinations}}{ A matrix of size n x p containing 
+\item{\code{combinations}}{ A matrix of size n x p containing
 the annotation of each cell given by the tree.}
 \item{\code{labels}}{ The partitioning of the set of n cells.}
 \item{\code{M}}{ The input matrix.}
-\item{\code{mark_tree}}{ A two level list containing markers used 
+\item{\code{mark_tree}}{ A two level list containing markers used
 for node splitting.}
 }
 }
@@ -33,11 +33,11 @@ for node splitting.}
 Binary tree algorithm for cytometry data analysis.
 }
 \details{
-The algorithm is based on the construction of a binary tree, 
-the nodes of which are subpopulations of cells. At each node, 
+The algorithm is based on the construction of a binary tree,
+the nodes of which are subpopulations of cells. At each node,
 observed cells and markers are modeled by both a familly of normal
-and a familly of normal mixtures distributions. 
-Spliting is done according to a normalized difference of AIC between 
+and a familly of normal mixtures distributions.
+Spliting is done according to a normalized difference of AIC between
 the two families.
 }
 \examples{
@@ -49,7 +49,7 @@ head(DLBCL)
 cellevents <- DLBCL[,c("FL1", "FL2", "FL4")]
 # Manual partitioning of the set N (from FlowCAP-I)
 manual_labels <- DLBCL[,"label"]
-# Build the binary tree 
+# Build the binary tree
 Tree <- CytomeTree(cellevents, minleaf = 1 ,t=.1)
 # Retreive the resulting partition of the set N
 Tree_Partition <- Tree$labels
@@ -64,8 +64,8 @@ plot_graph(Tree,edge.arrow.size=.3, Vcex =.5, vertex.size = 30)
 # Run the annotation algorithm
 Annot <- Annotation(Tree,plot=TRUE)
 Annot$combinations
-# Exemple of seeked phenotypes 
-# variable in which seeked phenotypes can be entered in the form 
+# Exemple of seeked phenotypes
+# variable in which seeked phenotypes can be entered in the form
 # of matrices.
 phenotypes <- list()
 ## Seeked phenotypes
@@ -78,14 +78,14 @@ phenotypes[[3]] <-  rbind(c("FL1", 1), c("FL2", 1), c("FL4", 1))
 # Retreive cell populations found using Annotation
 PhenoInfos <- RetrievePops(Annot, phenotypes)
 PhenoInfos$phenotypesinfo
-# F-measure ignoring cells labeled 0 as in FlowCAP-I. 
+# F-measure ignoring cells labeled 0 as in FlowCAP-I.
 # Use FmeasureC() in any other case.
 FmeasureC_no0(ref=manual_labels, pred=Tree_Partition)
 # Scatterplots
 library(ggplot2)
 # Ignoring cells labeled 0 as in FlowCAP-I
 rm_zeros <- which(!manual_labels)
-# Building the data frame to scatter plot the data. 
+# Building the data frame to scatter plot the data.
 FL1 <- cellevents[-c(rm_zeros),"FL1"]
 FL2 <- cellevents[-c(rm_zeros),"FL2"]
 FL4 <- cellevents[-c(rm_zeros),"FL4"]
@@ -94,15 +94,14 @@ Labels <- c(manual_labels[-c(rm_zeros)]\%\%2+1, Tree_Partition[-c(rm_zeros)])
 Labels <- as.factor(Labels)
 method <- as.factor(c(rep("FlowCapI",n),rep("CytomeTree",n)))
 scatter_df <- data.frame("FL2"=FL2,"FL4"=FL4,"labels"=Labels,"method"=method)
-p <- ggplot(scatter_df,  aes_string(x = "FL2", y="FL4",colour="labels"))+
- geom_point(alpha = 1,cex = 1)+
- scale_colour_manual(values = c("green","red","blue"))+ 
- facet_wrap(~ method)+
- theme_bw()+
- theme(legend.position="bottom")
+p <- ggplot2::ggplot(scatter_df,  ggplot2::aes_string(x = "FL2", y="FL4",colour="labels"))+
+ ggplot2::geom_point(alpha = 1,cex = 1)+
+ ggplot2::scale_colour_manual(values = c("green","red","blue"))+
+ ggplot2::facet_wrap(~ method)+
+ ggplot2::theme_bw()+
+ ggplot2::theme(legend.position="bottom")
 p
 }
 \author{
 Chariff Alkhassim
 }
-

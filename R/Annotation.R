@@ -19,7 +19,9 @@
 #'
 #'@author Chariff Alkhassim
 #'
-#'@export 
+#'@import ggplot2 graphics 
+#'
+#'@export
 
 
 
@@ -89,15 +91,15 @@ Annotation<- function(CytomeTreeObj, K3markers = NULL, plot = TRUE)
                                                 as.character(leavesSort)), 
                               Fluorescence = M[,j], 
                               Expression = as.factor(Expression))
-          p <- ggplot(dfbox, aes_string("Leaves", 
-                                 "Fluorescence", 
-                                 fill = "Expression" ))
-          suppressWarnings(print(p + ggtitle(cnames[j]) + 
-                                   geom_boxplot(outlier.shape = NA, 
-                                                alpha = 1/3)+
-                                   scale_fill_manual(values = c("red","blue"),
-                                                     name = "Annotation",
-                                                     labels = c("Hi","Low"))))
+          p <- ggplot2::ggplot(dfbox, ggplot2::aes_string("Leaves", 
+                                                          "Fluorescence", 
+                                                          fill = "Expression" ))
+          suppressWarnings(print(p + ggplot2::ggtitle(cnames[j]) + 
+                                   ggplot2::geom_boxplot(outlier.shape = NA, 
+                                                         alpha = 1/3)+
+                                   ggplot2::scale_fill_manual(values = c("red","blue"),
+                                                              name = "Annotation",
+                                                              labels = c("Hi","Low"))))
         }
       }
       else if(ExpressLevels == 3)
@@ -116,8 +118,8 @@ Annotation<- function(CytomeTreeObj, K3markers = NULL, plot = TRUE)
                               Fluorescence = M[,j], 
                               Expression = as.factor(Expression))
           p <- ggplot(dfbox, aes_string("Leaves", 
-                                 "Fluorescence", 
-                                 fill = "Expression" ))
+                                        "Fluorescence", 
+                                        fill = "Expression" ))
           suppressWarnings(print(p + ggtitle(cnames[j]) + 
                                    geom_boxplot(outlier.shape = NA, 
                                                 alpha = 1/3)+
@@ -135,7 +137,7 @@ Annotation<- function(CytomeTreeObj, K3markers = NULL, plot = TRUE)
   combinations <- cbind(combinations, table(labels), round(tblabels/len_lab,4))
   colnames(combinations) <- c(cnames, "leaves", "count", "prop")
   outCombinations <- as.data.frame(combinations[sort(combinations[,"count"], TRUE,
-                                  index.return=TRUE)$ix,])  
+                                                     index.return=TRUE)$ix,])  
   
   out <- list("combinations" = outCombinations, "labels" = labels)
   class(out) <- "Annotation"
