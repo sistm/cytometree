@@ -11,3 +11,6 @@ r_packages:
 - mclust
 r_build_args: "--html"
 r_check_args: "--as-cran --timings"
+os:
+- linux
+- osx
