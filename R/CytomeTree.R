@@ -35,40 +35,64 @@
 #'head(DLBCL)
 #'# number of cell event
 #'N <- nrow(DLBCL)
+#'head(DLBCL)
+#'# Cell events
+#'cellevents <- DLBCL[,c("FL1", "FL2", "FL4")]
+#'# Manual partitioning of the set N (from FlowCAP-I)
+#'manual_labels <- DLBCL[,"label"]
 #'# Build the binary tree 
-#'Tree <- CytomeTree(DLBCL, minleaf = 1 ,t=.1)
-#' 
+#'Tree <- CytomeTree(cellevents, minleaf = 1 ,t=.1)
+#'# Retreive the resulting partition of the set N
+#'Tree_Partition <- Tree$labels
 #'# Plot node distributions
 #'par(mfrow=c(1,2))
 #'plot_nodes(Tree)
 #'# Choose a node to plot
 #'plot_nodes(Tree,"FL4.1")
-# 
 #'# Plot a graph of the tree
 #'par(mfrow=c(1,1))
 #'plot_graph(Tree,edge.arrow.size=.3, Vcex =.5, vertex.size = 30)
 #'# Run the annotation algorithm
 #'Annot <- Annotation(Tree,plot=TRUE)
 #'Annot$combinations
-# 
 #'# Exemple of seeked phenotypes 
-# 
 #'# variable in which seeked phenotypes can be entered in the form 
 #'# of matrices.
 #'phenotypes <- list()
-# 
-#'# seeked phenotypes
-# 
+#'## Seeked phenotypes
+#'# FL1- FL2+ FL4-
 #'phenotypes[[1]] <-  rbind(c("FL1", 0), c("FL2", 1), c("FL4", 0))
-# 
+#'# FL1+ FL2- FL4+
 #'phenotypes[[2]] <-  rbind(c("FL1", 1), c("FL2", 0), c("FL4", 1))
-# 
+#'# FL1+ FL2+ FL4+
 #'phenotypes[[3]] <-  rbind(c("FL1", 1), c("FL2", 1), c("FL4", 1))
-# 
 #'# Retreive cell populations found using Annotation
 #'PhenoInfos <- RetrievePops(Annot, phenotypes)
 #'PhenoInfos$phenotypesinfo
-
+#'# F-measure ignoring cells labeled 0 as in FlowCAP-I. 
+#'# Use FmeasureC() in any other case.
+#'FmeasureC_no0(ref=manual_labels, pred=Tree_Partition)
+#'# Scatterplots
+#'library(ggplot2)
+#'# Ignoring cells labeled 0 as in FlowCAP-I
+#'rm_zeros <- which(!manual_labels)
+#'# Building the data frame to scatter plot the data. 
+#'FL1 <- cellevents[-c(rm_zeros),"FL1"]
+#'FL2 <- cellevents[-c(rm_zeros),"FL2"]
+#'FL4 <- cellevents[-c(rm_zeros),"FL4"]
+#'n <- length(FL1)
+#'Labels <- c(manual_labels[-c(rm_zeros)]%%2+1, Tree_Partition[-c(rm_zeros)])
+#'Labels <- as.factor(Labels)
+#'method <- as.factor(c(rep("FlowCapI",n),rep("CytomeTree",n)))
+#'scatter_df <- data.frame("FL2"=FL2,"FL4"=FL4,"labels"=Labels,"method"=method)
+# 
+#'p <- ggplot(scatter_df,  aes_string(x = "FL2", y="FL4",colour="labels"))+
+#'  geom_point(alpha = 1,cex = 1)+
+#'  scale_colour_manual(values = c("green","red","blue"))+ 
+#'  facet_wrap(~ method)+
+#'  theme_bw()+
+#'  theme(legend.position="bottom")
+#'p
 
 CytomeTree <- function(M, minleaf = 1, t = .1)
 {
