@@ -195,6 +195,9 @@ BinaryTree <- function(M, minleaf = 1, t = .1)
     level <- c_level
     mark_tree[[c_level]] <- list()
   }
+  return(list("combinations"=combinations,"labels"=labels,
+              "mark_tree" = mark_tree,
+              "pl_list"= pl_list, "Signtree" = Signtree))
 }
 
 
