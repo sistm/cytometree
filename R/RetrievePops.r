@@ -18,7 +18,6 @@
 #'@author Chariff Alkhassim
 #'
 #'@export 
-
 RetrievePops <-function(AnnotationObj, phenotypes)
 {
   if(class(AnnotationObj)!="Annotation")

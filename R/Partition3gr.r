@@ -1,3 +1,6 @@
+#' Computes (N-1)*(N-2) possible partitions of 3 sets of N. 
+#'
+#' @keywords internal
 Partition3gr <- function(N)
 {
   partitions <- list()

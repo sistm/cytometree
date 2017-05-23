@@ -70,11 +70,11 @@ Annot$combinations
 phenotypes <- list()
 ## Seeked phenotypes
 # FL1- FL2+ FL4-
-phenotypes[[1]] <-  rbind(c("FL1", 0), c("FL2", 1), c("FL4", 0))
+phenotypes[[1]] <- rbind(c("FL1", 0), c("FL2", 1), c("FL4", 0))
 # FL1+ FL2- FL4+
-phenotypes[[2]] <-  rbind(c("FL1", 1), c("FL2", 0), c("FL4", 1))
+phenotypes[[2]] <- rbind(c("FL1", 1), c("FL2", 0), c("FL4", 1))
 # FL1+ FL2+ FL4+
-phenotypes[[3]] <-  rbind(c("FL1", 1), c("FL2", 1), c("FL4", 1))
+phenotypes[[3]] <- rbind(c("FL1", 1), c("FL2", 1), c("FL4", 1))
 # Retreive cell populations found using Annotation
 PhenoInfos <- RetrievePops(Annot, phenotypes)
 PhenoInfos$phenotypesinfo
@@ -92,7 +92,7 @@ FL4 <- cellevents[-c(rm_zeros),"FL4"]
 n <- length(FL1)
 Labels <- c(manual_labels[-c(rm_zeros)]\%\%2+1, Tree_Partition[-c(rm_zeros)])
 Labels <- as.factor(Labels)
-method <- as.factor(c(rep("FlowCapI",n),rep("CytomeTree",n)))
+method <- as.factor(c(rep("FlowCap-I",n),rep("CytomeTree",n)))
 scatter_df <- data.frame("FL2"=FL2,"FL4"=FL4,"labels"=Labels,"method"=method)
 p <- ggplot2::ggplot(scatter_df,  ggplot2::aes_string(x = "FL2", y="FL4",colour="labels"))+
  ggplot2::geom_point(alpha = 1,cex = 1)+
@@ -105,3 +105,4 @@ p
 \author{
 Chariff Alkhassim
 }
+

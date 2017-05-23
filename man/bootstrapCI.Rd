@@ -22,3 +22,4 @@ Bootstrapped Confidence Interval.
 \author{
 Chariff Alkhassim
 }
+

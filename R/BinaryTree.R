@@ -3,7 +3,6 @@
 #' @keywords internal
 #'
 #' @importFrom stats density
-
 BinaryTree <- function(M, minleaf = 1, t = .1)
 {
   n <- nrow(M)
@@ -91,7 +90,8 @@ BinaryTree <- function(M, minleaf = 1, t = .1)
           {
             return(list("combinations"=combinations,"labels"=labels,
                         "mark_tree" = mark_tree,
-                        "pl_list"= pl_list, "Signtree" = Signtree))
+                        "pl_list"= pl_list, "Signtree" = Signtree)
+            )
           }
         }
         else
@@ -116,7 +116,8 @@ BinaryTree <- function(M, minleaf = 1, t = .1)
             {
               return(list("combinations"=combinations,"labels"=labels,
                           "mark_tree" = mark_tree,
-                          "pl_list"= pl_list, "Signtree" = Signtree))
+                          "pl_list"= pl_list, "Signtree" = Signtree)
+              )
             }
           }
           else
@@ -133,7 +134,7 @@ BinaryTree <- function(M, minleaf = 1, t = .1)
             R_child <- CytEMRes$child$R
             combinations[L_child,ind] <- 0
             combinations[R_child,ind] <- 1
-            KDE <- density(M[temp_node,ind], n = len_data_plot)
+            KDE <- stats::density(M[temp_node,ind], n = len_data_plot)
             GMM <- list()
             GMM$x <- KDE$x
             GMM$y <-   GaussMix(GMM$x, CytEMRes$mu1, CytEMRes$mu2,
@@ -203,7 +204,8 @@ BinaryTree <- function(M, minleaf = 1, t = .1)
   }
   return(list("combinations"=combinations,"labels"=labels,
               "mark_tree" = mark_tree,
-              "pl_list"= pl_list, "Signtree" = Signtree))
+              "pl_list"= pl_list, "Signtree" = Signtree)
+  )
 }
 
 

@@ -1,3 +1,6 @@
+#' Computes N-1 possible partitions of 2 sets of N. 
+#'
+#' @keywords internal
 Partition2gr <- function(N)
 {
   Partitions <- list()

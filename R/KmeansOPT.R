@@ -23,7 +23,7 @@ KmeansOPT<- function(groups, leaves, labels, dat, K)
       varKK[kk] <- sum(d1, d2)
     }
     winind <- which.min(varKK)
-    wcss <- varKK[kk]
+    wcss <- varKK[winind]
     return(list("ind" = winind, "val" = wcss))
   }
   else if (K == 3)
@@ -45,7 +45,7 @@ KmeansOPT<- function(groups, leaves, labels, dat, K)
       varKK[kk] <- sum(d1, d2, d3)
     }
     winind <- which.min(varKK)
-    wcss <- varKK[kk]
+    wcss <- varKK[winind]
     return(list("ind" = winind, "val" = wcss))
   }
 }

@@ -6,7 +6,8 @@ Date: 2017-05-23
 Author: Alkhassim Chariff
 Maintainer: Alkhassim Chariff <chariff.alkhassim@gmail.com>
 LinkingTo: Rcpp, RcppArmadillo
-Description: Implementation of a binary tree, the nodes of which are subpopulations of cells.
+Description: Implementation of a binary tree, the nodes of which are
+    subpopulations of cells.
 License: LGPL-3 | file LICENSE
 LazyData: true
 Depends:
@@ -17,6 +18,6 @@ Imports:
     graphics,
     igraph,
     mclust,
-    stats  
-RoxygenNote: 6.0.1
+    stats
+RoxygenNote: 5.0.1
 BugReports: https://github.com/chariff/Cytometree/issues

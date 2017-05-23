@@ -1,9 +1,10 @@
 #'E-M algorithm
 #'
 #'@import mclust
+#'
 #'@importFrom stats var
+#'
 #'@keywords internal
-
 CytEM <- function(M, indices, minleaf, level, t)
 {
   if(class(M)!="matrix")

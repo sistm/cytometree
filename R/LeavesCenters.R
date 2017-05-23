@@ -1,3 +1,6 @@
+#' Computes means of leaves given cytomeTreeObj
+#'
+#' @keywords internal
 LeavesCenters <- function(cytomeTreeObj)
 {
   out <- c()

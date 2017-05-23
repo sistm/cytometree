@@ -10,3 +10,4 @@ KmeansOPT(groups, leaves, labels, dat, K)
 Estimate partition minimizing intra-leaves variability
 }
 \keyword{internal}
+

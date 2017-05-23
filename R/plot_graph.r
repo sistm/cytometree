@@ -21,7 +21,6 @@
 #'@import igraph
 #'
 #'@export 
-# 
 plot_graph <- function(CytomeTreeObj, Ecex = 1, Ecolor = 8,
                        Vcex = .8, Vcolor = 0, ...)
 {
@@ -43,7 +42,8 @@ plot_graph <- function(CytomeTreeObj, Ecex = 1, Ecolor = 8,
       cpt <- cpt + 2
       adj_list <- rbind(adj_list, cbind(Tree[[level]][[Nnode]], 
                                         c(L_child, R_child),
-                                        c("-","+")))
+                                        c("-","+")
+      ))
     }
   }
   rm <- which(rowSums(is.na(adj_list))>0)
@@ -57,7 +57,8 @@ plot_graph <- function(CytomeTreeObj, Ecex = 1, Ecolor = 8,
   }
   g <- graph.data.frame(data.frame(parent=as.character(adj_list_[,1]), 
                                    node=as.character(adj_list_[,2]),
-                                   text=adj_list_[,3]))
+                                   text=adj_list_[,3])
+                        )
   E(g)$label.cex <- Ecex
   E(g)$color <- Ecolor
   V(g)$label.cex <- Vcex

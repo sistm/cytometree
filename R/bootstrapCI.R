@@ -12,7 +12,6 @@
 #'@author Chariff Alkhassim
 #'
 #'@export 
-#
 bootstrapCI <- function(stat, n, alpha){
   x_bar <- mean(stat)
   m <- length(stat)

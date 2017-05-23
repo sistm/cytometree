@@ -21,7 +21,7 @@
 #'}
 #'The main function in this package is \code{\link{CytomeTree}}.
 #'
-#'@author Chariff Alkhassim, Boris P. Hejblum
+#'@author Chariff Alkhassim
 #'--- Maintainer: Chariff Alkhassim
 #'
 #'@references D. Commenges, C Alkhassim, B.P. Hejblum, R. Thiébaut. A Binary tree algorithm for automatic gating in cytometry analysis. Sumitted, 2017.
