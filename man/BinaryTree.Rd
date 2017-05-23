@@ -10,4 +10,3 @@ BinaryTree(M, minleaf = 1, t = 0.1)
 Build a binary tree
 }
 \keyword{internal}
-

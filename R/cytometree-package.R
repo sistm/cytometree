@@ -24,7 +24,7 @@
 #'@author Chariff Alkhassim
 #'--- Maintainer: Chariff Alkhassim
 #'
-#'@references D. Commenges, C Alkhassim, B.P. Hejblum, R. Thiébaut. A Binary tree algorithm for automatic gating in cytometry analysis. Sumitted, 2017.
+#'@references D. Commenges, C Alkhassim, B.P. Hejblum, R. Thiebaut. A Binary tree algorithm for automatic gating in cytometry analysis. Sumitted, 2017.
 #'
 #'@docType package
 #'@name cytometree-package

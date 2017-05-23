@@ -14,4 +14,3 @@ FmeasureC(pred, ref)
 \description{
 C++ implementation of the F-measure computation
 }
-

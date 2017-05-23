@@ -10,4 +10,3 @@ Partition3gr(N)
 Computes (N-1)*(N-2) possible partitions of 3 sets of N.
 }
 \keyword{internal}
-

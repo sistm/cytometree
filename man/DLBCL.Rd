@@ -9,10 +9,9 @@
 \url{http://http://flowcap.flowsite.org/}
 }
 \usage{
-DLBCL
+data(DLBCL)
 }
 \description{
 Diffuse large B-cell lymphoma data set from the flowcap challenge.
 }
-\keyword{datasets}
-
+\keyword{data}
