@@ -1,17 +1,22 @@
 language: r
 cache: packages
-sudo: required
+sudo: false
+
 r:
 - release
 - devel
+
 os:
 - linux
 - osx
+
 r_packages:
 - Rcpp
 - RcppArmadillo
 - ggplot2
 - igraph
 - mclust
+
 r_build_args: "--html"
+
 r_check_args: "--as-cran --timings"
