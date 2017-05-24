@@ -2,11 +2,12 @@
 % Please edit documentation in R/Partition2gr.r
 \name{Partition2gr}
 \alias{Partition2gr}
-\title{Computes N-1 possible partitions of 2 sets of N.}
+\title{Computes N-1 possible partitions of N into 2 subsets.}
 \usage{
 Partition2gr(N)
 }
 \description{
-Computes N-1 possible partitions of 2 sets of N.
+Computes N-1 possible partitions of N into 2 subsets.
 }
 \keyword{internal}
+

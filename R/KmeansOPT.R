@@ -1,13 +1,11 @@
-#'Kmeans optimization
-#'
-#'Estimate partition minimizing intra-leaves variability
+#'Finds the partition which minimize the within-leaves sum of squares.
 #'
 #'@keywords internal
 KmeansOPT<- function(groups, leaves, labels, dat, K)
 {
   KK <- length(groups)
   N <- length(labels)
-  varKK <- rep(NA, KK)
+  wlss <- rep(NA, KK)
   if(K == 2)
   {
     for(kk in 1:KK)
@@ -20,11 +18,11 @@ KmeansOPT<- function(groups, leaves, labels, dat, K)
       g2 <- dat[ind2]
       d1 <- sum((mean(g1)-g1)**2)
       d2 <- sum((mean(g2)-g2)**2)
-      varKK[kk] <- sum(d1, d2)
+      wlss[kk] <- sum(d1, d2)
     }
-    winind <- which.min(varKK)
-    wcss <- varKK[winind]
-    return(list("ind" = winind, "val" = wcss))
+    winind <- which.min(wlss)
+    min_wlss <- wlss[winind]
+    return(list("ind" = winind, "val" = min_wlss))
   }
   else if (K == 3)
   {
@@ -42,10 +40,10 @@ KmeansOPT<- function(groups, leaves, labels, dat, K)
       d1 <- sum((mean(g1)-g1)**2)
       d2 <- sum((mean(g2)-g2)**2)
       d3 <- sum((mean(g3)-g3)**2)
-      varKK[kk] <- sum(d1, d2, d3)
+      wlss[kk] <- sum(d1, d2, d3)
     }
-    winind <- which.min(varKK)
-    wcss <- varKK[winind]
-    return(list("ind" = winind, "val" = wcss))
+    winind <- which.min(wlss)
+    min_wlss <- wlss[winind]
+    return(list("ind" = winind, "val" = min_wlss))
   }
 }

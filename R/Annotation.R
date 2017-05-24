@@ -1,9 +1,9 @@
 #' Annotates cell populations found using CytomeTree. 
 #' 
-#'@param CytomeTreeObj An object of class CytomeTree
+#'@param CytomeTreeObj An object of class CytomeTree.
 #'
-#'@param K3markers A vector of class character where names of the markers
-#'for which 3 levels of expression are seeked can be specified.
+#'@param K3markers A vector of class character where the names of 
+#'the markers for which 3 levels of expression are seeked can be specified.
 #'Default is \code{NULL} i.e. 2 levels of expression per marker. 
 #'
 #'@param plot A logical value indicating whether or not to plot the 
@@ -14,7 +14,7 @@
 #'
 #'@details The algorithm is set to find the partitioning in 2 or
 #' 3 groups of cell populations found using CytomeTree. It minimize 
-#' the within-cluster sum of squares of the observed values on each
+#' the within-leaves sum of squares of the observed values on each
 #' marker. 
 #'
 #'@author Chariff Alkhassim
@@ -26,13 +26,13 @@ Annotation<- function(CytomeTreeObj, K3markers = NULL, plot = TRUE)
 {
   if(class(CytomeTreeObj) != "CytomeTree")
   {
-    stop("CytometreeObj must be of class CytomeTree")
+    stop("CytometreeObj must be of class CytomeTree.")
   }
   if(!is.null(K3markers))
   {
     if(class(K3markers)!="character")
     {
-      stop("K3markers must be of class character")
+      stop("K3markers must be of class character.")
     }
   } 
   M <- CytomeTreeObj$M
@@ -47,7 +47,7 @@ Annotation<- function(CytomeTreeObj, K3markers = NULL, plot = TRUE)
   combinations <- cbind(matrix(0, ncol = (p-1), nrow = n), 1:n)
   if(n == 1) 
   {
-    stop("cytomeTree didn't find any population")
+    return(cat("CytomeTree found a single population.\n"))
   }
   else 
   {

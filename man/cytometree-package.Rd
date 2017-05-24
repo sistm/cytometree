@@ -2,14 +2,14 @@
 % Please edit documentation in R/cytometree-package.R
 \docType{package}
 \name{cytometree-package}
-\alias{cytometree-package}
 \alias{cytometree}
+\alias{cytometree-package}
 \title{Binary tree algorithm for cytometry data analysis.}
 \description{
 The algorithm is based on the construction of a binary tree, 
 the nodes of which are subpopulations of cells. At each node, 
 observed cells and markers are modeled by both a family of normal
-and a family of normal mixtures distributions. 
+distributions and a family of bimodal normal mixture distributions. 
 Splitting is done according to a normalized difference of AIC between 
 the two families.
 Given the unsupervised nature of the binary tree, some of the available
@@ -28,10 +28,11 @@ License:\tab \href{http://www.gnu.org/licenses/lgpl.txt}{LGPL-3}\cr
 }
 The main function in this package is \code{\link{CytomeTree}}.
 }
-\references{
-D. Commenges, C Alkhassim, B.P. Hejblum, R. Thiebaut. A Binary tree algorithm for automatic gating in cytometry analysis. Sumitted, 2017.
-}
 \author{
 Chariff Alkhassim
 --- Maintainer: Chariff Alkhassim
 }
+\references{
+D. Commenges, C. Alkhassim, B.P. Hejblum, R. Thiebaut. A Binary tree algorithm for automatic gating in cytometry analysis. Submitted, 2017.
+}
+

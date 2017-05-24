@@ -3,7 +3,7 @@
 #'The algorithm is based on the construction of a binary tree, 
 #'the nodes of which are subpopulations of cells. At each node, 
 #'observed cells and markers are modeled by both a family of normal
-#'and a family of normal mixtures distributions. 
+#'distributions and a family of bimodal normal mixture distributions. 
 #'Splitting is done according to a normalized difference of AIC between 
 #'the two families.
 #'Given the unsupervised nature of the binary tree, some of the available
@@ -24,7 +24,7 @@
 #'@author Chariff Alkhassim
 #'--- Maintainer: Chariff Alkhassim
 #'
-#'@references D. Commenges, C Alkhassim, B.P. Hejblum, R. Thiebaut. A Binary tree algorithm for automatic gating in cytometry analysis. Sumitted, 2017.
+#'@references D. Commenges, C. Alkhassim, B.P. Hejblum, R. Thiebaut. A Binary tree algorithm for automatic gating in cytometry analysis. Submitted, 2017.
 #'
 #'@docType package
 #'@name cytometree-package

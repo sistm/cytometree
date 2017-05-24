@@ -2,11 +2,12 @@
 % Please edit documentation in R/KmeansOPT.R
 \name{KmeansOPT}
 \alias{KmeansOPT}
-\title{Kmeans optimization}
+\title{Finds the partition which minimize the within-leaves sum of squares.}
 \usage{
 KmeansOPT(groups, leaves, labels, dat, K)
 }
 \description{
-Estimate partition minimizing intra-leaves variability
+Finds the partition which minimize the within-leaves sum of squares.
 }
 \keyword{internal}
+

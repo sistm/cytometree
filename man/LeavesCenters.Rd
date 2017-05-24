@@ -2,11 +2,12 @@
 % Please edit documentation in R/LeavesCenters.R
 \name{LeavesCenters}
 \alias{LeavesCenters}
-\title{Computes means of leaves given cytomeTreeObj}
+\title{Computes means of leaves given cytomeTreeObj.}
 \usage{
 LeavesCenters(cytomeTreeObj)
 }
 \description{
-Computes means of leaves given cytomeTreeObj
+Computes means of leaves given cytomeTreeObj.
 }
 \keyword{internal}
+

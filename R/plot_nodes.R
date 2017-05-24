@@ -4,7 +4,7 @@
 #'@param CytomeTreeObj An object of class CytomeTree.
 #'
 #'@param nodes A vector of class character containing the name of
-#'nodes for which the distribution is to be plotted. Default is 
+#'the nodes for which the distribution is to be plotted. Default is 
 #'\code{NULL}, and plots the distribution of each node.  
 #'
 #'@author Chariff Alkhassim
@@ -16,13 +16,13 @@ plot_nodes <- function(CytomeTreeObj, nodes=NULL)
 {
   if(class(CytomeTreeObj) != "CytomeTree")
   {
-    stop("CytomeTreeObj must be of class CytomeTree")
+    stop("CytomeTreeObj must be of class CytomeTree.")
   }
   if(!is.null(nodes))
   {
     if(class(nodes)!="character")
     {
-      stop("nodes must be of class character")
+      stop("nodes must be of class character.")
     }
   }
   pl_list <- CytomeTreeObj$pl_list
@@ -40,14 +40,16 @@ plot_nodes <- function(CytomeTreeObj, nodes=NULL)
       maxyinf <- max(pl_list[[1]][[n]]$y)
       maxysup <- max(pl_list[[3]][[n]]$y)
       graphics::plot(pl_list[[3]][[n]], 
-                     xlim=c(min(c(minxinf, minxsup)), max(c(maxxinf, maxxsup))),
-                     ylim=c(min(c(minyinf, minysup)), max(c(maxyinf, maxysup))),
+                     xlim=c(min(c(minxinf, minxsup)), 
+                            max(c(maxxinf, maxxsup))),
+                     ylim=c(min(c(minyinf, minysup)), 
+                            max(c(maxyinf, maxysup))),
                      yaxt = 'n',
                      main =pl_list[[2]][[n]],
                      xlab = pl_list[[4]][[n]],
                      ylab = "Density",
                      col = "blue", lwd=2, type="l")
-      lines(pl_list[[1]][[n]], col='red', lwd = 2)
+      graphics::lines(pl_list[[1]][[n]], col='red', lwd = 2)
     }
   }
   else
@@ -58,15 +60,15 @@ plot_nodes <- function(CytomeTreeObj, nodes=NULL)
       logicalind <- as.logical(1-nodes%in%treenodes)
       if(length(logicalind) >1)
       {
-        wstr <- paste("nodes",paste(c(nodes[]), 
+        wstr <- paste("Nodes",paste(c(nodes[]), 
                                     collapse=", "),
-                      "are not in the tree", sep = " ")
+                      "are not in CytomeTree.", sep = " ")
       }
       else
       {
-        wstr <- paste("node",paste(c(nodes[]), 
+        wstr <- paste("Node",paste(c(nodes[]), 
                                    collapse=", "),
-                      "is not in the tree", sep = " ")
+                      "is not in  CytomeTree.", sep = " ")
       }
       stop(wstr)
     }

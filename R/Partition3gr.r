@@ -1,4 +1,4 @@
-#' Computes (N-1)*(N-2) possible partitions of 3 sets of N. 
+#' Computes (N-1)*(N-2) possible partitions of N into 3 subsets. 
 #'
 #' @keywords internal
 Partition3gr <- function(N)

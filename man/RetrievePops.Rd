@@ -11,7 +11,7 @@ RetrievePops(AnnotationObj, phenotypes)
 
 \item{phenotypes}{A list containing at least one element of class 
 matrix describing a seeked phenotype. Each matrix should have two
-columns where the name of a used marked is associated to a value
+columns where the name of a used marker is associated to a value
 chosen between 0, 1 and 2. 0 translates to -, 1 to + and 2 to ++.}
 }
 \value{
@@ -29,3 +29,4 @@ Retreive cell populations found using Annotation.
 \author{
 Chariff Alkhassim
 }
+

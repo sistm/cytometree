@@ -8,10 +8,9 @@ bootstrapCI(stat, n, alpha)
 }
 \arguments{
 \item{stat}{A numeric vector of statistics for which to compute a 
-Confidence Interval.}
+confidence interval.}
 
-\item{n}{An integer giving the number of bootstrap sample to use for computing 
-the CI.}
+\item{n}{An integer giving the number of bootstrap samples.}
 
 \item{alpha}{A real number comprised in ]0, 1[ : 
 1 - desired confidence level.}
@@ -22,3 +21,4 @@ Bootstrapped Confidence Interval.
 \author{
 Chariff Alkhassim
 }
+

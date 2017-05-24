@@ -2,11 +2,12 @@
 % Please edit documentation in R/CytEM.R
 \name{CytEM}
 \alias{CytEM}
-\title{E-M algorithm}
+\title{E-M algorithm.}
 \usage{
 CytEM(M, indices, minleaf, level, t)
 }
 \description{
-E-M algorithm
+E-M algorithm.
 }
 \keyword{internal}
+

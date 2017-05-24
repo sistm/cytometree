@@ -2,13 +2,13 @@
 #' 
 #'@param CytomeTreeObj An object of class CytomeTree.
 #'
-#'@param Ecex Number indicating the amount by which plotting text
+#'@param Ecex Number indicating the amount by which text
 #'on the edges should be scaled. Default is \code{1}.
 #'
-#'@param Ecolor An intger or a string of character
+#'@param Ecolor An integer or a string of character
 #'to color edges of the graph.  Default is \code{8}.
 #'
-#'@param Vcex Number indicating the amount by which plotting text
+#'@param Vcex Number indicating the amount by which text
 #'in the vertices should be scaled.  Default is \code{.8}.  
 #'
 #'@param Vcolor A vector of class numeric or character to color
@@ -26,7 +26,7 @@ plot_graph <- function(CytomeTreeObj, Ecex = 1, Ecolor = 8,
 {
   if(class(CytomeTreeObj) != "CytomeTree")
   {
-    stop("CytomeTreeObj must be of class CytomeTree")
+    stop("CytomeTreeObj must be of class CytomeTree.")
   }
   Tree <- CytomeTreeObj$mark_tree
   Tree_level <- length(Tree)

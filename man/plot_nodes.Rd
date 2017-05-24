@@ -11,7 +11,7 @@ plot_nodes(CytomeTreeObj, nodes = NULL)
 \item{CytomeTreeObj}{An object of class CytomeTree.}
 
 \item{nodes}{A vector of class character containing the name of
-nodes for which the distribution is to be plotted. Default is 
+the nodes for which the distribution is to be plotted. Default is 
 \code{NULL}, and plots the distribution of each node.}
 }
 \description{
@@ -21,3 +21,4 @@ of the binary tree built using CytomeTree.
 \author{
 Chariff Alkhassim
 }
+

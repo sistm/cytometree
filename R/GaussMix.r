@@ -1,4 +1,4 @@
-#' Mixture of 2 Gaussian distribution
+#' Bimodal normal mixture distribution.
 #'
 #' @keywords internal
 #'

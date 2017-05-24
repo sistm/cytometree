@@ -4,7 +4,7 @@
 #'
 #'@param phenotypes A list containing at least one element of class 
 #'matrix describing a seeked phenotype. Each matrix should have two
-#'columns where the name of a used marked is associated to a value
+#'columns where the name of a used marker is associated to a value
 #'chosen between 0, 1 and 2. 0 translates to -, 1 to + and 2 to ++.
 #' 
 #'@return A \code{list} of two elements.
@@ -22,18 +22,18 @@ RetrievePops <-function(AnnotationObj, phenotypes)
 {
   if(class(AnnotationObj)!="Annotation")
   {
-    stop("AnnotationObj must be of class Annotation")
+    stop("AnnotationObj must be of class Annotation.")
   }
   if(class(phenotypes)=="list")
   {
     if(class(phenotypes[[1]])!="matrix")
     {
-      stop("elements of phenotypes should be of class matrix") 
+      stop("Elements of phenotypes should be of class matrix.") 
     }
   }
   else
   {
-    stop("phenotypes should be of class list")
+    stop("phenotypes should be of class list.")
   }
   labels <- AnnotationObj$labels
   labelmerge <- labels
@@ -55,13 +55,13 @@ RetrievePops <-function(AnnotationObj, phenotypes)
       {
         wstr <- paste("markers",paste(c(temp[logicalinds,1]), 
                                       collapse=", "),
-                      "are not in the tree", sep = " ")
+                      "are not in CytomeTree.", sep = " ")
       }
       else
       {
         wstr <- paste("marker",paste(c(temp[logicalinds,1]), 
                                       collapse=", "),
-                      "is not in the tree", sep = " ")
+                      "is not in CytomeTree.", sep = " ")
       }
       stop(wstr)
     }

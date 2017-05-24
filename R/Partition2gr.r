@@ -1,4 +1,4 @@
-#' Computes N-1 possible partitions of 2 sets of N. 
+#' Computes N-1 possible partitions of N into 2 subsets. 
 #'
 #' @keywords internal
 Partition2gr <- function(N)

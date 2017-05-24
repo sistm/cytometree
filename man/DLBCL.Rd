@@ -3,7 +3,7 @@
 \docType{data}
 \name{DLBCL}
 \alias{DLBCL}
-\title{Diffuse large B-cell lymphoma data set from the flowcap challenge.}
+\title{Diffuse large B-cell lymphoma data set from the flowCAP-I challenge.}
 \format{A data frame with 5524 cell events and 3 markers.}
 \source{
 \url{http://http://flowcap.flowsite.org/}
@@ -12,6 +12,7 @@
 data(DLBCL)
 }
 \description{
-Diffuse large B-cell lymphoma data set from the flowcap challenge.
+Diffuse large B-cell lymphoma data set from the flowCAP-I challenge.
 }
 \keyword{data}
+

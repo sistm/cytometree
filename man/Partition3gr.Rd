@@ -2,11 +2,12 @@
 % Please edit documentation in R/Partition3gr.r
 \name{Partition3gr}
 \alias{Partition3gr}
-\title{Computes (N-1)*(N-2) possible partitions of 3 sets of N.}
+\title{Computes (N-1)*(N-2) possible partitions of N into 3 subsets.}
 \usage{
 Partition3gr(N)
 }
 \description{
-Computes (N-1)*(N-2) possible partitions of 3 sets of N.
+Computes (N-1)*(N-2) possible partitions of N into 3 subsets.
 }
 \keyword{internal}
+

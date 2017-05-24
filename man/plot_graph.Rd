@@ -10,13 +10,13 @@ plot_graph(CytomeTreeObj, Ecex = 1, Ecolor = 8, Vcex = 0.8, Vcolor = 0,
 \arguments{
 \item{CytomeTreeObj}{An object of class CytomeTree.}
 
-\item{Ecex}{Number indicating the amount by which plotting text
+\item{Ecex}{Number indicating the amount by which text
 on the edges should be scaled. Default is \code{1}.}
 
-\item{Ecolor}{An intger or a string of character
+\item{Ecolor}{An integer or a string of character
 to color edges of the graph.  Default is \code{8}.}
 
-\item{Vcex}{Number indicating the amount by which plotting text
+\item{Vcex}{Number indicating the amount by which text
 in the vertices should be scaled.  Default is \code{.8}.}
 
 \item{Vcolor}{A vector of class numeric or character to color
@@ -30,3 +30,4 @@ Plot the binary tree built using CytomeTree.
 \author{
 Chariff Alkhassim
 }
+

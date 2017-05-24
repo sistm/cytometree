@@ -7,10 +7,10 @@
 Annotation(CytomeTreeObj, K3markers = NULL, plot = TRUE)
 }
 \arguments{
-\item{CytomeTreeObj}{An object of class CytomeTree}
+\item{CytomeTreeObj}{An object of class CytomeTree.}
 
-\item{K3markers}{A vector of class character where names of the markers
-for which 3 levels of expression are seeked can be specified.
+\item{K3markers}{A vector of class character where the names of 
+the markers for which 3 levels of expression are seeked can be specified.
 Default is \code{NULL} i.e. 2 levels of expression per marker.}
 
 \item{plot}{A logical value indicating whether or not to plot the 
@@ -26,9 +26,10 @@ Annotates cell populations found using CytomeTree.
 \details{
 The algorithm is set to find the partitioning in 2 or
 3 groups of cell populations found using CytomeTree. It minimize 
-the within-cluster sum of squares of the observed values on each
+the within-leaves sum of squares of the observed values on each
 marker.
 }
 \author{
 Chariff Alkhassim
 }
+

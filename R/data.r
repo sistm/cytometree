@@ -1,4 +1,4 @@
-#' Diffuse large B-cell lymphoma data set from the flowcap challenge.
+#' Diffuse large B-cell lymphoma data set from the flowCAP-I challenge.
 #'
 #'@docType data
 #'
