@@ -1,4 +1,4 @@
-#' Build a binary tree.
+#' Builds a binary tree.
 #'
 #' @keywords internal
 #'
