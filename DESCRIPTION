@@ -1,13 +1,16 @@
 Package: cytometree
 Type: Package
-Title: Automated cytometry gating
+Title: Automated Cytometry Gating
 Version: 1.0.0
-Date: 2017-05-23
+Date: 2017-06-23
 Author: Alkhassim Chariff
 Maintainer: Alkhassim Chariff <chariff.alkhassim@gmail.com>
 LinkingTo: Rcpp, RcppArmadillo
-Description: Implementation of a binary tree, the nodes of which are
-    subpopulations of cells.
+Description: Constructs a binary tree, the nodes of which are subpopulations of cells. 
+ At each node, observed cells and markers are modeled by both a familly of 
+ normal distributions and a familly of bimodal normal mixture distributions.
+ Splitting is done according to a normalized difference of AIC between 
+ the two families.
 License: LGPL-3 | file LICENSE
 LazyData: true
 Depends:

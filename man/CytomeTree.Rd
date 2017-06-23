@@ -49,7 +49,7 @@ cellevents <- DLBCL[,c("FL1", "FL2", "FL4")]
 # Manual partitioning of the set N (from FlowCAP-I).
 manual_labels <- DLBCL[,"label"]
 # Build the binary tree.
-Tree <- CytomeTree(cellevents, minleaf = 1 ,t=.1)
+Tree <- CytomeTree(cellevents, minleaf = 1, t=.1)
 # Retreive the resulting partition of the set N.
 Tree_Partition <- Tree$labels
 # Plot node distributions.
