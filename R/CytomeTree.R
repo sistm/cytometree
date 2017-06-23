@@ -13,8 +13,8 @@
 #'@return An object of class 'cytomeTree' providing a partitioning
 #'of the set of n cells.
 #'\itemize{
-#'\item{\code{combinations}}{ A matrix of size n x p containing
-#'the annotation of each cell given by the tree.}
+#'\item{\code{annotation}}{ A \code{data.frame} containing the annotation of each 
+#'cell population underlying the tree pattern.}
 #'\item{\code{labels}}{ The partitioning of the set of n cells.}
 #'\item{\code{M}}{ The input matrix.}
 #'\item{\code{mark_tree}}{ A two level list containing markers used
@@ -35,13 +35,12 @@
 #'head(DLBCL)
 #'# number of cell event.
 #'N <- nrow(DLBCL)
-#'head(DLBCL)
 #'# Cell events.
 #'cellevents <- DLBCL[,c("FL1", "FL2", "FL4")]
 #'# Manual partitioning of the set N (from FlowCAP-I).
 #'manual_labels <- DLBCL[,"label"]
 #'# Build the binary tree.
-#'Tree <- CytomeTree(cellevents, minleaf = 1 ,t=.1)
+#'Tree <- CytomeTree(cellevents, minleaf = 1, t=.1)
 #'# Retreive the resulting partition of the set N.
 #'Tree_Partition <- Tree$labels
 #'# Plot node distributions.
@@ -53,8 +52,10 @@
 #'par(mfrow=c(1,1))
 #'plot_graph(Tree,edge.arrow.size=.3, Vcex =.5, vertex.size = 30)
 #'# Run the annotation algorithm.
-#'Annot <- Annotation(Tree,plot=TRUE)
+#'Annot <- Annotation(Tree,plot=FALSE)
 #'Annot$combinations
+#'# Compare to the annotation gotten from the tree.
+#'Tree$annotation
 #'# Example of seeked phenotypes.
 #'# Variable in which seeked phenotypes can be entered in the form
 #'# of matrices.
@@ -114,10 +115,11 @@ CytomeTree <- function(M, minleaf = 1, t = .1)
     stop("M contains NAs.")
   }
   BT <- BinaryTree(M, floor(minleaf), t)
+  annotation <- TreeAnnot(BT$labels, BT$combinations)
   Tree <- list("M" = M, "labels" = BT$labels,
                "pl_list"= BT$pl_list,
                "mark_tree" = BT$mark_tree,
-               "combinations" = BT$combinations)
+               "annotation" = annotation)
   class(Tree) <- "CytomeTree"
   Tree
 }

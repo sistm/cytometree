@@ -21,8 +21,8 @@ A higher values limits the height of the tree.}
 An object of class 'cytomeTree' providing a partitioning
 of the set of n cells.
 \itemize{
-\item{\code{combinations}}{ A matrix of size n x p containing
-the annotation of each cell given by the tree.}
+\item{\code{annotation}}{ A \code{data.frame} containing the annotation of each 
+cell population underlying the tree pattern.}
 \item{\code{labels}}{ The partitioning of the set of n cells.}
 \item{\code{M}}{ The input matrix.}
 \item{\code{mark_tree}}{ A two level list containing markers used
@@ -44,7 +44,6 @@ the two families.
 head(DLBCL)
 # number of cell event.
 N <- nrow(DLBCL)
-head(DLBCL)
 # Cell events.
 cellevents <- DLBCL[,c("FL1", "FL2", "FL4")]
 # Manual partitioning of the set N (from FlowCAP-I).
@@ -62,8 +61,10 @@ plot_nodes(Tree,"FL4.1")
 par(mfrow=c(1,1))
 plot_graph(Tree,edge.arrow.size=.3, Vcex =.5, vertex.size = 30)
 # Run the annotation algorithm.
-Annot <- Annotation(Tree,plot=TRUE)
+Annot <- Annotation(Tree,plot=FALSE)
 Annot$combinations
+# Compare to the annotation gotten from the tree.
+Tree$annotation
 # Example of seeked phenotypes.
 # Variable in which seeked phenotypes can be entered in the form
 # of matrices.

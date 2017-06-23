@@ -2,12 +2,12 @@
 % Please edit documentation in R/BinaryTree.R
 \name{BinaryTree}
 \alias{BinaryTree}
-\title{Build a binary tree.}
+\title{Builds a binary tree.}
 \usage{
 BinaryTree(M, minleaf = 1, t = 0.1)
 }
 \description{
-Build a binary tree.
+Builds a binary tree.
 }
 \keyword{internal}
 
