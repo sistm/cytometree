@@ -70,7 +70,7 @@ Annotation<- function(CytomeTreeObj, K3markers = NULL, plot = TRUE)
       tind2.2 <- which(labels%in%tempclass_pos.2)
       partitions3gr <- Partition3gr(n)
       Kmeans3 <- KmeansOPT(partitions3gr, leavesSort, labels, M_j, K = 3)
-      partwin3gr <- partitions3gr[[which.max(Kmeans3$ind)]]
+      partwin3gr <- partitions3gr[[Kmeans3$ind]]
       tempclass_neg.3  <- leavesSort[which(partwin3gr == 1)]
       tempclass_pos.3  <- leavesSort[which(partwin3gr == 2)]
       tempclass_dpos.3 <- leavesSort[which(partwin3gr == 3)]
