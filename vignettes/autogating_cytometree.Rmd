@@ -2,7 +2,7 @@
 title: "User guide for automatic gating with cytometree"
 author: "Chariff Alkhassim, Boris Hejblum"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: pdf_document
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
@@ -277,7 +277,6 @@ CCR7 <- cellevents[subpopulation_indices,"CCR7"]
 auto_lab <- factor(as.character(auto_labels_merged[subpopulation_indices]))
 plot(CD45RA, CCR7, col = auto_lab)
 ```
-
 
 
 
