@@ -16,6 +16,8 @@ r_packages:
 - ggplot2
 - igraph
 - mclust
+- knitr
+- rmarkdown
 
 r_build_args: "--html"
 

@@ -25,6 +25,7 @@ Imports:
     stats
 RoxygenNote: 6.0.1
 BugReports: https://github.com/chariff/Cytometree/issues
-Suggests: knitr,
+Suggests: 
+    knitr,
     rmarkdown
 VignetteBuilder: knitr
