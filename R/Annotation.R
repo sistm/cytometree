@@ -22,7 +22,7 @@
 #'@import ggplot2 graphics 
 #'
 #'@export
-Annotation<- function(CytomeTreeObj, K3markers = NULL, plot = TRUE)
+Annotation <- function(CytomeTreeObj, K3markers = NULL, plot = TRUE)
 {
   if(class(CytomeTreeObj) != "CytomeTree")
   {
