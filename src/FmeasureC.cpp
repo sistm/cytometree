@@ -11,6 +11,8 @@ using namespace arma;
 //'@param pred vector of a predicted partition
 //'@param ref vector of a reference partition
 //'
+//'@author Boris Hejblum
+//'
 //'@export
 //'
 // [[Rcpp::export]]
@@ -67,6 +69,8 @@ double FmeasureC(NumericVector pred, NumericVector ref){
 //' 
 //'@param pred vector of a predicted partition
 //'@param ref vector of a reference partition
+//'
+//'@author Boris Hejblum
 //'
 //'@export
 //'

@@ -6,6 +6,8 @@
 #'@param pred vector of a predicted partition
 #'@param ref vector of a reference partition
 #'
+#'@author Boris Hejblum
+#'
 #'@export
 #'
 FmeasureC <- function(pred, ref) {
@@ -19,6 +21,8 @@ FmeasureC <- function(pred, ref) {
 #' 
 #'@param pred vector of a predicted partition
 #'@param ref vector of a reference partition
+#'
+#'@author Boris Hejblum
 #'
 #'@export
 #'

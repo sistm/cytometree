@@ -22,8 +22,8 @@ distinguish two or three expression levels per marker.
 \tabular{ll}{
 Package: \tab cytometree\cr
 Type: \tab Package\cr
-Version: \tab 1.0.0\cr
-Date: \tab 2017-05-23\cr
+Version: \tab 1.0.2\cr
+Date: \tab 2017-07-13\cr
 License:\tab \href{http://www.gnu.org/licenses/lgpl.txt}{LGPL-3}\cr
 }
 The main function in this package is \code{\link{CytomeTree}}.
@@ -32,6 +32,6 @@ The main function in this package is \code{\link{CytomeTree}}.
 D. Commenges, C. Alkhassim, B.P. Hejblum, R. Thiebaut. A Binary tree algorithm for automatic gating in cytometry analysis. Submitted, 2017.
 }
 \author{
-Chariff Alkhassim
+Chariff Alkhassim, Boris Hejblum
 --- Maintainer: Chariff Alkhassim
 }

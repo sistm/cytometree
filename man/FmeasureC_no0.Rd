@@ -14,3 +14,6 @@ FmeasureC_no0(pred, ref)
 \description{
 Aghaeepour in FlowCAP 1 ignore the reference class labeled "0"
 }
+\author{
+Boris Hejblum
+}
