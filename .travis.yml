@@ -18,6 +18,7 @@ r_packages:
 - mclust
 - knitr
 - rmarkdown
+- viridis
 
 r_build_args: "--html"
 
