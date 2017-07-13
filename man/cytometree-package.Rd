@@ -2,8 +2,8 @@
 % Please edit documentation in R/cytometree-package.R
 \docType{package}
 \name{cytometree-package}
-\alias{cytometree}
 \alias{cytometree-package}
+\alias{cytometree}
 \title{Binary tree algorithm for cytometry data analysis.}
 \description{
 The algorithm is based on the construction of a binary tree, 
@@ -28,11 +28,10 @@ License:\tab \href{http://www.gnu.org/licenses/lgpl.txt}{LGPL-3}\cr
 }
 The main function in this package is \code{\link{CytomeTree}}.
 }
+\references{
+D. Commenges, C. Alkhassim, B.P. Hejblum, R. Thiebaut. A Binary tree algorithm for automatic gating in cytometry analysis. Submitted, 2017.
+}
 \author{
 Chariff Alkhassim
 --- Maintainer: Chariff Alkhassim
 }
-\references{
-D. Commenges, C. Alkhassim, B.P. Hejblum, R. Thiebaut. A Binary tree algorithm for automatic gating in cytometry analysis. Submitted, 2017.
-}
-

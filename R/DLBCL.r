@@ -4,8 +4,6 @@
 #'
 #'@keywords data
 #'
-#'@name DLBCL
-#'
 #'@usage data(DLBCL)
 #'
 #'@format A data frame with 5524 cell events and 3 markers.

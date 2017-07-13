@@ -1,0 +1,159 @@
+---
+title: "User guide for automatic gating with cytometree"
+author: "Chariff Alkhassim, Boris Hejblum"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+# Introduction to `cytometree`
+
+`cytometree` is a package that implements a binary tree algorithm for the analysis of cytometry data.
+
+Its core algorithm is based on the construction of a binary tree, whose nodes represents 
+cell subpopulations.
+
+## Binary tree construction
+
+1. At each node, observed cells (or "events") and markers are modeled by both a normal distribution (so *uni-modal*), and a mixture of 2 normal distributions (so *bi-modal*).
+
+2. Splitting of the events at each node is done according to a normalized difference of AIC between 
+the two distributional fit (unimodal or bimodal), allowing to pick the marker that best splits those data.
+
+3. When AIC differences are not significant anymore, the tree and the cells have been automatically gated (i.e. partitioned). 
+
+## Post-hoc annotation
+
+Given the unsupervised nature of the binary tree, some of the available markers may not be used to find the different cell populations present in a given sample. To recover a complete annotation, we defined, as a post processing procedure, an annotation method which allows the user to distinguish two (or three) expression levels per marker.
+
+
+# Example of an analysis with `cytometree`
+
+In this example, we will use a diffuse large B-cell lymphoma dataset (from the [flowCAP-I challenge](http://flowcap.flowsite.org/), with only 3 markers. First, we need to load the package `cytometree` and we can have a look at the data:
+
+```{r, message=FALSE}
+library(cytometree)
+dim(DLBCL)
+head(DLBCL)
+```
+We have 3 markers measured `FL1`, `FL2`, `FL4` as well as the `label` obtained from manual gating, and `r nrow(DLBCL)`.
+
+```{r}
+# Cell events.
+cellevents <- DLBCL[,c("FL1", "FL2", "FL4")]
+# Manual gating reference from FlowCAP-I
+manual_labels <- DLBCL[,"label"]
+```
+
+
+```{r, eval=FALSE}
+# Build the binary tree.
+Tree <- CytomeTree(cellevents, minleaf = 1, t=.1)
+
+# Retreive the resulting partition of the set N.
+Tree_Partition <- Tree$labels
+# Plot node distributions.
+par(mfrow=c(1,2))
+plot_nodes(Tree)
+# Choose a node to plot.
+plot_nodes(Tree,"FL4.1")
+# Plot a graph of the tree.
+par(mfrow=c(1,1))
+plot_graph(Tree,edge.arrow.size=.3, Vcex =.5, vertex.size = 30)
+# Run the annotation algorithm.
+Annot <- Annotation(Tree,plot=FALSE)
+Annot$combinations
+# Compare to the annotation gotten from the tree.
+Tree$annotation
+# Example of seeked phenotypes.
+# Variable in which seeked phenotypes can be entered in the form
+# of matrices.
+phenotypes <- list()
+## Seeked phenotypes.
+# FL1- FL2+ FL4-.
+phenotypes[[1]] <- rbind(c("FL1", 0), c("FL2", 1), c("FL4", 0))
+# FL1+ FL2- FL4+.
+phenotypes[[2]] <- rbind(c("FL1", 1), c("FL2", 0), c("FL4", 1))
+# FL1+ FL2+ FL4+.
+phenotypes[[3]] <- rbind(c("FL1", 1), c("FL2", 1), c("FL4", 1))
+# Retreive cell populations found using Annotation.
+PhenoInfos <- RetrievePops(Annot, phenotypes)
+PhenoInfos$phenotypesinfo
+# F-measure ignoring cells labeled 0 as in FlowCAP-I.
+# Use FmeasureC() in any other case.
+FmeasureC_no0(ref=manual_labels, pred=Tree_Partition)
+# Scatterplots.
+library(ggplot2)
+# Ignoring cells labeled 0 as in FlowCAP-I.
+rm_zeros <- which(!manual_labels)
+# Building the data frame to scatter plot the data.
+FL1 <- cellevents[-c(rm_zeros),"FL1"]
+FL2 <- cellevents[-c(rm_zeros),"FL2"]
+FL4 <- cellevents[-c(rm_zeros),"FL4"]
+n <- length(FL1)
+Labels <- c(manual_labels[-c(rm_zeros)]%%2+1, Tree_Partition[-c(rm_zeros)])
+Labels <- as.factor(Labels)
+method <- as.factor(c(rep("FlowCap-I",n),rep("CytomeTree",n)))
+scatter_df <- data.frame("FL2"=FL2,"FL4"=FL4,"labels"=Labels,"method"=method)
+
+p <- ggplot2::ggplot(scatter_df,  ggplot2::aes_string(x = "FL2", y="FL4",colour="labels"))+
+ ggplot2::geom_point(alpha = 1,cex = 1)+
+ ggplot2::scale_colour_manual(values = c("green","red","blue"))+
+ ggplot2::facet_wrap(~ method)+
+ ggplot2::theme_bw()+
+ ggplot2::theme(legend.position="bottom")
+p
+```
+
+
+Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+
+- Never uses retina figures
+- Has a smaller default figure size
+- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+
+## Vignette Info
+
+Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+
+## Styles
+
+The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+
+    output: 
+      rmarkdown::html_vignette:
+        css: mystyles.css
+
+## Figures
+
+The figure sizes have been customised so that you can easily put two images side-by-side. 
+
+```{r, fig.show='hold'}
+plot(1:10)
+plot(10:1)
+```
+
+You can enable figure captions by `fig_caption: yes` in YAML:
+
+    output:
+      rmarkdown::html_vignette:
+        fig_caption: yes
+
+Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+
+## More Examples
+
+You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(head(mtcars, 10))
+```
+
+Also a quote using `>`:
+
+> "He who gives up [code] safety for [code] speed deserves neither."
+([via](https://twitter.com/hadleywickham/status/504368538874703872))

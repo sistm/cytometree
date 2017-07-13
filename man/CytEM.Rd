@@ -10,4 +10,3 @@ CytEM(M, indices, minleaf, level, t)
 E-M algorithm.
 }
 \keyword{internal}
-

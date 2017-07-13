@@ -10,4 +10,3 @@ Partition2gr(N)
 Computes N-1 possible partitions of N into 2 subsets.
 }
 \keyword{internal}
-
