@@ -49,7 +49,7 @@ library(cytometree)
 dim(DLBCL)
 head(DLBCL)
 ```
-We have 3 markers measured `FL1`, `FL2`, `FL4` as well as the `label` obtained from manual gating, and `r nrow(DLBCL)` cell.
+We have 3 markers measured `FL1`, `FL2`, `FL4` as well as the `label` obtained from manual gating, and `r nrow(DLBCL)` cells.
 
 ```{r}
 # getting the only the cell events with the 3 markers measured:
@@ -123,9 +123,10 @@ Finally, we can compare the automatic gating obtained using `cytometree` to the 
 ```{r, echo=FALSE, small.mar=TRUE, fig.width=6.5, fig.height=4}
 # F-measure ignoring cells labeled 0 as in FlowCAP-I.
 # Use FmeasureC() in any other case.
-Fmeas <- FmeasureC_no0(ref=manual_labels, pred=Tree_Partition)
+Fmeas <- cytometree::FmeasureC_no0(ref=manual_labels, pred=Tree_Partition)
 # Scatterplots.
 library(ggplot2)
+library(viridis)
 # Ignoring cells labeled 0 as in FlowCAP-I.
 # Building the data frame to scatter plot the data.
 FL1 <- cellevents[, "FL1"]
