@@ -153,3 +153,136 @@ p <- ggplot2::ggplot(scatter_df,  ggplot2::aes_string(x = "FL2", y="FL4",colour=
  ggplot2::ggtitle(paste("F-measure (manual gating as reference - removing the outliers) =", round(Fmeas, 3)))
 p
 ```
+
+# Second example of an analysis with `cytometree`
+
+## Automatic gating step
+
+
+In this example, we will use a dataset from the HIPC ([Human Immunology Project Consortium](https://www.immuneprofiling.org/) program where a PBMC sample from patient 12828 was analysed by Stanford. First, we need to load the package `cytometree` and we can have a look at the data:
+
+```{r, message=FALSE}
+library(cytometree)
+dim(HIPC)
+head(HIPC)
+```
+We have 6 markers measured ` CCR7`, `CD4`, `CD45RA`, `HLADR`, `CD38`, `CD8` as well as the `label` obtained from manual gating , and `r nrow(HIPC)` cell.
+
+
+```{r}
+# getting the only the cell events with the 3 markers measured:
+cellevents <- HIPC[,c("CCR7", "CD4", "CD45RA", "HLADR" ,"CD38" ,"CD8")]
+# storing the maanual gating reference from FlowCAP-I:
+manual_labels <- HIPC[,"label"]
+```
+The function `CytomeTree` builds the binary tree according to our algorithm, that gives the automatic gating (given in the resulting `labels` attribute):
+```{r, message=FALSE}
+# Build the binary tree:
+Tree <- CytomeTree(cellevents, minleaf = 1, t = 0.2)
+# Retreive the resulting partition (i.e. automatic gating):
+Tree_Partition <- Tree$labels
+```
+One can fiddle with the `t` threshold to change the desired depth of the tree.
+
+The function `plot_graph` plots a graph representing this binary tree, showing which markers were used in which order to splits the events:
+```{r, fig.width = 8, fig.height=15}
+# Plot a graph of the tree (with specific graphical parameters):
+plot_graph(Tree, edge.arrow.size = 0.3, Vcex = 0.8, vertex.size = 20)
+```
+
+The function `plot_nodes` allows to graphically evaluate the fit of the gaussian family distribution at each node. It can also be used to investigate a particular node:
+```{r}
+# Plot node distributions.
+par(mfrow=c(3,3))
+plot_nodes(Tree)
+# Choose a particular node to plot
+plot_nodes(Tree, "CD4.1")
+```
+
+## Post-processing annotation of automatically gated subpopulations
+
+The function `Annotation` annotates the subpopulations partitionned by the binary tree:
+
+```{r}
+# Run the annotation algorithm.
+Annot <- Annotation(Tree,plot=FALSE)
+Annot$combinations
+```
+
+The post-procesing annotation can be compared to the uncomplete annotation obtained from the tree alone:
+```{r}
+# Compare to the annotation gotten from the tree.
+Tree$annotation
+```
+
+This completed annotation eases the search for specific cell types of interest, where `1` represents a postive measurement of a marker, while `0` corresponds to its absence:
+```{r}
+
+# seeked cell type: CD8-CD4+CCR7-CD45RA+
+pheno_ex1 <- RetrievePops(Annot, phenotypes = list( rbind(c("CD8", 0), 
+                      c("CD4", 1), 
+                      c("CCR7", 0), 
+                      c("CD45RA", 1))))
+pheno_ex1$phenotypesinfo
+
+#One can look for several cell types at once:
+phenotypes <- list()
+# CD8-CD4+CCR7-CD45RA+
+CD4effector <-  rbind(c("CD8", 0), 
+                      c("CD4", 1), 
+                      c("CCR7", 0), 
+                      c("CD45RA", 1))
+phenotypes[[1]] <- CD4effector
+
+# CD8-CD4+CCR7+CD45RA+
+CD4naive <-     rbind(c("CD8", 0), 
+                      c("CD4", 1), 
+                      c("CCR7", 1), 
+                      c("CD45RA", 1))
+phenotypes[[2]] <- CD4naive
+
+# CD8-CD4+CCR7+CD45RA-
+CD4CM <-        rbind(c("CD8", 0), 
+                      c("CD4", 1), 
+                      c("CCR7", 1), 
+                      c("CD45RA", 0))
+phenotypes[[3]] <- CD4CM
+
+# CD8-CD4+CCR7+CD45RA+
+CD4effectorM <- rbind(c("CD8", 0), 
+                      c("CD4", 1), 
+                      c("CCR7", 0), 
+                      c("CD45RA", 0))
+phenotypes[[4]] <- CD4effectorM
+
+# Retreive corresponding cell populations:
+PhenoInfos <- RetrievePops(Annot, phenotypes)
+# One can find informations about the seeked phenotypes in 
+PhenoInfos$phenotypesinfo
+# According to PhenoInfos$phenotypesinfo, CD8-CD4+CCR7-CD45RA+ population is labeled 12
+# According to PhenoInfos$phenotypesinfo, CD8-CD4+CCR7+CD45RA+ population is labeled 5
+# According to PhenoInfos$phenotypesinfo, CD8-CD4+CCR7+CD45RA- population is labeled 4
+# According to PhenoInfos$phenotypesinfo, CD8-CD4+CCR7+CD45RA+ population is comprised
+# of 4 clusters labeled 8,9,10, 11. They were merged into a new cluster labeled 13.
+
+# The new partition, with merged clusters is to be found in PhenoInfos$Mergedleaves.
+auto_labels_merged <- PhenoInfos$Mergedleaves
+
+# Get the indices of the subpopulation comprised of classes labeled 4,5,12,13.
+subpopulation_indices <- auto_labels_merged %in%c(4,5,12,13)
+
+# Scatter plot the data.
+CD45RA <- cellevents[subpopulation_indices,"CD45RA"]
+CCR7 <- cellevents[subpopulation_indices,"CCR7"]
+auto_lab <- factor(as.character(auto_labels_merged[subpopulation_indices]))
+plot(CD45RA, CCR7, col = auto_lab)
+```
+
+
+
+
+
+
+
+
+
