@@ -20,6 +20,6 @@ r_packages:
 - rmarkdown
 - viridis
 
-r_build_args: "--html"
+r_build_args: "--html --no-manual"
 
 r_check_args: "--as-cran --timings"
