@@ -2,7 +2,7 @@
 title: "User guide for automatic gating with cytometree"
 author: "Chariff Alkhassim, Boris Hejblum"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: pdf_document
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
@@ -26,12 +26,12 @@ cell subpopulations.
 
 ## Binary tree construction
 
-1. At each node, observed cells (or "events") and markers are modeled by both a normal distribution (so *uni-modal*), and a mixture of 2 normal distributions (so *bi-modal*).
+1. At each node, observed cells (or "events") and markers are modeled by both a normal distribution (so *unimodal*), and a mixture of 2 normal distributions (so *bimodal*).
 
 2. Splitting of the events at each node is done according to a normalized difference of AIC between 
 the two distributional fit (unimodal or bimodal), allowing to pick the marker that best splits those data.
 
-3. When AIC differences are not significant anymore, the tree and the cells have been automatically gated (i.e. partitioned). 
+3. When AIC noralized differences $D$ are not significant anymore, the tree has been constructed, and the cells have been automatically gated (i.e. partitioned). 
 
 ## Post-hoc annotation
 
@@ -116,7 +116,7 @@ PhenoInfos <- RetrievePops(Annot, phenotypes)
 PhenoInfos$phenotypesinfo
 ```
 
-## Comparison between manual gating 
+## Comparison between manual and automatic gating
 
 Finally, we can compare the automatic gating obtained using `cytometree` to the original manual gating (which had `r sum(manual_labels==0)` events unconsitantly gated accross different operators performing the manual gating on those very same data - so those `r sum(manual_labels==0)` cells were identified as outliers in the reference label and were kept out of the evaluation criteria in the [flowCAP-I challenge](http://flowcap.flowsite.org/)):
 
