@@ -1,8 +1,8 @@
 ---
-title: "User guide for automatic gating with cytometree"
+title: "User guide for performing automatic gating with `cytometree`"
 author: "Chariff Alkhassim, Boris Hejblum"
 date: "`r Sys.Date()`"
-output: pdf_document
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
@@ -10,6 +10,7 @@ vignette: >
 ---
 
 ```{r knitrsetup, include=FALSE}
+knitr::opts_chunk$set(tidy = TRUE)
 knitr::knit_hooks$set(small.mar = function(before, options, envir) {
     if (before) par(mar = c(0, 0, 0, 0))  # no margin
 })
@@ -38,14 +39,19 @@ the two distributional fit (unimodal or bimodal), allowing to pick the marker th
 Given the unsupervised nature of the binary tree, some of the available markers may not be used to find the different cell populations present in a given sample. To recover a complete annotation, we defined, as a post processing procedure, an annotation method which allows the user to distinguish two (or three) expression levels per marker.
 
 
-# Example of an analysis with `cytometree`
+# Example of analysis with `cytometree`
 
-## Automatic gating step
+## Diffuse large B-cell lymphoma dataset with 3 markers
 
-In this example, we will use a diffuse large B-cell lymphoma dataset (from the [flowCAP-I challenge](http://flowcap.flowsite.org/), with only 3 markers. First, we need to load the package `cytometree` and we can have a look at the data:
+In this example, we will use a diffuse large B-cell lymphoma dataset (from the [flowCAP-I challenge](http://flowcap.flowsite.org/), with only 3 markers.
+
+### Automatic gating step
+
+First, we need to load the package `cytometree` and we can have a look at the data:
 
 ```{r, message=FALSE}
 library(cytometree)
+data(DLBCL)
 dim(DLBCL)
 head(DLBCL)
 ```
@@ -75,33 +81,33 @@ plot_graph(Tree, edge.arrow.size = 0.3, Vcex = 0.8, vertex.size = 30)
 
 The function `plot_nodes` allows to graphically evaluate the fit of the gaussian family distribution at each node. It can also be used to investigate a particular node:
 ```{r}
-# Plot node distributions.
+# Plot the distribution fit for each node:
 plot_nodes(Tree)
-# Choose a particular node to plot
+# Plot the distribution fit for a particular node:
 plot_nodes(Tree, "FL4.1")
 ```
 
 
-## Post-processing annotation of automatically gated subpopulations
+### Post-processing annotation of automatically gated subpopulations
 
 The function `Annotation` annotates the subpopulations partitionned by the binary tree:
 
 ```{r}
-# Run the annotation algorithm.
+# Run the annotation algorithm:
 Annot <- Annotation(Tree,plot=FALSE)
 Annot$combinations
 ```
 
 The post-procesing annotation can be compared to the uncomplete annotation obtained from the tree alone:
 ```{r}
-# Compare to the annotation gotten from the tree.
+# Annotation gotten from the tree:
 Tree$annotation
 ```
 
 This completed annotation eases the search for specific cell types of interest, where `1` represents a postive measurement of a marker, while `0` corresponds to its absence:
 ```{r}
 
-# seeked cell type: FL1+FL2+FL4+.
+# seeked cell type: FL1+FL2+FL4+
 pheno_ex1 <- RetrievePops(Annot, phenotypes = list(rbind(c("FL1", 1), c("FL2", 1), c("FL4", 1))))
 pheno_ex1$phenotypesinfo
 
@@ -116,7 +122,7 @@ PhenoInfos <- RetrievePops(Annot, phenotypes)
 PhenoInfos$phenotypesinfo
 ```
 
-## Comparison between manual and automatic gating
+### Comparison between manual and automatic gating
 
 Finally, we can compare the automatic gating obtained using `cytometree` to the original manual gating (which had `r sum(manual_labels==0)` events unconsitantly gated accross different operators performing the manual gating on those very same data - so those `r sum(manual_labels==0)` cells were identified as outliers in the reference label and were kept out of the evaluation criteria in the [flowCAP-I challenge](http://flowcap.flowsite.org/)):
 
@@ -154,20 +160,21 @@ p <- ggplot2::ggplot(scatter_df,  ggplot2::aes_string(x = "FL2", y="FL4",colour=
 p
 ```
 
-# Second example of an analysis with `cytometree`
+## nalysis using `cytometree`
 
-## Automatic gating step
+In this example, we will use a dataset from the HIPC ([Human Immunology Project Consortium](https://www.immuneprofiling.org/) program where a PBMC sample from patient 12828 was analysed by Stanford. 
 
+### Automatic gating step
 
-In this example, we will use a dataset from the HIPC ([Human Immunology Project Consortium](https://www.immuneprofiling.org/) program where a PBMC sample from patient 12828 was analysed by Stanford. First, we need to load the package `cytometree` and we can have a look at the data:
+First, we need to load the package `cytometree` and we can have a look at the data:
+
 
 ```{r, message=FALSE}
-library(cytometree)
+data(HIPC)
 dim(HIPC)
 head(HIPC)
 ```
-We have 6 markers measured ` CCR7`, `CD4`, `CD45RA`, `HLADR`, `CD38`, `CD8` as well as the `label` obtained from manual gating , and `r nrow(HIPC)` cell.
-
+We have 6 markers measured ` CCR7`, `CD4`, `CD45RA`, `HLADR`, `CD38`, `CD8` as well as the `label` obtained from manual gating, and `r nrow(HIPC)` cell.
 
 ```{r}
 # getting the only the cell events with the 3 markers measured:
@@ -185,46 +192,28 @@ Tree_Partition <- Tree$labels
 One can fiddle with the `t` threshold to change the desired depth of the tree.
 
 The function `plot_graph` plots a graph representing this binary tree, showing which markers were used in which order to splits the events:
-```{r, fig.width = 8, fig.height=15}
+```{r, fig.width = 6.2, fig.height = 6.2, small.mar = TRUE}
 # Plot a graph of the tree (with specific graphical parameters):
-plot_graph(Tree, edge.arrow.size = 0.3, Vcex = 0.8, vertex.size = 20)
+plot_graph(Tree, edge.arrow.size = 0.4, Vcex = 0.45)
 ```
 
 The function `plot_nodes` allows to graphically evaluate the fit of the gaussian family distribution at each node. It can also be used to investigate a particular node:
 ```{r}
-# Plot node distributions.
-par(mfrow=c(3,3))
-plot_nodes(Tree)
-# Choose a particular node to plot
-plot_nodes(Tree, "CD4.1")
+# Plot the fit for 2 specific nodes:
+plot_nodes(Tree, c("CD4.1", "CD45RA.7"))
 ```
 
 ## Post-processing annotation of automatically gated subpopulations
 
 The function `Annotation` annotates the subpopulations partitionned by the binary tree:
-
 ```{r}
-# Run the annotation algorithm.
+# Run the annotation algorithm:
 Annot <- Annotation(Tree,plot=FALSE)
 Annot$combinations
 ```
 
-The post-procesing annotation can be compared to the uncomplete annotation obtained from the tree alone:
-```{r}
-# Compare to the annotation gotten from the tree.
-Tree$annotation
-```
-
 This completed annotation eases the search for specific cell types of interest, where `1` represents a postive measurement of a marker, while `0` corresponds to its absence:
-```{r}
-
-# seeked cell type: CD8-CD4+CCR7-CD45RA+
-pheno_ex1 <- RetrievePops(Annot, phenotypes = list( rbind(c("CD8", 0), 
-                      c("CD4", 1), 
-                      c("CCR7", 0), 
-                      c("CD45RA", 1))))
-pheno_ex1$phenotypesinfo
-
+```{r, fig.width=5, fig.height=5}
 #One can look for several cell types at once:
 phenotypes <- list()
 # CD8-CD4+CCR7-CD45RA+
@@ -268,14 +257,16 @@ PhenoInfos$phenotypesinfo
 # The new partition, with merged clusters is to be found in PhenoInfos$Mergedleaves.
 auto_labels_merged <- PhenoInfos$Mergedleaves
 
-# Get the indices of the subpopulation comprised of classes labeled 4,5,12,13.
-subpopulation_indices <- auto_labels_merged %in%c(4,5,12,13)
+# Get the indices of the subpopulation comprised of classes labeled 12, 5, 4,13.
+subpopulation_indices <- auto_labels_merged %in% c(12, 5, 4, 13)
 
 # Scatter plot the data.
-CD45RA <- cellevents[subpopulation_indices,"CD45RA"]
-CCR7 <- cellevents[subpopulation_indices,"CCR7"]
-auto_lab <- factor(as.character(auto_labels_merged[subpopulation_indices]))
-plot(CD45RA, CCR7, col = auto_lab)
+CD45RA <- cellevents[subpopulation_indices, "CD45RA"]
+CCR7 <- cellevents[subpopulation_indices, "CCR7"]
+auto_lab <- factor(auto_labels_merged[subpopulation_indices])
+levels(auto_lab) <- viridis::viridis(length(levels(auto_lab)))
+auto_lab <- as.character(auto_lab)
+plot(CD45RA, CCR7, col = auto_lab, main = "Automatic gating")
 ```
 
 
