@@ -1,10 +1,12 @@
 ---
-title: "User guide for performing automatic gating with `cytometree`"
+title: "Userguide for performing automatic gating with `cytometree`"
 author: "Chariff Alkhassim, Boris Hejblum"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    toc: yes
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Userguide for performing automatic gating with `cytometree`}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -39,7 +41,7 @@ the two distributional fit (unimodal or bimodal), allowing to pick the marker th
 Given the unsupervised nature of the binary tree, some of the available markers may not be used to find the different cell populations present in a given sample. To recover a complete annotation, we defined, as a post processing procedure, an annotation method which allows the user to distinguish two (or three) expression levels per marker.
 
 
-# Example of analysis with `cytometree`
+# Examples of analysis with `cytometree`
 
 ## Diffuse large B-cell lymphoma dataset with 3 markers
 
@@ -160,7 +162,7 @@ p <- ggplot2::ggplot(scatter_df,  ggplot2::aes_string(x = "FL2", y="FL4",colour=
 p
 ```
 
-## nalysis using `cytometree`
+## PBMC sample from the Human Immunology Project
 
 In this example, we will use a dataset from the HIPC ([Human Immunology Project Consortium](https://www.immuneprofiling.org/) program where a PBMC sample from patient 12828 was analysed by Stanford. 
 
@@ -203,7 +205,7 @@ The function `plot_nodes` allows to graphically evaluate the fit of the gaussian
 plot_nodes(Tree, c("CD4.1", "CD45RA.7"))
 ```
 
-## Post-processing annotation of automatically gated subpopulations
+### Post-processing annotation of automatically gated subpopulations
 
 The function `Annotation` annotates the subpopulations partitionned by the binary tree:
 ```{r}
