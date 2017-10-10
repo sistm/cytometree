@@ -1,8 +1,8 @@
 citHeader("To cite cytometree in publications, please use:")
 
 citEntry(entry = "Article",
-   title  = "A Binary tree algorithm for automatic gating in cytometry analysis",
-   author = c(person("Daniel Commenges"), person("Chariff Alkhassim"), person("Boris P Hejblum"), person("Rodolphe Thi\\'ebaut")),
+   title  = “cytometree: a binary tree algorithm for automatic gating in cytometry analysis",
+   author = c(person("Daniel Commenges"), person("Chariff Alkhassim"), person(“Raphael Gottardo”), person("Boris P Hejblum"), person("Rodolphe Thi\\'ebaut")),
    journal = "submitted",
    year   = "2017",
    volume = "",
@@ -10,8 +10,8 @@ citEntry(entry = "Article",
    pages  = "1-7",
    doi    = "",
    url    = "",
-   note   = "R package version 1.0.0",
-   textVersion = "Commenges D, Alkhassim C, Hejblum BP, Thiebaut R. A Binary tree algorithm for automatic gating in cytometry analysis. Sumitted. 2017. ."
+   note   = "R package version 1.1.0”,
+   textVersion = "Commenges D, Alkhassim C, Gottardo R, Hejblum BP, Thiebaut R. cytometree: a binary tree algorithm for automatic gating in cytometry analysis. Submitted. 2017. ."
 )
 
 citFooter("We have invested a lot of time and effort in implementing cytometree, ", "please cite it when using it for data analysis or research.")
