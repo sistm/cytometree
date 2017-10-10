@@ -36,9 +36,15 @@ Temporary Items
 .apdisk
 # Rstudio user dependent created files
 .Rproj.user
+.Rproj.user/*
 *.Rproj
 .Rhistory
 *.o
 *.so
 *.dll
 inst/doc
+*.Rproj*
+
+# vignettes
+vignettes/*.html
+vignettes/*.R
