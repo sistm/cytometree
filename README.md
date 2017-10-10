@@ -8,7 +8,7 @@ cytometree
 Overview
 --------
 
-`cytometree` is a package which performs automatic gating and annotation of flow-cytometry data. On top of the [CRAN help files](https://cran.r-project.org/web/packages/cytometree/cytometree.pdf), we also provide a [vignette](https://cran.r-project.org/web/packages/cytometree/vignettes/autogating_cytometree.html) illustrating the functionnalities of `cytometree`.
+`cytometree` is a package which performs automatic gating and annotation of flow-cytometry data. On top of the [CRAN help files](https://cran.r-project.org/package=cytometree/cytometree.pdf), we also provide a [vignette](https://cran.r-project.org/package=cytometree/vignettes/autogating_cytometree.html) illustrating the functionnalities of `cytometree`.
 
 The following article explains what `cytometree` is about:
 
