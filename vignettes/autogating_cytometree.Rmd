@@ -109,16 +109,16 @@ Tree$annotation
 This completed annotation eases the search for specific cell types of interest, where `1` represents a postive measurement of a marker, while `0` corresponds to its absence:
 ```{r}
 
-# seeked cell type: FL1+FL2+FL4+
-pheno_ex1 <- RetrievePops(Annot, phenotypes = list(rbind(c("FL1", 1), c("FL2", 1), c("FL4", 1))))
+# seeked cell type: FL2+FL4+
+pheno_ex1 <- RetrievePops(Annot, phenotypes = list(rbind(c("FL2", 1), c("FL4", 1))))
 pheno_ex1$phenotypesinfo
 
 #One can look for several cell types at once:
 phenotypes <- list()
-# FL1-FL2+FL4-
-phenotypes[[1]] <- rbind(c("FL1", 0), c("FL2", 1), c("FL4", 0))
-# FL1+FL2-FL4+
-phenotypes[[2]] <- rbind(c("FL1", 1), c("FL2", 0), c("FL4", 1))
+# FL2+FL4-
+phenotypes[[1]] <- rbind(c("FL2", 1), c("FL4", 0))
+# FL2-FL4+
+phenotypes[[2]] <- rbind(c("FL2", 0), c("FL4", 1))
 # Retreive corresponding cell populations:
 PhenoInfos <- RetrievePops(Annot, phenotypes)
 PhenoInfos$phenotypesinfo

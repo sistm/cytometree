@@ -8,7 +8,7 @@
 #'
 #'@param t A real positive-or-null number used for comparison with
 #'the normalized AIC computed at each node of the tree.
-#'A higher values limits the height of the tree.
+#'A higher value limits the height of the tree.
 #'
 #'@return An object of class 'cytomeTree' providing a partitioning
 #'of the set of n cells.
@@ -61,12 +61,12 @@
 #'# of matrices.
 #'phenotypes <- list()
 #'## Seeked phenotypes.
-#'# FL1- FL2+ FL4-.
-#'phenotypes[[1]] <- rbind(c("FL1", 0), c("FL2", 1), c("FL4", 0))
-#'# FL1+ FL2- FL4+.
-#'phenotypes[[2]] <- rbind(c("FL1", 1), c("FL2", 0), c("FL4", 1))
-#'# FL1+ FL2+ FL4+.
-#'phenotypes[[3]] <- rbind(c("FL1", 1), c("FL2", 1), c("FL4", 1))
+#'# FL2+ FL4-.
+#'phenotypes[[1]] <- rbind(c("FL2", 1), c("FL4", 0))
+#'# FL2- FL4+.
+#'phenotypes[[2]] <- rbind(c("FL2", 0), c("FL4", 1))
+#'# FL2+ FL4+.
+#'phenotypes[[3]] <- rbind(c("FL2", 1), c("FL4", 1))
 #'# Retreive cell populations found using Annotation.
 #'PhenoInfos <- RetrievePops(Annot, phenotypes)
 #'PhenoInfos$phenotypesinfo
@@ -117,7 +117,7 @@ CytomeTree <- function(M, minleaf = 1, t = .1)
   BT <- BinaryTree(M, floor(minleaf), t)
   annotation <- TreeAnnot(BT$labels, BT$combinations)
   Tree <- list("M" = M, "labels" = BT$labels,
-               "pl_list"= BT$pl_list,
+               "pl_list"= BT$pl_list, "t"= t,
                "mark_tree" = BT$mark_tree,
                "annotation" = annotation)
   class(Tree) <- "CytomeTree"

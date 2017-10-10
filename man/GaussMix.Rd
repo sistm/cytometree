@@ -10,3 +10,4 @@ GaussMix(x, mu1, mu2, sd1, sd2, pi1, pi2)
 Bimodal normal mixture distribution.
 }
 \keyword{internal}
+

@@ -10,3 +10,4 @@ TreeAnnot(labels, combinaisons)
 Returns the underlying annotation given a tree pattern.
 }
 \keyword{internal}
+

@@ -15,7 +15,7 @@ per population. Default is \code{1}.}
 
 \item{t}{A real positive-or-null number used for comparison with
 the normalized AIC computed at each node of the tree.
-A higher values limits the height of the tree.}
+A higher value limits the height of the tree.}
 }
 \value{
 An object of class 'cytomeTree' providing a partitioning
@@ -70,12 +70,12 @@ Tree$annotation
 # of matrices.
 phenotypes <- list()
 ## Seeked phenotypes.
-# FL1- FL2+ FL4-.
-phenotypes[[1]] <- rbind(c("FL1", 0), c("FL2", 1), c("FL4", 0))
-# FL1+ FL2- FL4+.
-phenotypes[[2]] <- rbind(c("FL1", 1), c("FL2", 0), c("FL4", 1))
-# FL1+ FL2+ FL4+.
-phenotypes[[3]] <- rbind(c("FL1", 1), c("FL2", 1), c("FL4", 1))
+# FL2+ FL4-.
+phenotypes[[1]] <- rbind(c("FL2", 1), c("FL4", 0))
+# FL2- FL4+.
+phenotypes[[2]] <- rbind(c("FL2", 0), c("FL4", 1))
+# FL2+ FL4+.
+phenotypes[[3]] <- rbind(c("FL2", 1), c("FL4", 1))
 # Retreive cell populations found using Annotation.
 PhenoInfos <- RetrievePops(Annot, phenotypes)
 PhenoInfos$phenotypesinfo
@@ -106,3 +106,4 @@ p
 \author{
 Chariff Alkhassim
 }
+
