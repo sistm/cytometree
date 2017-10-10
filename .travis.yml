@@ -1,5 +1,6 @@
-language: r
+language: R
 cache: packages
+warnings_are_errors: true
 sudo: false
 
 r:
@@ -19,6 +20,12 @@ r_packages:
 - knitr
 - rmarkdown
 - viridis
+
+r_github_packages:
+  - jimhester/covr
+
+after_success:
+  - Rscript -e 'covr::codecov(type ="all")'
 
 r_build_args: "--html"
 
