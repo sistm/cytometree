@@ -4,17 +4,30 @@
 \alias{Annotation}
 \title{Annotates cell populations found using CytomeTree.}
 \usage{
-Annotation(CytomeTreeObj, K3markers = NULL, plot = TRUE)
+Annotation(CytomeTreeObj, K2markers = NULL, K3markers = NULL, plot = TRUE,
+  t = 0.2)
 }
 \arguments{
 \item{CytomeTreeObj}{An object of class CytomeTree.}
 
+\item{K2markers}{A vector of class character where the names of 
+the markers for which 2 levels of expression are sought can be specified.
+Default is \code{NULL} i.e. unsupervised.}
+
 \item{K3markers}{A vector of class character where the names of 
-the markers for which 3 levels of expression are seeked can be specified.
-Default is \code{NULL} i.e. 2 levels of expression per marker.}
+the markers for which 3 levels of expression are sought can be specified.
+Default is \code{NULL} i.e. unsupervised.}
 
 \item{plot}{A logical value indicating whether or not to plot the 
-partitioning in 2 or 3 groups for each marker. Default is \code{TRUE}.}
+partitioning in 1, 2 or 3 groups for each marker. Default is \code{TRUE}.}
+
+\item{t}{A real positive-or-null number used for comparison with
+the normalized AIC computed to compare the fits of the marginal distributions
+obtained by one normal distribution and by a mixture of two or three normal.
+For markers used in the tree, the algorithm compares the
+fits obtained by a mixture of two and three normal distributions.
+Default value is .2. A higher value leads to a smaller number of
+expression levels per marker.}
 }
 \value{
 A \code{data.frame} containing the annotation of each 
@@ -24,10 +37,13 @@ cell population.
 Annotates cell populations found using CytomeTree.
 }
 \details{
-The algorithm is set to find the partitioning in 2 or
-3 groups of cell populations found using CytomeTree. It minimize 
-the within-leaves sum of squares of the observed values on each
-marker.
+The algorithm is set to find the partitioning in 1, 2 or
+3 groups of cell populations found using CytomeTree. In an unsupervised mode,
+it minimizes the within-leaves sum of squares of the observed values on each
+marker and computes the normalized AIC to compare the fits of the marginal 
+distributions obtained by one normal distribution and by a mixture of two
+or three normal.For markers used in the tree, the algorithm compares the
+fits obtained by a mixture of two and three normal distributions.
 }
 \author{
 Chariff Alkhassim

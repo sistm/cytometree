@@ -62,7 +62,7 @@ double FmeasureC(NumericVector pred, NumericVector ref){
 }
 
 
-//' C++ implementation of the F-measure computation without the ref classe 0
+//' C++ implementation of the F-measure computation without the reference class labeled "0"
 //' 
 //' Aghaeepour in FlowCAP 1 ignore the reference class labeled "0"
 //' 

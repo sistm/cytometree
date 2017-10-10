@@ -23,60 +23,89 @@
 #'
 #'@details The algorithm is based on the construction of a binary tree,
 #'the nodes of which are subpopulations of cells. At each node,
-#'observed cells and markers are modeled by both a familly of normal
-#'distributions and a familly of bimodal normal mixture distributions.
+#'observed cells and markers are modeled by both a family of normal
+#'distributions and a family of bimodal normal mixture distributions.
 #'Splitting is done according to a normalized difference of AIC between
 #'the two families.
-#'@author Chariff Alkhassim
+#'@author Chariff Alkhassim, Boris Hejblum
 #'
 #'@export
 #'
 #'@examples
 #'head(DLBCL)
-#'# number of cell event.
+#'
+#'# number of cell event
 #'N <- nrow(DLBCL)
-#'# Cell events.
+#'
+#'# Cell events
 #'cellevents <- DLBCL[,c("FL1", "FL2", "FL4")]
-#'# Manual partitioning of the set N (from FlowCAP-I).
+#'
+#'
+#'# Manual partitioning of the set N (from FlowCAP-I)
 #'manual_labels <- DLBCL[,"label"]
-#'# Build the binary tree.
+#'
+#'
+#'# Build the binary tree
 #'Tree <- CytomeTree(cellevents, minleaf = 1, t=.1)
-#'# Retreive the resulting partition of the set N.
+#'
+#'
+#'# Retreive the resulting partition of the set N
 #'Tree_Partition <- Tree$labels
-#'# Plot node distributions.
+#'
+#'
+#'# Plot node distributions
 #'par(mfrow=c(1,2))
 #'plot_nodes(Tree)
-#'# Choose a node to plot.
+#'
+#'# Choose a node to plot
 #'plot_nodes(Tree,"FL4.1")
-#'# Plot a graph of the tree.
+#'
+#'# Plot a graph of the tree
 #'par(mfrow=c(1,1))
 #'plot_graph(Tree,edge.arrow.size=.3, Vcex =.5, vertex.size = 30)
-#'# Run the annotation algorithm.
+#'
+#'# Run the annotation algorithm
 #'Annot <- Annotation(Tree,plot=FALSE)
 #'Annot$combinations
-#'# Compare to the annotation gotten from the tree.
+#'
+#'
+#'# Compare to the annotation gotten from the tree
 #'Tree$annotation
-#'# Example of seeked phenotypes.
-#'# Variable in which seeked phenotypes can be entered in the form
-#'# of matrices.
+#'
+#'
+#'# Example of sought phenotypes
+#'# Variable in which sought phenotypes can be entered in the form of matrices.
 #'phenotypes <- list()
-#'## Seeked phenotypes.
-#'# FL2+ FL4-.
+#'
+#'# Sought phenotypes:
+#'## FL2+ FL4-.
 #'phenotypes[[1]] <- rbind(c("FL2", 1), c("FL4", 0))
-#'# FL2- FL4+.
+#'
+#'## FL2- FL4+.
 #'phenotypes[[2]] <- rbind(c("FL2", 0), c("FL4", 1))
-#'# FL2+ FL4+.
+#'
+#'## FL2+ FL4+.
 #'phenotypes[[3]] <- rbind(c("FL2", 1), c("FL4", 1))
+#'
 #'# Retreive cell populations found using Annotation.
 #'PhenoInfos <- RetrievePops(Annot, phenotypes)
 #'PhenoInfos$phenotypesinfo
+#'
 #'# F-measure ignoring cells labeled 0 as in FlowCAP-I.
+#'
 #'# Use FmeasureC() in any other case.
 #'FmeasureC_no0(ref=manual_labels, pred=Tree_Partition)
+#'
+#'
+#'
+#'\dontrun{
+#'
 #'# Scatterplots.
 #'library(ggplot2)
+#'
 #'# Ignoring cells labeled 0 as in FlowCAP-I.
 #'rm_zeros <- which(!manual_labels)
+#'
 #'# Building the data frame to scatter plot the data.
 #'FL1 <- cellevents[-c(rm_zeros),"FL1"]
 #'FL2 <- cellevents[-c(rm_zeros),"FL2"]
@@ -85,15 +114,17 @@
 #'Labels <- c(manual_labels[-c(rm_zeros)]%%2+1, Tree_Partition[-c(rm_zeros)])
 #'Labels <- as.factor(Labels)
 #'method <- as.factor(c(rep("FlowCap-I",n),rep("CytomeTree",n)))
-#'scatter_df <- data.frame("FL2"=FL2,"FL4"=FL4,"labels"=Labels,"method"=method)
-#
-#'p <- ggplot2::ggplot(scatter_df,  ggplot2::aes_string(x = "FL2", y="FL4",colour="labels"))+
-#'  ggplot2::geom_point(alpha = 1,cex = 1)+
-#'  ggplot2::scale_colour_manual(values = c("green","red","blue"))+
-#'  ggplot2::facet_wrap(~ method)+
-#'  ggplot2::theme_bw()+
+#'
+#'scatter_df <- data.frame("FL2" = FL2, "FL4" = FL4, "labels" = Labels, "method" = method)
+#'p <- ggplot2::ggplot(scatter_df,  ggplot2::aes_string(x = "FL2", y = "FL4", colour = "labels")) +
+#'  ggplot2::geom_point(alpha = 1,cex = 1) +
+#'  ggplot2::scale_colour_manual(values = c("green","red","blue")) +
+#'  ggplot2::facet_wrap(~ method) +
+#'  ggplot2::theme_bw() +
 #'  ggplot2::theme(legend.position="bottom")
 #'p
+#'
+#'}
 
 CytomeTree <- function(M, minleaf = 1, t = .1)
 {

@@ -3,7 +3,7 @@
 \docType{data}
 \name{HIPC}
 \alias{HIPC}
-\title{HIPC T cell data set from HIPC program, patient 12828. The data was analysed and gated by Stanford.}
+\title{HIPC T cell data set from HIPC program, patient 12828. The data was analyzed and gated by Stanford.}
 \format{A data frame with 33992 cell events and 6 markers.}
 \source{
 \url{https://www.immuneprofiling.org/}
@@ -12,7 +12,6 @@
 data(HIPC)
 }
 \description{
-HIPC T cell data set from HIPC program, patient 12828. The data was analysed and gated by Stanford.
+HIPC T cell data set from HIPC program, patient 12828. The data was analyzed and gated by Stanford.
 }
 \keyword{data}
-

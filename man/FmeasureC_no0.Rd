@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{FmeasureC_no0}
 \alias{FmeasureC_no0}
-\title{C++ implementation of the F-measure computation without the ref classe 0}
+\title{C++ implementation of the F-measure computation without the reference class labeled "0"}
 \usage{
 FmeasureC_no0(pred, ref)
 }
@@ -17,4 +17,3 @@ Aghaeepour in FlowCAP 1 ignore the reference class labeled "0"
 \author{
 Boris Hejblum
 }
-

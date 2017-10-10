@@ -1,16 +1,16 @@
-#' Retreive cell populations found using Annotation.
+#' Retrieve cell populations found using Annotation.
 #' 
 #'@param AnnotationObj An object of class Annotation.
 #'
 #'@param phenotypes A list containing at least one element of class 
-#'matrix describing a seeked phenotype. Each matrix should have two
+#'matrix describing a sought phenotype. Each matrix should have two
 #'columns where the name of a used marker is associated to a value
 #'chosen between 0, 1 and 2. 0 translates to -, 1 to + and 2 to ++.
 #' 
 #'@return A \code{list} of two elements.
 #'\itemize{
 #'\item{\code{phenotypesinfo}}{ A \code{list} containing informations 
-#'about seeked populations.}
+#'about sought populations.}
 #'\item{\code{Mergedleaves}}{ The partitioning of the set of n cells
 #'with potentially merged leaves.}
 #'}

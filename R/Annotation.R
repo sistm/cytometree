@@ -3,11 +3,11 @@
 #'@param CytomeTreeObj An object of class CytomeTree.
 #'
 #'@param K2markers A vector of class character where the names of 
-#'the markers for which 2 levels of expression are seeked can be specified.
+#'the markers for which 2 levels of expression are sought can be specified.
 #'Default is \code{NULL} i.e. unsupervised. 
 #'
 #'@param K3markers A vector of class character where the names of 
-#'the markers for which 3 levels of expression are seeked can be specified.
+#'the markers for which 3 levels of expression are sought can be specified.
 #'Default is \code{NULL} i.e. unsupervised. 
 #'
 #'@param plot A logical value indicating whether or not to plot the 
@@ -36,7 +36,7 @@
 #'
 #'@import ggplot2 graphics 
 #'
-#'@importFrom stats dnorm
+#'@importFrom stats dnorm sd
 #'
 #'@export
 Annotation <- function(CytomeTreeObj, K2markers = NULL, 
@@ -188,10 +188,10 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
         comp2.3 <- M_j[tind2.3]
         comp3.3 <- M_j[tind3.3]
         lik2 <- GaussMix(M_j, mean(comp1.2), mean(comp2.2), 
-                         sd(comp1.2), sd(comp2.2), 
+                         stats::sd(comp1.2), stats::sd(comp2.2), 
                          length(comp1.2)/len_lab, length(comp2.2)/len_lab)
         lik3 <- GaussMix2(M_j, mean(comp1.3), mean(comp2.3), mean(comp3.3),
-                          sd(comp1.3), sd(comp2.3), sd(comp3.3),
+                          stats::sd(comp1.3), stats::sd(comp2.3), stats::sd(comp3.3),
                           length(comp1.3)/len_lab, length(comp2.3)/len_lab,
                           length(comp3.3)/len_lab)
         aic2 <- 10 - 2*sum(log(lik2))
