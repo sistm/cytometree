@@ -45,6 +45,3 @@ Temporary Items
 inst/doc
 *.Rproj*
 
-# vignettes
-vignettes/*.html
-vignettes/*.R
