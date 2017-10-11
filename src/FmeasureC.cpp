@@ -25,13 +25,13 @@ double FmeasureC(NumericVector pred, NumericVector ref){
   int m = K.size();
   int n = C.size();
   
-  mat M = mat(n, m);
-  mat Pr = mat(n, m);
-  mat Re = mat(n, m);
-  mat Fmat = mat(n, m);
+  mat M(n, m);
+  mat Pr(n, m);
+  mat Re(n, m);
+  mat Fmat(n, m);
   
-  vec C_card = vec(n);
-  vec K_card = vec(m);
+  vec C_card(n);
+  vec K_card(m);
   
   for(int i=0; i<n; i++){
     C_card(i) = sum(ref == C(i));
@@ -49,8 +49,8 @@ double FmeasureC(NumericVector pred, NumericVector ref){
   } 
   
   double C_card_sum = sum(C_card);
-  vec Ffinal = vec(n);
-  vec Fsum = vec(n);
+  vec Ffinal(n);
+  vec Fsum(n);
   
   for(int i=0; i<n; i++){
     Ffinal(i) = max(Fmat.row(i));
