@@ -23,7 +23,7 @@ Imports:
     igraph,
     mclust,
     stats
-RoxygenNote: 6.0.1
+RoxygenNote: 5.0.1
 BugReports: https://github.com/chariff/Cytometree/issues
 Suggests:
     knitr,

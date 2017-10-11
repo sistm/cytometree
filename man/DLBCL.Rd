@@ -15,3 +15,4 @@ data(DLBCL)
 Diffuse large B-cell lymphoma data set from the FlowCAP-I challenge.
 }
 \keyword{data}
+

@@ -10,3 +10,4 @@ GaussMix2(x, mu1, mu2, mu3, sd1, sd2, sd3, pi1, pi2, pi3)
 trimodal normal mixture distribution.
 }
 \keyword{internal}
+

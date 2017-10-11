@@ -109,9 +109,7 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
                                                           fill="Expression"))+
             ggplot2::xlab("Populations")+
             ggplot2::theme(axis.title=element_text(size=15),
-                           axis.text=element_text(size=12),
-                           axis.text.y=element_text(face = "bold"),
-                           axis.text.x=element_text(face = "bold"),
+                           axis.text=element_text(size=12,face = "bold"),
                            legend.title=element_text(face="bold"))
           
           suppressWarnings(print(p + ggplot2::ggtitle(cnames[j]) + 
@@ -148,11 +146,8 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
                                                         fill = "Expression"))+
           ggplot2::xlab("Populations")+
           ggplot2::theme(axis.title=element_text(size=15),
-                         axis.text=element_text(size=12),
-                         axis.text.y=element_text(face = "bold"),
-                         axis.text.x=element_text(face = "bold"),
+                         axis.text=element_text(size=12,face = "bold"),
                          legend.title=element_text(face="bold"))
-        
         suppressWarnings(print(p + ggplot2::ggtitle(cnames[j]) + 
                                  ggplot2::geom_boxplot(outlier.shape = NA, 
                                                        alpha = 1)+
@@ -187,15 +182,15 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
         comp1.3 <- M_j[tind1.3]
         comp2.3 <- M_j[tind2.3]
         comp3.3 <- M_j[tind3.3]
-        lik2 <- GaussMix(M_j, mean(comp1.2), mean(comp2.2), 
+        loglik2 <- log(GaussMix(M_j, mean(comp1.2), mean(comp2.2), 
                          stats::sd(comp1.2), stats::sd(comp2.2), 
-                         length(comp1.2)/len_lab, length(comp2.2)/len_lab)
-        lik3 <- GaussMix2(M_j, mean(comp1.3), mean(comp2.3), mean(comp3.3),
+                         length(comp1.2)/len_lab, length(comp2.2)/len_lab))
+        loglik3 <- log(GaussMix2(M_j, mean(comp1.3), mean(comp2.3), mean(comp3.3),
                           stats::sd(comp1.3), stats::sd(comp2.3), stats::sd(comp3.3),
                           length(comp1.3)/len_lab, length(comp2.3)/len_lab,
-                          length(comp3.3)/len_lab)
-        aic2 <- 10 - 2*sum(log(lik2))
-        aic3 <- 16 - 2*sum(log(lik3))
+                          length(comp3.3)/len_lab))
+        aic2 <- 10 - 2*sum(is.finite(loglik2)*loglik2, na.rm = TRUE)
+        aic3 <- 16 - 2*sum(is.finite(loglik3)*loglik3, na.rm = TRUE)
         aic_norm_23 <- (aic2 - aic3)/len_lab
         if(any(FlagMArkerinTree%in%j))
         {
@@ -219,9 +214,7 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
                                                               fill="Expression"))+
                 ggplot2::xlab("Populations")+
                 ggplot2::theme(axis.title=element_text(size=15),
-                               axis.text=element_text(size=12),
-                               axis.text.y=element_text(face = "bold"),
-                               axis.text.x=element_text(face = "bold"),
+                               axis.text=element_text(size=12,face = "bold"),
                                legend.title=element_text(face="bold"))
               
               suppressWarnings(print(p + ggplot2::ggtitle(cnames[j]) + 
@@ -254,9 +247,7 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
                                                               fill = "Expression"))+
                 ggplot2::xlab("Populations")+
                 ggplot2::theme(axis.title=element_text(size=15),
-                               axis.text=element_text(size=12),
-                               axis.text.y=element_text(face = "bold"),
-                               axis.text.x=element_text(face = "bold"),
+                               axis.text=element_text(size=12,face = "bold"),
                                legend.title=element_text(face="bold"))
               
               suppressWarnings(print(p + ggplot2::ggtitle(cnames[j]) + 
@@ -274,7 +265,7 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
         }
         else
         {
-          aic1 <- 4 - 2*sum(log(stats::dnorm(M_j, mean(M_j), sd(M_j))))
+          aic1 <- 4 - 2*sum(stats::dnorm(M_j, mean(M_j), sd(M_j), log = TRUE))
           aic_norm_12 <- (aic1 - aic2)/len_lab
           if(aic_norm_12 > t)
           {
@@ -287,8 +278,6 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
                 Expression <- rep(1, len_lab)
                 Expression[labels%in%tempclass_pos.3] <- 2
                 Expression[labels%in%tempclass_dpos.3] <- 3
-                
-                
                 dfbox <- data.frame(Leaves = factor(labels, levels = 
                                                       as.character(leavesSort)), 
                                     Fluorescence = M[,j], 
@@ -300,9 +289,7 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
                                                                 fill="Expression"))+
                   ggplot2::xlab("Populations")+
                   ggplot2::theme(axis.title=element_text(size=15),
-                                 axis.text=element_text(size=12),
-                                 axis.text.y=element_text(face = "bold"),
-                                 axis.text.x=element_text(face = "bold"),
+                                 axis.text=element_text(size=12,face = "bold"),
                                  legend.title=element_text(face="bold"))
                 
                 suppressWarnings(print(p + ggplot2::ggtitle(cnames[j]) + 
@@ -335,9 +322,7 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
                                                                 fill = "Expression"))+
                   ggplot2::xlab("Populations")+
                   ggplot2::theme(axis.title=element_text(size=15),
-                                 axis.text=element_text(size=12),
-                                 axis.text.y=element_text(face = "bold"),
-                                 axis.text.x=element_text(face = "bold"),
+                                 axis.text=element_text(size=12,face = "bold"),
                                  legend.title=element_text(face="bold"))
                 
                 suppressWarnings(print(p + ggplot2::ggtitle(cnames[j]) + 
@@ -365,9 +350,8 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
                                                               "Fluorescence"))+
                 ggplot2::xlab("Populations")+
                 ggplot2::theme(axis.title=element_text(size=15),
-                               axis.text=element_text(size=12),
-                               axis.text.y=element_text(face = "bold"),
-                               axis.text.x=element_text(face = "bold"))
+                               axis.text=element_text(size=12,face = "bold"),
+                               legend.title=element_text(face="bold"))
               suppressWarnings(print(p + ggplot2::ggtitle(cnames[j]) + 
                                        ggplot2::geom_boxplot(outlier.shape = NA, 
                                                              alpha = 1)                       
