@@ -58,15 +58,15 @@ plot_nodes <- function(CytomeTreeObj, nodes=NULL)
     if(sum(nodes%in%treenodes)!=length(nodes))
     {
       logicalind <- as.logical(1-nodes%in%treenodes)
-      if(length(logicalind) >1)
+      if(sum(logicalind) >1)
       {
-        wstr <- paste("Nodes",paste(c(nodes[]), 
+        wstr <- paste("Nodes",paste(c(nodes[logicalind]), 
                                     collapse=", "),
                       "are not in CytomeTree.", sep = " ")
       }
       else
       {
-        wstr <- paste("Node",paste(c(nodes[]), 
+        wstr <- paste("Node",paste(c(nodes[logicalind]), 
                                    collapse=", "),
                       "is not in  CytomeTree.", sep = " ")
       }
@@ -75,6 +75,7 @@ plot_nodes <- function(CytomeTreeObj, nodes=NULL)
     inds <- which(treenodes%in%nodes)
     for(ind in inds)
     {
+      browser
       df <- data.frame("x1" = pl_list[[3]][[ind]]$x,
                        "y1" = pl_list[[3]][[ind]]$y,
                        "x2" = pl_list[[1]][[ind]]$x,
