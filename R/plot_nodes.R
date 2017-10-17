@@ -75,7 +75,6 @@ plot_nodes <- function(CytomeTreeObj, nodes=NULL)
     inds <- which(treenodes%in%nodes)
     for(ind in inds)
     {
-      browser
       df <- data.frame("x1" = pl_list[[3]][[ind]]$x,
                        "y1" = pl_list[[3]][[ind]]$y,
                        "x2" = pl_list[[1]][[ind]]$x,
