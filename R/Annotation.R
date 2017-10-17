@@ -34,7 +34,7 @@
 #'
 #'@author Chariff Alkhassim
 #'
-#'@import ggplot2 graphics 
+#'@import ggplot2 graphics mclust
 #'
 #'@importFrom stats dnorm sd
 #'
@@ -135,29 +135,34 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
         tempclass_pos.2  <- leavesSort[which(partwin2gr == 2)]
         tind1.2 <- which(labels%in%tempclass_neg.2)
         tind2.2 <- which(labels%in%tempclass_pos.2)
-        Expression <- rep(1, len_lab)
-        Expression[labels%in%tempclass_neg.2] <- 2      
-        dfbox <- data.frame(Leaves = factor(labels, levels = 
-                                              as.character(leavesSort)), 
-                            Fluorescence = M[,j], 
-                            Expression = as.factor(Expression))
-        p <- ggplot2::ggplot(dfbox, ggplot2::aes_string("Leaves", 
-                                                        "Fluorescence", 
-                                                        fill = "Expression"))+
-          ggplot2::xlab("Populations")+
-          ggplot2::theme(axis.title=element_text(size=15),
-                         axis.text=element_text(size=12,face = "bold"),
-                         legend.title=element_text(face="bold"))
-        suppressWarnings(print(p + ggplot2::ggtitle(cnames[j]) + 
-                                 ggplot2::geom_boxplot(outlier.shape = NA, 
-                                                       alpha = 1)+
-                                 ggplot2::scale_fill_manual(values=c("tomato1",
-                                                                     "cyan3"),
-                                                            name="Annotation",
-                                                            labels=c("+",
-                                                                     "-")
-                                 )
-        )) 
+        combinations[tempclass_pos.2, j] <- 1
+        if(plot)
+        {
+          Expression <- rep(1, len_lab)
+          Expression[labels%in%tempclass_neg.2] <- 2     
+          
+          dfbox <- data.frame(Leaves = factor(labels, levels = 
+                                                as.character(leavesSort)), 
+                              Fluorescence = M[,j], 
+                              Expression = as.factor(Expression))
+          p <- ggplot2::ggplot(dfbox, ggplot2::aes_string("Leaves", 
+                                                          "Fluorescence", 
+                                                          fill = "Expression"))+
+            ggplot2::xlab("Populations")+
+            ggplot2::theme(axis.title=element_text(size=15),
+                           axis.text=element_text(size=12,face = "bold"),
+                           legend.title=element_text(face="bold"))
+          suppressWarnings(print(p + ggplot2::ggtitle(cnames[j]) + 
+                                   ggplot2::geom_boxplot(outlier.shape = NA, 
+                                                         alpha = 1)+
+                                   ggplot2::scale_fill_manual(values=c("tomato1",
+                                                                       "cyan3"),
+                                                              name="Annotation",
+                                                              labels=c("+",
+                                                                       "-")
+                                   )
+          ))
+        }
       }
       else
       {
@@ -182,16 +187,12 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
         comp1.3 <- M_j[tind1.3]
         comp2.3 <- M_j[tind2.3]
         comp3.3 <- M_j[tind3.3]
-        loglik2 <- log(GaussMix(M_j, mean(comp1.2), mean(comp2.2), 
-                         stats::sd(comp1.2), stats::sd(comp2.2), 
-                         length(comp1.2)/len_lab, length(comp2.2)/len_lab))
-        loglik3 <- log(GaussMix2(M_j, mean(comp1.3), mean(comp2.3), mean(comp3.3),
-                          stats::sd(comp1.3), stats::sd(comp2.3), stats::sd(comp3.3),
-                          length(comp1.3)/len_lab, length(comp2.3)/len_lab,
-                          length(comp3.3)/len_lab))
-        aic2 <- 10 - 2*sum(is.finite(loglik2)*loglik2, na.rm = TRUE)
-        aic3 <- 16 - 2*sum(is.finite(loglik3)*loglik3, na.rm = TRUE)
+        mc2 <- Mclust(M_j, G=2, modelNames = "E")
+        mc3 <- Mclust(M_j, G=3, modelNames = "E")
+        aic2 <- 2*mc2$df - 2*mc2$loglik
+        aic3 <- 2*mc3$df - 2*mc3$loglik
         aic_norm_23 <- (aic2 - aic3)/len_lab
+      
         if(any(FlagMArkerinTree%in%j))
         {
           if(aic_norm_23 > t)
