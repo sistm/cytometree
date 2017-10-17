@@ -1,8 +1,8 @@
 Package: cytometree
 Type: Package
 Title: Automated Cytometry Gating and Annotation
-Version: 1.1
-Date: 2017-10-10
+Version: 1.1.1
+Date: 2017-10-18
 Author: Chariff Alkhassim, Boris Hejblum
 Maintainer: Alkhassim Chariff <chariff.alkhassim@gmail.com>
 LinkingTo: Rcpp, RcppArmadillo
@@ -23,7 +23,7 @@ Imports:
     igraph,
     mclust,
     stats
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 BugReports: https://github.com/chariff/Cytometree/issues
 Suggests:
     knitr,

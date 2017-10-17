@@ -48,4 +48,3 @@ fits obtained by a mixture of two and three normal distributions.
 \author{
 Chariff Alkhassim
 }
-

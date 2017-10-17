@@ -30,4 +30,3 @@ Plot the binary tree built using CytomeTree.
 \author{
 Chariff Alkhassim
 }
-

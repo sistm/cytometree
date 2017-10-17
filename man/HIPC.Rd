@@ -15,4 +15,3 @@ data(HIPC)
 HIPC T cell data set from HIPC program, patient 12828. The data was analyzed and gated by Stanford.
 }
 \keyword{data}
-

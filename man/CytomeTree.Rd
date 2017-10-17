@@ -138,4 +138,3 @@ p
 \author{
 Chariff Alkhassim, Boris Hejblum
 }
-
