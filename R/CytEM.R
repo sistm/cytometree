@@ -29,8 +29,8 @@ CytEM <- function(M, indices, minleaf, level, t)
   {
     flag_uni <- 0
     M_j <- M[,j]
-    mc_uni <- Mclust(M_j, 1)
-    mc_mix <- Mclust(M_j, 2, modelNames = "E")
+    mc_uni <- Mclust(M_j, 1, verbose = FALSE)
+    mc_mix <- Mclust(M_j, 2, modelNames = "E", verbose = FALSE)
     ind1 <- which(mc_mix$classification == 1)
     ind2 <- which(mc_mix$classification == 2)
     if(length(ind1)<minleaf|length(ind2)<minleaf|is.null(mc_mix)
