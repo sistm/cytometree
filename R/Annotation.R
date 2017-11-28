@@ -187,8 +187,8 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
         comp1.3 <- M_j[tind1.3]
         comp2.3 <- M_j[tind2.3]
         comp3.3 <- M_j[tind3.3]
-        mc2 <- Mclust(M_j, G=2, modelNames = "E")
-        mc3 <- Mclust(M_j, G=3, modelNames = "E")
+        mc2 <- Mclust(M_j, G=2, modelNames = "E", verbose = FALSE)
+        mc3 <- Mclust(M_j, G=3, modelNames = "E", verbose = FALSE)
         aic2 <- 2*mc2$df - 2*mc2$loglik
         aic3 <- 2*mc3$df - 2*mc3$loglik
         aic_norm_23 <- (aic2 - aic3)/len_lab

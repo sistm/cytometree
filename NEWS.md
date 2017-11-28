@@ -1,6 +1,6 @@
 # News about the `cytometree` R package
 
-### Main changes in Version 1.1.1  (2017-10-18)
+### Main changes in Version 1.1.1  (2017-10-22)
 * Added a 3 component Gaussian mixture option
 
 ### Main changes in Version 1.1.0  (2017-10-10) 
