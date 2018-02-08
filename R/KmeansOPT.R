@@ -10,7 +10,7 @@ KmeansOPT<- function(groups, leaves, labels, dat, K)
   {
     for(kk in 1:KK)
     {
-      ind1 <- labels%in%leaves[which(groups[[kk]] == 1)]
+      ind1 <- labels%in%leaves[groups[[kk]] == 1]
       ind2 <- as.logical(1-ind1)
       n1 <- sum(ind1)
       n2 <- N-n1
@@ -28,9 +28,9 @@ KmeansOPT<- function(groups, leaves, labels, dat, K)
   {
     for(kk in 1:KK)
     {
-      ind1 <- labels%in%leaves[which(groups[[kk]] == 1)]
-      ind2 <- labels%in%leaves[which(groups[[kk]] == 2)]
-      ind3 <- labels%in%leaves[which(groups[[kk]] == 3)]
+      ind1 <- labels%in%leaves[groups[[kk]] == 1]
+      ind2 <- labels%in%leaves[groups[[kk]] == 2]
+      ind3 <- labels%in%leaves[groups[[kk]] == 3]
       n1 <- length(ind1)
       n2 <- length(ind2)
       n3 <- length(ind3)

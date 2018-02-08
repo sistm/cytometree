@@ -126,7 +126,7 @@
 #'
 #'}
 
-CytomeTree <- function(M, minleaf = 1, t = .1)
+CytomeTree <- function(M, minleaf = 1, t = .1, verbose = TRUE)
 {
   if((class(M) != "matrix") & (class(M) != "data.frame"))
   {
@@ -145,7 +145,7 @@ CytomeTree <- function(M, minleaf = 1, t = .1)
   {
     stop("M contains NAs.")
   }
-  BT <- BinaryTree(M, floor(minleaf), t)
+  BT <- BinaryTree(M, floor(minleaf), t, verbose)
   annotation <- TreeAnnot(BT$labels, BT$combinations)
   Tree <- list("M" = M, "labels" = BT$labels,
                "pl_list"= BT$pl_list, "t"= t,

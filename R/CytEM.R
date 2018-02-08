@@ -22,19 +22,23 @@ CytEM <- function(M, indices, minleaf, level, t)
   {
     minleaf <- nEMdegenerate
   }
-  parameters <- aic_norm_old <- mark_not_dis <- c()
-  t_zer <- .25
+  aic_norm_old <- -Inf
+  parameters  <- mark_not_dis <- c()
   child <- list()
   for(j in 1:p)
   {
     flag_uni <- 0
     M_j <- M[,j]
+    if(!var(M_j))
+    {
+      mark_not_dis <- append(mark_not_dis, j)
+      next() 
+    }
     mc_uni <- Mclust(M_j, 1, verbose = FALSE)
     mc_mix <- Mclust(M_j, 2, modelNames = "E", verbose = FALSE)
-    ind1 <- which(mc_mix$classification == 1)
-    ind2 <- which(mc_mix$classification == 2)
-    if(length(ind1)<minleaf|length(ind2)<minleaf|is.null(mc_mix)
-       |length(which(!M_j))>(n*t_zer))
+    ind1 <- mc_mix$classification == 1
+    ind2 <- mc_mix$classification == 2
+    if(length(ind1)<minleaf|length(ind2)<minleaf|is.null(mc_mix))
     {
       mark_not_dis <- append(mark_not_dis, j)
       next()
@@ -44,7 +48,6 @@ CytEM <- function(M, indices, minleaf, level, t)
     aic_uni <- 2*mc_uni$df - 2*mc_uni$loglik
     aic_mix <- 2*mc_mix$df - 2*mc_mix$loglik
     aic_norm_new <- (aic_uni - aic_mix)/n
-    flagComp <- 0
     if(flag_uni | aic_norm_new < t)
     {
       mark_not_dis <- append(mark_not_dis, j)
@@ -70,20 +73,11 @@ CytEM <- function(M, indices, minleaf, level, t)
         temparameters <- c(aic_norm_new, j, mean_M1, mean_M2,
                            stats::var(M1), stats::var(M2), pi_M1, pi_M2)
       }
-      if(is.null(aic_norm_old))
+      if(aic_norm_old < aic_norm_new)
       {
-        child$L <-  indices[which(label == 0)]
-        child$R <-  indices[which(label == 1)]
+        child$L <-  indices[label == 0]
+        child$R <-  indices[label == 1]
         aic_norm_old <- aic_norm_new
-      }
-      else
-      {
-        if(aic_norm_old < aic_norm_new)
-        {
-          child$L <-  indices[which(label == 0)]
-          child$R <-  indices[which(label == 1)]
-          aic_norm_old <- aic_norm_new
-        }
       }
       parameters <- rbind(parameters, temparameters)
     }

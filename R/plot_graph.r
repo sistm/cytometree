@@ -29,39 +29,45 @@ plot_graph <- function(CytomeTreeObj, Ecex = 1, Ecolor = 8,
     stop("CytomeTreeObj must be of class CytomeTree.")
   }
   Tree <- CytomeTreeObj$mark_tree
+  if(is.null(Tree))
+  {
+    return(cat("CytomeTree found a single population.\n"))
+  }
   Tree_level <- length(Tree)
   adj_list <- c()
+  cptleaf <- 1
   for(level in 1:(Tree_level - 1))
   {
     cpt <- 1
     NnodeLevel <- length(Tree[[level]])
     for(Nnode in 1:NnodeLevel)
     {
+      if(Tree[[level]][[Nnode]] == as.character(cptleaf))
+      {
+        cptleaf <- cptleaf + 1
+        next
+      }
       L_child <- Tree[[level + 1]][[cpt]] 
       R_child <- Tree[[level + 1]][[cpt + 1]] 
       cpt <- cpt + 2
-      adj_list <- rbind(adj_list, cbind(Tree[[level]][[Nnode]], 
-                                        c(L_child, R_child),
-                                        c("-","+")
-      ))
+      adj_list <- rbind(
+        adj_list, 
+        cbind(
+          Tree[[level]][[Nnode]], 
+          c(L_child, R_child),
+          c("-","+")
+        )
+      )
     }
   }
-  rm <- which(rowSums(is.na(adj_list))>0)
-  if(length(rm))
-  {
-    adj_list_ <- adj_list[-c(rm),] 
-  }
-  else
-  {
-    adj_list_ <- adj_list
-  }
-  g <- graph.data.frame(data.frame(parent=as.character(adj_list_[,1]), 
-                                   node=as.character(adj_list_[,2]),
-                                   text=adj_list_[,3])
-                        )
+  g <- graph.data.frame(data.frame(parent=as.character(adj_list[,1]), 
+                                   node=as.character(adj_list[,2]),
+                                   text=adj_list[,3])
+  )
   E(g)$label.cex <- Ecex
   E(g)$color <- Ecolor
   V(g)$label.cex <- Vcex
   V(g)$color <- Vcolor  
   plot(g, layout = layout.reingold.tilford(g),edge.label=E(g)$text, ...)
+  
 }

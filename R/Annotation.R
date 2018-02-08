@@ -85,19 +85,19 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
         partitions3gr <- Partition3gr(n)
         Kmeans3 <- KmeansOPT(partitions3gr, leavesSort, labels, M_j, K = 3)
         partwin3gr <- partitions3gr[[Kmeans3$ind]]
-        tempclass_neg.3  <- leavesSort[which(partwin3gr == 1)]
-        tempclass_pos.3  <- leavesSort[which(partwin3gr == 2)]
-        tempclass_dpos.3 <- leavesSort[which(partwin3gr == 3)]
-        tind1.3 <- which(labels%in%tempclass_neg.3)
-        tind2.3 <- which(labels%in%tempclass_pos.3)
-        tind3.3 <- which(labels%in%tempclass_dpos.3)
+        tempclass_neg.3  <- leavesSort[partwin3gr == 1]
+        tempclass_pos.3  <- leavesSort[partwin3gr == 2]
+        tempclass_dpos.3 <- leavesSort[partwin3gr == 3]
+        tind1.3 <- labels%in%tempclass_neg.3
+        tind2.3 <- labels%in%tempclass_pos.3
+        tind3.3 <- labels%in%tempclass_dpos.3
         combinations[tempclass_pos.3, j] <- 1
         combinations[tempclass_dpos.3, j] <- 2
         if(plot)
         {   
           Expression <- rep(1, len_lab)
-          Expression[labels%in%tempclass_pos.3] <- 2
-          Expression[labels%in%tempclass_dpos.3] <- 3
+          Expression[tind2.3] <- 2
+          Expression[tind3.3] <- 3
           dfbox <- data.frame(Leaves = factor(labels, levels = 
                                                 as.character(leavesSort)), 
                               Fluorescence = M[,j], 
@@ -131,15 +131,15 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
         partitions2gr <- Partition2gr(n)
         Kmeans2 <- KmeansOPT(partitions2gr, leavesSort, labels, M_j, K = 2)
         partwin2gr <- partitions2gr[[Kmeans2$ind]]
-        tempclass_neg.2  <- leavesSort[which(partwin2gr == 1)]
-        tempclass_pos.2  <- leavesSort[which(partwin2gr == 2)]
-        tind1.2 <- which(labels%in%tempclass_neg.2)
-        tind2.2 <- which(labels%in%tempclass_pos.2)
+        tempclass_neg.2  <- leavesSort[partwin2gr == 1]
+        tempclass_pos.2  <- leavesSort[partwin2gr == 2]
+        tind1.2 <- labels%in%tempclass_neg.2
+        tind2.2 <- labels%in%tempclass_pos.2
         combinations[tempclass_pos.2, j] <- 1
         if(plot)
         {
           Expression <- rep(1, len_lab)
-          Expression[labels%in%tempclass_neg.2] <- 2     
+          Expression[tind1.2] <- 2     
           
           dfbox <- data.frame(Leaves = factor(labels, levels = 
                                                 as.character(leavesSort)), 
@@ -169,19 +169,19 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
         partitions2gr <- Partition2gr(n)
         Kmeans2 <- KmeansOPT(partitions2gr, leavesSort, labels, M_j, K = 2)
         partwin2gr <- partitions2gr[[Kmeans2$ind]]
-        tempclass_neg.2  <- leavesSort[which(partwin2gr == 1)]
-        tempclass_pos.2  <- leavesSort[which(partwin2gr == 2)]
-        tind1.2 <- which(labels%in%tempclass_neg.2)
-        tind2.2 <- which(labels%in%tempclass_pos.2)
+        tempclass_neg.2  <- leavesSort[partwin2gr == 1]
+        tempclass_pos.2  <- leavesSort[partwin2gr == 2]
+        tind1.2 <- labels%in%tempclass_neg.2
+        tind2.2 <- labels%in%tempclass_pos.2
         partitions3gr <- Partition3gr(n)
         Kmeans3 <- KmeansOPT(partitions3gr, leavesSort, labels, M_j, K = 3)
         partwin3gr <- partitions3gr[[Kmeans3$ind]]
-        tempclass_neg.3  <- leavesSort[which(partwin3gr == 1)]
-        tempclass_pos.3  <- leavesSort[which(partwin3gr == 2)]
-        tempclass_dpos.3 <- leavesSort[which(partwin3gr == 3)]
-        tind1.3 <- which(labels%in%tempclass_neg.3)
-        tind2.3 <- which(labels%in%tempclass_pos.3)
-        tind3.3 <- which(labels%in%tempclass_dpos.3)
+        tempclass_neg.3  <- leavesSort[partwin3gr == 1]
+        tempclass_pos.3  <- leavesSort[partwin3gr == 2]
+        tempclass_dpos.3 <- leavesSort[partwin3gr == 3]
+        tind1.3 <- labels%in%tempclass_neg.3
+        tind2.3 <- labels%in%tempclass_pos.3
+        tind3.3 <- labels%in%tempclass_dpos.3
         comp1.2 <- M_j[tind1.2]
         comp2.2 <- M_j[tind2.2]
         comp1.3 <- M_j[tind1.3]
@@ -202,8 +202,8 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
             if(plot)
             {        
               Expression <- rep(1, len_lab)
-              Expression[labels%in%tempclass_pos.3] <- 2
-              Expression[labels%in%tempclass_dpos.3] <- 3
+              Expression[tind2.3] <- 2
+              Expression[tind3.3] <- 3
               dfbox <- data.frame(Leaves = factor(labels, levels = 
                                                     as.character(leavesSort)), 
                                   Fluorescence = M[,j], 
@@ -238,7 +238,7 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
             if(plot)
             {
               Expression <- rep(1, len_lab)
-              Expression[labels%in%tempclass_neg.2] <- 2      
+              Expression[tind1.2] <- 2      
               dfbox <- data.frame(Leaves = factor(labels, levels = 
                                                     as.character(leavesSort)), 
                                   Fluorescence = M[,j], 
@@ -277,8 +277,8 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
               if(plot)
               {        
                 Expression <- rep(1, len_lab)
-                Expression[labels%in%tempclass_pos.3] <- 2
-                Expression[labels%in%tempclass_dpos.3] <- 3
+                Expression[tind2.3] <- 2
+                Expression[tind3.3] <- 3
                 dfbox <- data.frame(Leaves = factor(labels, levels = 
                                                       as.character(leavesSort)), 
                                     Fluorescence = M[,j], 
@@ -313,7 +313,7 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
               if(plot)
               {
                 Expression <- rep(1, len_lab)
-                Expression[labels%in%tempclass_neg.2] <- 2      
+                Expression[tind1.2] <- 2      
                 dfbox <- data.frame(Leaves = factor(labels, levels = 
                                                       as.character(leavesSort)), 
                                     Fluorescence = M[,j], 
