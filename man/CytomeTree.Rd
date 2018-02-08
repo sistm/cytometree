@@ -4,7 +4,7 @@
 \alias{CytomeTree}
 \title{Binary tree algorithm for cytometry data analysis.}
 \usage{
-CytomeTree(M, minleaf = 1, t = 0.1)
+CytomeTree(M, minleaf = 1, t = 0.1, verbose = TRUE)
 }
 \arguments{
 \item{M}{A matrix of size n x p containing cytometry measures

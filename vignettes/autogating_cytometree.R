@@ -16,9 +16,9 @@ cellevents <- DLBCL[,c("FL1", "FL2", "FL4")]
 # storing the maanual gating reference from FlowCAP-I:
 manual_labels <- DLBCL[,"label"]
 
-## ---- message=FALSE------------------------------------------------------
+## ---- message=FALSE, results='hide'--------------------------------------
 # Build the binary tree:
-Tree <- CytomeTree(cellevents, minleaf = 1, t = 0.1)
+Tree <- CytomeTree(cellevents, minleaf = 1, t = 0.2)
 # Retreive the resulting partition (i.e. automatic gating):
 Tree_Partition <- Tree$labels
 
@@ -74,7 +74,7 @@ n <- length(FL1)
 man_lab <- factor(as.character(manual_labels))
 levels(man_lab) <- c("outliers (manual gating)", "pop1", "pop2")
 auto_lab <- factor(as.character(Tree_Partition))
-levels(auto_lab) <- c("pop2", "pop1", "pop3 (autogating only)")
+levels(auto_lab) <- c("pop2", "pop1")
 Labels <- factor(c(as.character(man_lab), as.character(auto_lab)))
 
 method <- as.factor(c(rep("FlowCap-I manual gating", n), rep("CytomeTree auto gating", n)))
@@ -101,7 +101,7 @@ cellevents <- HIPC[,c("CCR7", "CD4", "CD45RA", "HLADR" ,"CD38" ,"CD8")]
 # storing the maanual gating reference from FlowCAP-I:
 manual_labels <- HIPC[,"label"]
 
-## ---- message=FALSE------------------------------------------------------
+## ---- message=FALSE, results='hide'--------------------------------------
 # Build the binary tree:
 Tree <- CytomeTree(cellevents, minleaf = 1, t = 0.2)
 # Retreive the resulting partition (i.e. automatic gating):
