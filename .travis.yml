@@ -20,6 +20,7 @@ r_packages:
 - knitr
 - rmarkdown
 - viridis
+- formatR
 
 r_github_packages:
   - jimhester/covr
