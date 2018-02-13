@@ -2,15 +2,17 @@
 #'
 #' @keywords internal
 #'
-#' @importFrom stats density
+#' @importFrom stats density 
+#' @importFrom utils flush.console setTxtProgressBar txtProgressBar
+ 
 BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE)
 {
   n <- nrow(M)
   p <- ncol(M)
   if(verbose)
   {
-    flush.console()
-    pb <- txtProgressBar(min = 0, max = p, style = 3)
+    utils::flush.console()
+    pb <- utils::txtProgressBar(min = 0, max = p, style = 3)
     on.exit(close(pb))
     ipbar <- 1
   }
@@ -27,7 +29,7 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE)
   CytEMRes <- CytEM(M, 1:n, minleaf, level, t)
   if(is.null(CytEMRes$ind))
   {
-    if(verbose){setTxtProgressBar(pb, p)}
+    if(verbose){utils::setTxtProgressBar(pb, p)}
     return(list("labels"= rep(1, n)))
   }
   root_ind <- CytEMRes$ind[1]
@@ -77,7 +79,7 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE)
         if(verbose)
         {
           ipbar <- p-length(unique(unlist((marks_left[[level]]))))
-          setTxtProgressBar(pb, ipbar)
+          utils::setTxtProgressBar(pb, ipbar)
         }
         if(!length(mark_left))
         {
@@ -87,7 +89,7 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE)
           label_counter <- label_counter + 1
           if(stopping_flag == n_nodes_at_level)
           {
-            if(verbose){setTxtProgressBar(pb, p)}
+            if(verbose){utils::setTxtProgressBar(pb, p)}
             return(list("combinations"=combinations,"labels"=labels,
                         "mark_tree" = mark_tree, "pl_list"= pl_list)
             )
@@ -105,7 +107,7 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE)
             label_counter <- label_counter + 1
             if(stopping_flag==n_nodes_at_level)
             {
-              if(verbose){setTxtProgressBar(pb, p)}
+              if(verbose){utils::setTxtProgressBar(pb, p)}
               return(list("combinations"=combinations,"labels"=labels,
                           "mark_tree" = mark_tree, "pl_list"= pl_list)
               )
