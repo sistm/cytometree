@@ -10,6 +10,9 @@
 #'the normalized AIC computed at each node of the tree.
 #'A higher value limits the height of the tree.
 #'
+#'@param verbose A logical controlling if a text progress bar is displayed 
+#'during the execution of the algorithm. By default is TRUE.
+#'
 #'@return An object of class 'cytomeTree' providing a partitioning
 #'of the set of n cells.
 #'\itemize{
