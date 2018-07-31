@@ -2,7 +2,7 @@
 #' 
 #' @param AnnotObj An object of class Annotation.
 #' 
-#' @param nbpop Number indicating the number of population plotted.
+#' @param nbpop Number indicating the maximum of population plotted.
 #' Defaut is \code{10}
 #' 
 #' @param mincount Number indicating the minimum of cell count
@@ -16,6 +16,19 @@
 #' @import ggplot2
 #' 
 #' @export
+#' 
+#' @example 
+#' 
+#' # Run CytomeTree
+#' 
+#' data(DLBCL)
+#' cellevents <- DLBCL[,c("FL1", "FL2", "FL4")]
+#' Tree <- CytomeTree(cellevents, minleaf = 1, t=.1)
+#' Annot <- Annotation(Tree,plot=FALSE)
+#' 
+#' # Plot the cell count
+#' 
+#' plot_cytopop(Annot)
 
 
 plot_cytopop <- function(AnnotObj, nbpop = 10, mincount = 1, maxcount = NULL) {
@@ -71,7 +84,11 @@ plot_cytopop <- function(AnnotObj, nbpop = 10, mincount = 1, maxcount = NULL) {
   
   if (!is.null(nbpop)) {
     
-    data <- data[1:nbpop,]
+    if (nbpop<dim(data)[1]) {
+      
+      data <- data[1:nbpop,]
+      
+    }
     
   }
   
