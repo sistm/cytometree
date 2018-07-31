@@ -16,6 +16,9 @@ per population. Default is \code{1}.}
 \item{t}{A real positive-or-null number used for comparison with
 the normalized AIC computed at each node of the tree.
 A higher value limits the height of the tree.}
+
+\item{verbose}{A logical controlling if a text progress bar is displayed 
+during the execution of the algorithm. By default is TRUE.}
 }
 \value{
 An object of class 'cytomeTree' providing a partitioning
