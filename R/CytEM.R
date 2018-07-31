@@ -1,6 +1,6 @@
 #'E-M algorithm.
 #'
-#'@import mclust
+#'@importFrom mclust Mclust
 #'
 #'@importFrom stats var
 #'
