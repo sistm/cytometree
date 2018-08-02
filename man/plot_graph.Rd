@@ -4,8 +4,8 @@
 \alias{plot_graph}
 \title{Plot the binary tree built using CytomeTree.}
 \usage{
-plot_graph(CytomeTreeObj, Ecex = 1, Ecolor = 8, Vcex = 0.8, Vcolor = 0,
-  ...)
+plot_graph(CytomeTreeObj, Ecex = 1, Ecolor = 8, Vcex = 0.8,
+  Vcolor = 0, ...)
 }
 \arguments{
 \item{CytomeTreeObj}{An object of class CytomeTree.}

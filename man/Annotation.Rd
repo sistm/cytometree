@@ -4,8 +4,8 @@
 \alias{Annotation}
 \title{Annotates cell populations found using CytomeTree.}
 \usage{
-Annotation(CytomeTreeObj, K2markers = NULL, K3markers = NULL, plot = TRUE,
-  t = 0.2)
+Annotation(CytomeTreeObj, K2markers = NULL, K3markers = NULL,
+  plot = TRUE, t = 0.2)
 }
 \arguments{
 \item{CytomeTreeObj}{An object of class CytomeTree.}

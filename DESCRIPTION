@@ -22,8 +22,11 @@ Imports:
     graphics,
     igraph,
     mclust,
+    pheatmap,
+    RColorBrewer,
+    robustbase,
     stats
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 BugReports: https://github.com/chariff/Cytometree/issues
 Suggests:
     knitr,
