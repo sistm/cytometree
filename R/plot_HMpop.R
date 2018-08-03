@@ -48,7 +48,9 @@ plot_HMpop <- function(TreeObj, AnnotObj) {
   data <- t(data[-1,])
   colnames(data) <- c(1:nbClust)
   
-  pheatmap::pheatmap(data, scale = "row",
+  annotation <- data.frame(Log10_Count = log10(AnnotObj$combinations[,"count"]))
+  
+  pheatmap::pheatmap(data, scale = "row", annotation_col = annotation, 
            color = colorRampPalette(RColorBrewer::brewer.pal(n = 10, name =
                                                      "RdYlGn"))(100), cluster_rows = FALSE)
 
