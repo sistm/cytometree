@@ -25,7 +25,8 @@ Imports:
     pheatmap,
     RColorBrewer,
     robustbase,
-    stats
+    stats,
+    grDevices
 RoxygenNote: 6.1.0
 BugReports: https://github.com/chariff/Cytometree/issues
 Suggests:
