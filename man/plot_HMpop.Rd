@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_HMpop.R
 \name{plot_HMpop}
 \alias{plot_HMpop}
-\title{Plot a heatmap representing the median of the expression for each population and each marker using CytomeTree}
+\title{Plot a heatmap representing the median of the expression for each population and marker using CytomeTree}
 \usage{
 plot_HMpop(TreeObj, AnnotObj)
 }
@@ -12,7 +12,7 @@ plot_HMpop(TreeObj, AnnotObj)
 \item{AnnotObj}{An object of class Annotation}
 }
 \description{
-Plot a heatmap representing the median of the expression for each population and each marker using CytomeTree
+Plot a heatmap representing the median of the expression for each population and marker using CytomeTree
 }
 \examples{
 
