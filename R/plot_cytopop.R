@@ -96,7 +96,6 @@ plot_cytopop <- function(AnnotObj, nbpop = 10, mincount = 1, maxcount = NULL, y_
     data <- subset(data, select=c("leaves", "prop"))
   }
   
-  
   if (!is.null(nbpop)) {
     
     if (nbpop<dim(data)[1]) {
@@ -107,19 +106,22 @@ plot_cytopop <- function(AnnotObj, nbpop = 10, mincount = 1, maxcount = NULL, y_
     
   }
   
+  
   if (dim(data)[1]!=0) {
+    
+    data$leaves <- as.factor(data$leaves)
     
     p <- ggplot(data = data)
     
     if(y_axis == "abs_count"){
       p <- p + 
-        geom_bar(aes(x=as.factor(leaves), y=count), stat = "identity", fill = "steelblue") +
+        geom_bar(aes_string(x="leaves", y="count"), stat = "identity", fill = "steelblue") +
         scale_y_log10() +
         ylab("Cell count")
     }
     else if(y_axis == "prop"){
       p <- p + 
-        geom_bar(aes(x=as.factor(leaves), y=prop), stat = "identity", fill = "steelblue") +
+        geom_bar(aes_string(x="leaves", y="prop"), stat = "identity", fill = "steelblue") +
         ylab("Poulation proportion") 
     }
     
