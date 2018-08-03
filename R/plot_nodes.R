@@ -102,8 +102,3 @@ plot_nodes <- function(CytomeTreeObj, nodes=NULL)
     }
   }
 }
-
-
-
-
-

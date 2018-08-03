@@ -22,6 +22,3 @@ bootstrapCI <- function(stat, n, alpha){
   sup_val <- x_bar - delta_star[percentile_inf]
   return(list("inf"= inf_val,"sup"= sup_val))
 }
-
-
-

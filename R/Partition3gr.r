@@ -25,7 +25,3 @@ Partition3gr <- function(N)
   }
   partitions
 }
-
-
-
-

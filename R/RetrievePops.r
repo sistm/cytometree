@@ -101,4 +101,3 @@ RetrievePops <-function(AnnotationObj, phenotypes)
   }
   return(list("phenotypesinfo" = outlist, "Mergedleaves" = labelmerge))
 }
-
