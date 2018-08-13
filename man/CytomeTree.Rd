@@ -50,11 +50,11 @@ head(DLBCL)
 N <- nrow(DLBCL)
 
 # Cell events
-cellevents <- DLBCL[,c("FL1", "FL2", "FL4")]
+cellevents <- DLBCL[, c("FL1", "FL2", "FL4")]
 
 
 # Manual partitioning of the set N (from FlowCAP-I)
-manual_labels <- DLBCL[,"label"]
+manual_labels <- DLBCL[, "label"]
 
 
 # Build the binary tree
@@ -66,7 +66,7 @@ Tree_Partition <- Tree$labels
 
 
 # Plot node distributions
-par(mfrow=c(1,2))
+par(mfrow=c(1, 2))
 plot_nodes(Tree)
 
 # Choose a node to plot
