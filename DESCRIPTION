@@ -26,7 +26,8 @@ Imports:
     RColorBrewer,
     robustbase,
     stats,
-    grDevices
+    grDevices,
+    cowplot
 RoxygenNote: 6.1.0
 BugReports: https://github.com/chariff/Cytometree/issues
 Suggests:

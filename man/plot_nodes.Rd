@@ -5,19 +5,44 @@
 \title{Plot the distribution of the observed cells at each node 
 of the binary tree built using CytomeTree.}
 \usage{
-plot_nodes(CytomeTreeObj, nodes = NULL)
+plot_nodes(CytomeTreeObj, nodes = NULL, nodesPerCol = NULL,
+  nodesPerRow = NULL, ...)
 }
 \arguments{
 \item{CytomeTreeObj}{An object of class CytomeTree.}
 
 \item{nodes}{A vector of class character containing the name of
 the nodes for which the distribution is to be plotted. Default is 
-\code{NULL}, and plots the distribution of each node.}
+\code{NULL}, and plots the distribution for each node.}
+
+\item{nodesPerCol}{an integer specifying the number of plots to be
+displayed per column when plotting multiple nodes at once. Default is 
+\code{NULL}.}
+
+\item{nodesPerRow}{an integer specifying the number of plots to be
+displayed per row when plotting multiple nodes at once. Default is 
+\code{NULL}.}
+
+\item{...}{further arguments to be passed to \code{\link[cowplot]{plotgrid}}.}
+}
+\value{
+a list of \code{ggplot2} plot objects, containing each node plot.
 }
 \description{
 Plot the distribution of the observed cells at each node 
 of the binary tree built using CytomeTree.
 }
+\details{
+if both \code{nodesPerCol} and \code{nodesPerRow} are \code{NULL}
+then all the nodes are plotted on a single page.
+}
+\examples{
+
+data(DLBCL)
+myct <- CytomeTree(DLBCL[, c("FL1", "FL2", "FL4")], minleaf = 1, t=.1)
+plot_nodes(myct)
+
+}
 \author{
-Chariff Alkhassim
+Chariff Alkhassim, Boris Hejblum
 }
