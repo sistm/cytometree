@@ -40,18 +40,23 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE)
   rootmarks[[level]] <- mark_left
   marks_left[[level]] <- rootmarks
   len_data_plot <- 512
-  pl_list <- list()
+  
   KDE <- stats::density(M[,root_ind], n = len_data_plot)
   GMM <- list()
   GMM$x <- KDE$x
   GMM$y <-   GaussMix(GMM$x, CytEMRes$mu1, CytEMRes$mu2,
                       sqrt(CytEMRes$Var1), sqrt(CytEMRes$Var2),
                       CytEMRes$pi1, CytEMRes$pi2)
-  pl_list[[1]] <-  pl_list[[2]]<- pl_list[[3]] <- pl_list[[4]] <- list()
-  pl_list[[1]][[label_graph]] <- KDE
-  pl_list[[2]][[label_graph]] <- paste0(col_names[root_ind],".",label_graph)
-  pl_list[[3]][[label_graph]] <- GMM
-  pl_list[[4]][[label_graph]] <- paste(paste0("n",label_graph), "=", n,"D =",
+  
+  pl_list <- list()
+  pl_list[["kde"]] <- list()
+  pl_list[["nodes"]] <- list()
+  pl_list[["gmm"]] <- list()
+  pl_list[["legend"]] <- list()
+  pl_list$kde[[label_graph]] <- KDE
+  pl_list$nodes[[label_graph]] <- paste0(col_names[root_ind],".",label_graph)
+  pl_list$gmm[[label_graph]] <- GMM
+  pl_list$legend[[label_graph]] <- paste(paste0("n",label_graph), "=", n,"D =",
                                        round(CytEMRes$nAIC[1],2), sep =" ")
   while(level < (p + 2))
   {
@@ -127,17 +132,20 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE)
             R_child <- CytEMRes$child$R
             combinations[L_child,ind] <- 0
             combinations[R_child,ind] <- 1
+            
             KDE <- stats::density(M[temp_node,ind], n = len_data_plot)
+            
             GMM <- list()
             GMM$x <- KDE$x
             GMM$y <-   GaussMix(GMM$x, CytEMRes$mu1, CytEMRes$mu2,
                                 sqrt(CytEMRes$Var1), sqrt(CytEMRes$Var2),
                                 CytEMRes$pi1, CytEMRes$pi2)
-            pl_list[[1]][[label_graph]] <- KDE
-            pl_list[[2]][[label_graph]] <- paste0(col_names[ind],".",
+            
+            pl_list$kde[[label_graph]] <- KDE
+            pl_list$nodes[[label_graph]] <- paste0(col_names[ind],".",
                                                   label_graph)
-            pl_list[[3]][[label_graph]] <- GMM
-            pl_list[[4]][[label_graph]] <- paste(paste0("n",label_graph), "=",
+            pl_list$gmm[[label_graph]] <- GMM
+            pl_list$legend[[label_graph]] <- paste(paste0("n",label_graph), "=",
                                                  length(temp_node),"D =",
                                                  round(CytEMRes$nAIC[1],2),
                                                  sep =" ")
