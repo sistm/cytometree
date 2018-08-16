@@ -52,8 +52,11 @@ plot_HMpop <- function(TreeObj, AnnotObj) {
   
   color = colorRamp2(seq(min(data), max(data), length = 3), c("red", "#EEEEEE", "green"), space = "RGB")
   
-  annotation <- HeatmapAnnotation(df = data.frame(Log10_Count = log10(AnnotObj$combinations[,"count"]))
-                                  ) 
+  df <- data.frame(Log10_Count = log10(AnnotObj$combinations[,"count"]))
+  
+  annotation <- HeatmapAnnotation(df = df,
+                                  col = list(Log10_Count = colorRamp2(c(min(df), max(df)), 
+                                                                      c("yellow", "orange")))) 
   
   Heatmap(data, col = color, name = "Median of intensity by population", 
           column_title = "Populations", row_title = "Markers",
