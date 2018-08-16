@@ -50,10 +50,29 @@ plot_HMpop <- function(TreeObj, AnnotObj) {
   data <- t(data[-1,])
   colnames(data) <- c(1:nbClust)
   
-  annotation <- data.frame(Log10_Count = log10(AnnotObj$combinations[,"count"]))
+  color = colorRamp2(seq(min(data), max(data), length = 3), c("red", "#EEEEEE", "green"), space = "RGB")
   
-  pheatmap::pheatmap(data, scale = "row", annotation_col = annotation, 
-           color = grDevices::colorRampPalette(RColorBrewer::brewer.pal(n = 10, name =
-                                                     "RdYlGn"))(100), cluster_rows = FALSE)
+  annotation <- HeatmapAnnotation(df = data.frame(Log10_Count = log10(AnnotObj$combinations[,"count"]))
+                                  ) 
+  
+  Heatmap(data, col = color, name = "Median of intensity by population", 
+          column_title = "Populations", row_title = "Markers",
+          column_title_side = "bottom",
+          top_annotation = annotation,
+          cluster_rows = FALSE,
+          row_names_side = "left",
+          cell_fun = function(j, i, x, y, width, height, fill) {
+            grid.text(sprintf("%.1f", data[i, j]), x, y, gp = gpar(fontsize = 10))
+          })
+  
+  
+  
+  ################################################################################
+  
+  #annotation <- data.frame(Log10_Count = log10(AnnotObj$combinations[,"count"]))
+  
+  #pheatmap::pheatmap(data, scale = "row", annotation_col = annotation, 
+  #         color = grDevices::colorRampPalette(RColorBrewer::brewer.pal(n = 10, name =
+  #                                                   "RdYlGn"))(100), cluster_rows = FALSE)
 
 }
