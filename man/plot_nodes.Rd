@@ -11,7 +11,7 @@ plot_nodes(CytomeTreeObj, nodes = NULL, nodesPerCol = NULL,
 \arguments{
 \item{CytomeTreeObj}{An object of class CytomeTree.}
 
-\item{nodes}{A vector of class character containing the name of
+\item{nodes}{A list of character elements containing the name of
 the nodes for which the distribution is to be plotted. Default is 
 \code{NULL}, and plots the distribution for each node.}
 

@@ -3,7 +3,7 @@
 #' 
 #'@param CytomeTreeObj An object of class CytomeTree.
 #'
-#'@param nodes A vector of class character containing the name of
+#'@param nodes A list of character elements containing the name of
 #'the nodes for which the distribution is to be plotted. Default is 
 #'\code{NULL}, and plots the distribution for each node.  
 #'
@@ -42,10 +42,14 @@ plot_nodes <- function(CytomeTreeObj, nodes=NULL, nodesPerCol = NULL,
   }
   if(!is.null(nodes)){
     if(class(nodes) != "list"){
-      stop("'nodes' argument must be a list")
-    }else{
-      if(class(unlist(nodes)) != "character")
-        stop("elements 'nodes' must be of class character")
+      warning("'nodes' argument coerced to be a list")
+      nodes <- as.list(nodes)
+      if(class(nodes) != "list"){
+        stop("'nodes' argument must be a list")
+      }
+    }
+    if(class(unlist(nodes)) != "character"){
+      stop("elements of 'nodes' must be of class character")
     }
   }
   
@@ -104,7 +108,6 @@ plot_nodes <- function(CytomeTreeObj, nodes=NULL, nodesPerCol = NULL,
     plot_list[[ind]] <- p
   }
   
-  browser()
   if(length(nodes)>1 & (!is.null(nodesPerRow) | !is.null(nodesPerCol))){
     if(is.null(nodesPerRow)){
       nodesPerRow <- 1
@@ -117,7 +120,7 @@ plot_nodes <- function(CytomeTreeObj, nodes=NULL, nodesPerCol = NULL,
     if(nbPages >1 & nbPages != nNodes/nodesPerPage){
       for(i in 1:(nbPages)){
         print(cowplot::plot_grid(plotlist = plot_list[((i-1)*nodesPerPage + 1):min(nNodes, (i*nodesPerPage))], 
-                           nrow = nodesPerCol, ncol = nodesPerRow))
+                                 nrow = nodesPerCol, ncol = nodesPerRow))
       }
     }else{
       print(cowplot::plot_grid(plotlist = plot_list, nrow = nodesPerRow, ncol = nodesPerCol, ...))

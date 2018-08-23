@@ -34,8 +34,8 @@ CytEM <- function(M, indices, minleaf, level, t)
       mark_not_dis <- append(mark_not_dis, j)
       next() 
     }
-    mc_uni <- Mclust(M_j, 1, verbose = FALSE)
-    mc_mix <- Mclust(M_j, 2, modelNames = "E", verbose = FALSE)
+    mc_uni <- Mclust(M_j, G=1, verbose = FALSE)
+    mc_mix <- Mclust(M_j, G=2, modelNames = "E", verbose = FALSE)
     ind1 <- mc_mix$classification == 1
     ind2 <- mc_mix$classification == 2
     if(length(ind1)<minleaf|length(ind2)<minleaf|is.null(mc_mix))
