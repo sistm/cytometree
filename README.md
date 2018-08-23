@@ -7,7 +7,7 @@
 [![Travis-CI Build
 Status](https://travis-ci.org/sistm/cytometree.svg?branch=master)](https://travis-ci.org/sistm/cytometree)
 [![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/sistm/cytometree?branch=master&svg=true)](https://ci.appveyor.com/project/borishejblum/cytometree-vjqmp)
+Status](https://ci.appveyor.com/api/projects/status/github/sistm/cytometree?branch=master&svg=true)](https://ci.appveyor.com/project/borishejblum/cytometree)
 [![codecov.io](https://codecov.io/github/sistm/Cytometree/coverage.svg?branch=master)](https://codecov.io/github/sistm/Cytometree?branch=master)
 [![Downloads](https://cranlogs.r-pkg.org/badges/cytometree?color=blue)](https://www.r-pkg.org/pkg/cytometree)
 
