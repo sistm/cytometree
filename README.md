@@ -16,14 +16,15 @@ Status](https://ci.appveyor.com/api/projects/status/github/chariff/cytometree?br
 `cytometree` is a package which performs automatic gating and annotation
 of flow-cytometry data. On top of the [CRAN help
 files](https://cran.r-project.org/package=cytometree/cytometree.pdf), we
-also provide a vignette illustrating the functionnalities of
-`cytometree`.
+also provide a
+[vignette](https://cran.r-project.org/web/packages/cytometree/vignettes/autogating_cytometree.html)
+illustrating the functionnalities of `cytometree`.
 
 The following article explains what `cytometree` is about:
 
 > D Commenges, C Alkhassim, R Gottardo, BP Hejblum, R Thiébaut,
 > cytometree: a binary tree algorithm for automatic gating in cytometry
-> analysis, 2017, *in revision*.
+> analysis, *Cytometry: Part A*, (in press), 2018.
 
 ## Installation
 
