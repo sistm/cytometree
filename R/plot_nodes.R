@@ -15,7 +15,7 @@
 #'displayed per row when plotting multiple nodes at once. Default is 
 #'\code{NULL}.
 #'
-#'@param ... further arguments to be passed to \code{\link[cowplot]{plotgrid}}.
+#'@param ... further arguments to be passed to \code{\link[cowplot]{plot_grid}}.
 #'
 #'@details if both \code{nodesPerCol} and \code{nodesPerRow} are \code{NULL}
 #'then all the nodes are plotted on a single page.

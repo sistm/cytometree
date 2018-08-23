@@ -23,7 +23,7 @@ displayed per column when plotting multiple nodes at once. Default is
 displayed per row when plotting multiple nodes at once. Default is 
 \code{NULL}.}
 
-\item{...}{further arguments to be passed to \code{\link[cowplot]{plotgrid}}.}
+\item{...}{further arguments to be passed to \code{\link[cowplot]{plot_grid}}.}
 }
 \value{
 a list of \code{ggplot2} plot objects, containing each node plot.

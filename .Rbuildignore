@@ -4,3 +4,4 @@
 ^appveyor\.yml$
 ^README\.Rmd$
 ^README-.*\.png$
+R/plot_HMpop.R

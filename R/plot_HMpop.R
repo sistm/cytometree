@@ -1,5 +1,7 @@
 #' Plot a heatmap representing the median of the expression for each population and marker using CytomeTree
 #' 
+#' Under construction...
+#' 
 #' @param TreeObj An object of class CytomeTree
 #' 
 #' @param AnnotObj An object of class Annotation
@@ -9,11 +11,12 @@
 #' @import robustbase pheatmap 
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom grDevices colorRampPalette
+#' @importFrom circlize colorRamp2
 #' 
 #' @export plot_HMpop
 #' 
 #' @examples 
-#' 
+#' \dontrun{
 #' # Run CytomeTree
 #' data(DLBCL)
 #' cellevents <- DLBCL[,c("FL1", "FL2", "FL4")]
@@ -22,6 +25,7 @@
 #' 
 #' # Plot the cell count
 #' plot_HMpop(Tree,Annot)
+#' }
 
 
 plot_HMpop <- function(TreeObj, AnnotObj) {
@@ -55,7 +59,7 @@ plot_HMpop <- function(TreeObj, AnnotObj) {
   df <- data.frame(Log10_Count = log10(AnnotObj$combinations[,"count"]))
   
   annotation <- HeatmapAnnotation(df = df,
-                                  col = list(Log10_Count = colorRamp2(c(min(df), max(df)), 
+                                  col = list(Log10_Count = circlize::colorRamp2(c(min(df), max(df)), 
                                                                       c("yellow", "orange")))) 
   
   Heatmap(data, col = color, name = "Median of intensity by population", 
