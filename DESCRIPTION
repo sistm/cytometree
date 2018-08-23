@@ -22,7 +22,6 @@ Imports:
     graphics,
     igraph,
     mclust,
-    pheatmap,
     RColorBrewer,
     robustbase,
     stats,
@@ -30,6 +29,7 @@ Imports:
     cowplot
 RoxygenNote: 6.1.0
 BugReports: https://github.com/chariff/Cytometree/issues
+Encoding: UTF-8
 Suggests:
     knitr,
     rmarkdown,
