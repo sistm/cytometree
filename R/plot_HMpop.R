@@ -8,9 +8,11 @@
 #' 
 #' @author Anthony Devaux, Boris Hejblum
 #' 
-#' @import robustbase pheatmap 
+#' @import robustbase
+#' @importFrom ComplexHeatmap Heatmap HeatmapAnnotation
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom grDevices colorRampPalette
+#' @importFrom grid grid.text gpar
 #' @importFrom circlize colorRamp2
 #' 
 #' @export plot_HMpop
@@ -58,19 +60,20 @@ plot_HMpop <- function(TreeObj, AnnotObj) {
   
   df <- data.frame(Log10_Count = log10(AnnotObj$combinations[,"count"]))
   
-  annotation <- HeatmapAnnotation(df = df,
-                                  col = list(Log10_Count = circlize::colorRamp2(c(min(df), max(df)), 
-                                                                      c("yellow", "orange")))) 
+  annotation <- ComplexHeatmap::HeatmapAnnotation(df = df,
+                                                  col = list(Log10_Count = circlize::colorRamp2(c(min(df), max(df)), 
+                                                                                                c("yellow", "orange")))) 
   
-  Heatmap(data, col = color, name = "Median of intensity by population", 
-          column_title = "Populations", row_title = "Markers",
-          column_title_side = "bottom",
-          top_annotation = annotation,
-          cluster_rows = FALSE,
-          row_names_side = "left",
-          cell_fun = function(j, i, x, y, width, height, fill) {
-            grid.text(sprintf("%.1f", data[i, j]), x, y, gp = gpar(fontsize = 10))
-          })
+  ComplexHeatmap::Heatmap(data, col = color, name = "Median of intensity by population", 
+                          column_title = "Populations", row_title = "Markers",
+                          column_title_side = "bottom",
+                          top_annotation = annotation,
+                          cluster_rows = FALSE,
+                          row_names_side = "left",
+                          cell_fun = function(j, i, x, y, width, height, fill) {
+                            grid::grid.text(sprintf("%.1f", data[i, j]), x, y, 
+                                            gp = grid::gpar(fontsize = 10))
+                          })
   
   
   
@@ -81,5 +84,5 @@ plot_HMpop <- function(TreeObj, AnnotObj) {
   #pheatmap::pheatmap(data, scale = "row", annotation_col = annotation, 
   #         color = grDevices::colorRampPalette(RColorBrewer::brewer.pal(n = 10, name =
   #                                                   "RdYlGn"))(100), cluster_rows = FALSE)
-
+  
 }
