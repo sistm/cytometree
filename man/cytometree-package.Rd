@@ -22,8 +22,8 @@ distinguish two or three expression levels per marker.
 \tabular{ll}{
 Package: \tab cytometree\cr
 Type: \tab Package\cr
-Version: \tab 1.1.1\cr
-Date: \tab 2018-04-08\cr
+Version: \tab 1.2.0\cr
+Date: \tab 2018-08-23\cr
 License:\tab \href{http://www.gnu.org/licenses/lgpl.txt}{LGPL-3}\cr
 }
 The main function in this package is \code{\link{CytomeTree}}.
