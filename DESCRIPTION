@@ -2,7 +2,7 @@ Package: cytometree
 Type: Package
 Title: Automated Cytometry Gating and Annotation
 Version: 1.2.0
-Date: 2018-08-23
+Date: 2018-08-28
 Author: Chariff Alkhassim, Boris Hejblum, Anthony Devaux
 Maintainer: Boris Hejblum <boris.hejblum@u-bordeaux.fr>
 LinkingTo: Rcpp, RcppArmadillo
