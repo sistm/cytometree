@@ -2,11 +2,11 @@
 % Please edit documentation in R/GaussMix.R
 \name{GaussMix}
 \alias{GaussMix}
-\title{Bimodal normal mixture distribution.}
+\title{Bi-modal normal mixture distribution.}
 \usage{
 GaussMix(x, mu1, mu2, sd1, sd2, pi1, pi2)
 }
 \description{
-Bimodal normal mixture distribution.
+Bi-modal normal mixture distribution.
 }
 \keyword{internal}

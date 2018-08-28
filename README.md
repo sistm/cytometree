@@ -17,7 +17,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/sistm/cytometree?bran
 annotation of flow-cytometry data**. On top of the [CRAN help
 files](https://cran.r-project.org/package=cytometree/cytometree.pdf), we
 also provide a
-[vignette](https://cran.r-project.org/web/packages/cytometree/vignettes/autogating_cytometree.html)
+[vignette](https://cran.r-project.org/package=cytometree/vignettes/autogating_cytometree.html)
 illustrating the functionnalities of `cytometree`.
 
 The `cytometree` algorithm rely on the construction of a **binary

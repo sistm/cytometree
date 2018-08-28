@@ -2,11 +2,11 @@
 % Please edit documentation in R/GaussMix2.R
 \name{GaussMix2}
 \alias{GaussMix2}
-\title{trimodal normal mixture distribution.}
+\title{tri-modal normal mixture distribution.}
 \usage{
 GaussMix2(x, mu1, mu2, mu3, sd1, sd2, sd3, pi1, pi2, pi3)
 }
 \description{
-trimodal normal mixture distribution.
+tri-modal normal mixture distribution.
 }
 \keyword{internal}

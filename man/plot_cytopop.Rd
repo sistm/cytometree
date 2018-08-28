@@ -17,10 +17,10 @@ Defaut is \code{10}}
 for the populations. Defaut is \code{1}.}
 
 \item{maxcount}{Number indicating the maximum of cell count
-for the populations. Defaut is \code{NULL} i.e no maximum selected.}
+for the populations. Default is \code{NULL} i.e no maximum selected.}
 
 \item{y_axis}{a character string either \code{"abs_count"} or \code{"prop"} indicating 
-whether the absolute cell count or the relative populations proportions should be ploted.
+whether the absolute cell count or the relative populations proportions should be plotted.
 Default is \code{"abs_count"}.}
 }
 \description{

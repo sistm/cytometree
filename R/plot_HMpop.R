@@ -56,7 +56,7 @@ plot_HMpop <- function(TreeObj, AnnotObj) {
   data <- t(data[-1,])
   colnames(data) <- c(1:nbClust)
   
-  color = colorRamp2(seq(min(data), max(data), length = 3), c("red", "#EEEEEE", "green"), space = "RGB")
+  color <-  circlize::colorRamp2(seq(min(data), max(data), length = 3), c("red", "#EEEEEE", "green"), space = "RGB")
   
   df <- data.frame(Log10_Count = log10(AnnotObj$combinations[,"count"]))
   

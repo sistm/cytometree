@@ -1,4 +1,4 @@
-#' Bimodal normal mixture distribution.
+#' Bi-modal normal mixture distribution.
 #'
 #' @keywords internal
 #'

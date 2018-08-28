@@ -39,7 +39,7 @@ Binary tree algorithm for cytometry data analysis.
 The algorithm is based on the construction of a binary tree,
 the nodes of which are subpopulations of cells. At each node,
 observed cells and markers are modeled by both a family of normal
-distributions and a family of bimodal normal mixture distributions.
+distributions and a family of bi-modal normal mixture distributions.
 Splitting is done according to a normalized difference of AIC between
 the two families.
 }

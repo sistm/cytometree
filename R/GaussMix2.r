@@ -1,4 +1,4 @@
-#' trimodal normal mixture distribution.
+#' tri-modal normal mixture distribution.
 #'
 #' @keywords internal
 #'

@@ -9,10 +9,10 @@
 #' for the populations. Defaut is \code{1}.
 #' 
 #' @param maxcount Number indicating the maximum of cell count
-#' for the populations. Defaut is \code{NULL} i.e no maximum selected.
+#' for the populations. Default is \code{NULL} i.e no maximum selected.
 #' 
 #' @param y_axis a character string either \code{"abs_count"} or \code{"prop"} indicating 
-#' whether the absolute cell count or the relative populations proportions should be ploted.
+#' whether the absolute cell count or the relative populations proportions should be plotted.
 #' Default is \code{"abs_count"}.
 #' 
 #' @author Anthony Devaux, Boris Hejblum
