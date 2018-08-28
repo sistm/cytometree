@@ -28,7 +28,7 @@ Imports:
     grDevices,
     cowplot
 RoxygenNote: 6.1.0
-BugReports: https://github.com/chariff/Cytometree/issues
+BugReports: https://github.com/sistm/Cytometree/issues
 Encoding: UTF-8
 Suggests:
     knitr,
