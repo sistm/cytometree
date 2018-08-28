@@ -5,3 +5,4 @@
 ^README\.Rmd$
 ^README-.*\.png$
 R/plot_HMpop.R
+^cran-comments\.md$
