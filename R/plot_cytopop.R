@@ -3,10 +3,10 @@
 #' @param AnnotObj An object of class Annotation.
 #' 
 #' @param nbpop Number indicating the maximum of population plotted.
-#' Defaut is \code{10}
+#' Default is \code{10}
 #' 
 #' @param mincount Number indicating the minimum of cell count
-#' for the populations. Defaut is \code{1}.
+#' for the populations. Default is \code{1}.
 #' 
 #' @param maxcount Number indicating the maximum of cell count
 #' for the populations. Default is \code{NULL} i.e no maximum selected.
