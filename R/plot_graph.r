@@ -67,7 +67,8 @@ plot_graph <- function(CytomeTreeObj, Ecex = 1, Ecolor = 8,
   E(g)$label.cex <- Ecex
   E(g)$color <- Ecolor
   V(g)$label.cex <- Vcex
-  V(g)$color <- Vcolor  
-  plot(g, layout = layout.reingold.tilford(g),edge.label=E(g)$text, ...)
+  V(g)$color <- Vcolor
+  igraph::plot.igraph(g, layout = igraph::layout_as_tree(g), 
+                      edge.label=E(g)$text, ...)
   
 }

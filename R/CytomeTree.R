@@ -13,6 +13,12 @@
 #'@param verbose A logical controlling if a text progress bar is displayed 
 #'during the execution of the algorithm. By default is TRUE.
 #'
+#'@param force_first_markers a vector of index to split the data on first.
+#'This argument is used in the semi-supervised setting, forcing the algorithm to consider 
+#'those markers first, in the order they appear in this \code{force_first_markers} vector, 
+#'and forcing the split at every node. Default is \code{NULL}, in which case
+#'the clustering algorithm is unsupervised.
+#'
 #'@return An object of class 'cytomeTree' providing a partitioning
 #'of the set of n cells.
 #'\itemize{
@@ -129,7 +135,7 @@
 #'
 #'}
 
-CytomeTree <- function(M, minleaf = 1, t = .1, verbose = TRUE)
+CytomeTree <- function(M, minleaf = 1, t = .1, verbose = TRUE, force_first_markers = NULL)
 {
   if((class(M) != "matrix") & (class(M) != "data.frame"))
   {
@@ -148,12 +154,12 @@ CytomeTree <- function(M, minleaf = 1, t = .1, verbose = TRUE)
   {
     stop("M contains NAs.")
   }
-  BT <- BinaryTree(M, floor(minleaf), t, verbose)
+  BT <- BinaryTree(M, floor(minleaf), t, verbose, force_first_markers)
   annotation <- TreeAnnot(BT$labels, BT$combinations)
   Tree <- list("M" = M, "labels" = BT$labels,
                "pl_list"= BT$pl_list, "t"= t,
                "mark_tree" = BT$mark_tree,
                "annotation" = annotation)
   class(Tree) <- "CytomeTree"
-  Tree
+  return(Tree)
 }

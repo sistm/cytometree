@@ -4,7 +4,7 @@
 \alias{CytEM}
 \title{E-M algorithm.}
 \usage{
-CytEM(M, indices, minleaf, level, t)
+CytEM(M, indices, minleaf, level, t, force_marker = NULL)
 }
 \description{
 E-M algorithm.

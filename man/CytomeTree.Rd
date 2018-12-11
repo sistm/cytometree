@@ -4,7 +4,8 @@
 \alias{CytomeTree}
 \title{Binary tree algorithm for cytometry data analysis.}
 \usage{
-CytomeTree(M, minleaf = 1, t = 0.1, verbose = TRUE)
+CytomeTree(M, minleaf = 1, t = 0.1, verbose = TRUE,
+  force_first_markers = NULL)
 }
 \arguments{
 \item{M}{A matrix of size n x p containing cytometry measures
@@ -19,6 +20,12 @@ A higher value limits the height of the tree.}
 
 \item{verbose}{A logical controlling if a text progress bar is displayed 
 during the execution of the algorithm. By default is TRUE.}
+
+\item{force_first_markers}{a vector of index to split the data on first.
+This argument is used in the semi-supervised setting, forcing the algorithm to consider 
+those markers first, in the order they appear in this \code{force_first_markers} vector, 
+and forcing the split at every node. Default is \code{NULL}, in which case
+the clustering algorithm is unsupervised.}
 }
 \value{
 An object of class 'cytomeTree' providing a partitioning

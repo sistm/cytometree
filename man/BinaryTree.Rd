@@ -4,7 +4,8 @@
 \alias{BinaryTree}
 \title{Builds a binary tree.}
 \usage{
-BinaryTree(M, minleaf = 1, t = 0.1, verbose = TRUE)
+BinaryTree(M, minleaf = 1, t = 0.1, verbose = TRUE,
+  force_first_markers = NULL)
 }
 \description{
 Builds a binary tree.

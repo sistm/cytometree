@@ -3,7 +3,7 @@ Type: Package
 Title: Automated Cytometry Gating and Annotation
 Version: 1.2.0
 Date: 2018-08-28
-Author: Chariff Alkhassim, Boris Hejblum, Anthony Devaux
+Author: Chariff Alkhassim, Boris Hejblum, Anthony Devaux, Van Hung Huynh Tran
 Maintainer: Boris Hejblum <boris.hejblum@u-bordeaux.fr>
 LinkingTo: Rcpp, RcppArmadillo
 Description: Given the hypothesis of a bi-modal distribution of cells for
@@ -27,7 +27,7 @@ Imports:
     stats,
     grDevices,
     cowplot
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 BugReports: https://github.com/sistm/Cytometree/issues
 Encoding: UTF-8
 Suggests:
