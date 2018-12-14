@@ -8,6 +8,7 @@
 CytEM <- function(M, indices, minleaf, level, t, force_marker = NULL){
   
   if(class(M)!="matrix"){
+    warning("M is not a matrix, this should not happen\n Please let the package maintainer know that ', drop=FALSE' is probably missing somewhere...")
     M <- as.matrix(M)
   }
   n <- nrow(M)
@@ -23,7 +24,7 @@ CytEM <- function(M, indices, minleaf, level, t, force_marker = NULL){
   }
   
   aic_norm_old <- -Inf
-  parameters  <- c()
+  parameters  <- list()
   mark_not_dis <- c()
   child <- list()
   
@@ -32,7 +33,7 @@ CytEM <- function(M, indices, minleaf, level, t, force_marker = NULL){
       flag_uni <- 0
       M_j <- M[,j]
       if(!var(M_j)){
-        mark_not_dis <- append(mark_not_dis, j)
+        mark_not_dis <- append(mark_not_dis, colnames(M)[j])
         next() 
       }
       mc_uni <- Mclust(M_j, G=1, verbose = FALSE)
@@ -40,7 +41,7 @@ CytEM <- function(M, indices, minleaf, level, t, force_marker = NULL){
       ind1 <- mc_mix$classification == 1
       ind2 <- mc_mix$classification == 2
       if(length(ind1) < minleaf | length(ind2) < minleaf | is.null(mc_mix)){
-        mark_not_dis <- append(mark_not_dis, j)
+        mark_not_dis <- append(mark_not_dis, colnames(M)[j])
         next()
       }
       M1 <- M_j[ind1]
@@ -50,7 +51,7 @@ CytEM <- function(M, indices, minleaf, level, t, force_marker = NULL){
       aic_norm_new <- (aic_uni - aic_mix)/n
       
       if(flag_uni | aic_norm_new < t){
-        mark_not_dis <- append(mark_not_dis, j)
+        mark_not_dis <- append(mark_not_dis, colnames(M)[j])
       }else{
         label <- mc_mix$classification
         mean_M1 <- mean(M1)
@@ -60,29 +61,40 @@ CytEM <- function(M, indices, minleaf, level, t, force_marker = NULL){
         if(mean_M1 > mean_M2){
           label[ind1] <- 1
           label[ind2] <- 0
-          temparameters <- c(aic_norm_new, j, mean_M2, mean_M1,
-                             stats::var(M2), stats::var(M1), pi_M2, pi_M1)
+          temparameters <- cbind.data.frame("aic_norm" = aic_norm_new, 
+                                            "marker" = colnames(M)[j], 
+                                            "mean_M1" = mean_M2, 
+                                            "mean_M2" = mean_M1,
+                                            "Var1" = stats::var(M2), 
+                                            "Var2" = stats::var(M1), 
+                                            "pi1" = pi_M2, 
+                                            "pi2" = pi_M1)
         }else{
           label[ind1] <- 0
           label[ind2] <- 1
-          temparameters <- c(aic_norm_new, j, mean_M1, mean_M2,
-                             stats::var(M1), stats::var(M2), pi_M1, pi_M2)
+          temparameters <- cbind.data.frame("aic_norm" = aic_norm_new, 
+                                            "marker" = colnames(M)[j], 
+                                            "mean_M1" = mean_M1, 
+                                            "mean_M2" = mean_M2,
+                                            "Var1" = stats::var(M1), 
+                                            "Var2" = stats::var(M2), 
+                                            "pi1" = pi_M1, 
+                                            "pi2" = pi_M2)
         }
         if(aic_norm_old < aic_norm_new){
           child$L <-  indices[label == 0]
           child$R <-  indices[label == 1]
           aic_norm_old <- aic_norm_new
         }
-        parameters <- rbind(parameters, temparameters)
+        parameters <- rbind.data.frame(parameters, temparameters)
       }
     }
   }else{
     #split on force_marker
+    force_marker_index <- which(colnames(M) == force_marker)
+    mark_not_dis <- colnames(M)[-force_marker_index]
     
-    mark_not_dis <- 1:ncol(M)
-    mark_not_dis <- mark_not_dis[-force_marker]
-    
-    M_j <- M[, force_marker]
+    M_j <- M[, force_marker_index]
     
     mc_uni <- Mclust(M_j, G=1, verbose = FALSE)
     mc_mix <- Mclust(M_j, G=2, modelNames = "E", verbose = FALSE)
@@ -102,31 +114,43 @@ CytEM <- function(M, indices, minleaf, level, t, force_marker = NULL){
     if(mean_M1 > mean_M2){
       label[ind1] <- 1
       label[ind2] <- 0
-      temparameters <- c(aic_norm_new, force_marker, mean_M2, mean_M1,
-                         stats::var(M2), stats::var(M1), pi_M2, pi_M1)
+      temparameters <- cbind.data.frame("aic_norm" = aic_norm_new, 
+                                        "marker" = force_marker, 
+                                        "mean_M1" = mean_M2, 
+                                        "mean_M2" = mean_M1,
+                                        "Var1" = stats::var(M2), 
+                                        "Var2" = stats::var(M1), 
+                                        "pi1" = pi_M2, 
+                                        "pi2" = pi_M1)
     }else{
       label[ind1] <- 0
       label[ind2] <- 1
-      temparameters <- c(aic_norm_new, force_marker, mean_M1, mean_M2,
-                         stats::var(M1), stats::var(M2), pi_M1, pi_M2)
+      temparameters <- cbind.data.frame("aic_norm" = aic_norm_new, 
+                                        "marker" = force_marker, 
+                                        "mean_M1" = mean_M1, 
+                                        "mean_M2" = mean_M2,
+                                        "Var1" = stats::var(M1), 
+                                        "Var2" = stats::var(M2), 
+                                        "pi1" = pi_M1, 
+                                        "pi2" = pi_M2)
     }
     
     child$L <-  indices[label == 0]
     child$R <-  indices[label == 1]
-    parameters <- rbind(parameters, temparameters)
+    parameters <- rbind.data.frame(parameters, temparameters)
   }
   
   nnrowpara <- nrow(parameters)
-  
+
   ans <- NULL
   if(is.null(nnrowpara)){
     ans <- list("mark_not_dis" = mark_not_dis)
   }else{
     if(nnrowpara > 1){
-      parameters <- parameters[order(parameters[, 1], decreasing = TRUE),]
+      parameters <- parameters[order(parameters[, "aic_norm"], decreasing = TRUE), ]
     }
     ans <- list("mark_not_dis" = mark_not_dis, "child" = child,
-                "nAIC" = parameters[, 1], "ind" = parameters[, 2],
+                "nAIC" = parameters[, 1], "ind" = as.character(parameters[, 2]),
                 "mu1"= parameters[1, 3], "mu2"= parameters[1, 4],
                 "Var1" = parameters[1, 5], "Var2" = parameters[1, 6],
                 "pi1"= parameters[1, 7], "pi2" = parameters[1, 8])

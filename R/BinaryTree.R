@@ -58,7 +58,7 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
   mark_left <- c(CytEMRes$ind[-c(1)], CytEMRes$mark_not_dis)
   root[[level]] <- M[,root_ind]
   tree[[level]] <- root
-  mark_tree[[level]] <- paste0(col_names[root_ind],".",label_graph)
+  mark_tree[[level]] <- paste0(root_ind, ".", label_graph)
   rootmarks[[level]] <- mark_left
   marks_left[[level]] <- rootmarks
   len_data_plot <- 512
@@ -76,11 +76,10 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
   pl_list[["gmm"]] <- list()
   pl_list[["legend"]] <- list()
   pl_list$kde[[label_graph]] <- KDE
-  pl_list$nodes[[label_graph]] <- paste0(col_names[root_ind],".",label_graph)
+  pl_list$nodes[[label_graph]] <- paste0(root_ind, ".", label_graph)
   pl_list$gmm[[label_graph]] <- GMM
-  pl_list$legend[[label_graph]] <- paste(paste0("n",label_graph), "=", n,"D =",
-                                         round(CytEMRes$nAIC[1],2), sep =" ")
-  
+  pl_list$legend[[label_graph]] <- paste(paste0("n", label_graph), "=", n, "D =",
+                                         round(CytEMRes$nAIC[1], 2), sep =" ")
   
   if(!is.null(force_first_markers)){
     while(length(force_first_markers)>0){
@@ -89,20 +88,21 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
       
       #loop intialisation
       c_level <- level + 1
-      tree[[c_level]] <- marks_left[[c_level]] <- list()
+      tree[[c_level]] <- list()
+      marks_left[[c_level]] <- list()
       n_nodes_at_level <- length(tree[[level]])
-      stopping_flag <- 0
+      stopping_flag <- FALSE
       node_counter <- 1
       
       
       for (i in 1:n_nodes_at_level){
-        flag_child <- 0
+        flag_child <- FALSE
         temp_node <- tree[[level]][[i]]
         mark_left <- marks_left[[level]][[i]]
         flag_mark_left <- length(mark_left)
         
         if(level==1){ #we are just after root
-          flag_child <- 1
+          flag_child <- TRUE
           L_child <- CytEMRes$child$L
           R_child <- CytEMRes$child$R
           combinations[L_child, root_ind] <- 0
@@ -113,7 +113,7 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
             utils::setTxtProgressBar(pb, ipbar)
           }
           if(!length(mark_left)){
-            stopping_flag <- stopping_flag + 1
+            stopping_flag <- TRUE
             labels[temp_node] <- label_counter
             mark_tree[[level]][[i]] <- as.character(label_counter)
             label_counter <- label_counter + 1
@@ -125,7 +125,8 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
               )
             }
           }else{
-            CytEMRes <- CytEM(M[temp_node,mark_left], temp_node,
+            
+            CytEMRes <- CytEM(M[temp_node, mark_left, drop=FALSE], temp_node,
                               minleaf, level, t, force_marker)
             if(is.null(CytEMRes$ind)){
               stopping_flag <- stopping_flag + 1
@@ -141,9 +142,8 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
             }else{
               label_graph <- label_graph + 1
               ind <- mark_left[CytEMRes$ind[1]]
-              mark_tree[[level]][[i]] <- paste0(col_names[ind],".",label_graph)
-              temp_mar_res <- c(CytEMRes$ind[-c(1)],
-                                CytEMRes$mark_not_dis)
+              mark_tree[[level]][[i]] <- paste0(ind, ".", label_graph)
+              temp_mar_res <- c(CytEMRes$ind[-1], CytEMRes$mark_not_dis)
               mark_left <- mark_left[temp_mar_res]
               flag_mark_left <- length(mark_left)
               flag_child <- 1
@@ -161,8 +161,7 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
                                   CytEMRes$pi1, CytEMRes$pi2)
               
               pl_list$kde[[label_graph]] <- KDE
-              pl_list$nodes[[label_graph]] <- paste0(col_names[ind],".",
-                                                     label_graph)
+              pl_list$nodes[[label_graph]] <- paste0(ind, ".", label_graph)
               pl_list$gmm[[label_graph]] <- GMM
               pl_list$legend[[label_graph]] <- paste(paste0("n",label_graph), "=",
                                                      length(temp_node),"D =",
@@ -172,7 +171,8 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
           }
         }
         if(flag_child){
-          temp_list_lc <- temp_list_rc <- list()
+          temp_list_lc <- list()
+          temp_list_rc <- list()
           temp_list_lc[[1]] <- L_child
           temp_list_rc[[1]] <- R_child
           tree[[c_level]][node_counter] <- temp_list_lc
@@ -188,9 +188,12 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
           node_counter <- node_counter + 2
         }
       }
-      level <- c_level
       mark_tree[[c_level]] <- list()
-      force_first_markers <- force_first_markers[-1]
+      browser()
+      if(level>1){
+        force_first_markers <- force_first_markers[-1]
+      }
+      level <- c_level
     }
   }
   
@@ -199,21 +202,22 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
     c_level <- level + 1
     tree[[c_level]] <- marks_left[[c_level]] <- list()
     n_nodes_at_level <- length(tree[[level]])
-    stopping_flag <- 0
+    stopping_flag <- FALSE
     node_counter <- 1
     
     for (i in 1:n_nodes_at_level){
-      flag_child <- 0
+      flag_child <- FALSE
       temp_node <- tree[[level]][[i]]
       mark_left <- marks_left[[level]][[i]]
       flag_mark_left <- length(mark_left)
       
       if(level==1){ #we are just after root
-        flag_child <- 1
+        flag_child <- TRUE
         L_child <- CytEMRes$child$L
         R_child <- CytEMRes$child$R
-        combinations[L_child,root_ind] <- 0
-        combinations[R_child,root_ind] <- 1
+        #OK
+        combinations[L_child, root_ind] <- 0
+        combinations[R_child, root_ind] <- 1
       }else{
         if(verbose){
           ipbar <- p-length(unique(unlist((marks_left[[level]]))))
@@ -232,7 +236,8 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
             )
           }
         }else{
-          CytEMRes <- CytEM(M[temp_node,mark_left], temp_node,
+          
+          CytEMRes <- CytEM(M[temp_node, mark_left, drop=FALSE], temp_node,
                             minleaf, level, t)
           if(is.null(CytEMRes$ind)){
             stopping_flag <- stopping_flag + 1
@@ -247,17 +252,15 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
             }
           }else{
             label_graph <- label_graph + 1
-            ind <- mark_left[CytEMRes$ind[1]]
-            mark_tree[[level]][[i]] <- paste0(col_names[ind],".",label_graph)
-            temp_mar_res <- c(CytEMRes$ind[-c(1)],
-                              CytEMRes$mark_not_dis)
-            mark_left <- mark_left[temp_mar_res]
+            ind <- CytEMRes$ind[1]
+            mark_tree[[level]][[i]] <- paste0(ind, ".", label_graph)
+            mark_left <- c(CytEMRes$ind[-1], CytEMRes$mark_not_dis)
             flag_mark_left <- length(mark_left)
-            flag_child <- 1
+            flag_child <- TRUE
             L_child <- CytEMRes$child$L
             R_child <- CytEMRes$child$R
-            combinations[L_child,ind] <- 0
-            combinations[R_child,ind] <- 1
+            combinations[L_child, ind] <- 0
+            combinations[R_child, ind] <- 1
             
             KDE <- stats::density(M[temp_node,ind], n = len_data_plot)
             
@@ -268,8 +271,7 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
                                 CytEMRes$pi1, CytEMRes$pi2)
             
             pl_list$kde[[label_graph]] <- KDE
-            pl_list$nodes[[label_graph]] <- paste0(col_names[ind],".",
-                                                   label_graph)
+            pl_list$nodes[[label_graph]] <- paste0(ind, ".", label_graph)
             pl_list$gmm[[label_graph]] <- GMM
             pl_list$legend[[label_graph]] <- paste(paste0("n",label_graph), "=",
                                                    length(temp_node),"D =",
@@ -279,7 +281,8 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
         }
       }
       if(flag_child){
-        temp_list_lc <- temp_list_rc <- list()
+        temp_list_lc <- list()
+        temp_list_rc <- list()
         temp_list_lc[[1]] <- L_child
         temp_list_rc[[1]] <- R_child
         tree[[c_level]][node_counter] <- temp_list_lc

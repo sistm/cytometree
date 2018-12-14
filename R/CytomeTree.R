@@ -154,6 +154,19 @@ CytomeTree <- function(M, minleaf = 1, t = .1, verbose = TRUE, force_first_marke
   {
     stop("M contains NAs.")
   }
+  
+  if(is.null(colnames(M))){
+    colnames(M) <- paste0(rep("M",p), 1:p)
+  }
+  
+  if(!is.null(force_first_markers)){
+    if(any(!(force_first_markers %in% colnames(M)))){
+      cat("'force_first_markers' are not all in M colnames:")
+      colnames(M)
+      stop()
+    }
+  }
+  
   BT <- BinaryTree(M, floor(minleaf), t, verbose, force_first_markers)
   annotation <- TreeAnnot(BT$labels, BT$combinations)
   Tree <- list("M" = M, "labels" = BT$labels,

@@ -75,6 +75,7 @@ plot_nodes <- function(CytomeTreeObj, nodes=NULL, nodesPerCol = NULL,
   
   inds <- which(treenodes%in%nodes)
   df <- list()
+  df_fill <- list()
   plot_list <- list()
   for(ind in inds){
     df[[ind]] <- data.frame("x" = c(pl_list$gmm[[ind]]$x, 
@@ -87,9 +88,11 @@ plot_nodes <- function(CytomeTreeObj, nodes=NULL, nodesPerCol = NULL,
                                                    rep("KDE", length(pl_list$kde[[ind]]$x)))
                             )
     )
+    df_fill[[ind]] <- rbind.data.frame(cbind.data.frame("x" = df[[ind]]$x[1], "y" = 0, "Marker" = df[[ind]]$Marker[1], "Estimator" = "GMM"), 
+                                       df[[ind]])
     p <- ggplot(df[[ind]], ggplot2::aes_string(x = "x", y = "y")) +
       ggplot2::geom_line(ggplot2::aes_string(colour = "Estimator"), lwd = 1) +  
-      ggplot2::geom_polygon(ggplot2::aes_string(fill = "Estimator"), alpha=0.3) +
+      ggplot2::geom_polygon(ggplot2::aes_string(fill = "Estimator"), alpha=0.3, data = df_fill[[ind]]) +
       ggplot2::scale_colour_manual(name = "",
                                    values = c("blue","red"),
                                    labels = c("GM", "KDE")) + 
