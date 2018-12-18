@@ -15,7 +15,7 @@ CytEM <- function(M, indices, minleaf, level, t, force_marker = NULL){
   p <- ncol(M)
   
   if(n <= minleaf ){
-    return(list("mark_not_dis" = 1:p))
+    return(list("mark_not_dis" = colnames(M)))
   }
   nEMdegenerate <- 5
   
