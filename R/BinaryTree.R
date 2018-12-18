@@ -117,15 +117,13 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
             labels[temp_node] <- label_counter
             mark_tree[[level]][[i]] <- as.character(label_counter)
             label_counter <- label_counter + 1
-            if(stopping_flag == n_nodes_at_level)
-            {
+            if(stopping_flag == n_nodes_at_level){
               if(verbose){utils::setTxtProgressBar(pb, p)}
               return(list("combinations"=combinations,"labels"=labels,
                           "mark_tree" = mark_tree, "pl_list"= pl_list)
               )
             }
           }else{
-            
             CytEMRes <- CytEM(M[temp_node, mark_left, drop=FALSE], temp_node,
                               minleaf, level, t, force_marker)
             if(is.null(CytEMRes$ind)){
@@ -141,16 +139,16 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
               }
             }else{
               label_graph <- label_graph + 1
-              ind <- mark_left[CytEMRes$ind[1]]
+              ind <- CytEMRes$ind[1]
               mark_tree[[level]][[i]] <- paste0(ind, ".", label_graph)
               temp_mar_res <- c(CytEMRes$ind[-1], CytEMRes$mark_not_dis)
-              mark_left <- mark_left[temp_mar_res]
+              mark_left <- temp_mar_res
               flag_mark_left <- length(mark_left)
               flag_child <- 1
               L_child <- CytEMRes$child$L
               R_child <- CytEMRes$child$R
-              combinations[L_child,ind] <- 0
-              combinations[R_child,ind] <- 1
+              combinations[L_child, ind] <- 0
+              combinations[R_child, ind] <- 1
               
               KDE <- stats::density(M[temp_node,ind], n = len_data_plot)
               
@@ -189,7 +187,6 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
         }
       }
       mark_tree[[c_level]] <- list()
-      browser()
       if(level>1){
         force_first_markers <- force_first_markers[-1]
       }
