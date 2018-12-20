@@ -100,48 +100,52 @@ CytEM <- function(M, indices, minleaf, level, t, force_marker = NULL){
     mc_mix <- Mclust(M_j, G=2, modelNames = "E", verbose = FALSE)
     ind1 <- mc_mix$classification == 1
     ind2 <- mc_mix$classification == 2
-    M1 <- M_j[ind1]
-    M2 <- M_j[ind2]
-    aic_uni <- 2*mc_uni$df - 2*mc_uni$loglik
-    aic_mix <- 2*mc_mix$df - 2*mc_mix$loglik
-    aic_norm_new <- (aic_uni - aic_mix)/n
-    
-    label <- mc_mix$classification
-    mean_M1 <- mean(M1)
-    mean_M2 <- mean(M2)
-    pi_M1 <- length(M1)/n
-    pi_M2 <- 1 - pi_M1
-    if(mean_M1 > mean_M2){
-      label[ind1] <- 1
-      label[ind2] <- 0
-      temparameters <- cbind.data.frame("aic_norm" = aic_norm_new, 
-                                        "marker" = force_marker, 
-                                        "mean_M1" = mean_M2, 
-                                        "mean_M2" = mean_M1,
-                                        "Var1" = stats::var(M2), 
-                                        "Var2" = stats::var(M1), 
-                                        "pi1" = pi_M2, 
-                                        "pi2" = pi_M1)
+    if(sum(ind1)<1 | sum(ind2)<1){
+      message(paste0("Unable to force split on ", force_marker, " for some node at level", level))
     }else{
-      label[ind1] <- 0
-      label[ind2] <- 1
-      temparameters <- cbind.data.frame("aic_norm" = aic_norm_new, 
-                                        "marker" = force_marker, 
-                                        "mean_M1" = mean_M1, 
-                                        "mean_M2" = mean_M2,
-                                        "Var1" = stats::var(M1), 
-                                        "Var2" = stats::var(M2), 
-                                        "pi1" = pi_M1, 
-                                        "pi2" = pi_M2)
+      M1 <- M_j[ind1]
+      M2 <- M_j[ind2]
+      aic_uni <- 2*mc_uni$df - 2*mc_uni$loglik
+      aic_mix <- 2*mc_mix$df - 2*mc_mix$loglik
+      aic_norm_new <- (aic_uni - aic_mix)/n
+      
+      label <- mc_mix$classification
+      mean_M1 <- mean(M1)
+      mean_M2 <- mean(M2)
+      pi_M1 <- length(M1)/n
+      pi_M2 <- 1 - pi_M1
+      if(mean_M1 > mean_M2){
+        label[ind1] <- 1
+        label[ind2] <- 0
+        temparameters <- cbind.data.frame("aic_norm" = aic_norm_new, 
+                                          "marker" = force_marker, 
+                                          "mean_M1" = mean_M2, 
+                                          "mean_M2" = mean_M1,
+                                          "Var1" = stats::var(M2), 
+                                          "Var2" = stats::var(M1), 
+                                          "pi1" = pi_M2, 
+                                          "pi2" = pi_M1)
+      }else{
+        label[ind1] <- 0
+        label[ind2] <- 1
+        temparameters <- cbind.data.frame("aic_norm" = aic_norm_new, 
+                                          "marker" = force_marker, 
+                                          "mean_M1" = mean_M1, 
+                                          "mean_M2" = mean_M2,
+                                          "Var1" = stats::var(M1), 
+                                          "Var2" = stats::var(M2), 
+                                          "pi1" = pi_M1, 
+                                          "pi2" = pi_M2)
+      }
+      
+      child$L <-  indices[label == 0]
+      child$R <-  indices[label == 1]
+      parameters <- rbind.data.frame(parameters, temparameters)
     }
-    
-    child$L <-  indices[label == 0]
-    child$R <-  indices[label == 1]
-    parameters <- rbind.data.frame(parameters, temparameters)
   }
   
   nnrowpara <- nrow(parameters)
-
+  
   ans <- NULL
   if(is.null(nnrowpara)){
     ans <- list("mark_not_dis" = mark_not_dis)
