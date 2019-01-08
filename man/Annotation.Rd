@@ -5,7 +5,8 @@
 \title{Annotates cell populations found using CytomeTree.}
 \usage{
 Annotation(CytomeTreeObj, K2markers = NULL, K3markers = NULL,
-  plot = TRUE, t = 0.2)
+  plot = TRUE, t = 0.2, remove_outliers_inplot = TRUE,
+  center_fun = c("median", "mean"))
 }
 \arguments{
 \item{CytomeTreeObj}{An object of class CytomeTree.}
@@ -28,6 +29,13 @@ For markers used in the tree, the algorithm compares the
 fits obtained by a mixture of two and three normal distributions.
 Default value is .2. A higher value leads to a smaller number of
 expression levels per marker.}
+
+\item{remove_outliers_inplot}{a logical flag indicating wether the y-axis
+should be scaled by removing outliers or not. Default is \code{TRUE}.}
+
+\item{center_fun}{a character string either 'median' or 'mean' indicating based 
+on which summary the populations should be ordered. Default is \code{'median'},
+which is more robust to outliers and long tail distributions.}
 }
 \value{
 A \code{data.frame} containing the annotation of each 
@@ -46,5 +54,5 @@ or three normal.For markers used in the tree, the algorithm compares the
 fits obtained by a mixture of two and three normal distributions.
 }
 \author{
-Chariff Alkhassim
+Chariff Alkhassim, Boris Hejblum
 }

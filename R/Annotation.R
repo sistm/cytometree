@@ -21,6 +21,13 @@
 #'Default value is .2. A higher value leads to a smaller number of
 #'expression levels per marker.
 #'
+#'@param remove_outliers_inplot a logical flag indicating wether the y-axis
+#'should be scaled by removing outliers or not. Default is \code{TRUE}.
+#'
+#'@param center_fun a character string either 'median' or 'mean' indicating based 
+#'on which summary the populations should be ordered. Default is \code{'median'},
+#'which is more robust to outliers and long tail distributions. 
+#'
 #'@return A \code{data.frame} containing the annotation of each 
 #'cell population. 
 #'
@@ -32,7 +39,7 @@
 #'or three normal.For markers used in the tree, the algorithm compares the
 #'fits obtained by a mixture of two and three normal distributions.
 #'
-#'@author Chariff Alkhassim
+#'@author Chariff Alkhassim, Boris Hejblum
 #'
 #'@import ggplot2 graphics mclust
 #'
@@ -40,7 +47,9 @@
 #'
 #'@export
 Annotation <- function(CytomeTreeObj, K2markers = NULL, 
-                       K3markers = NULL, plot = TRUE, t = 0.2)
+                       K3markers = NULL, plot = TRUE, t = 0.2,
+                       remove_outliers_inplot = TRUE,
+                       center_fun = c("median", "mean"))
 {
   if(class(CytomeTreeObj) != "CytomeTree")
   {
@@ -53,14 +62,26 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
       stop("K3markers must be of class character.")
     }
   }
+  
   if(is.null(t))
   {
     t <- CytomeTreeObj$t
   }
   M <- CytomeTreeObj$M
   labels <- CytomeTreeObj$labels
-  lc <- LeavesCenters(CytomeTreeObj)
   len_lab <- length(labels)
+  
+  if(length(center_fun) > 1){
+    center_fun <- center_fun[1]
+  }
+  if(center_fun == "median"){
+    lc <- LeavesMedians(CytomeTreeObj)
+  }else if(center_fun == "mean"){
+    lc <- LeavesCenters(CytomeTreeObj)
+  }else{
+    stop("center_fun is neither 'mean' nor 'median'.")
+  }
+  
   dlc <- dim(lc)
   n <- dlc[1]
   p <- dlc[2]
@@ -75,13 +96,11 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
   {
     indToAuto <- colSums(apply(CytomeTreeObj$annotation[,1:(p-1)],2,is.na)) == n
     FlagMArkerinTree <- seq_len((p-1))[as.logical(abs(indToAuto*1-1))]
-    for(j in 1:(p-1))
-    {
+    for(j in 1:(p-1)){
       leavesSort <- leaves[sort(lc[,j], index.return = TRUE)$ix]
       M_j <- M[,j]
       leavesSort_ <- leavesSort
-      if(any(cnames[j] == K3markers))
-      {
+      if(any(cnames[j] == K3markers)){
         partitions3gr <- Partition3gr(n)
         Kmeans3 <- KmeansOPT(partitions3gr, leavesSort, labels, M_j, K = 3)
         partwin3gr <- partitions3gr[[Kmeans3$ind]]
@@ -126,8 +145,7 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
           ))
         }
       }
-      else if(any(cnames[j] == K2markers))
-      {
+      else if(any(cnames[j] == K2markers)){
         partitions2gr <- Partition2gr(n)
         Kmeans2 <- KmeansOPT(partitions2gr, leavesSort, labels, M_j, K = 2)
         partwin2gr <- partitions2gr[[Kmeans2$ind]]
@@ -136,8 +154,7 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
         tind1.2 <- labels%in%tempclass_neg.2
         tind2.2 <- labels%in%tempclass_pos.2
         combinations[tempclass_pos.2, j] <- 1
-        if(plot)
-        {
+        if(plot){
           Expression <- rep(1, len_lab)
           Expression[tind1.2] <- 2     
           
@@ -152,6 +169,10 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
             ggplot2::theme(axis.title=element_text(size=15),
                            axis.text=element_text(size=12,face = "bold"),
                            legend.title=element_text(face="bold"))
+          if(remove_outliers_inplot){
+            ylim1 = range(boxplot(Fluorescence~Leaves, data=dfbox, plot=FALSE)$stats)
+            p <- p + ylim(ylim1)
+          }
           suppressWarnings(print(p + ggplot2::ggtitle(cnames[j]) + 
                                    ggplot2::geom_boxplot(outlier.shape = NA, 
                                                          alpha = 1)+
