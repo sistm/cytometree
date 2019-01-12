@@ -135,11 +135,12 @@
 #'
 #'}
 
-CytomeTree <- function(M, minleaf = 1, t = .1, verbose = TRUE, force_first_markers = NULL)
-{
-  if((class(M) != "matrix") & (class(M) != "data.frame"))
-  {
-    stop("M should be of class matrix or data.frame.")
+CytomeTree <- function(M, minleaf = 1, t = .1, verbose = TRUE, force_first_markers = NULL){
+  if(class(M) == "data.frame"){
+    M <- as.matrix(M)
+  }
+  if(class(M) != "matrix" | mode(M) != "numeric"){
+    stop("M should be a numeric matrix")
   }
   n <- nrow(M)
   if(minleaf >= n)

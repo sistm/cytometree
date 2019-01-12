@@ -1,6 +1,8 @@
 #' Computes medians of leaves given cytomeTreeObj.
 #'
 #' @keywords internal
+#' 
+#' @importFrom stats median
 LeavesMedians <- function(cytomeTreeObj)
 {
   out <- c()
@@ -14,7 +16,7 @@ LeavesMedians <- function(cytomeTreeObj)
     for(label in Labels) 
     {
       ind <- which(labels == label)
-      mu_leafs <- append(mu_leafs, median(M[ind, mar]))
+      mu_leafs <- append(mu_leafs, stats::median(M[ind, mar]))
     }
     out <- cbind(out, mu_leafs)
   }

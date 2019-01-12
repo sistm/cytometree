@@ -41,6 +41,9 @@ plot_nodes <- function(CytomeTreeObj, nodes=NULL, nodesPerCol = NULL,
     stop("'CytomeTreeObj' must be of class CytomeTree")
   }
   if(!is.null(nodes)){
+    if(length(nodes) == 1 & class(nodes) != "list"){
+      nodes <- as.list(nodes)
+    }
     if(class(nodes) != "list"){
       warning("'nodes' argument coerced to be a list")
       nodes <- as.list(nodes)
@@ -73,7 +76,7 @@ plot_nodes <- function(CytomeTreeObj, nodes=NULL, nodesPerCol = NULL,
     stop(wstr)
   }
   
-  inds <- which(treenodes%in%nodes)
+  inds <- which(treenodes %in% nodes)
   df <- list()
   df_fill <- list()
   plot_list <- list()
@@ -108,7 +111,7 @@ plot_nodes <- function(CytomeTreeObj, nodes=NULL, nodesPerCol = NULL,
                      axis.text.y=element_blank(),
                      axis.ticks.y=element_blank())
     
-    plot_list[[ind]] <- p
+    plot_list[[as.character(ind)]] <- p
   }
   
   if(length(nodes)>1 & (!is.null(nodesPerRow) | !is.null(nodesPerCol))){

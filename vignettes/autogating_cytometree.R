@@ -18,7 +18,7 @@ manual_labels <- DLBCL[,"label"]
 
 ## ---- message=FALSE, results='hide'--------------------------------------
 # Build the binary tree:
-Tree <- CytomeTree(cellevents, minleaf = 1, t = 0.2)
+Tree <- CytomeTree(cellevents, minleaf = 1, t = 0.1)
 # Retreive the resulting partition (i.e. automatic gating):
 Tree_Partition <- Tree$labels
 
@@ -26,9 +26,11 @@ Tree_Partition <- Tree$labels
 # Plot a graph of the tree (with specific graphical parameters):
 plot_graph(Tree, edge.arrow.size = 0.3, Vcex = 0.8, vertex.size = 30)
 
-## ------------------------------------------------------------------------
+## ---- small.mar=TRUE, fig.width=6.5, fig.height=6------------------------
 # Plot the distribution fit for each node:
 plot_nodes(Tree)
+
+## ------------------------------------------------------------------------
 # Plot the distribution fit for a particular node:
 plot_nodes(Tree, "FL4.1")
 
@@ -57,7 +59,7 @@ phenotypes[[2]] <- rbind(c("FL2", 0), c("FL4", 1))
 PhenoInfos <- RetrievePops(Annot, phenotypes)
 PhenoInfos$phenotypesinfo
 
-## ---- echo=FALSE, small.mar=TRUE, fig.width=6.5, fig.height=4------------
+## ---- echo=FALSE, small.mar=TRUE, fig.width=6.5, fig.height=4, message=FALSE----
 # F-measure ignoring cells labeled 0 as in FlowCAP-I.
 # Use FmeasureC() in any other case.
 Fmeas <- cytometree::FmeasureC_no0(ref=manual_labels, pred=Tree_Partition)
@@ -73,7 +75,9 @@ n <- length(FL1)
 
 man_lab <- factor(as.character(manual_labels))
 levels(man_lab) <- c("outliers (manual gating)", "pop1", "pop2")
-auto_lab <- factor(as.character(Tree_Partition))
+
+FL4pos <- RetrievePops(Annot, phenotypes = list(cbind("FL4", 1)))
+auto_lab <- factor(as.character(FL4pos$Mergedleaves))
 levels(auto_lab) <- c("pop2", "pop1")
 Labels <- factor(c(as.character(man_lab), as.character(auto_lab)))
 
@@ -82,7 +86,7 @@ scatter_df <- data.frame("FL2" = FL2, "FL4" = FL4, "Label" = Labels, "method" = 
 
 p <- ggplot2::ggplot(scatter_df,  ggplot2::aes_string(x = "FL2", y="FL4",colour="Label"))+
  ggplot2::geom_point(alpha = 1,cex = 1)+ 
- ggplot2::scale_colour_manual(values = c("grey", viridis::viridis(3))) +
+ ggplot2::scale_colour_manual(values = c("grey", viridis::viridis(4))) +
  ggplot2::facet_wrap(~ method) +
  ggplot2::theme_bw() +
  ggplot2::theme(legend.position="bottom") +
@@ -111,9 +115,9 @@ Tree_Partition <- Tree$labels
 # Plot a graph of the tree (with specific graphical parameters):
 plot_graph(Tree, edge.arrow.size = 0.4, Vcex = 0.45)
 
-## ------------------------------------------------------------------------
+## ---- echo=FALSE, small.mar=TRUE, fig.width=6.5, fig.height=4, message=FALSE----
 # Plot the fit for 2 specific nodes:
-plot_nodes(Tree, c("CD4.1", "CD45RA.7"))
+plot_nodes(Tree, list("CD4.1", "CD45RA.7"))
 
 ## ------------------------------------------------------------------------
 # Run the annotation algorithm:

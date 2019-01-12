@@ -9,9 +9,9 @@ citEntry(entry = "Article",
    number = "11",
    pages  = "1132--1140",
    doi    = "10.1002/cyto.a.23601",
-   url    = "https://doi.org/10.1002/cyto.a.23601"",
+   url    = "https://doi.org/10.1002/cyto.a.23601",
    note   = "R package version 1.2.1",
-   textVersion = "Commenges D, Alkhassim C, Gottardo R, Hejblum BP, Thiebaut R. cytometree: a binary tree algorithm for automatic gating in cytometry analysis. Cytometry Part A, 93(11):1132-1140."
+   textVersion = "Commenges D, Alkhassim C, Gottardo R, Hejblum BP, Thiebaut R (2018). cytometree: a binary tree algorithm for automatic gating in cytometry analysis. Cytometry Part A, 93(11):1132-1140."
 )
 
 citFooter("We have invested a lot of time and effort in implementing cytometree, ", "please cite it when using it for data analysis or research.")

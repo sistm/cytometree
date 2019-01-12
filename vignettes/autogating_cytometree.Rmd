@@ -69,7 +69,7 @@ manual_labels <- DLBCL[,"label"]
 The function `CytomeTree` builds the binary tree according to our algorithm, that gives the automatic gating (given in the resulting `labels` attribute):
 ```{r, message=FALSE, results='hide'}
 # Build the binary tree:
-Tree <- CytomeTree(cellevents, minleaf = 1, t = 0.2)
+Tree <- CytomeTree(cellevents, minleaf = 1, t = 0.1)
 # Retreive the resulting partition (i.e. automatic gating):
 Tree_Partition <- Tree$labels
 ```
@@ -82,9 +82,11 @@ plot_graph(Tree, edge.arrow.size = 0.3, Vcex = 0.8, vertex.size = 30)
 ```
 
 The function `plot_nodes` allows to graphically evaluate the fit of the gaussian family distribution at each node. It can also be used to investigate a particular node:
-```{r}
+```{r, small.mar=TRUE, fig.width=6.5, fig.height=6}
 # Plot the distribution fit for each node:
 plot_nodes(Tree)
+```
+```{r}
 # Plot the distribution fit for a particular node:
 plot_nodes(Tree, "FL4.1")
 ```
@@ -128,7 +130,7 @@ PhenoInfos$phenotypesinfo
 
 Finally, we can compare the automatic gating obtained using `cytometree` to the original manual gating (which had `r sum(manual_labels==0)` events unconsitantly gated accross different operators performing the manual gating on those very same data - so those `r sum(manual_labels==0)` cells were identified as outliers in the reference label and were kept out of the evaluation criteria in the [flowCAP-I challenge](http://flowcap.flowsite.org/)):
 
-```{r, echo=FALSE, small.mar=TRUE, fig.width=6.5, fig.height=4}
+```{r, echo=FALSE, small.mar=TRUE, fig.width=6.5, fig.height=4, message=FALSE}
 # F-measure ignoring cells labeled 0 as in FlowCAP-I.
 # Use FmeasureC() in any other case.
 Fmeas <- cytometree::FmeasureC_no0(ref=manual_labels, pred=Tree_Partition)
@@ -144,7 +146,9 @@ n <- length(FL1)
 
 man_lab <- factor(as.character(manual_labels))
 levels(man_lab) <- c("outliers (manual gating)", "pop1", "pop2")
-auto_lab <- factor(as.character(Tree_Partition))
+
+FL4pos <- RetrievePops(Annot, phenotypes = list(cbind("FL4", 1)))
+auto_lab <- factor(as.character(FL4pos$Mergedleaves))
 levels(auto_lab) <- c("pop2", "pop1")
 Labels <- factor(c(as.character(man_lab), as.character(auto_lab)))
 
@@ -153,7 +157,7 @@ scatter_df <- data.frame("FL2" = FL2, "FL4" = FL4, "Label" = Labels, "method" = 
 
 p <- ggplot2::ggplot(scatter_df,  ggplot2::aes_string(x = "FL2", y="FL4",colour="Label"))+
  ggplot2::geom_point(alpha = 1,cex = 1)+ 
- ggplot2::scale_colour_manual(values = c("grey", viridis::viridis(3))) +
+ ggplot2::scale_colour_manual(values = c("grey", viridis::viridis(4))) +
  ggplot2::facet_wrap(~ method) +
  ggplot2::theme_bw() +
  ggplot2::theme(legend.position="bottom") +
@@ -200,9 +204,9 @@ plot_graph(Tree, edge.arrow.size = 0.4, Vcex = 0.45)
 ```
 
 The function `plot_nodes` allows to graphically evaluate the fit of the gaussian family distribution at each node. It can also be used to investigate a particular node:
-```{r}
+```{r, echo=FALSE, small.mar=TRUE, fig.width=6.5, fig.height=4, message=FALSE}
 # Plot the fit for 2 specific nodes:
-plot_nodes(Tree, c("CD4.1", "CD45RA.7"))
+plot_nodes(Tree, list("CD4.1", "CD45RA.7"))
 ```
 
 ### Post-processing annotation of automatically gated subpopulations
@@ -271,9 +275,21 @@ auto_lab <- as.character(auto_lab)
 plot(CD45RA, CCR7, col = auto_lab, main = "Automatic gating")
 ```
 
+## Semi-supervised gating
 
+It is possible to force the markers which will be used to gate the data first,
+usign the `force_first_markers` argument of the `CytomeTree()` function.
+Once those forced markers are used, automatic behavior of the algorithm is 
+resumed for the remaining markers.
 
-
+```{r, message=FALSE, results='hide'}
+# Build the binary tree, forcing the first node to be CD4, and the second ones HLADR
+Tree <- CytomeTree(cellevents, minleaf = 1, t = 0.2, force_first_markers = c("CD4", "HLADR"))
+```
+```{r, fig.width = 6.2, fig.height = 6.2, small.mar = TRUE}
+# Plot a graph of the tree (with specific graphical parameters):
+plot_graph(Tree, edge.arrow.size = 0.4, Vcex = 0.45)
+```
 
 
 

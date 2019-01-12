@@ -1,5 +1,9 @@
 # News about the `cytometree` R package
 
+
+### Main changes in Version 1.3.0  (2019-01-12)
+* (semi-)supervised option 
+
 ### Main changes in Version 1.2.0  (2018-08-23)
 * improved `plot_nodes()` function
 * added `plot_cytopop()` function for displaying populations counts
