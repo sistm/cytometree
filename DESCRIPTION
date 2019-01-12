@@ -22,10 +22,8 @@ Imports:
     graphics,
     igraph,
     mclust,
-    RColorBrewer,
     robustbase,
     stats,
-    grDevices,
     cowplot
 RoxygenNote: 6.1.1
 BugReports: https://github.com/sistm/Cytometree/issues

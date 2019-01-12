@@ -1,12 +1,12 @@
 ---
-title: "Userguide for performing automatic gating with `cytometree`"
+title: "User guide for performing automatic gating with `cytometree`"
 author: "Chariff Alkhassim, Boris Hejblum"
 date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
     toc: yes
 vignette: >
-  %\VignetteIndexEntry{Userguide for performing automatic gating with `cytometree`}
+  %\VignetteIndexEntry{User guide for performing automatic gating with `cytometree`}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -34,7 +34,7 @@ cell subpopulations.
 2. Splitting of the events at each node is done according to a normalized difference of AIC between 
 the two distributional fit (unimodal or bimodal), allowing to pick the marker that best splits those data.
 
-3. When AIC noralized differences $D$ are not significant anymore, the tree has been constructed, and the cells have been automatically gated (i.e. partitioned). 
+3. When AIC normalized differences $D$ are not significant anymore, the tree has been constructed, and the cells have been automatically gated (i.e. partitioned). 
 
 ## Post-hoc annotation
 
@@ -45,7 +45,7 @@ Given the unsupervised nature of the binary tree, some of the available markers 
 
 ## Diffuse large B-cell lymphoma dataset with 3 markers
 
-In this example, we will use a diffuse large B-cell lymphoma dataset (from the [flowCAP-I challenge](http://flowcap.flowsite.org/), with only 3 markers.
+In this example, we will use a diffuse large B-cell lymphoma dataset (from the [FlowCAP-I challenge](http://flowcap.flowsite.org/), with only 3 markers.
 
 ### Automatic gating step
 
@@ -94,7 +94,7 @@ plot_nodes(Tree, "FL4.1")
 
 ### Post-processing annotation of automatically gated subpopulations
 
-The function `Annotation` annotates the subpopulations partitionned by the binary tree:
+The function `Annotation` annotates the subpopulations partitioned by the binary tree:
 
 ```{r}
 # Run the annotation algorithm:
@@ -102,13 +102,13 @@ Annot <- Annotation(Tree,plot=FALSE)
 Annot$combinations
 ```
 
-The post-procesing annotation can be compared to the uncomplete annotation obtained from the tree alone:
+The post-processing annotation can be compared to the incomplete annotation obtained from the tree alone:
 ```{r}
 # Annotation gotten from the tree:
 Tree$annotation
 ```
 
-This completed annotation eases the search for specific cell types of interest, where `1` represents a postive measurement of a marker, while `0` corresponds to its absence:
+This completed annotation eases the search for specific cell types of interest, where `1` represents a positive measurement of a marker, while `0` corresponds to its absence:
 ```{r}
 
 # seeked cell type: FL2+FL4+
@@ -128,7 +128,7 @@ PhenoInfos$phenotypesinfo
 
 ### Comparison between manual and automatic gating
 
-Finally, we can compare the automatic gating obtained using `cytometree` to the original manual gating (which had `r sum(manual_labels==0)` events unconsitantly gated accross different operators performing the manual gating on those very same data - so those `r sum(manual_labels==0)` cells were identified as outliers in the reference label and were kept out of the evaluation criteria in the [flowCAP-I challenge](http://flowcap.flowsite.org/)):
+Finally, we can compare the automatic gating obtained using `cytometree` to the original manual gating (which had `r sum(manual_labels==0)` events inconsistently gated across different operators performing the manual gating on those very same data - so those `r sum(manual_labels==0)` cells were identified as outliers in the reference label and were kept out of the evaluation criteria in the [FlowCAP-I challenge](http://flowcap.flowsite.org/)):
 
 ```{r, echo=FALSE, small.mar=TRUE, fig.width=6.5, fig.height=4, message=FALSE}
 # F-measure ignoring cells labeled 0 as in FlowCAP-I.
@@ -168,7 +168,7 @@ p
 
 ## PBMC sample from the Human Immunology Project
 
-In this example, we will use a dataset from the HIPC ([Human Immunology Project Consortium](https://www.immuneprofiling.org/) program where a PBMC sample from patient 12828 was analysed by Stanford. 
+In this example, we will use a dataset from the HIPC ([Human Immunology Project Consortium](https://www.immuneprofiling.org/) program where a PBMC sample from patient 12828 was analyzed by Stanford. 
 
 ### Automatic gating step
 
@@ -211,14 +211,14 @@ plot_nodes(Tree, list("CD4.1", "CD45RA.7"))
 
 ### Post-processing annotation of automatically gated subpopulations
 
-The function `Annotation` annotates the subpopulations partitionned by the binary tree:
+The function `Annotation` annotates the subpopulations partitioned by the binary tree:
 ```{r}
 # Run the annotation algorithm:
 Annot <- Annotation(Tree,plot=FALSE)
 Annot$combinations
 ```
 
-This completed annotation eases the search for specific cell types of interest, where `1` represents a postive measurement of a marker, while `0` corresponds to its absence:
+This completed annotation eases the search for specific cell types of interest, where `1` represents a positive measurement of a marker, while `0` corresponds to its absence:
 ```{r, fig.width=5, fig.height=5}
 #One can look for several cell types at once:
 phenotypes <- list()
@@ -278,7 +278,7 @@ plot(CD45RA, CCR7, col = auto_lab, main = "Automatic gating")
 ## Semi-supervised gating
 
 It is possible to force the markers which will be used to gate the data first,
-usign the `force_first_markers` argument of the `CytomeTree()` function.
+using the `force_first_markers` argument of the `CytomeTree()` function.
 Once those forced markers are used, automatic behavior of the algorithm is 
 resumed for the remaining markers.
 

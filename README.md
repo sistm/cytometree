@@ -1,5 +1,5 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.Rmd generates from README.Rmd. Please generate that file once done editing -->
 
 # cytometree
 
@@ -18,7 +18,7 @@ annotation of flow-cytometry data**. On top of the [CRAN help
 files](https://cran.r-project.org/package=cytometree/cytometree.pdf), we
 also provide a
 [vignette](https://cran.r-project.org/package=cytometree/vignettes/autogating_cytometree.html)
-illustrating the functionnalities of `cytometree`.
+illustrating the functionalities of `cytometree`.
 
 The `cytometree` algorithm rely on the construction of a **binary
 tree**, the nodes of which represents **cellular (sub)populations**. At

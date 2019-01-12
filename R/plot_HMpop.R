@@ -8,10 +8,8 @@
 #' 
 #' @author Anthony Devaux, Boris Hejblum
 #' 
-#' @import robustbase
+#' @importFrom robustbase colMedians
 #' @importFrom ComplexHeatmap Heatmap HeatmapAnnotation
-#' @importFrom RColorBrewer brewer.pal
-#' @importFrom grDevices colorRampPalette
 #' @importFrom grid grid.text gpar
 #' @importFrom circlize colorRamp2
 #' 
@@ -49,7 +47,7 @@ plot_HMpop <- function(TreeObj, AnnotObj) {
   
   for (numclust in 1:nbClust) {
     
-    data <- rbind(data,robustbase::colMedians(as.matrix(TreeObj$M[which(AnnotObj$labels==numclust),])))
+    data <- rbind(data, robustbase::colMedians(as.matrix(TreeObj$M[which(AnnotObj$labels==numclust),])))
     
   }
   

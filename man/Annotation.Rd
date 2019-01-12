@@ -30,7 +30,7 @@ fits obtained by a mixture of two and three normal distributions.
 Default value is .2. A higher value leads to a smaller number of
 expression levels per marker.}
 
-\item{remove_outliers_inplot}{a logical flag indicating wether the y-axis
+\item{remove_outliers_inplot}{a logical flag indicating whether the y-axis
 should be scaled by removing outliers or not. Default is \code{TRUE}.}
 
 \item{center_fun}{a character string either 'median' or 'mean' indicating based 

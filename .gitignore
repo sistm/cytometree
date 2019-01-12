@@ -35,6 +35,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 # Rstudio user dependent created files
+.gitignore
 .Rproj.user
 .Rproj.user/*
 *.Rproj
@@ -44,4 +45,4 @@ Temporary Items
 *.dll
 inst/doc
 *.Rproj*
-
+temp_Hung.rmd

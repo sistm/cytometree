@@ -6,3 +6,4 @@
 ^README-.*\.png$
 R/plot_HMpop.R
 ^cran-comments\.md$
+temp_Hung.rmd

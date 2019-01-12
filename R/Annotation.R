@@ -21,7 +21,7 @@
 #'Default value is .2. A higher value leads to a smaller number of
 #'expression levels per marker.
 #'
-#'@param remove_outliers_inplot a logical flag indicating wether the y-axis
+#'@param remove_outliers_inplot a logical flag indicating whether the y-axis
 #'should be scaled by removing outliers or not. Default is \code{TRUE}.
 #'
 #'@param center_fun a character string either 'median' or 'mean' indicating based 

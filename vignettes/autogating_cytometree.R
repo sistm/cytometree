@@ -179,3 +179,11 @@ levels(auto_lab) <- viridis::viridis(length(levels(auto_lab)))
 auto_lab <- as.character(auto_lab)
 plot(CD45RA, CCR7, col = auto_lab, main = "Automatic gating")
 
+## ---- message=FALSE, results='hide'--------------------------------------
+# Build the binary tree, forcing the first node to be CD4, and the second ones HLADR
+Tree <- CytomeTree(cellevents, minleaf = 1, t = 0.2, force_first_markers = c("CD4", "HLADR"))
+
+## ---- fig.width = 6.2, fig.height = 6.2, small.mar = TRUE----------------
+# Plot a graph of the tree (with specific graphical parameters):
+plot_graph(Tree, edge.arrow.size = 0.4, Vcex = 0.45)
+
