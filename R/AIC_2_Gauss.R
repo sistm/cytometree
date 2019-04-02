@@ -16,7 +16,12 @@
 aic_2_gauss <- function(x, init){
   
   if (class(x)!="numeric"){
-    stop("data vector can be numeric !")
+    stop("data vector must be numeric !")
+  }
+  if (class(init)!="numeric"){
+    stop("init vector must be numeric !")
+  }else if (length(init)!=5){
+    stop("init must contain p, mu1, mu2, sigma1, sigma2 parameters")
   }
   
   #globals
