@@ -18,7 +18,7 @@
 
 aic_1_gauss <- function(x){
   if (class(x)!="numeric"){
-    stop("x vector can be numeric !")
+    stop("x vector must be numeric !")
   }
   
   n <- length(x)
