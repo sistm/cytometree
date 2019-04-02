@@ -31,9 +31,11 @@ aic_1_gauss <- function(x){
   
   vraisemblance <- prod(((sigma*sqrt(2*pi))^-1)*exp((-(x-mu)^2)/sigma^2))
   
-  aic <- -2*log(vraisemblance)+4
+  aic <- -2*log(vraisemblance)+2*2
   
-  theta <- list(mu = mu, sigma = sigma, var_mu = var_mu, var_sigma = var_sigma, aic = aic)
+  theta <- list("mu" = mu, "sigma" = sigma, 
+                "var_mu" = var_mu, "var_sigma" = var_sigma, 
+                "aic" = aic)
   
   return(theta)
   
