@@ -5,13 +5,16 @@
 #' @param x Numeric vector of observations
 #' @param init Numeric vector of parameters (p, mu1, mu2, sigma1, sigma2)
 #'
-#' @importFrom stats marqLevAlg
+#' @importFrom marqLevAlg marqLevAlg
 #' 
 #' @return List with AIC and parameters
 #' 
-#'@examples
-#'xx <- c(rnorm(100,4,2), rnorm(200, -25, 0.1))
-#'aic_2_gauss(xx, init = c(0.5, 0, 0, 2, 2))
+#' @export
+#' 
+#' @examples
+#' xx <- c(rnorm(100,4,2), rnorm(200, -25, 0.1))
+#' aic_2_gauss(xx, init = c(0.5, 0, 0, 2, 2))
+#'
 
 aic_2_gauss <- function(x, init, maxit=15){
   
@@ -21,7 +24,7 @@ aic_2_gauss <- function(x, init, maxit=15){
   if (class(init)!="numeric"){
     stop("init vector must be numeric !")
   }else if (length(init)!=5){
-    stop("init must contain p, mu1, mu2, sigma1, sigma2 parameters")
+    stop("init must be of length 5 \n(with the followoing parameters: p, mu1, mu2, sigma1, sigma2)")
   }
   
   #globals
@@ -37,7 +40,7 @@ aic_2_gauss <- function(x, init, maxit=15){
     s2 <- sqrt(b[5]^2)
     
     indiv_ll <- sapply(x, function(y){
-      log(p * exp(-(y-mu1)^2/s1^2)/(s1 * sqrt(2 * pi)) + (1-p) * exp(-(y-mu2)^2/s2^2)/(s2 * sqrt(2 * pi)))
+      log(p * exp(-(y-mu1)^2/(2*s1^2))/(s1 * sqrt(2 * pi)) + (1-p) * exp(-(y-mu2)^2/s2^2)/(s2 * sqrt(2 * pi)))
     })
     return(-sum(indiv_ll))
     
@@ -53,10 +56,10 @@ aic_2_gauss <- function(x, init, maxit=15){
   AIC_opt <- 2*resu$fn.value + 2*5
   
   indiv_ll1 <- sapply(x, function(y){
-    log(p_opt) -(y-mu1_opt)^2/s1_opt^2 - log(s1_opt) - log(2)/2 - log(pi)/2
+    log(p_opt) - (y-mu1_opt)^2/(2*s1_opt^2) - log(s1_opt) - log(2*pi)/2
   })
   indiv_ll2 <- sapply(x, function(y){
-    log(1-p_opt) -(y-mu2_opt)^2/s2_opt^2 -log(s2_opt) - log(2)/2 - log(pi)/2
+    log(1-p_opt) -(y-mu2_opt)^2/(2*s2_opt^2) - log(s2_opt) - log(2*pi)/2
   })
   indiv_clustering <- apply(cbind(indiv_ll1, indiv_ll2), 1, which.max)
   

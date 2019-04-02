@@ -1,6 +1,11 @@
-x <- c(rnorm(100,4,2), rnorm(200, -25, 0.1))
-resu_aic_1_gauss <- aic_1_gauss(xx)
-resu_aic_2_gauss <- aic_2_gauss(xx, init = c(0.5, 0, 0, 2, 2))
+#' Cytgridsearch
+#' 
+#' @export
+#' 
+#' @example 
+#' x <- c(rnorm(100,4,2), rnorm(200, -25, 0.1))
+#' resu_aic_1_gauss <- aic_1_gauss(x)
+#' resu_aic_2_gauss <- aic_2_gauss(x, init = c(0.5, 0, 0, 2, 2))
 
 
 CytGridsearch <- function(x, resu_aic_1_gauss, resu_aic_2_gauss, iter_max = 15,

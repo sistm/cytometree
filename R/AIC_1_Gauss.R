@@ -1,20 +1,21 @@
-#' Compute parameters and AIC from observations with normal distribution
+#' MLE and AIC from normally distributed observations
 #
-#' @author Anthony Devaux
+#' @author Anthony Devaux, Boris Hejblum
 #'
-#' @param x Numeric vector of observations
-#'
-#' @importFrom stats 
+#' @param x a numeric vector of observations
 #' 
-#' @return List with AIC and parameters
+#' @return a list with AIC and parameters
 #' 
-#'@examples
-#'data_obs <- rnorm(100,2,4)
+#' @export
+#' 
+#' @examples
+#' x <- rnorm(10, m=5, sd=2)
+#' res <- aic_1_gauss(x)
 #'
-#'res <- aic_1_gauss(data_obs)
-#'
-#'res$mu
-#'res$aic
+#' res$mu
+#' res$sigma
+#' res$loglikelihood
+#' sum(dnorm(x, m = res$mu, sd = res$sigma, log = TRUE))
 
 aic_1_gauss <- function(x){
   if (class(x)!="numeric"){
@@ -23,20 +24,21 @@ aic_1_gauss <- function(x){
   
   n <- length(x)
   
-  mu <- sum(x)/n
-  sigma <- sqrt(sum((x-mu)^2)/n)
+  mu_mle <- mean(x)
+  sigma2_mle <- mean((x - mu_mle)^2)
   
-  var_mu <- (sigma^2)/n
-  var_sigma <- (2*sigma^4)/n
+  var_mu_FisherInfo <- sigma2_mle / n
+  var_sigma_FisherInfo <- 2 * sigma2_mle^2 / n
   
-  vraisemblance <- prod(((sigma*sqrt(2*pi))^-1)*exp((-(x-mu)^2)/sigma^2))
+  log_likelihood <- - sum((x-mu_mle)^2) / (2*sigma2_mle) - n/2*log(2*pi*sigma2_mle)
   
-  aic <- -2*log(vraisemblance)+2*2
+  aic <- -2*log_likelihood + 2*2
   
-  theta <- list("mu" = mu, "sigma" = sigma, 
-                "var_mu" = var_mu, "var_sigma" = var_sigma, 
-                "aic" = aic)
-  
-  return(theta)
+  return(list("mu" = mu_mle, 
+              "sigma" = sqrt(sigma2_mle), 
+              "var_mu" = var_mu_FisherInfo, 
+              "var_sigma" = var_sigma_FisherInfo, 
+              "loglikelihood" = log_likelihood,
+              "AIC" = aic))
   
 }
