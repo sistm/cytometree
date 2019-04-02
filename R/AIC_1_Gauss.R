@@ -17,7 +17,7 @@
 #'res$aic
 
 aic_1_gauss <- function(x){
-  if (class()!="numeric"){
+  if (class(x)!="numeric"){
     stop("x vector can be numeric !")
   }
   
