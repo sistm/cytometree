@@ -13,7 +13,7 @@
 #'xx <- c(rnorm(100,4,2), rnorm(200, -25, 0.1))
 #'aic_2_gauss(xx, init = c(0.5, 0, 0, 2, 2))
 
-aic_2_gauss <- function(x, init){
+aic_2_gauss <- function(x, init, maxit=15){
   
   if (class(x)!="numeric"){
     stop("data vector must be numeric !")
@@ -28,7 +28,7 @@ aic_2_gauss <- function(x, init){
   n <- length(x)
   init[1] <- init[1]/(1 - init[1])
   
-  mlogvrais_2gauss <- function(b){
+  mloglik_2gauss <- function(b){
     
     p <- 1/(1 + exp(b[1]))
     mu1 <- b[2]
@@ -36,21 +36,38 @@ aic_2_gauss <- function(x, init){
     s1 <- sqrt(b[4]^2)
     s2 <- sqrt(b[5]^2)
     
-    indiv_lv <- sapply(x, function(y){
+    indiv_ll <- sapply(x, function(y){
       log(p * exp(-(y-mu1)^2/s1^2)/(s1 * sqrt(2 * pi)) + (1-p) * exp(-(y-mu2)^2/s2^2)/(s2 * sqrt(2 * pi)))
     })
-    return(-sum(indiv_lv))
+    return(-sum(indiv_ll))
     
   }
   
-  resu <- marqLevAlg(b = init, fn = mlogvrais_2gauss)
+  resu <- marqLevAlg(b = init, fn = mloglik_2gauss, maxiter = maxit)
+  
+  p_opt <- 1/(1 + exp(resu$b[1]))
+  mu1_opt <- resu$b[2]
+  mu2_opt <- resu$b[3]
+  s1_opt <- sqrt(resu$b[4]^2)
+  s2_opt <- sqrt(resu$b[5]^2)
+  AIC_opt <- 2*resu$fn.value + 2*5
+  
+  indiv_ll1 <- sapply(x, function(y){
+    log(p_opt) -(y-mu1_opt)^2/s1_opt^2 - log(s1_opt) - log(2)/2 - log(pi)/2
+  })
+  indiv_ll2 <- sapply(x, function(y){
+    log(1-p_opt) -(y-mu2_opt)^2/s2_opt^2 -log(s2_opt) - log(2)/2 - log(pi)/2
+  })
+  indiv_clustering <- apply(cbind(indiv_ll1, indiv_ll2), 1, which.max)
+  
   return(list(
-    "p" = 1/(1 + exp(resu$b[1])),
-    "mu1" = resu$b[2],
-    "mu2" = resu$b[3],
-    "s1" = sqrt(resu$b[4]^2),
-    "s2" = sqrt(resu$b[5]^2),
-    "AIC" = 2*resu$fn.value + 2*5
+    "p" = p_opt,
+    "mu1" = mu1_opt,
+    "mu2" = mu2_opt,
+    "s1" = s1_opt,
+    "s2" = s2_opt,
+    "AIC" = 2*resu$fn.value + 2*5,
+    "cluster" = indiv_clustering
   ))
   
 }
