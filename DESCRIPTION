@@ -18,13 +18,14 @@ Depends:
     R (>= 3.1.0),
     Rcpp (>= 0.12.11)
 Imports:
+    cowplot,
     ggplot2,
     graphics,
     igraph,
+    marqLevAlg,
     mclust,
     robustbase,
-    stats,
-    cowplot
+    stats
 RoxygenNote: 6.1.1
 BugReports: https://github.com/sistm/Cytometree/issues
 Encoding: UTF-8

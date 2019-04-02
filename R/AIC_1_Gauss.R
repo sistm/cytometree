@@ -1,6 +1,6 @@
 #' Compute parameters and AIC from observations with normal distribution
 #
-#' @author Anthony DEVAUX
+#' @author Anthony Devaux
 #'
 #' @param x Numeric vector of observations
 #'

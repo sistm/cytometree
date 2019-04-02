@@ -1,6 +1,6 @@
 #' Compute parameters and AIC from observations with mixture of 2 normal distribution
 #
-#' @author Boris Hejblum, Anthony DEVAUX
+#' @author Boris Hejblum, Anthony Devaux
 #'
 #' @param x Numeric vector of observations
 #' @param init Numeric vector of parameters (p, mu1, mu2, sigma1, sigma2)
