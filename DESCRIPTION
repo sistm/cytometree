@@ -32,5 +32,6 @@ Encoding: UTF-8
 Suggests:
     knitr,
     rmarkdown,
-    viridis
+    viridis,
+    testthat
 VignetteBuilder: knitr
