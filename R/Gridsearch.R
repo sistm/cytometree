@@ -1,4 +1,4 @@
-#' Cytgridsearch
+#' Gridsearch
 #' 
 #' @export
 #' 
@@ -6,9 +6,10 @@
 #' x <- c(rnorm(100,4,2), rnorm(200, -25, 0.1))
 #' resu_aic_1_gauss <- aic_1_gauss(x)
 #' resu_aic_2_gauss <- aic_2_gauss(x, init = c(0.5, 0, 0, 2, 2))
+#' res <- Gridsearch(x, resu_aic_1_gauss, resu_aic_2_gauss)
 
 
-CytGridsearch <- function(x, resu_aic_1_gauss, resu_aic_2_gauss, iter_max = 15,
+Gridsearch <- function(x, resu_aic_1_gauss, resu_aic_2_gauss, iter_max = 15,
                            ntry = 30){
   
   list_aic2 <- lapply(1:ntry, function(i){
