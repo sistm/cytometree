@@ -5,16 +5,14 @@
 #' @example 
 #' x <- c(rnorm(100,4,2), rnorm(200, -25, 0.1))
 #' resu_aic_1_gauss <- aic_1_gauss(x)
-#' resu_aic_2_gauss <- aic_2_gauss(x, init = c(0.5, 0, 0, 2, 2))
-#' res <- Gridsearch(x, resu_aic_1_gauss, resu_aic_2_gauss)
+#' res <- Gridsearch(x, resu_aic_1_gauss)
 
 
-Gridsearch <- function(x, resu_aic_1_gauss, resu_aic_2_gauss, iter_max = 15,
-                           ntry = 30){
+Gridsearch <- function(x, resu_aic_1_gauss, iter_max = 15, ntry = 30){
   
   list_aic2 <- lapply(1:ntry, function(i){
     
-    init_p <-0.5
+    init_p <- 0.5
     init_mu1 <- rnorm(1, resu_aic_1_gauss$mu, resu_aic_1_gauss$var_mu)
     init_mu2 <- rnorm(1, resu_aic_1_gauss$mu, resu_aic_1_gauss$var_mu)
     init_sigma1 <- rnorm(1, resu_aic_1_gauss$sigma, resu_aic_1_gauss$var_sigma)

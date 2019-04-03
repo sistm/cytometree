@@ -8,6 +8,8 @@
 BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE, 
                        force_first_markers = NULL){
   
+  #browser()
+  
   n <- nrow(M)
   p <- ncol(M)
   if(verbose){
@@ -45,17 +47,17 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
   }else{
     force_marker <- NULL
   }
-  CytEMRes <- CytEM(M, 1:n, minleaf, level, t, force_marker)
+  CytGridsearchRes <- CytGridsearch(M, 1:n, minleaf, level, t, force_marker)
   
-  if(is.null(CytEMRes$ind)){
+  if(is.null(CytGridsearchRes$ind)){
     if(verbose){
       utils::setTxtProgressBar(pb, p)
     }
     return(list("labels"= rep(1, n)))
   }
   
-  root_ind <- CytEMRes$ind[1]
-  mark_left <- c(CytEMRes$ind[-c(1)], CytEMRes$mark_not_dis)
+  root_ind <- CytGridsearchRes$ind[1]
+  mark_left <- c(CytGridsearchRes$ind[-c(1)], CytGridsearchRes$mark_not_dis)
   root[[level]] <- M[,root_ind]
   tree[[level]] <- root
   mark_tree[[level]] <- paste0(root_ind, ".", label_graph)
@@ -66,9 +68,9 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
   KDE <- stats::density(M[,root_ind], n = len_data_plot)
   GMM <- list()
   GMM$x <- KDE$x
-  GMM$y <-   GaussMix(GMM$x, CytEMRes$mu1, CytEMRes$mu2,
-                      sqrt(CytEMRes$Var1), sqrt(CytEMRes$Var2),
-                      CytEMRes$pi1, CytEMRes$pi2)
+  GMM$y <-   GaussMix(GMM$x, CytGridsearchRes$mu1, CytGridsearchRes$mu2,
+                      sqrt(CytGridsearchRes$Var1), sqrt(CytGridsearchRes$Var2),
+                      CytGridsearchRes$pi1, CytGridsearchRes$pi2)
   
   pl_list <- list()
   pl_list[["kde"]] <- list()
@@ -79,12 +81,12 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
   pl_list$nodes[[label_graph]] <- paste0(root_ind, ".", label_graph)
   pl_list$gmm[[label_graph]] <- GMM
   pl_list$legend[[label_graph]] <- paste(paste0("n", label_graph), "=", n, "D =",
-                                         round(CytEMRes$nAIC[1], 2), sep =" ")
+                                         round(CytGridsearchRes$nAIC[1], 2), sep =" ")
   
   if(!is.null(force_first_markers)){
     while(length(force_first_markers)>0){
       force_marker <- force_first_markers[1]
-      #CytEMRes <- CytEM(M, 1:n, minleaf, level, t, force_marker)
+      #CytGridsearchRes <- CytGridsearch(M, 1:n, minleaf, level, t, force_marker)
       
       #loop intialisation
       c_level <- level + 1
@@ -103,8 +105,8 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
         
         if(level==1){ #we are just after root
           flag_child <- TRUE
-          L_child <- CytEMRes$child$L
-          R_child <- CytEMRes$child$R
+          L_child <- CytGridsearchRes$child$L
+          R_child <- CytGridsearchRes$child$R
           combinations[L_child, root_ind] <- 0
           combinations[R_child, root_ind] <- 1
         }else{
@@ -124,9 +126,9 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
               )
             }
           }else{
-            CytEMRes <- CytEM(M[temp_node, mark_left, drop=FALSE], temp_node,
+            CytGridsearchRes <- CytGridsearch(M[temp_node, mark_left, drop=FALSE], temp_node,
                               minleaf, level, t, force_marker)
-            if(is.null(CytEMRes$ind)){
+            if(is.null(CytGridsearchRes$ind)){
               stopping_flag <- stopping_flag + 1
               labels[temp_node] <- label_counter
               mark_tree[[level]][[i]] <- as.character(label_counter)
@@ -139,14 +141,14 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
               }
             }else{
               label_graph <- label_graph + 1
-              ind <- CytEMRes$ind[1]
+              ind <- CytGridsearchRes$ind[1]
               mark_tree[[level]][[i]] <- paste0(ind, ".", label_graph)
-              temp_mar_res <- c(CytEMRes$ind[-1], CytEMRes$mark_not_dis)
+              temp_mar_res <- c(CytGridsearchRes$ind[-1], CytGridsearchRes$mark_not_dis)
               mark_left <- temp_mar_res
               flag_mark_left <- length(mark_left)
               flag_child <- 1
-              L_child <- CytEMRes$child$L
-              R_child <- CytEMRes$child$R
+              L_child <- CytGridsearchRes$child$L
+              R_child <- CytGridsearchRes$child$R
               combinations[L_child, ind] <- 0
               combinations[R_child, ind] <- 1
               
@@ -154,16 +156,16 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
               
               GMM <- list()
               GMM$x <- KDE$x
-              GMM$y <-   GaussMix(GMM$x, CytEMRes$mu1, CytEMRes$mu2,
-                                  sqrt(CytEMRes$Var1), sqrt(CytEMRes$Var2),
-                                  CytEMRes$pi1, CytEMRes$pi2)
+              GMM$y <-   GaussMix(GMM$x, CytGridsearchRes$mu1, CytGridsearchRes$mu2,
+                                  sqrt(CytGridsearchRes$Var1), sqrt(CytGridsearchRes$Var2),
+                                  CytGridsearchRes$pi1, CytGridsearchRes$pi2)
               
               pl_list$kde[[label_graph]] <- KDE
               pl_list$nodes[[label_graph]] <- paste0(ind, ".", label_graph)
               pl_list$gmm[[label_graph]] <- GMM
               pl_list$legend[[label_graph]] <- paste(paste0("n",label_graph), "=",
                                                      length(temp_node),"D =",
-                                                     round(CytEMRes$nAIC[1],2),
+                                                     round(CytGridsearchRes$nAIC[1],2),
                                                      sep =" ")
             }
           }
@@ -210,8 +212,8 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
       
       if(level==1){ #we are just after root
         flag_child <- TRUE
-        L_child <- CytEMRes$child$L
-        R_child <- CytEMRes$child$R
+        L_child <- CytGridsearchRes$child$L
+        R_child <- CytGridsearchRes$child$R
         #OK
         combinations[L_child, root_ind] <- 0
         combinations[R_child, root_ind] <- 1
@@ -234,9 +236,9 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
           }
         }else{
           
-          CytEMRes <- CytEM(M[temp_node, mark_left, drop=FALSE], temp_node,
+          CytGridsearchRes <- CytGridsearch(M[temp_node, mark_left, drop=FALSE], temp_node,
                             minleaf, level, t)
-          if(is.null(CytEMRes$ind)){
+          if(is.null(CytGridsearchRes$ind)){
             stopping_flag <- stopping_flag + 1
             labels[temp_node] <- label_counter
             mark_tree[[level]][[i]] <- as.character(label_counter)
@@ -249,13 +251,13 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
             }
           }else{
             label_graph <- label_graph + 1
-            ind <- CytEMRes$ind[1]
+            ind <- CytGridsearchRes$ind[1]
             mark_tree[[level]][[i]] <- paste0(ind, ".", label_graph)
-            mark_left <- c(CytEMRes$ind[-1], CytEMRes$mark_not_dis)
+            mark_left <- c(CytGridsearchRes$ind[-1], CytGridsearchRes$mark_not_dis)
             flag_mark_left <- length(mark_left)
             flag_child <- TRUE
-            L_child <- CytEMRes$child$L
-            R_child <- CytEMRes$child$R
+            L_child <- CytGridsearchRes$child$L
+            R_child <- CytGridsearchRes$child$R
             combinations[L_child, ind] <- 0
             combinations[R_child, ind] <- 1
             
@@ -263,16 +265,16 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
             
             GMM <- list()
             GMM$x <- KDE$x
-            GMM$y <-   GaussMix(GMM$x, CytEMRes$mu1, CytEMRes$mu2,
-                                sqrt(CytEMRes$Var1), sqrt(CytEMRes$Var2),
-                                CytEMRes$pi1, CytEMRes$pi2)
+            GMM$y <-   GaussMix(GMM$x, CytGridsearchRes$mu1, CytGridsearchRes$mu2,
+                                sqrt(CytGridsearchRes$Var1), sqrt(CytGridsearchRes$Var2),
+                                CytGridsearchRes$pi1, CytGridsearchRes$pi2)
             
             pl_list$kde[[label_graph]] <- KDE
             pl_list$nodes[[label_graph]] <- paste0(ind, ".", label_graph)
             pl_list$gmm[[label_graph]] <- GMM
             pl_list$legend[[label_graph]] <- paste(paste0("n",label_graph), "=",
                                                    length(temp_node),"D =",
-                                                   round(CytEMRes$nAIC[1],2),
+                                                   round(CytGridsearchRes$nAIC[1],2),
                                                    sep =" ")
           }
         }
