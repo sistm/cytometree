@@ -27,7 +27,7 @@ aic_3_gauss <- function(x, init, maxit=15){
     stop("init must be of length 8 \n(with the followoing parameters: p1, p2, mu1, mu2, m3, sigma1, sigma2, sigma3)")
   }
   
-  browser()
+  #browser()
   
   #globals
   n <- length(x)
