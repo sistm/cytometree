@@ -1,11 +1,11 @@
-#' Compute parameters and AIC from observations with mixture of 2 normal distribution
+#' MLE and AIC from mixture of 2 normally distributed observations
 #
 #' @author Boris Hejblum, Anthony Devaux
 #'
 #' @param x Numeric vector of observations
 #' @param init Numeric vector of parameters (p, mu1, mu2, sigma1, sigma2)
 #'
-#' @importFrom marqLevAlg marqLevAlg
+#' @importFrom marqLevAlg
 #' 
 #' @return List with AIC and parameters
 #' 
@@ -69,7 +69,7 @@ aic_2_gauss <- function(x, init, maxit=15){
     "mu2" = mu2_opt,
     "s1" = s1_opt,
     "s2" = s2_opt,
-    "AIC" = 2*resu$fn.value + 2*5,
+    "AIC" = AIC_opt,
     "cluster" = indiv_clustering
   ))
   

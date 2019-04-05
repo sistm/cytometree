@@ -19,6 +19,9 @@
 #'and forcing the split at every node. Default is \code{NULL}, in which case
 #'the clustering algorithm is unsupervised.
 #'
+#'@param cytof A logical controlling if data gather from mass cytometry. Defaut is \code{FALSE}, 
+#'in which case the data gather from flow cytometry.
+#'
 #'@return An object of class 'cytomeTree' providing a partitioning
 #'of the set of n cells.
 #'\itemize{
@@ -135,7 +138,7 @@
 #'
 #'}
 
-CytomeTree <- function(M, minleaf = 1, t = .1, verbose = TRUE, force_first_markers = NULL){
+CytomeTree <- function(M, minleaf = 1, t = .1, verbose = TRUE, force_first_markers = NULL, cytof = FALSE){
   if(class(M) == "data.frame"){
     M <- as.matrix(M)
   }
@@ -168,7 +171,7 @@ CytomeTree <- function(M, minleaf = 1, t = .1, verbose = TRUE, force_first_marke
     }
   }
   
-  BT <- BinaryTree(M, floor(minleaf), t, verbose, force_first_markers)
+  BT <- BinaryTree(M, floor(minleaf), t, verbose, force_first_markers, cytof)
   annotation <- TreeAnnot(BT$labels, BT$combinations)
   Tree <- list("M" = M, "labels" = BT$labels,
                "pl_list"= BT$pl_list, "t"= t,

@@ -27,8 +27,8 @@ aic_1_gauss <- function(x){
   mu_mle <- mean(x)
   sigma2_mle <- mean((x - mu_mle)^2)
   
-  var_mu_FisherInfo <- sigma2_mle / n
-  var_sigma_FisherInfo <- 2 * sigma2_mle^2 / n
+  var_mu_FisherInfo <- n / sigma2_mle
+  var_sigma_FisherInfo <- n / (2 * sigma2_mle^2)
   
   log_likelihood <- - sum((x-mu_mle)^2) / (2*sigma2_mle) - n/2*log(2*pi*sigma2_mle)
   

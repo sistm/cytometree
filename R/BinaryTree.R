@@ -6,7 +6,7 @@
 #' @importFrom utils flush.console setTxtProgressBar txtProgressBar
 
 BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE, 
-                       force_first_markers = NULL){
+                       force_first_markers = NULL, cytof = FALSE){
   
   #browser()
   
@@ -26,6 +26,8 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
   col_names <- colnames(M)
   colnames(combinations) <- col_names
   
+  rownames(M) <- 1:n
+  rownames(combinations) <- rownames(M)
   
   root <- list()
   tree <- list()
@@ -47,7 +49,7 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
   }else{
     force_marker <- NULL
   }
-  CytGridsearchRes <- CytGridsearch(M, 1:n, minleaf, level, t, force_marker)
+  CytGridsearchRes <- CytGridsearch(M, 1:n, minleaf, level, t, force_marker, cytof)
   
   if(is.null(CytGridsearchRes$ind)){
     if(verbose){
@@ -86,7 +88,7 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
   if(!is.null(force_first_markers)){
     while(length(force_first_markers)>0){
       force_marker <- force_first_markers[1]
-      #CytGridsearchRes <- CytGridsearch(M, 1:n, minleaf, level, t, force_marker)
+      #CytGridsearchRes <- CytGridsearch(M, 1:n, minleaf, level, t, force_marker, cytof)
       
       #loop intialisation
       c_level <- level + 1
@@ -127,7 +129,7 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
             }
           }else{
             CytGridsearchRes <- CytGridsearch(M[temp_node, mark_left, drop=FALSE], temp_node,
-                              minleaf, level, t, force_marker)
+                              minleaf, level, t, force_marker, cytof)
             if(is.null(CytGridsearchRes$ind)){
               stopping_flag <- stopping_flag + 1
               labels[temp_node] <- label_counter
@@ -237,7 +239,7 @@ BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
         }else{
           
           CytGridsearchRes <- CytGridsearch(M[temp_node, mark_left, drop=FALSE], temp_node,
-                            minleaf, level, t)
+                            minleaf, level, t, force_marker = NULL, cytof)
           if(is.null(CytGridsearchRes$ind)){
             stopping_flag <- stopping_flag + 1
             labels[temp_node] <- label_counter
