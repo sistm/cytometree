@@ -5,7 +5,7 @@
 #' @param x Numeric vector of observations
 #' @param init Numeric vector of parameters (p, mu1, mu2, sigma1, sigma2)
 #'
-#' @importFrom marqLevAlg
+#' @import marqLevAlg
 #' 
 #' @return List with AIC and parameters
 #' 
@@ -16,7 +16,7 @@
 #' aic_2_gauss(xx, init = c(0.5, 0, 0, 2, 2))
 #'
 
-aic_2_gauss <- function(x, init, maxit=15){
+aic_2_gauss <- function(x, init, maxit = 15){
   
   if (class(x)!="numeric" & class(x)!="integer"){
     stop("data vector must be numeric !")
@@ -29,18 +29,18 @@ aic_2_gauss <- function(x, init, maxit=15){
 
   #globals
   n <- length(x)
-  init[1] <- init[1]/(1 - init[1])
+  init[1] <- logit(init[1])
   
   mloglik_2gauss <- function(b){
     
-    p <- 1/(1 + exp(b[1]))
+    p <- expit(b[1])
     mu1 <- b[2]
     mu2 <- b[3]
     s1 <- sqrt(b[4]^2)
     s2 <- sqrt(b[5]^2)
     
     indiv_ll <- sapply(x, function(y){
-      log(p * exp(-(y-mu1)^2/(2*s1^2))/(s1 * sqrt(2 * pi)) + (1-p) * exp(-(y-mu2)^2/s2^2)/(s2 * sqrt(2 * pi)))
+      log(p * exp(-(y-mu1)^2/(2*s1^2))/(s1 * sqrt(2 * pi)) + (1-p) * exp(-(y-mu2)^2/(2*s2^2))/(s2 * sqrt(2 * pi)))
     })
     return(-sum(indiv_ll))
     
@@ -48,7 +48,7 @@ aic_2_gauss <- function(x, init, maxit=15){
   
   resu <- marqLevAlg(b = init, fn = mloglik_2gauss, maxiter = maxit)
   
-  p_opt <- 1/(1 + exp(resu$b[1]))
+  p_opt <- expit(resu$b[1])
   mu1_opt <- resu$b[2]
   mu2_opt <- resu$b[3]
   s1_opt <- sqrt(resu$b[4]^2)

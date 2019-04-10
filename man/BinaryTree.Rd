@@ -5,7 +5,7 @@
 \title{Builds a binary tree.}
 \usage{
 BinaryTree(M, minleaf = 1, t = 0.1, verbose = TRUE,
-  force_first_markers = NULL)
+  force_first_markers = NULL, cytof = FALSE)
 }
 \description{
 Builds a binary tree.

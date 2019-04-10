@@ -2,7 +2,7 @@
 #' 
 #' @export
 #' 
-#' @example 
+#' @examples
 #' x <- c(rnorm(100,4,2), rnorm(200, -25, 0.1))
 #' resu_aic_1_gauss <- aic_1_gauss(x)
 #' res <- Gridsearch(x, resu_aic_1_gauss)

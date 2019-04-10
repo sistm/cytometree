@@ -2,7 +2,7 @@
 % Please edit documentation in R/AIC_2_Gauss.R
 \name{aic_2_gauss}
 \alias{aic_2_gauss}
-\title{Compute parameters and AIC from observations with mixture of 2 normal distribution}
+\title{MLE and AIC from mixture of 2 normally distributed observations}
 \usage{
 aic_2_gauss(x, init, maxit = 15)
 }
@@ -15,7 +15,7 @@ aic_2_gauss(x, init, maxit = 15)
 List with AIC and parameters
 }
 \description{
-Compute parameters and AIC from observations with mixture of 2 normal distribution
+MLE and AIC from mixture of 2 normally distributed observations
 }
 \examples{
 xx <- c(rnorm(100,4,2), rnorm(200, -25, 0.1))

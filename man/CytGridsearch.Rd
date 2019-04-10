@@ -2,11 +2,11 @@
 % Please edit documentation in R/CytGridsearch.R
 \name{CytGridsearch}
 \alias{CytGridsearch}
-\title{Cytgridsearch}
+\title{Gridsearch}
 \usage{
-CytGridsearch(x, resu_aic_1_gauss, resu_aic_2_gauss, iter_max = 15,
-  ntry = 30)
+CytGridsearch(M, indices, minleaf, level, t, force_marker = NULL,
+  cytof = FALSE)
 }
 \description{
-Cytgridsearch
+Gridsearch
 }

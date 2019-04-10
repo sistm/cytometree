@@ -5,18 +5,19 @@
 #' @param x Numeric vector of observations
 #' @param init Numeric vector of parameters (p, mu1, mu2, sigma1, sigma2)
 #'
-#' @importFrom marqLevAlg
+#' @import marqLevAlg
 #' 
 #' @return List with AIC and parameters
 #' 
 #' @export
 #' 
 #' @examples
-#' xx <- c(rnorm(100,4,2), rnorm(200, -25, 0.1), rnorm(50, 30, 4))
-#' aic_3_gauss(xx, init = c(0.3, 0.5, 0, 0, 0, 2, 2, 2))
+#' xx <- c(rnorm(1000,4,2), rnorm(2000, -25, 0.1), rnorm(500, 30, 4))
+#' 100/350; 200/350; 50/350
+#' aic_3_gauss(xx, init = c(0.3, 0.3, 0, -10, 10, 2, 2, 2), maxit=50)
 #'
 
-aic_3_gauss <- function(x, init, maxit=15){
+aic_3_gauss <- function(x, init, maxit = 15){
   
   if (class(x)!="numeric" & class(x)!="integer"){
     stop("data vector must be numeric !")
@@ -26,18 +27,22 @@ aic_3_gauss <- function(x, init, maxit=15){
   }else if (length(init)!=8){
     stop("init must be of length 8 \n(with the followoing parameters: p1, p2, mu1, mu2, m3, sigma1, sigma2, sigma3)")
   }
+  if(init[1]>1 | init[1]<0 | init[2]>1 | init[2]<0 | (init[1] + init[2])>1 | (init[1] + init[2])<0){
+    stop(" first 2 parameters arte probabilities that must be in [0;1] and sum under 1")
+  }
   
   #browser()
   
   #globals
   n <- length(x)
-  init[1] <- init[1]/(1 - init[1])
-  init[2] <- init[2]/(1 - init[2])
+  init[1] <- logit(init[1])
+  init[2] <- logit(init[2])
   
   mloglik_3gauss <- function(b){
     
-    p1 <- 1/(1 + exp(b[1]))
-    p2 <- 1/(1 + exp(b[2]))
+    p1 <- expit(b[1])
+    p2 <- expit(b[2])*(1-p1)
+    p3 <- 1- p1 - p2
     mu1 <- b[3]
     mu2 <- b[4]
     mu3 <- b[5]
@@ -47,8 +52,9 @@ aic_3_gauss <- function(x, init, maxit=15){
     
     indiv_ll <- sapply(x, function(y){
       log(p1 * exp(-(y-mu1)^2/(2*s1^2))/(s1 * sqrt(2 * pi)) + 
-            (p2 * exp(-(y-mu2)^2/s2^2)/(s2 * sqrt(2 * pi))) +
-            ((1 - (p1+p2)) * exp(-(y-mu3)^2/s3^2)/(s3 * sqrt(2 * pi))))
+          p2 * exp(-(y-mu2)^2/(2*s2^2))/(s2 * sqrt(2 * pi))  +
+          (1 - p1 - p2) * exp(-(y-mu3)^2/(2*s3^2))/(s3 * sqrt(2 * pi))
+      )
     })
     return(-sum(indiv_ll))
     
@@ -56,8 +62,9 @@ aic_3_gauss <- function(x, init, maxit=15){
   
   resu <- marqLevAlg(b = init, fn = mloglik_3gauss, maxiter = maxit)
   
-  p1_opt <- 1/(1 + exp(resu$b[1]))
-  p2_opt <- 1/(1 + exp(resu$b[2]))
+  p1_opt <- expit(resu$b[1])
+  p2_opt <- expit(resu$b[2])*(1 - p1_opt)
+  p3_opt <- 1 - p1_opt - p2_opt
   mu1_opt <- resu$b[3]
   mu2_opt <- resu$b[4]
   mu3_opt <- resu$b[5]
@@ -80,6 +87,7 @@ aic_3_gauss <- function(x, init, maxit=15){
   return(list(
     "p1" = p1_opt,
     "p2" = p2_opt,
+    "p3" = p3_opt,
     "mu1" = mu1_opt,
     "mu2" = mu2_opt,
     "mu3" = mu3_opt,

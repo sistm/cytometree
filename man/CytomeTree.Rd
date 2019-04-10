@@ -5,7 +5,7 @@
 \title{Binary tree algorithm for cytometry data analysis.}
 \usage{
 CytomeTree(M, minleaf = 1, t = 0.1, verbose = TRUE,
-  force_first_markers = NULL)
+  force_first_markers = NULL, cytof = FALSE)
 }
 \arguments{
 \item{M}{A matrix of size n x p containing cytometry measures
@@ -26,6 +26,9 @@ This argument is used in the semi-supervised setting, forcing the algorithm to c
 those markers first, in the order they appear in this \code{force_first_markers} vector, 
 and forcing the split at every node. Default is \code{NULL}, in which case
 the clustering algorithm is unsupervised.}
+
+\item{cytof}{A logical controlling if data gather from mass cytometry. Defaut is \code{FALSE}, 
+in which case the data gather from flow cytometry.}
 }
 \value{
 An object of class 'cytomeTree' providing a partitioning
