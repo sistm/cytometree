@@ -18,7 +18,7 @@
 
 aic_3_gauss <- function(x, init, maxit=15){
   
-  if (class(x)!="numeric"){
+  if (class(x)!="numeric" & class(x)!="integer"){
     stop("data vector must be numeric !")
   }
   if (class(init)!="numeric"){

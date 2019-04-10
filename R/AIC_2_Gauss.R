@@ -18,7 +18,7 @@
 
 aic_2_gauss <- function(x, init, maxit=15){
   
-  if (class(x)!="numeric"){
+  if (class(x)!="numeric" & class(x)!="integer"){
     stop("data vector must be numeric !")
   }
   if (class(init)!="numeric"){
@@ -26,7 +26,7 @@ aic_2_gauss <- function(x, init, maxit=15){
   }else if (length(init)!=5){
     stop("init must be of length 5 \n(with the followoing parameters: p, mu1, mu2, sigma1, sigma2)")
   }
-  
+
   #globals
   n <- length(x)
   init[1] <- init[1]/(1 - init[1])
