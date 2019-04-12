@@ -13,20 +13,33 @@
 #' 
 #' @examples
 #' xx <- c(rnorm(100,4,2), rnorm(200, -25, 0.1))
-#' aic_2_gauss(xx, init = c(0.5, 0, 0, 2, 2))
+#' aic_2_gauss(xx, init = c(0.5, 0, -5, 2, 1))
 #'
 
 aic_2_gauss <- function(x, init, maxit = 15){
-  
+    
   if (class(x)!="numeric" & class(x)!="integer"){
     stop("data vector must be numeric !")
   }
-  if (class(init)!="numeric"){
-    stop("init vector must be numeric !")
-  }else if (length(init)!=5){
-    stop("init must be of length 5 \n(with the followoing parameters: p, mu1, mu2, sigma1, sigma2)")
-  }
-
+  if (init=="kmeans"){
+   
+    kmeans_resu <- kmeans(x = x, centers = 2)
+    p <- kmeans_resu$size[1]/length(x)
+    m1 <- kmeans_resu$centers[1]
+    m2 <- kmeans_resu$centers[2]
+    s1 <- sd(x[kmeans_resu$cluster==1])
+    s2 <- sd(x[kmeans_resu$cluster==2])
+    
+    init <- c(p,m1,m2,s1,s2)
+    
+  }else{
+    if (class(init)!="numeric"){
+      stop("init vector must be numeric !")
+    }else if (length(init)!=5){
+      stop("init must be of length 5 \n(with the followoing parameters: p, mu1, mu2, sigma1, sigma2)")
+    }
+  } 
+  
   #globals
   n <- length(x)
   init[1] <- logit(init[1])

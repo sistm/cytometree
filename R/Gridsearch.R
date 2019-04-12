@@ -20,9 +20,10 @@ Gridsearch <- function(x, resu_aic_1_gauss, iter_max = 15, ntry = 30, mixture = 
       init_mu2 <- rnorm(1, resu_aic_1_gauss$mu, resu_aic_1_gauss$var_mu)
       init_sigma1 <- rnorm(1, resu_aic_1_gauss$sigma, resu_aic_1_gauss$var_sigma)
       init_sigma2 <- rnorm(1, resu_aic_1_gauss$mu, resu_aic_1_gauss$var_mu)
-      return(aic_2_gauss(x, init = c(init_p, 
-                                     init_mu1, init_mu2,
-                                     init_sigma1, init_sigma2), maxit = iter_max))
+      #return(aic_2_gauss(x, c(init_p, 
+      #                        init_mu1, init_mu2,
+      #                        init_sigma1, init_sigma2), maxit = iter_max))
+      return(aic_2_gauss(x, init = "kmeans"))
     })
   }else if (mixture == 3){
     list_aic <- lapply(1:ntry, function(i){

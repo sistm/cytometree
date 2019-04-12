@@ -22,13 +22,29 @@ aic_3_gauss <- function(x, init, maxit = 15){
   if (class(x)!="numeric" & class(x)!="integer"){
     stop("data vector must be numeric !")
   }
-  if (class(init)!="numeric"){
-    stop("init vector must be numeric !")
-  }else if (length(init)!=8){
-    stop("init must be of length 8 \n(with the followoing parameters: p1, p2, mu1, mu2, m3, sigma1, sigma2, sigma3)")
-  }
-  if(init[1]>1 | init[1]<0 | init[2]>1 | init[2]<0 | (init[1] + init[2])>1 | (init[1] + init[2])<0){
-    stop(" first 2 parameters arte probabilities that must be in [0;1] and sum under 1")
+  if (init == "kmeans"){
+    
+    kmeans_resu <- kmeans(x = x, centers = 3)
+    p1 <- kmeans_resu$size[1]/length(x)
+    p2 <- kmeans_resu$size[2]/length(x)
+    m1 <- kmeans_resu$centers[1]
+    m2 <- kmeans_resu$centers[2]
+    m3 <- kmeans_resu$centers[3]
+    s1 <- sd(x[kmeans_resu$cluster==1])
+    s2 <- sd(x[kmeans_resu$cluster==2])
+    s3 <- sd(x[kmeans_resu$cluster==3])
+    
+    init <- c(p1,p2,m1,m2,m3,s1,s2,s3)
+    
+  }else{
+    if (class(init)!="numeric"){
+      stop("init vector must be numeric !")
+    }else if (length(init)!=8){
+      stop("init must be of length 8 \n(with the followoing parameters: p1, p2, mu1, mu2, m3, sigma1, sigma2, sigma3)")
+    }
+    if(init[1]>1 | init[1]<0 | init[2]>1 | init[2]<0 | (init[1] + init[2])>1 | (init[1] + init[2])<0){
+      stop(" first 2 parameters arte probabilities that must be in [0;1] and sum under 1")
+    }
   }
   
   #browser()
