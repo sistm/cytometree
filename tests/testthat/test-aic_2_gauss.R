@@ -11,3 +11,10 @@ test_that("AIC is correct", {
                  ) + 2*5)
 })
 
+test_that("approximation is correct", {
+  expect_equal(res$AIC,
+               -2*sum(log(1/3 * exp(-(x-4)^2/(2*2^2))/(2 * sqrt(2 * pi)) + 
+                            2/3 * exp(-(x--25)^2/(2*0.1^2))/(0.1 * sqrt(2 * pi)))) + 2*5,
+               tolerance = 0.01
+  )
+})

@@ -12,3 +12,12 @@ test_that("AIC is correct", {
                        res$p3 * exp(-(x-res$mu3)^2/(2*res$s3^2))/(res$s3 * sqrt(2 * pi)))
                ) + 2*8)
 })
+
+test_that("approximation is correct", {
+  expect_equal(res$AIC,
+               -2*sum(log(1/10 * exp(-(x-4)^2/(2*2^2))/(2 * sqrt(2 * pi)) + 
+                            6/10 * exp(-(x--25)^2/(2*0.1^2))/(0.1 * sqrt(2 * pi))  +
+                            3/10 * exp(-(x-30)^2/(2*4^2))/(4 * sqrt(2 * pi)))) + 2*8,
+               tolerance = 0.01
+  )
+})
