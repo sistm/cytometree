@@ -8,7 +8,8 @@
 #' res <- Gridsearch(x, resu_aic_1_gauss)
 
 
-Gridsearch <- function(x, resu_aic_1_gauss, iter_max = 15, ntry = 30, mixture = 2){
+Gridsearch <- function(x, resu_aic_1_gauss, iter_max = 15, ntry = 30, ncore = 1,
+                       mixture = 2){
 
   #browser()
     
@@ -23,7 +24,7 @@ Gridsearch <- function(x, resu_aic_1_gauss, iter_max = 15, ntry = 30, mixture = 
       #return(aic_2_gauss(x, c(init_p, 
       #                        init_mu1, init_mu2,
       #                        init_sigma1, init_sigma2), maxit = iter_max))
-      return(aic_2_gauss(x, init = "kmeans"))
+      return(aic_2_gauss(x, init = "kmeans", maxit = iter_max, ncore = ncore))
     })
   }else if (mixture == 3){
     list_aic <- lapply(1:ntry, function(i){
@@ -38,7 +39,8 @@ Gridsearch <- function(x, resu_aic_1_gauss, iter_max = 15, ntry = 30, mixture = 
       init_sigma3 <- rnorm(1, resu_aic_1_gauss$mu, resu_aic_1_gauss$var_mu)
       return(aic_3_gauss(x, init = c(init_p1, init_p2, 
                                      init_mu1, init_mu2, init_mu3,
-                                     init_sigma1, init_sigma2, init_sigma3), maxit = iter_max))
+                                     init_sigma1, init_sigma2, init_sigma3), maxit = iter_max,
+                         ncore = ncore))
     })
   }
   

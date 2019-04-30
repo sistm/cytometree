@@ -5,19 +5,19 @@
 #' @param x Numeric vector of observations
 #' @param init Numeric vector of parameters (p, mu1, mu2, sigma1, sigma2)
 #'
-#' @import marqLevAlg
+#' @import marqLevAlgParallel
 #' 
 #' @return List with AIC and parameters
 #' 
 #' @export
 #' 
 #' @examples
-#' xx <- c(rnorm(1000,4,2), rnorm(2000, -25, 0.1), rnorm(500, 30, 4))
-#' 100/350; 200/350; 50/350
-#' aic_3_gauss(xx, init = c(0.3, 0.3, 0, -10, 10, 2, 2, 2), maxit=50)
+#' x <- c(rnorm(100,4,2), rnorm(600, -25, 0.1), rnorm(300, 30, 4))
+#' res <- aic_3_gauss(x, init = "kmeans", maxit = 100)
+#' res <- aic_3_gauss(x, init = c(0.3, 0.3, 0, -10, 10, 2, 2, 2), maxit = 100)
 #'
 
-aic_3_gauss <- function(x, init, maxit = 15){
+aic_3_gauss <- function(x, init, maxit = 15, ncore = 1){
   
   if (class(x)!="numeric" & class(x)!="integer"){
     stop("data vector must be numeric !")
@@ -47,8 +47,6 @@ aic_3_gauss <- function(x, init, maxit = 15){
     }
   }
   
-  #browser()
-  
   #globals
   n <- length(x)
   init[1] <- logit(init[1])
@@ -72,11 +70,12 @@ aic_3_gauss <- function(x, init, maxit = 15){
           (1 - p1 - p2) * exp(-(y-mu3)^2/(2*s3^2))/(s3 * sqrt(2 * pi))
       )
     })
-    return(-sum(indiv_ll))
+    return(sum(indiv_ll))
     
   }
   
-  resu <- marqLevAlg(b = init, fn = mloglik_3gauss, maxiter = maxit)
+  resu <- marqLevAlgParallel::marqLevAlg(b = init, fn = mloglik_3gauss, maxiter = maxit,
+                                         nproc = ncore, minimize = FALSE)
   
   p1_opt <- expit(resu$b[1])
   p2_opt <- expit(resu$b[2])*(1 - p1_opt)

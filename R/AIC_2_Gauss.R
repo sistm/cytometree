@@ -5,7 +5,7 @@
 #' @param x Numeric vector of observations
 #' @param init Numeric vector of parameters (p, mu1, mu2, sigma1, sigma2)
 #'
-#' @import marqLevAlg
+#' @import marqLevAlgParallel
 #' 
 #' @return List with AIC and parameters
 #' 
@@ -13,10 +13,13 @@
 #' 
 #' @examples
 #' xx <- c(rnorm(100,4,2), rnorm(200, -25, 0.1))
+#' aic_2_gauss(xx, init = "kmeans")
 #' aic_2_gauss(xx, init = c(0.5, 0, -5, 2, 1))
 #'
 
-aic_2_gauss <- function(x, init, maxit = 15){
+aic_2_gauss <- function(x, init, maxit = 15, ncore = 1){
+  
+  browser()
     
   if (class(x)!="numeric" & class(x)!="integer"){
     stop("data vector must be numeric !")
@@ -55,11 +58,12 @@ aic_2_gauss <- function(x, init, maxit = 15){
     indiv_ll <- sapply(x, function(y){
       log(p * exp(-(y-mu1)^2/(2*s1^2))/(s1 * sqrt(2 * pi)) + (1-p) * exp(-(y-mu2)^2/(2*s2^2))/(s2 * sqrt(2 * pi)))
     })
-    return(-sum(indiv_ll))
+    return(sum(indiv_ll))
     
   }
   
-  resu <- marqLevAlg(b = init, fn = mloglik_2gauss, maxiter = maxit)
+  resu <- marqLevAlgParallel::marqLevAlg(b = init, fn = mloglik_2gauss, maxiter = maxit,
+                                         nproc = ncore, minimize = FALSE)
   
   p_opt <- expit(resu$b[1])
   mu1_opt <- resu$b[2]
