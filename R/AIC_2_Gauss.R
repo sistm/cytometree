@@ -62,6 +62,32 @@ aic_2_gauss <- function(x, init, maxit = 15, ncore = 1){
     
   }
   
+  deriv_p_llh_2gauss <- function(b){
+    
+  }
+  
+  deriv_mu1_llh_2gauss <- function(b){
+    
+  }
+  
+  deriv_mu2_llh_2gauss <- function(b){
+    
+  }
+  
+  deriv_sigma1_llh_2gauss <- function(b){
+    
+  }
+  
+  deriv_sigma2_llh_2gauss <- function(b){
+    
+  }
+  
+  gradient <- c(deriv_p_llh_2gauss,
+                deriv_mu1_llh_2gauss,
+                deriv_mu2_llh_2gauss,
+                deriv_sigma1_llh_2gauss,
+                deriv_sigma2_llh_2gauss)
+  
   resu <- marqLevAlgParallel::marqLevAlg(b = init, fn = mloglik_2gauss, maxiter = maxit,
                                          nproc = ncore, minimize = FALSE)
   
