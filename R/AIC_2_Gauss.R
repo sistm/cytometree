@@ -18,8 +18,6 @@
 #'
 
 aic_2_gauss <- function(x, init, maxit = 15, ncore = 1){
-  
-  browser()
     
   if (class(x)!="numeric" & class(x)!="integer"){
     stop("data vector must be numeric !")
@@ -63,7 +61,16 @@ aic_2_gauss <- function(x, init, maxit = 15, ncore = 1){
   }
   
   deriv_p_llh_2gauss <- function(b){
+    p <- expit(b[1])
+    mu1 <- b[2]
+    mu2 <- b[3]
+    s1 <- sqrt(b[4]^2)
+    s2 <- sqrt(b[5]^2)
     
+    indiv_deriva_p <- sapply(x, function(y){
+      exp(-(y-mu1)^2/(2*s1^2))/(s1 * sqrt(2 * pi)) - exp(-(y-mu2)^2/(2*s2^2))/(s2 * sqrt(2 * pi))
+    })
+    return(sum(indiv_deriva_p))
   }
   
   deriv_mu1_llh_2gauss <- function(b){
@@ -82,11 +89,11 @@ aic_2_gauss <- function(x, init, maxit = 15, ncore = 1){
     
   }
   
-  gradient <- c(deriv_p_llh_2gauss,
-                deriv_mu1_llh_2gauss,
-                deriv_mu2_llh_2gauss,
-                deriv_sigma1_llh_2gauss,
-                deriv_sigma2_llh_2gauss)
+  gradient <- c(deriv_p_llh_2gauss(init),
+                deriv_mu1_llh_2gauss(init),
+                deriv_mu2_llh_2gauss(init),
+                deriv_sigma1_llh_2gauss(init),
+                deriv_sigma2_llh_2gauss(init))
   
   resu <- marqLevAlgParallel::marqLevAlg(b = init, fn = mloglik_2gauss, maxiter = maxit,
                                          nproc = ncore, minimize = FALSE)
