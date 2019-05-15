@@ -68,34 +68,84 @@ aic_2_gauss <- function(x, init, maxit = 15, ncore = 1){
     s2 <- sqrt(b[5]^2)
     
     indiv_deriva_p <- sapply(x, function(y){
-      exp(-(y-mu1)^2/(2*s1^2))/(s1 * sqrt(2 * pi)) - exp(-(y-mu2)^2/(2*s2^2))/(s2 * sqrt(2 * pi))
+      num <- exp(-(y-mu1)^2/(2*s1^2))/(s1 * sqrt(2 * pi)) - exp(-(y-mu2)^2/(2*s2^2))/(s2 * sqrt(2 * pi))
+      den <- p*exp(-(y-mu1)^2/(2*s1^2))/(s1 * sqrt(2 * pi)) + (1 - p)*exp(-(y-mu2)^2/(2*s2^2))/(s2 * sqrt(2 * pi))
+      return(num/den)
     })
     return(sum(indiv_deriva_p))
   }
   
   deriv_mu1_llh_2gauss <- function(b){
+    p <- expit(b[1])
+    mu1 <- b[2]
+    mu2 <- b[3]
+    s1 <- sqrt(b[4]^2)
+    s2 <- sqrt(b[5]^2)
     
+    indiv_deriva_mu1 <- sapply(x, function(y){
+      num <- p*((y-mu1)/s1^2)*exp(-(y-mu1)^2/(2*s1^2))/(s1 * sqrt(2 * pi))
+      den <- p*exp(-(y-mu1)^2/(2*s1^2))/(s1 * sqrt(2 * pi)) + (1 - p)*exp(-(y-mu2)^2/(2*s2^2))/(s2 * sqrt(2 * pi))
+      return(num/den)
+    })
+    return(sum(indiv_deriva_mu1))
   }
   
   deriv_mu2_llh_2gauss <- function(b){
+    p <- expit(b[1])
+    mu1 <- b[2]
+    mu2 <- b[3]
+    s1 <- sqrt(b[4]^2)
+    s2 <- sqrt(b[5]^2)
     
+    indiv_deriva_mu2 <- sapply(x, function(y){
+      num <- (1-p)*((y-mu2)/s2^2)*exp(-(y-mu2)^2/(2*s2^2))/(s2 * sqrt(2 * pi))
+      den <- p*exp(-(y-mu1)^2/(2*s1^2))/(s1 * sqrt(2 * pi)) + (1 - p)*exp(-(y-mu2)^2/(2*s2^2))/(s2 * sqrt(2 * pi))
+      return(num/den)
+    })
+    return(sum(indiv_deriva_mu2))    
   }
   
   deriv_sigma1_llh_2gauss <- function(b){
+    p <- expit(b[1])
+    mu1 <- b[2]
+    mu2 <- b[3]
+    s1 <- sqrt(b[4]^2)
+    s2 <- sqrt(b[5]^2)
     
+    indiv_deriva_sigma1 <- sapply(x, function(y){
+      num <- (p/sqrt(2*pi)) * ((((y-mu1)^2)*exp(-(y-mu1)^2/(2*s1^2))/s1^4) - (exp(-(y-mu1)^2/(2*s1^2)))/s1^2)
+      den <- p*exp(-(y-mu1)^2/(2*s1^2))/(s1 * sqrt(2 * pi)) + (1 - p)*exp(-(y-mu2)^2/(2*s2^2))/(s2 * sqrt(2 * pi))
+      return(num/den)
+    })
+    return(sum(indiv_deriva_sigma1))     
   }
   
   deriv_sigma2_llh_2gauss <- function(b){
+    p <- expit(b[1])
+    mu1 <- b[2]
+    mu2 <- b[3]
+    s1 <- sqrt(b[4]^2)
+    s2 <- sqrt(b[5]^2)
     
+    indiv_deriva_sigma2 <- sapply(x, function(y){
+      num <- ((1-p)/sqrt(2*pi)) * ((((y-mu2)^2)*exp(-(y-mu2)^2/(2*s2^2))/s2^4) - (exp(-(y-mu2)^2/(2*s2^2)))/s2^2)
+      den <- p*exp(-(y-mu1)^2/(2*s1^2))/(s1 * sqrt(2 * pi)) + (1 - p)*exp(-(y-mu2)^2/(2*s2^2))/(s2 * sqrt(2 * pi))
+      return(num/den)
+    })
+    return(sum(indiv_deriva_sigma2))     
   }
   
-  gradient <- c(deriv_p_llh_2gauss(init),
-                deriv_mu1_llh_2gauss(init),
-                deriv_mu2_llh_2gauss(init),
-                deriv_sigma1_llh_2gauss(init),
-                deriv_sigma2_llh_2gauss(init))
+  gradient_llh_2gauss <- function(b){
+    return(c(deriv_p_llh_2gauss(b),
+      deriv_mu1_llh_2gauss(b),
+      deriv_mu2_llh_2gauss(b),
+      deriv_sigma1_llh_2gauss(b),
+      deriv_sigma2_llh_2gauss(b)))
+  }
   
-  resu <- marqLevAlgParallel::marqLevAlg(b = init, fn = mloglik_2gauss, maxiter = maxit,
+  resu <- marqLevAlgParallel::marqLevAlg(b = init, fn = mloglik_2gauss, 
+                                         gr = gradient_llh_2gauss,
+                                         maxiter = maxit,
                                          nproc = ncore, minimize = FALSE)
   
   p_opt <- expit(resu$b[1])

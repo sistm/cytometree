@@ -49,7 +49,7 @@ CytGridsearch <- function(M, indices, minleaf, level, t, force_marker = NULL, cy
         
         res1_MLE <- aic_1_gauss(x = M_j[ind_no_zero])
         res2_MLE <- Gridsearch(x = M_j[ind_no_zero], resu_aic_1_gauss = res1_MLE, 
-                               iter_max = 100, ntry = 15, mixture = 2)
+                               iter_max = 15, ntry = 30, mixture = 2)
         
         aic_n <- (res1_MLE$AIC - res2_MLE$AIC)/n_j
         
@@ -132,7 +132,7 @@ CytGridsearch <- function(M, indices, minleaf, level, t, force_marker = NULL, cy
         
         res1_MLE <- aic_1_gauss(x = M_j)
         res2_MLE <- Gridsearch(x = M_j, resu_aic_1_gauss = res1_MLE, 
-                               iter_max = 100, ntry = 15, mixture = 2)
+                               iter_max = 15, ntry = 30, mixture = 2)
         
         aic_n <- (res1_MLE$AIC - res2_MLE$AIC)/n_j
         
@@ -213,7 +213,7 @@ CytGridsearch <- function(M, indices, minleaf, level, t, force_marker = NULL, cy
         
         res1_MLE <- aic_1_gauss(x = M_j[ind_no_zero])
         res2_MLE <- Gridsearch(x = M_j[ind_no_zero], resu_aic_1_gauss = res1_MLE, 
-                               iter_max = 100, ntry = 15, mixture = 2)
+                               iter_max = 15, ntry = 30, mixture = 2)
         
         aic_n <- (res1_MLE$AIC - res2_MLE$AIC)/n_j
         
@@ -279,7 +279,7 @@ CytGridsearch <- function(M, indices, minleaf, level, t, force_marker = NULL, cy
       
       res1_MLE <- aic_1_gauss(x = M_j)
       res2_MLE <- Gridsearch(x = M_j, resu_aic_1_gauss = res1_MLE, 
-                             iter_max = 100, ntry = 15, mixture = 2)
+                             iter_max = 15, ntry = 30, mixture = 2)
       
       clust1 <- res2_MLE$cluster == 1
       clust2 <- res2_MLE$cluster == 2
