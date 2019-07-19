@@ -5,7 +5,7 @@
 #' @importFrom stats density 
 #' @importFrom utils flush.console setTxtProgressBar txtProgressBar
 
-cytof_BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE, 
+Cytof_BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE, 
                        force_first_markers = NULL){
   
   n <- nrow(M)
@@ -47,7 +47,7 @@ cytof_BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
   }else{
     force_marker <- NULL
   }
-  CytEMRes <- cytofEM(M, 1:n, minleaf, level, t, force_marker)
+  CytEMRes <- CytofEM(M, 1:n, minleaf, level, t, force_marker)
   
   if(is.null(CytEMRes$ind)){
     if(verbose){
@@ -86,7 +86,7 @@ cytof_BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
   if(!is.null(force_first_markers)){
     while(length(force_first_markers)>0){
       force_marker <- force_first_markers[1]
-      #CytEMRes <- cytofEM(M, 1:n, minleaf, level, t, force_marker)
+      #CytEMRes <- CytofEM(M, 1:n, minleaf, level, t, force_marker)
       
       #loop intialisation
       c_level <- level + 1
@@ -126,7 +126,7 @@ cytof_BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
               )
             }
           }else{
-            CytEMRes <- cytofEM(M[temp_node, mark_left, drop=FALSE], temp_node,
+            CytEMRes <- CytofEM(M[temp_node, mark_left, drop=FALSE], temp_node,
                               minleaf, level, t, force_marker)
             if(is.null(CytEMRes$ind)){
               stopping_flag <- stopping_flag + 1
@@ -236,7 +236,7 @@ cytof_BinaryTree <- function(M, minleaf = 1, t = .1, verbose = TRUE,
           }
         }else{
           
-          CytEMRes <- cytofEM(M[temp_node, mark_left, drop=FALSE], temp_node,
+          CytEMRes <- CytofEM(M[temp_node, mark_left, drop=FALSE], temp_node,
                             minleaf, level, t)
           if(is.null(CytEMRes$ind)){
             stopping_flag <- stopping_flag + 1
