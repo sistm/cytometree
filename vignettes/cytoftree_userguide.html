@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Anthony Devaux, Boris Hejblum" />
+
+<meta name="date" content="2019-07-20" />
+
+<title>cytoftree: extension of cytometree to analyze mass cytometry data</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore"><code>cytoftree</code>: extension of <code>cytometree</code> to analyze mass cytometry data</h1>
+<h4 class="author"><em>Anthony Devaux, Boris Hejblum</em></h4>
+<h4 class="date"><em>2019-07-20</em></h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction-to-cytoftree">Introduction to <code>cytoftree</code></a><ul>
+<li><a href="#data-transformation">Data transformation</a></li>
+<li><a href="#binary-tree-construction">Binary tree construction</a></li>
+<li><a href="#post-hoc-annotation">Post-hoc annotation</a></li>
+</ul></li>
+<li><a href="#influenza-vaccine-response-dataset-analysis-with-cytoftree">Influenza vaccine response dataset analysis with <code>cytoftree</code></a><ul>
+<li><a href="#data-preparation">Data preparation</a></li>
+<li><a href="#cytoftree-function">CytofTree function</a><ul>
+<li><a href="#without-force_first_marker-option">Without <code>force_first_marker</code> option</a></li>
+<li><a href="#with-force_first_marker-option">With <code>force_first_marker</code> option</a></li>
+</ul></li>
+<li><a href="#high-dimensional-issues">High dimensional issues</a></li>
+<li><a href="#annotation-function">Annotation function</a></li>
+<li><a href="#retrievepops-informations-for-particular-subpopulations"><code>RetrievePops</code> : informations for particular subpopulations</a></li>
+<li><a href="#proportions-comparison-between-manual-and-automatic-gating">Proportions comparison between manual and automatic gating</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="introduction-to-cytoftree" class="section level1">
+<h1>Introduction to <code>cytoftree</code></h1>
+<p><code>cytoftree</code> is an extension to <code>cytometree</code> function to analyze mass cytometry data. These data are specific due to a high number of zero and the high number of markers (up to 100 potentially). <code>cytoftree</code> is based on <code>cytometree</code>’s algorithm which is the construction of binary tree, whose nodes represents cell subpopulations, and slighly modified to take into account the specification of mass cytometry data.</p>
+<div id="data-transformation" class="section level2">
+<h2>Data transformation</h2>
+<p>According to the litterature, mass cytometry data must be transform to get best partitions. We propose differents transformations: <code>asinh</code> (as default), <code>none</code> (without transformation).</p>
+</div>
+<div id="binary-tree-construction" class="section level2">
+<h2>Binary tree construction</h2>
+<ol style="list-style-type: decimal">
+<li><p>At each node, for each marker, the cells with zero values are set apart from the other cells.</p></li>
+<li><p>The remaining observed cells (or “events”) and markers are modeled by both a normal distribution (so <em>unimodal</em>), and a mixture of 2 normal distributions (so <em>bimodal</em>).</p></li>
+<li><p>If the AIC normalized differences <span class="math inline">\(D\)</span> are significant, the cells are split into 2 groups according to the bimodal distribution. Cells with low values are annoted <code>-</code> (no marker) while cells with high values are annoted <code>+</code> (with marker). The cells with zero values are also annoted <code>-</code> (no marker).</p></li>
+<li><p>The binary tree is constructed until the cells can no longer be split into 2 groups.</p></li>
+</ol>
+</div>
+<div id="post-hoc-annotation" class="section level2">
+<h2>Post-hoc annotation</h2>
+<p>Given the unsupervised nature of the binary tree, some of the available markers may not be used to find the different cell populations present in a given sample. To recover a complete annotation, we defined, as a post processing procedure, an annotation method which allows the user to distinguish two (or three) expression levels per marker.</p>
+</div>
+</div>
+<div id="influenza-vaccine-response-dataset-analysis-with-cytoftree" class="section level1">
+<h1>Influenza vaccine response dataset analysis with <code>cytoftree</code></h1>
+<p>In this example, we will use an influenza vaccine response dataset (from <a href="https://www.immunespace.org/project/Studies/SDY478/begin.view?">ImmuneSpace</a>), with 39 markers. To speed-up the computation of this example, we sampled 10 000 cells from this dataset.</p>
+<div id="data-preparation" class="section level2">
+<h2>Data preparation</h2>
+<p>First, we can look the structure and the markers of the data</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(cytometree)
+<span class="kw">data</span>(IMdata)
+<span class="kw">dim</span>(IMdata)</code></pre></div>
+<pre><code>## [1] 10000    39</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(IMdata)</code></pre></div>
+<pre><code>##  [1] &quot;Time&quot;             &quot;Cell_length&quot;      &quot;(In113)Dd_CD57&quot;  
+##  [4] &quot;(In115)Dd_Dead&quot;   &quot;(Ce140)Dd_Bead&quot;   &quot;(Nd142)Dd_CD19&quot;  
+##  [7] &quot;(Nd143)Dd_CD4&quot;    &quot;(Nd144)Dd_CD8&quot;    &quot;(Nd146)Dd_IgD&quot;   
+## [10] &quot;(Sm147)Dd_CD85j&quot;  &quot;(Nd148)Dd_CD11c&quot;  &quot;(Sm149)Dd_CD16&quot;  
+## [13] &quot;(Nd150)Dd_CD3&quot;    &quot;(Eu151)Dd_CD38&quot;   &quot;(Sm152)Dd_CD27&quot;  
+## [16] &quot;(Eu153)Dd_CD11b&quot;  &quot;(Sm154)Dd_CD14&quot;   &quot;(Gd155)Dd_CCR6&quot;  
+## [19] &quot;(Gd156)Dd_CD94&quot;   &quot;(Gd157)Dd_CD86&quot;   &quot;(Gd158)Dd_CXCR5&quot; 
+## [22] &quot;(Tb159)Dd_CXCR3&quot;  &quot;(Gd160)Dd_CCR7&quot;   &quot;(Dy162)Dd_CD45RA&quot;
+## [25] &quot;(Dy164)Dd_CD20&quot;   &quot;(Ho165)Dd_CD127&quot;  &quot;(Er166)Dd_CD33&quot;  
+## [28] &quot;(Er167)Dd_CD28&quot;   &quot;(Er168)Dd_CD24&quot;   &quot;(Tm169)Dd_ICOS&quot;  
+## [31] &quot;(Er170)Dd_CD161&quot;  &quot;(Yb171)Dd_TCRgd&quot;  &quot;(Yb172)Dd_PD-1&quot;  
+## [34] &quot;(Yb173)Dd_CD123&quot;  &quot;(Yb174)Dd_CD56&quot;   &quot;(Lu175)Dd_HLADR&quot; 
+## [37] &quot;(Yb176)Dd_CD25&quot;   &quot;(Ir191)Dd_DNA1&quot;   &quot;(Ir193)Dd_DNA2&quot;</code></pre>
+<p>Then, we also check the proportion of zero for each marker, which is the particularity of mass cytometry data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zero_proportion &lt;-<span class="st"> </span><span class="kw">apply</span>(IMdata[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)], 
+                         <span class="dt">MARGIN =</span> <span class="dv">2</span>, 
+                         <span class="dt">FUN =</span> <span class="cf">function</span>(x){<span class="kw">round</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(x<span class="op">==</span><span class="dv">0</span>))[<span class="st">&quot;TRUE&quot;</span>]<span class="op">*</span><span class="dv">100</span>,<span class="dv">2</span>)})
+zero_proportion</code></pre></div>
+<pre><code>##   (In113)Dd_CD57   (In115)Dd_Dead   (Ce140)Dd_Bead   (Nd142)Dd_CD19 
+##            76.26            60.55            91.00            70.34 
+##    (Nd143)Dd_CD4    (Nd144)Dd_CD8    (Nd146)Dd_IgD  (Sm147)Dd_CD85j 
+##            38.92            45.04            70.61            55.14 
+##  (Nd148)Dd_CD11c   (Sm149)Dd_CD16    (Nd150)Dd_CD3   (Eu151)Dd_CD38 
+##            54.75            63.78            18.75            16.30 
+##   (Sm152)Dd_CD27  (Eu153)Dd_CD11b   (Sm154)Dd_CD14   (Gd155)Dd_CCR6 
+##            23.19            33.66            56.47            68.81 
+##   (Gd156)Dd_CD94   (Gd157)Dd_CD86  (Gd158)Dd_CXCR5  (Tb159)Dd_CXCR3 
+##            63.89            57.71            56.91            52.07 
+##   (Gd160)Dd_CCR7 (Dy162)Dd_CD45RA   (Dy164)Dd_CD20  (Ho165)Dd_CD127 
+##            29.54             8.67            49.11            34.57 
+##   (Er166)Dd_CD33   (Er167)Dd_CD28   (Er168)Dd_CD24   (Tm169)Dd_ICOS 
+##            39.43            31.08            64.00            74.00 
+##  (Er170)Dd_CD161  (Yb171)Dd_TCRgd   (Yb172)Dd_PD-1  (Yb173)Dd_CD123 
+##            76.15            90.25            81.13            75.48 
+##   (Yb174)Dd_CD56  (Lu175)Dd_HLADR   (Yb176)Dd_CD25   (Ir191)Dd_DNA1 
+##            66.72            45.16            56.40             1.42 
+##   (Ir193)Dd_DNA2 
+##             2.63</code></pre>
+</div>
+<div id="cytoftree-function" class="section level2">
+<h2>CytofTree function</h2>
+<p>To improve the performance of automating gating, we decided to transform data with <code>asinh</code> transformation. Then, we have to choose which markers must be tranform using <code>num_col</code> argument. The columns <code>Time</code> et <code>Cell_length</code> are not mass cytometry measure and mustn’t be transform.</p>
+<div id="without-force_first_marker-option" class="section level3">
+<h3>Without <code>force_first_marker</code> option</h3>
+<p>Without <code>force_first_marker</code> option, we let <code>cytoftree</code> choose the best marker to split the cells on each node.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">num_col &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="kw">ncol</span>(IMdata))
+
+tree &lt;-<span class="st"> </span><span class="kw">CytofTree</span>(<span class="dt">M =</span> IMdata,
+                  <span class="dt">minleaf =</span> <span class="dv">1</span>,
+                  <span class="dt">t =</span> <span class="fl">0.1</span>,
+                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>,
+                  <span class="dt">force_first_markers =</span> <span class="ot">NULL</span>,
+                  <span class="dt">transformation =</span> <span class="st">&quot;asinh&quot;</span>,
+                  <span class="dt">num_col =</span> num_col)</code></pre></div>
+<pre><code>## It works !</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(tree<span class="op">$</span>labels)</code></pre></div>
+<pre><code>## [1] 812</code></pre>
+</div>
+<div id="with-force_first_marker-option" class="section level3">
+<h3>With <code>force_first_marker</code> option</h3>
+<p>Whereas with <code>force_first_marker</code> option, <code>cytoftree</code> splits on particular markers. Specially in this example, we force <code>cytoftree</code> to split on the markers <code>DNA1</code>, <code>DNA2</code>, <code>Cell_length</code>, <code>Bead</code> and <code>Dead</code> to be the closest to the manual gating.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tree_force &lt;-<span class="st"> </span><span class="kw">CytofTree</span>(<span class="dt">M =</span> IMdata,
+                        <span class="dt">minleaf =</span> <span class="dv">1</span>,
+                        <span class="dt">t =</span> <span class="fl">0.1</span>,
+                        <span class="dt">verbose =</span> <span class="ot">FALSE</span>,
+                        <span class="dt">force_first_markers =</span> <span class="kw">c</span>(<span class="st">&quot;(Ir191)Dd_DNA1&quot;</span>,
+                                                <span class="st">&quot;(Ir193)Dd_DNA2&quot;</span>,
+                                                <span class="st">&quot;Cell_length&quot;</span>,
+                                                <span class="st">&quot;(Ce140)Dd_Bead&quot;</span>,
+                                                <span class="st">&quot;(In115)Dd_Dead&quot;</span>),
+                        <span class="dt">transformation =</span> <span class="st">&quot;asinh&quot;</span>,
+                        <span class="dt">num_col =</span> num_col)</code></pre></div>
+<pre><code>## Unable to force split on (In115)Dd_Dead for some node at level5</code></pre>
+<pre><code>## Unable to force split on (In115)Dd_Dead for some node at level5</code></pre>
+<pre><code>## It works !</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(tree_force<span class="op">$</span>labels)</code></pre></div>
+<pre><code>## [1] 823</code></pre>
+</div>
+</div>
+<div id="high-dimensional-issues" class="section level2">
+<h2>High dimensional issues</h2>
+<p>Due to the high number of markers, <code>cytoftree</code> provides high number of subpopulations, but can be decrease modifying <code>minleaf</code> value for the minimum of cells by subpopulation and <code>t</code> threshold for the depth of the binary tree.</p>
+<p>The <code>plot_graph</code> function provides a look on the binary tree, but should be unreadable due to the high number of subpopulations. Nevertheless, we can take a look on the distribution on a particular node with <code>plot_nodes</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_nodes</span>(tree, <span class="dt">nodes =</span> <span class="st">&quot;(Dy164)Dd_CD20.2&quot;</span>)</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="annotation-function" class="section level2">
+<h2>Annotation function</h2>
+<p>The <code>annotation</code> function allows to recover the incomplete annotation on subpopulations. <code>combinations</code> option provides the complete annotation on each subpopulation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">annot &lt;-<span class="st"> </span><span class="kw">Annotation</span>(tree, <span class="dt">plot =</span> <span class="ot">FALSE</span>, <span class="dt">K2markers =</span> <span class="kw">colnames</span>(IMdata))
+annot<span class="op">$</span>combinations[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,]</code></pre></div>
+<pre><code>##     Time Cell_length (In113)Dd_CD57 (In115)Dd_Dead (Ce140)Dd_Bead
+## 755    1           0              0              0              0
+## 754    1           0              0              0              0
+## 793    0           0              0              0              0
+## 661    1           0              0              0              0
+## 692    1           0              0              0              0
+##     (Nd142)Dd_CD19 (Nd143)Dd_CD4 (Nd144)Dd_CD8 (Nd146)Dd_IgD
+## 755              0             1             0             0
+## 754              0             1             0             0
+## 793              0             1             0             0
+## 661              1             0             0             1
+## 692              0             0             1             0
+##     (Sm147)Dd_CD85j (Nd148)Dd_CD11c (Sm149)Dd_CD16 (Nd150)Dd_CD3
+## 755               0               0              0             1
+## 754               0               0              0             1
+## 793               0               0              0             1
+## 661               1               0              0             0
+## 692               0               0              0             1
+##     (Eu151)Dd_CD38 (Sm152)Dd_CD27 (Eu153)Dd_CD11b (Sm154)Dd_CD14
+## 755              0              1               0              0
+## 754              0              0               0              0
+## 793              0              1               0              0
+## 661              0              0               0              0
+## 692              0              1               0              0
+##     (Gd155)Dd_CCR6 (Gd156)Dd_CD94 (Gd157)Dd_CD86 (Gd158)Dd_CXCR5
+## 755              0              0              0               0
+## 754              0              0              0               0
+## 793              0              0              0               0
+## 661              1              0              0               1
+## 692              0              0              0               0
+##     (Tb159)Dd_CXCR3 (Gd160)Dd_CCR7 (Dy162)Dd_CD45RA (Dy164)Dd_CD20
+## 755               0              1                0              0
+## 754               0              1                0              0
+## 793               0              1                1              0
+## 661               0              0                1              1
+## 692               0              1                1              0
+##     (Ho165)Dd_CD127 (Er166)Dd_CD33 (Er167)Dd_CD28 (Er168)Dd_CD24
+## 755               0              0              1              0
+## 754               0              0              1              0
+## 793               0              0              1              0
+## 661               0              0              0              0
+## 692               0              0              1              0
+##     (Tm169)Dd_ICOS (Er170)Dd_CD161 (Yb171)Dd_TCRgd (Yb172)Dd_PD-1
+## 755              0               0               0              0
+## 754              0               0               0              0
+## 793              0               0               0              0
+## 661              0               0               0              0
+## 692              0               0               0              0
+##     (Yb173)Dd_CD123 (Yb174)Dd_CD56 (Lu175)Dd_HLADR (Yb176)Dd_CD25
+## 755               0              0               0              0
+## 754               0              0               0              0
+## 793               0              0               0              0
+## 661               0              0               1              0
+## 692               0              0               0              0
+##     (Ir191)Dd_DNA1 (Ir193)Dd_DNA2 leaves count   prop
+## 755              1              1    755   427 0.0427
+## 754              1              1    754   193 0.0193
+## 793              1              1    793   138 0.0138
+## 661              1              1    661   122 0.0122
+## 692              1              1    692   122 0.0122</code></pre>
+<p>Due to the high number of subpopulations, it’s recommanded to use <code>RetrievePops</code> function which provide informations for particular subpopulations.</p>
+</div>
+<div id="retrievepops-informations-for-particular-subpopulations" class="section level2">
+<h2><code>RetrievePops</code> : informations for particular subpopulations</h2>
+<p><code>RetrievePops</code> provides several informations on specific subpopulations, in particular the proportion and the subpopulations merged.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">phenotypes &lt;-<span class="st"> </span><span class="kw">list</span>()
+phenotypes[[<span class="st">&quot;CD4+&quot;</span>]] &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">c</span>(<span class="st">&quot;(Ir191)Dd_DNA1&quot;</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="st">&quot;(Ir193)Dd_DNA2&quot;</span>, <span class="dv">1</span>), 
+                              <span class="kw">c</span>(<span class="st">&quot;Cell_length&quot;</span>, <span class="dv">0</span>), <span class="kw">c</span>(<span class="st">&quot;(Ce140)Dd_Bead&quot;</span>, <span class="dv">0</span>), 
+                              <span class="kw">c</span>(<span class="st">&quot;(In115)Dd_Dead&quot;</span>, <span class="dv">0</span>), <span class="kw">c</span>(<span class="st">&quot;(Sm154)Dd_CD14&quot;</span>, <span class="dv">0</span>), 
+                              <span class="kw">c</span>(<span class="st">&quot;(Er166)Dd_CD33&quot;</span>, <span class="dv">0</span>), <span class="kw">c</span>(<span class="st">&quot;(Nd150)Dd_CD3&quot;</span>, <span class="dv">1</span>), 
+                              <span class="kw">c</span>(<span class="st">&quot;(Nd143)Dd_CD4&quot;</span>, <span class="dv">1</span>))
+
+phenotypes[[<span class="st">&quot;CD8+&quot;</span>]] &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">c</span>(<span class="st">&quot;(Ir191)Dd_DNA1&quot;</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="st">&quot;(Ir193)Dd_DNA2&quot;</span>, <span class="dv">1</span>), 
+                              <span class="kw">c</span>(<span class="st">&quot;Cell_length&quot;</span>, <span class="dv">0</span>), <span class="kw">c</span>(<span class="st">&quot;(Ce140)Dd_Bead&quot;</span>, <span class="dv">0</span>), 
+                              <span class="kw">c</span>(<span class="st">&quot;(In115)Dd_Dead&quot;</span>, <span class="dv">0</span>), <span class="kw">c</span>(<span class="st">&quot;(Sm154)Dd_CD14&quot;</span>, <span class="dv">0</span>), 
+                              <span class="kw">c</span>(<span class="st">&quot;(Er166)Dd_CD33&quot;</span>, <span class="dv">0</span>), <span class="kw">c</span>(<span class="st">&quot;(Nd150)Dd_CD3&quot;</span>, <span class="dv">1</span>), 
+                              <span class="kw">c</span>(<span class="st">&quot;(Nd144)Dd_CD8&quot;</span>, <span class="dv">1</span>))
+
+pheno_result &lt;-<span class="st"> </span><span class="kw">RetrievePops</span>(annot, <span class="dt">phenotypes =</span> phenotypes)
+
+<span class="co"># CD4+</span>
+pheno_result<span class="op">$</span>phenotypesinfo[[<span class="dv">1</span>]]</code></pre></div>
+<pre><code>## $phenotype
+## [1] &quot;(Ir191)Dd_DNA1-1&quot; &quot;(Ir193)Dd_DNA2-1&quot; &quot;Cell_length-0&quot;   
+## [4] &quot;(Ce140)Dd_Bead-0&quot; &quot;(In115)Dd_Dead-0&quot; &quot;(Sm154)Dd_CD14-0&quot;
+## [7] &quot;(Er166)Dd_CD33-0&quot; &quot;(Nd150)Dd_CD3-1&quot;  &quot;(Nd143)Dd_CD4-1&quot; 
+## 
+## $proportion
+## [1] 0.1912
+## 
+## $Mergedlabels
+##  [1] 755 754 793 792 704 705 706 738 417 809 277 535 512 787 568 106 612
+## [18] 641 642 563 669 565 345 510 634 481 574 742 676 668 175 419 477 484
+## [35] 573 677 537 483 606 609 643 172 199 282 319 536 605 703 234 315 476
+## [52] 639 737 786 185 209 607 710 741 812  81 139 173 220 235 316 348 443
+## [69] 485 566 608 610 640 670 671 810 811  18 221 245 274 296 387 482 513
+## [86] 611 613 765
+## 
+## $Newlabel
+## [1] 813</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># CD8+</span>
+pheno_result<span class="op">$</span>phenotypesinfo[[<span class="dv">2</span>]]</code></pre></div>
+<pre><code>## $phenotype
+## [1] &quot;(Ir191)Dd_DNA1-1&quot; &quot;(Ir193)Dd_DNA2-1&quot; &quot;Cell_length-0&quot;   
+## [4] &quot;(Ce140)Dd_Bead-0&quot; &quot;(In115)Dd_Dead-0&quot; &quot;(Sm154)Dd_CD14-0&quot;
+## [7] &quot;(Er166)Dd_CD33-0&quot; &quot;(Nd150)Dd_CD3-1&quot;  &quot;(Nd144)Dd_CD8-1&quot; 
+## 
+## $proportion
+## [1] 0.0724
+## 
+## $Mergedlabels
+##  [1] 692 625 804 585 201 721 789 749 806 433 748 520 228 229 335 371 497
+## [18] 627 655 202 400 519 590 747 788 807 121 199 334 434 498 227 234 398
+## [35] 552 589 396 436 550 551 586 720 805 231 235 397 399 523 624 691  18
+## [52]  55 124 296 401 435 460 587
+## 
+## $Newlabel
+## [1] 814</code></pre>
+</div>
+<div id="proportions-comparison-between-manual-and-automatic-gating" class="section level2">
+<h2>Proportions comparison between manual and automatic gating</h2>
+<p>We can compare proportions providing by automatic gating (<code>cytoftree</code>) and manual gating for the selected subpopulations</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">CD4+</th>
+<th align="right">CD8+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Manual Gating</td>
+<td align="right">0.182</td>
+<td align="right">0.065</td>
+</tr>
+<tr class="even">
+<td>Automating Gating</td>
+<td align="right">0.191</td>
+<td align="right">0.072</td>
+</tr>
+</tbody>
+</table>
+<p><code>cytoftree</code> provides good results, close to the proportions getting by manual gating.</p>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
