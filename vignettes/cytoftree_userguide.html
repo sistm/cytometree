@@ -12,7 +12,7 @@
 
 <meta name="author" content="Anthony Devaux, Boris Hejblum" />
 
-<meta name="date" content="2019-07-20" />
+<meta name="date" content="2019-07-22" />
 
 <title>cytoftree: extension of cytometree to analyze mass cytometry data</title>
 
@@ -92,7 +92,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore"><code>cytoftree</code>: extension of <code>cytometree</code> to analyze mass cytometry data</h1>
 <h4 class="author"><em>Anthony Devaux, Boris Hejblum</em></h4>
-<h4 class="date"><em>2019-07-20</em></h4>
+<h4 class="date"><em>2019-07-22</em></h4>
 
 
 <div id="TOC">
@@ -110,7 +110,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li><a href="#high-dimensional-issues">High dimensional issues</a></li>
 <li><a href="#annotation-function">Annotation function</a></li>
-<li><a href="#retrievepops-informations-for-particular-subpopulations"><code>RetrievePops</code> : informations for particular subpopulations</a></li>
+<li><a href="#retrievepops-providing-informations-for-particular-subpopulations"><code>RetrievePops</code> : providing informations for particular subpopulations</a></li>
 <li><a href="#proportions-comparison-between-manual-and-automatic-gating">Proportions comparison between manual and automatic gating</a></li>
 </ul></li>
 </ul>
@@ -224,7 +224,7 @@ tree &lt;-<span class="st"> </span><span class="kw">CytofTree</span>(<span class
 <pre><code>## Unable to force split on (In115)Dd_Dead for some node at level5</code></pre>
 <pre><code>## It works !</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(tree_force<span class="op">$</span>labels)</code></pre></div>
-<pre><code>## [1] 823</code></pre>
+<pre><code>## [1] 824</code></pre>
 </div>
 </div>
 <div id="high-dimensional-issues" class="section level2">
@@ -301,8 +301,8 @@ annot<span class="op">$</span>combinations[<span class="dv">1</span><span class=
 ## 692              1              1    692   122 0.0122</code></pre>
 <p>Due to the high number of subpopulations, it’s recommanded to use <code>RetrievePops</code> function which provide informations for particular subpopulations.</p>
 </div>
-<div id="retrievepops-informations-for-particular-subpopulations" class="section level2">
-<h2><code>RetrievePops</code> : informations for particular subpopulations</h2>
+<div id="retrievepops-providing-informations-for-particular-subpopulations" class="section level2">
+<h2><code>RetrievePops</code> : providing informations for particular subpopulations</h2>
 <p><code>RetrievePops</code> provides several informations on specific subpopulations, in particular the proportion and the subpopulations merged.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">phenotypes &lt;-<span class="st"> </span><span class="kw">list</span>()
 phenotypes[[<span class="st">&quot;CD4+&quot;</span>]] &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">c</span>(<span class="st">&quot;(Ir191)Dd_DNA1&quot;</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="st">&quot;(Ir193)Dd_DNA2&quot;</span>, <span class="dv">1</span>), 
@@ -360,7 +360,7 @@ pheno_result<span class="op">$</span>phenotypesinfo[[<span class="dv">2</span>]]
 </div>
 <div id="proportions-comparison-between-manual-and-automatic-gating" class="section level2">
 <h2>Proportions comparison between manual and automatic gating</h2>
-<p>We can compare proportions providing by automatic gating (<code>cytoftree</code>) and manual gating for the selected subpopulations</p>
+<p>We can compare proportions providing by automatic gating (<code>cytoftree</code>) and manual gating for the selected subpopulations.</p>
 <table>
 <thead>
 <tr class="header">

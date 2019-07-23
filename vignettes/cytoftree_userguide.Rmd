@@ -127,7 +127,7 @@ annot$combinations[1:5,]
 
 Due to the high number of subpopulations, it's recommanded to use `RetrievePops` function which provide informations for particular subpopulations.
 
-## `RetrievePops` : informations for particular subpopulations
+## `RetrievePops` : providing informations for particular subpopulations
 
 `RetrievePops` provides several informations on specific subpopulations, in particular the proportion and the subpopulations merged.
 
@@ -156,7 +156,7 @@ pheno_result$phenotypesinfo[[2]]
 
 ## Proportions comparison between manual and automatic gating
 
-We can compare proportions providing by automatic gating (`cytoftree`) and manual gating for the selected subpopulations
+We can compare proportions providing by automatic gating (`cytoftree`) and manual gating for the selected subpopulations.
 
 ```{r, echo = FALSE}
 automating <- c(pheno_result$phenotypesinfo[[1]]$proportion,

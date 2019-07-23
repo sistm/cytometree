@@ -20,7 +20,7 @@
 #'the clustering algorithm is unsupervised.
 #'
 #'@param transformation A string indicating the transformation used among \code{asinh} 
-#'\code{log10} and \code{none}. Default is \code{asinh} transformation.
+#'\code{biexp}, \code{log10} and \code{none}. Default is \code{asinh} transformation.
 #'
 #'@param num_col An integer vector of index indicating the columns to be transform. 
 #'Default is \code{1:ncol(M)} to transform all the data. 
@@ -38,7 +38,7 @@
 #'\item{\code{num_col}}{ Indexes of columns transformed}
 #' }
 #'
-#'@details Previously, dhe data can be transform using different kind of transformations. 
+#'@details First of all, data can be transformed using different transformations. 
 #'The algorithm is based on the construction of a binary tree,
 #'the nodes of which are subpopulations of cells. At each node,
 #'observed cells and markers are modeled by both a family of normal
@@ -69,7 +69,7 @@
 #'
 
 CytofTree <- function(M, minleaf = 1, t = .1, verbose = TRUE, force_first_markers = NULL, 
-                      transformation = c("asinh", "log10", "none"), 
+                      transformation = c("asinh", "biexp", "log10", "none"), 
                       num_col = 1:ncol(M)){
   if(class(M) == "data.frame"){
     M <- as.matrix(M)
@@ -103,7 +103,7 @@ CytofTree <- function(M, minleaf = 1, t = .1, verbose = TRUE, force_first_marker
     }
   }
   
-  if(any(!transformation%in%c("asinh", "log10", "none"))){
+  if(any(!transformation%in%c("asinh", "biexp", "log10", "none"))){
     stop("The only allowed values for transformation are 'asinh', 'log10' or 'none'")
   }
   
@@ -122,6 +122,10 @@ CytofTree <- function(M, minleaf = 1, t = .1, verbose = TRUE, force_first_marker
   
   if(transformation=="asinh"){
     M <- AsinhTransformation(M, num_col)
+  }
+  
+  if(transformation=="biexp"){
+    M <- BiexpTransformation(M, num_col)
   }
   
   if(transformation=="log10"){
