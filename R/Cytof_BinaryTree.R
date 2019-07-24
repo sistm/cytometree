@@ -1,4 +1,4 @@
-#' Builds a binary tree.
+#' Builds a binary tree for mass cytometry data.
 #'
 #' @keywords internal
 #'

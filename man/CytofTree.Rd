@@ -5,8 +5,8 @@
 \title{Binary tree algorithm for mass cytometry data analysis.}
 \usage{
 CytofTree(M, minleaf = 1, t = 0.1, verbose = TRUE,
-  force_first_markers = NULL, transformation = c("asinh", "log10",
-  "none"), num_col = 1:ncol(M))
+  force_first_markers = NULL, transformation = c("asinh", "biexp",
+  "log10", "none"), num_col = 1:ncol(M))
 }
 \arguments{
 \item{M}{A matrix of size n x p containing mass cytometry measures
@@ -29,7 +29,7 @@ and forcing the split at every node. Default is \code{NULL}, in which case
 the clustering algorithm is unsupervised.}
 
 \item{transformation}{A string indicating the transformation used among \code{asinh} 
-\code{log10} and \code{none}. Default is \code{asinh} transformation.}
+\code{biexp}, \code{log10} and \code{none}. Default is \code{asinh} transformation.}
 
 \item{num_col}{An integer vector of index indicating the columns to be transform. 
 Default is \code{1:ncol(M)} to transform all the data.}
@@ -52,7 +52,7 @@ for node splitting.}
 Binary tree algorithm for mass cytometry data analysis.
 }
 \details{
-Previously, dhe data can be transform using different kind of transformations. 
+First of all, data can be transformed using different transformations. 
 The algorithm is based on the construction of a binary tree,
 the nodes of which are subpopulations of cells. At each node,
 observed cells and markers are modeled by both a family of normal
@@ -67,7 +67,7 @@ data(IMdata)
 dim(IMdata)
 
 # Don't transform Time et Cell_length column
-num_col <- 3:ncol(M)
+num_col <- 3:ncol(IMdata)
 
 # Build Cytoftree binary tree
 tree <- CytofTree(M = IMdata, minleaf = 1, t = 0.1, transformation = "asinh", num_col = num_col)

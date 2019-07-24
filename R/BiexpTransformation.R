@@ -1,6 +1,6 @@
 #' Data transformation using biexp
 #'
-#' @importFrom GoFKernel GoFKernel
+#' @importFrom GoFKernel inverse
 #'
 #' @keywords internal
 

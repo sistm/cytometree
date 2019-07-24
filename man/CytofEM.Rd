@@ -2,11 +2,11 @@
 % Please edit documentation in R/CytofEM.R
 \name{CytofEM}
 \alias{CytofEM}
-\title{E-M algorithm.}
+\title{E-M algorithm for cytoftree.}
 \usage{
 CytofEM(M, indices, minleaf, level, t, force_marker = NULL)
 }
 \description{
-E-M algorithm.
+E-M algorithm for cytoftree.
 }
 \keyword{internal}

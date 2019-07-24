@@ -56,7 +56,7 @@
 #'dim(IMdata)
 #'
 #'# Don't transform Time et Cell_length column
-#'num_col <- 3:ncol(M)
+#'num_col <- 3:ncol(IMdata)
 #'
 #'# Build Cytoftree binary tree
 #'tree <- CytofTree(M = IMdata, minleaf = 1, t = 0.1, transformation = "asinh", num_col = num_col)

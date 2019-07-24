@@ -2,12 +2,12 @@
 % Please edit documentation in R/Cytof_BinaryTree.R
 \name{Cytof_BinaryTree}
 \alias{Cytof_BinaryTree}
-\title{Builds a binary tree.}
+\title{Builds a binary tree for mass cytometry data.}
 \usage{
 Cytof_BinaryTree(M, minleaf = 1, t = 0.1, verbose = TRUE,
   force_first_markers = NULL)
 }
 \description{
-Builds a binary tree.
+Builds a binary tree for mass cytometry data.
 }
 \keyword{internal}

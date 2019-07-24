@@ -24,7 +24,8 @@ Imports:
     mclust,
     robustbase,
     stats,
-    cowplot
+    cowplot,
+    GoFKernel
 RoxygenNote: 6.1.1
 BugReports: https://github.com/sistm/Cytometree/issues
 Encoding: UTF-8

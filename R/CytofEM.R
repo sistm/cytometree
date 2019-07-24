@@ -1,4 +1,4 @@
-#'E-M algorithm.
+#'E-M algorithm for cytoftree.
 #'
 #'@importFrom mclust Mclust
 #'
