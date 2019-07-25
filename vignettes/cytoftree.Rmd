@@ -1,0 +1,147 @@
+---
+title: "`cytoftree`: extension of `cytometree` to analyze mass cytometry data"
+author: "Anthony Devaux, Boris Hejblum"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: yes
+vignette: >
+  %\VignetteIndexEntry{`cytoftree`: extension of `cytometree` to analyze mass cytometry data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitrsetup, include=FALSE}
+knitr::opts_chunk$set(tidy = TRUE)
+knitr::knit_hooks$set(small.mar = function(before, options, envir) {
+    if (before) par(mar = c(0, 0, 0, 0))  # no margin
+})
+```
+
+# Introduction to `cytoftree`
+
+`cytoftree` is an extension to `cytometree` function to analyze mass cytometry data. These data are specific due to a high number of zero and the high number of markers (up to 100 potentially). `cytoftree` is based on `cytometree`'s algorithm which is the construction of binary tree, whose nodes represents cell subpopulations, and slighly modified to take into account the specification of mass cytometry data.
+
+## Data transformation
+
+According to the litterature, mass cytometry data must be transform to get best partitions. We propose differents transformations: `asinh` (as default), `biexp`, `log10` or `none` (without transformation).
+
+## Binary tree construction
+
+1. At each node, for each marker, the cells with zero values are temporarily set aside from the other cells.
+
+2. The remaining observed cells (or "events") and markers are modeled by both a normal distribution (so *unimodal*), and a mixture of 2 normal distributions (so *bimodal*).
+
+3. If the AIC normalized differences $D$ are significant, the cells are split into 2 groups according to the bimodal distribution. Cells with low values are annoted `-` (no marker) while cells with high values are annoted `+` (with marker). The cells with zero values are also annoted `-` (no marker).
+
+4. The binary tree is constructed until the cells can no longer be split into 2 groups.
+
+## Post-hoc annotation
+
+Given the unsupervised nature of the binary tree, some of the available markers may not be used to find the different cell populations present in a given sample. To recover a complete annotation, we defined, as a post processing procedure, an annotation method which allows the user to distinguish two (or three) expression levels per marker.
+
+# Influenza vaccine response dataset analysis with `cytoftree`
+
+In this example, we will use an influenza vaccine response dataset (from [ImmuneSpace](https://www.immunespace.org/project/Studies/SDY478/begin.view?)), with 39 markers. To speed-up the computation, we sampled 10 000 cells from this dataset.
+
+## Data preparation
+
+First, we can look the structure and the markers of the data.
+
+```{r, message = FALSE, warning = FALSE}
+library(cytometree)
+data(IMdata)
+dim(IMdata)
+colnames(IMdata)
+```
+
+Then, we also check the proportion of zero for each marker, particularity of mass cytometry data.
+
+```{r}
+zero_proportion <- apply(IMdata[,-c(1,2)], 
+                         MARGIN = 2, 
+                         FUN = function(x){round(prop.table(table(x==0))["TRUE"]*100,2)})
+zero_proportion
+```
+
+## CytofTree function
+
+According to the available markers, a gating strategy may be considered. In this example, we have a gating strategy to conserve only viable cells by splitting on the following markers : `DNA1`, `DNA2`, `Cell_length`, `Bead` and `Dead`. This way, we can be as close as possible to manual gating. To do this, we have to force the markers with the `force_first_marker` option (semi-supervised gating).
+
+Then, to improve the performance of automating gating, we decided to transform data with `asinh` transformation (default transformation). Then, we have to choose which markers should be tranformed using `num_col` argument. The columns `Time` et `Cell_length` are not mass cytometry measure and shouldn't be transformed.
+
+```{r}
+num_col <- c(3:ncol(IMdata))
+
+tree <- CytofTree(M = IMdata,
+                  minleaf = 1,
+                  t = 0.1,
+                  verbose = FALSE,
+                  force_first_markers = c("(Ir191)Dd_DNA1",
+                                          "(Ir193)Dd_DNA2",
+                                          "Cell_length",
+                                          "(Ce140)Dd_Bead",
+                                          "(In115)Dd_Dead"),
+                  transformation = "asinh",
+                  num_col = num_col)
+
+max(tree$labels)
+```
+
+## High dimensional issues
+
+Due to the high number of markers, `cytoftree` provides high number of subpopulations. `minleaf` value for the minimum of cells by subpopulation and `t` threshold for the depth of the binary tree can be modified to get more or less subpopulations. The `plot_graph` function provides a look on the binary tree, but should be unreadable due to the high number of subpopulations. 
+
+## Annotation function
+
+The `annotation` function allows to recover the incomplete annotation on subpopulations. `combinations` option provides the complete annotation on each subpopulation.
+
+```{r}
+annot <- Annotation(tree, plot = FALSE, K2markers = colnames(IMdata))
+annot$combinations[1:5,]
+```
+
+Due to the high number of subpopulations, it's recommanded to use `RetrievePops` function which provide informations for particular subpopulations.
+
+## `RetrievePops` : providing informations for particular subpopulations
+
+`RetrievePops` provides several informations on specific subpopulations, in particular the proportions and the subpopulations merged.
+
+```{r}
+phenotypes <- list()
+phenotypes[["CD4+"]] <- rbind(c("(Ir191)Dd_DNA1", 1), c("(Ir193)Dd_DNA2", 1), 
+                              c("Cell_length", 0), c("(Ce140)Dd_Bead", 0), 
+                              c("(In115)Dd_Dead", 0), c("(Sm154)Dd_CD14", 0), 
+                              c("(Er166)Dd_CD33", 0), c("(Nd150)Dd_CD3", 1), 
+                              c("(Nd143)Dd_CD4", 1))
+
+phenotypes[["CD8+"]] <- rbind(c("(Ir191)Dd_DNA1", 1), c("(Ir193)Dd_DNA2", 1), 
+                              c("Cell_length", 0), c("(Ce140)Dd_Bead", 0), 
+                              c("(In115)Dd_Dead", 0), c("(Sm154)Dd_CD14", 0), 
+                              c("(Er166)Dd_CD33", 0), c("(Nd150)Dd_CD3", 1), 
+                              c("(Nd144)Dd_CD8", 1))
+
+pheno_result <- RetrievePops(annot, phenotypes = phenotypes)
+
+# CD4+
+pheno_result$phenotypesinfo[[1]]
+
+# CD8+
+pheno_result$phenotypesinfo[[2]]
+```
+
+## Proportions comparison between manual and automatic gating
+
+We can compare proportions providing by automatic gating (`cytoftree`) and manual gating for the selected subpopulations.
+
+```{r, echo = FALSE}
+automating <- c(pheno_result$phenotypesinfo[[1]]$proportion,
+                pheno_result$phenotypesinfo[[2]]$proportion)
+manual <- c(0.1824389, 0.06523925)
+resu <- rbind(manual, automating)
+rownames(resu) <- c("Manual Gating", "Automating Gating")
+colnames(resu) <- c("CD4+", "CD8+")
+knitr::kable(resu, digits = 3)
+```
+
+`cytoftree` provides good results, close to the proportions getting by manual gating.
