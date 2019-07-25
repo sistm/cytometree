@@ -55,6 +55,9 @@
 #'# dimension of data
 #'dim(IMdata)
 #'
+#'# given the size of the dataset, the code below can take several minutes to run
+#'
+#'\dontrun{
 #'# Don't transform Time et Cell_length column
 #'num_col <- 3:ncol(IMdata)
 #'
@@ -66,6 +69,7 @@
 #'
 #'# Provide subpopulations
 #'annot$combinations
+#'}
 #'
 
 CytofTree <- function(M, minleaf = 1, t = .1, verbose = TRUE, force_first_markers = NULL, 

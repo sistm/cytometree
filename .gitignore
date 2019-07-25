@@ -48,3 +48,5 @@ Temporary Items
 inst/doc
 *.Rproj*
 temp_Hung.rmd
+vignettes/*.R
+vignettes/*.html

@@ -66,6 +66,9 @@ data(IMdata)
 # dimension of data
 dim(IMdata)
 
+# given the size of the dataset, the code below can take several minutes to run
+
+\dontrun{
 # Don't transform Time et Cell_length column
 num_col <- 3:ncol(IMdata)
 
@@ -77,6 +80,7 @@ annot <- Annotation(tree, plot = FALSE, K2markers = colnames(IMdata))
 
 # Provide subpopulations
 annot$combinations
+}
 
 }
 \author{
