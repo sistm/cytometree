@@ -13,6 +13,7 @@ data(IMdata)
 }
 \description{
 A dataset containing 10,000 cells and 39 markers of mass cytometry subsampled
-from the study retrived from ImmuneSpace
+from the sample SUB116516.478 from the study SDY478 by Mark Davis 
+retrieved from ImmuneSpace
 }
 \keyword{data}
