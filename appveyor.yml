@@ -17,8 +17,6 @@ cache:
 
 build_script:
   - travis-tool.sh install_deps
-  - travis-tool.sh github_package jimhester/covr
-  - travis-tool.sh github_package RcppCore/Rcpp
 
 test_script:
   - travis-tool.sh run_tests
