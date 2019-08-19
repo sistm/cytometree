@@ -10,8 +10,6 @@
 #'
 #'@format A data frame with 33992 cell events and 6 markers.
 #'
-#'@reference
-#'
 #'@source \url{https://www.immuneprofiling.org/} \url{https://www.immunespace.org/} 
 #'\url{https://www.immunespace.org/project/HIPC/Lyoplate/begin.view?pageId=study.DATA_ANALYSIS}
 "HIPC"
