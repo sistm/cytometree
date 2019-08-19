@@ -22,7 +22,6 @@ Imports:
     graphics,
     igraph,
     mclust,
-    robustbase,
     stats,
     cowplot,
     GoFKernel
