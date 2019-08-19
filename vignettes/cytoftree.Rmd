@@ -20,11 +20,11 @@ knitr::knit_hooks$set(small.mar = function(before, options, envir) {
 
 # Introduction to `cytoftree`
 
-`cytoftree` is an extension to `cytometree` function to analyze mass cytometry data. These data are specific due to a high number of zero and the high number of markers (up to 100 potentially). `cytoftree` is based on `cytometree`'s algorithm which is the construction of binary tree, whose nodes represents cell subpopulations, and slighly modified to take into account the specification of mass cytometry data.
+`cytoftree` is an extension to `cytometree` function to analyze mass cytometry data. These data are specific due to a high number of zero and the high number of markers (up to 100 potentially). `cytoftree` is based on `cytometree`'s algorithm which is the construction of binary tree, whose nodes represents cell sub-populations, and slighly modified to take into account the specification of mass cytometry data.
 
 ## Data transformation
 
-According to the litterature, mass cytometry data must be transform to get best partitions. We propose differents transformations: `asinh` (as default), `biexp`, `log10` or `none` (without transformation).
+According to the literature, mass cytometry data must be transform to get best partitions. We propose different transformations: `asinh` (as default), `biexp`, `log10` or `none` (without transformation).
 
 ## Binary tree construction
 
@@ -32,7 +32,7 @@ According to the litterature, mass cytometry data must be transform to get best 
 
 2. The remaining observed cells (or "events") and markers are modeled by both a normal distribution (so *unimodal*), and a mixture of 2 normal distributions (so *bimodal*).
 
-3. If the AIC normalized differences $D$ are significant, the cells are split into 2 groups according to the bimodal distribution. Cells with low values are annoted `-` (no marker) while cells with high values are annoted `+` (with marker). The cells with zero values are also annoted `-` (no marker).
+3. If the AIC normalized differences $D$ are significant, the cells are split into 2 groups according to the bimodal distribution. Cells with low values are annotated `-` (no marker) while cells with high values are annotated `+` (with marker). The cells with zero values are also annotated `-` (no marker).
 
 4. The binary tree is constructed until the cells can no longer be split into 2 groups.
 
@@ -68,7 +68,7 @@ zero_proportion
 
 According to the available markers, a gating strategy may be considered. In this example, we have a gating strategy to conserve only viable cells by splitting on the following markers : `DNA1`, `DNA2`, `Cell_length`, `Bead` and `Dead`. This way, we can be as close as possible to manual gating. To do this, we have to force the markers with the `force_first_marker` option (semi-supervised gating).
 
-Then, to improve the performance of automating gating, we decided to transform data with `asinh` transformation (default transformation). Then, we have to choose which markers should be tranformed using `num_col` argument. The columns `Time` et `Cell_length` are not mass cytometry measure and shouldn't be transformed.
+Then, to improve the performance of automating gating, we decided to transform data with `asinh` transformation (default transformation). Then, we have to choose which markers should be transformed using `num_col` argument. The columns `Time` et `Cell_length` are not mass cytometry measure and shouldn't be transformed.
 
 ```{r}
 num_col <- c(3:ncol(IMdata))
@@ -90,22 +90,22 @@ max(tree$labels)
 
 ## High dimensional issues
 
-Due to the high number of markers, `cytoftree` provides high number of subpopulations. `minleaf` value for the minimum of cells by subpopulation and `t` threshold for the depth of the binary tree can be modified to get more or less subpopulations. The `plot_graph` function provides a look on the binary tree, but should be unreadable due to the high number of subpopulations. 
+Due to the high number of markers, `cytoftree` provides high number of sub-populations. `minleaf` value for the minimum of cells by sub-population and `t` threshold for the depth of the binary tree can be modified to get more or less sub-populations. The `plot_graph` function provides a look on the binary tree, but should be unreadable due to the high number of sub-populations. 
 
 ## Annotation function
 
-The `annotation` function allows to recover the incomplete annotation on subpopulations. `combinations` option provides the complete annotation on each subpopulation.
+The `annotation` function allows to recover the incomplete annotation on sub-populations. `combinations` option provides the complete annotation on each sub-population.
 
 ```{r}
 annot <- Annotation(tree, plot = FALSE, K2markers = colnames(IMdata))
 annot$combinations[1:5,]
 ```
 
-Due to the high number of subpopulations, it's recommanded to use `RetrievePops` function which provide informations for particular subpopulations.
+Due to the high number of sub-populations, it's recommended to use `RetrievePops` function which provide informations for particular sub-populations.
 
-## `RetrievePops` : providing informations for particular subpopulations
+## `RetrievePops` : providing informations for particular sub-populations
 
-`RetrievePops` provides several informations on specific subpopulations, in particular the proportions and the subpopulations merged.
+`RetrievePops` provides several informations on specific sub-populations, in particular the proportions and the sub-populations merged.
 
 ```{r}
 phenotypes <- list()
@@ -132,7 +132,7 @@ pheno_result$phenotypesinfo[[2]]
 
 ## Proportions comparison between manual and automatic gating
 
-We can compare proportions providing by automatic gating (`cytoftree`) and manual gating for the selected subpopulations.
+We can compare proportions providing by automatic gating (`cytoftree`) and manual gating for the selected sub-populations.
 
 ```{r, echo = FALSE}
 automating <- c(pheno_result$phenotypesinfo[[1]]$proportion,
