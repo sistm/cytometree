@@ -3,8 +3,8 @@ Type: Package
 Title: Automated Cytometry Gating and Annotation
 Version: 2.0.1
 Date: 2019-08-20
-Author: Chariff Alkhassim, Boris Hejblum, Anthony Devaux, Van Hung Huynh Tran
-Maintainer: Boris Hejblum <boris.hejblum@u-bordeaux.fr>
+Author: Chariff Alkhassim, Boris P Hejblum, Anthony Devaux, Van Hung Huynh Tran
+Maintainer: Boris P Hejblum <boris.hejblum@u-bordeaux.fr>
 LinkingTo: Rcpp, RcppArmadillo
 Description: Given the hypothesis of a bi-modal distribution of cells for
     each marker, the algorithm constructs a binary tree, the nodes of which are
