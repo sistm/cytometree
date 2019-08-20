@@ -107,7 +107,7 @@
 #'
 #'
 #'
-#'\dontrun{
+#'if(interactive()){
 #'
 #'# Scatterplots.
 #'library(ggplot2)

@@ -22,7 +22,7 @@ distinguish two or three expression levels per marker.
 \tabular{ll}{
 Package: \tab cytometree\cr
 Type: \tab Package\cr
-Version: \tab 2.0.0\cr
+Version: \tab 2.0.1\cr
 Date: \tab 2019-08-19\cr
 License:\tab \href{http://www.gnu.org/licenses/lgpl.txt}{LGPL-3}\cr
 }

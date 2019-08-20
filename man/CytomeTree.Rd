@@ -117,7 +117,7 @@ FmeasureC_no0(ref=manual_labels, pred=Tree_Partition)
 
 
 
-\dontrun{
+if(interactive()){
 
 # Scatterplots.
 library(ggplot2)

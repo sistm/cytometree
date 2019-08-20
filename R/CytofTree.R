@@ -57,7 +57,7 @@
 #'
 #'# given the size of the dataset, the code below can take several minutes to run
 #'
-#'\dontrun{
+#'if(interactive()){
 #'# Don't transform Time et Cell_length column
 #'num_col <- 3:ncol(IMdata)
 #'

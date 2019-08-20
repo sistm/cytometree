@@ -15,8 +15,8 @@
 #'\tabular{ll}{
 #'Package: \tab cytometree\cr
 #'Type: \tab Package\cr
-#'Version: \tab 2.0.0\cr
-#'Date: \tab 2019-08-19\cr
+#'Version: \tab 2.0.1\cr
+#'Date: \tab 2019-08-20\cr
 #'License:\tab \href{http://www.gnu.org/licenses/lgpl.txt}{LGPL-3}\cr
 #'}
 #'The main function in this package is \code{\link{CytomeTree}}.

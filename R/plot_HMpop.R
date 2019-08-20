@@ -16,7 +16,7 @@
 #' @export plot_HMpop
 #' 
 #' @examples 
-#' \dontrun{
+#'if(interactive()){
 #' # Run CytomeTree
 #' data(DLBCL)
 #' cellevents <- DLBCL[,c("FL1", "FL2", "FL4")]
@@ -25,7 +25,7 @@
 #' 
 #' # Plot the cell count
 #' plot_HMpop(Tree,Annot)
-#' }
+#'}
 
 
 plot_HMpop <- function(TreeObj, AnnotObj) {
