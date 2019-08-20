@@ -26,7 +26,7 @@
 #'
 #'@references Commenges D, Alkhassim C, Gottardo R, Hejblum BP, Thiebaut R (2018). 
 #'cytometree: a binary tree algorithm for automatic gating in cytometry analysis. 
-#'Cytometry Part A, 93(11):1132-1140.
+#'Cytometry Part A, 93(11):1132-1140. <doi: 10.1002/cyto.a.23601>
 #'
 #'@docType package
 #'@name cytometree-package

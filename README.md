@@ -35,9 +35,10 @@ user to distinguish two or three expression levels per marker.
 
 The following article explains in more details how `cytometree` works:
 
-> D Commenges, C Alkhassim, R Gottardo, BP Hejblum, R Thiébaut,
+> Commenges D, Alkhassim C, Gottardo R, Hejblum BP, Thiebaut R (2018).
 > cytometree: a binary tree algorithm for automatic gating in cytometry
-> analysis, *Cytometry: Part A*, (in press), 2018.
+> analysis. Cytometry Part A, 93(11):1132-1140. \<doi:
+> 10.1002/cyto.a.23601\>
 
 ## Installation
 
