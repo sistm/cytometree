@@ -4,8 +4,13 @@
 \alias{plot_cytopop}
 \title{Plot the cell count for each population using CytomeTree.}
 \usage{
-plot_cytopop(AnnotObj, nbpop = 10, mincount = 1, maxcount = NULL,
-  y_axis = c("abs_count", "prop"))
+plot_cytopop(
+  AnnotObj,
+  nbpop = 10,
+  mincount = 1,
+  maxcount = NULL,
+  y_axis = c("abs_count", "prop")
+)
 }
 \arguments{
 \item{AnnotObj}{An object of class Annotation.}

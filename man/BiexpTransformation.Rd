@@ -4,8 +4,7 @@
 \alias{BiexpTransformation}
 \title{Data transformation using biexp}
 \usage{
-BiexpTransformation(M, num_col, a = 0.5, b = 1, c = 0.5, d = 1,
-  f = 0, w = 0)
+BiexpTransformation(M, num_col, a = 0.5, b = 1, c = 0.5, d = 1, f = 0, w = 0)
 }
 \description{
 Data transformation using biexp

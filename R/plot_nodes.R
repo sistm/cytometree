@@ -32,26 +32,27 @@
 #'
 #'@import ggplot2 graphics 
 #'@importFrom cowplot plot_grid
+#'@importFrom methods is
 #'
 #'@export
 plot_nodes <- function(CytomeTreeObj, nodes=NULL, nodesPerCol = NULL, 
                        nodesPerRow = NULL, ...){
   
-  if(class(CytomeTreeObj) != "CytomeTree"){
+  if(!methods::is(CytomeTreeObj, "CytomeTree")){
     stop("'CytomeTreeObj' must be of class CytomeTree")
   }
   if(!is.null(nodes)){
-    if(length(nodes) == 1 & class(nodes) != "list"){
+    if(length(nodes) == 1 & !methods::is(nodes, "list")){
       nodes <- as.list(nodes)
     }
-    if(class(nodes) != "list"){
+    if(!methods::is(nodes, "list")){
       warning("'nodes' argument coerced to be a list")
       nodes <- as.list(nodes)
-      if(class(nodes) != "list"){
+      if(!methods::is(nodes, "list")){
         stop("'nodes' argument must be a list")
       }
     }
-    if(class(unlist(nodes)) != "character"){
+    if(!methods::is(unlist(nodes), "character")){
       stop("elements of 'nodes' must be of class character")
     }
   }

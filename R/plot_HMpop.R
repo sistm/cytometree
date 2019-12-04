@@ -12,6 +12,7 @@
 #' @importFrom ComplexHeatmap Heatmap HeatmapAnnotation
 #' @importFrom grid grid.text gpar
 #' @importFrom circlize colorRamp2
+#' @importFrom methods is
 #' 
 #' @export plot_HMpop
 #' 
@@ -30,16 +31,11 @@
 
 plot_HMpop <- function(TreeObj, AnnotObj) {
   
-  if (class(TreeObj)!="CytomeTree") {
-    
+  if (!methods::is(TreeObj, "CytomeTree")){
     stop("TreeObj must be class of CytomeTree")
-    
   }
-  
-  if (class(AnnotObj)!="Annotation") {
-    
+  if(!methods::is(AnnotObj, "Annotation")){
     stop("AnnotObj must be class of Annotation")
-    
   }
   
   nbClust <- max(AnnotObj$labels)

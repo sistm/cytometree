@@ -15,16 +15,16 @@
 #'\tabular{ll}{
 #'Package: \tab cytometree\cr
 #'Type: \tab Package\cr
-#'Version: \tab 2.0.1\cr
-#'Date: \tab 2019-08-20\cr
+#'Version: \tab 2.0.2\cr
+#'Date: \tab 2019-12-04\cr
 #'License:\tab \href{http://www.gnu.org/licenses/lgpl.txt}{LGPL-3}\cr
 #'}
 #'The main function in this package is \code{\link{CytomeTree}}.
 #'
 #'@author Chariff Alkhassim, Boris Hejblum, Anthony Devaux, Van Hung Huynh Tran
-#'--- Maintainer: Chariff Alkhassim
+#'--- Maintainer: Boris Hejblum
 #'
-#'@references Commenges D, Alkhassim C, Gottardo R, Hejblum BP, Thiebaut R (2018). 
+#'@references Commenges D, Alkhassim C, Gottardo R, Hejblum BP, Thiébaut R (2018). 
 #'cytometree: a binary tree algorithm for automatic gating in cytometry analysis. 
 #'Cytometry Part A, 93(11):1132-1140. <doi: 10.1002/cyto.a.23601>
 #'

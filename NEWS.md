@@ -1,5 +1,8 @@
 # News about the `cytometree` R package
 
+### Main changes in Version 2.0.2  --- *this is only a minor release*:
+* better args checks for R 4.0.0
+
 ### Main changes in Version 2.0.0  (2019-08-19)
 * CyTOF data support through `CytofTree()` 
 * various bug fixes (mostly in the supervised option)

@@ -24,8 +24,7 @@
 plot_graph <- function(CytomeTreeObj, Ecex = 1, Ecolor = 8,
                        Vcex = .8, Vcolor = 0, ...)
 {
-  if(class(CytomeTreeObj) != "CytomeTree")
-  {
+  if(!methods::is(CytomeTreeObj, "CytomeTree")){
     stop("CytomeTreeObj must be of class CytomeTree.")
   }
   Tree <- CytomeTreeObj$mark_tree
@@ -40,23 +39,20 @@ plot_graph <- function(CytomeTreeObj, Ecex = 1, Ecolor = 8,
   {
     cpt <- 1
     NnodeLevel <- length(Tree[[level]])
-    for(Nnode in 1:NnodeLevel)
-    {
-      if(Tree[[level]][[Nnode]] == as.character(cptleaf))
-      {
+    for(Nnode in 1:NnodeLevel){
+      if(Tree[[level]][[Nnode]] == as.character(cptleaf)){
         cptleaf <- cptleaf + 1
         next
       }
       L_child <- Tree[[level + 1]][[cpt]] 
       R_child <- Tree[[level + 1]][[cpt + 1]] 
       cpt <- cpt + 2
-      adj_list <- rbind(
-        adj_list, 
-        cbind(
-          Tree[[level]][[Nnode]], 
-          c(L_child, R_child),
-          c("-","+")
-        )
+      adj_list <- rbind(adj_list, 
+                        cbind(
+                          Tree[[level]][[Nnode]], 
+                          c(L_child, R_child),
+                          c("-","+")
+                        )
       )
     }
   }

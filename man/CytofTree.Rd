@@ -4,9 +4,15 @@
 \alias{CytofTree}
 \title{Binary tree algorithm for mass cytometry data analysis.}
 \usage{
-CytofTree(M, minleaf = 1, t = 0.1, verbose = TRUE,
-  force_first_markers = NULL, transformation = c("asinh", "biexp",
-  "log10", "none"), num_col = 1:ncol(M))
+CytofTree(
+  M,
+  minleaf = 1,
+  t = 0.1,
+  verbose = TRUE,
+  force_first_markers = NULL,
+  transformation = c("asinh", "biexp", "log10", "none"),
+  num_col = 1:ncol(M)
+)
 }
 \arguments{
 \item{M}{A matrix of size n x p containing mass cytometry measures

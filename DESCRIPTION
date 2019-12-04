@@ -1,8 +1,8 @@
 Package: cytometree
 Type: Package
 Title: Automated Cytometry Gating and Annotation
-Version: 2.0.1
-Date: 2019-08-20
+Version: 2.0.2
+Date: 2019-12-04
 Author: Chariff Alkhassim, Boris P Hejblum, Anthony Devaux, Van Hung Huynh Tran
 Maintainer: Boris P Hejblum <boris.hejblum@u-bordeaux.fr>
 LinkingTo: Rcpp, RcppArmadillo
@@ -23,14 +23,16 @@ Imports:
     graphics,
     igraph,
     mclust,
+    methods,
     stats,
     cowplot,
     GoFKernel
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 BugReports: https://github.com/sistm/Cytometree/issues
 Encoding: UTF-8
 Suggests:
     knitr,
+    formatR,
     rmarkdown,
     viridis
 VignetteBuilder: knitr

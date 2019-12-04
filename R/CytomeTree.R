@@ -38,6 +38,8 @@
 #'the two families.
 #'@author Chariff Alkhassim, Boris Hejblum
 #'
+#'@importFrom methods is
+#'
 #'@export
 #'
 #'@examples
@@ -136,10 +138,10 @@
 #'}
 
 CytomeTree <- function(M, minleaf = 1, t = .1, verbose = TRUE, force_first_markers = NULL){
-  if(class(M) == "data.frame"){
+  if(methods::is(M, "data.frame")){
     M <- as.matrix(M)
   }
-  if(class(M) != "matrix" | mode(M) != "numeric"){
+  if(!methods::is(M, "matrix") | mode(M) != "numeric"){
     stop("M should be a numeric matrix")
   }
   n <- nrow(M)

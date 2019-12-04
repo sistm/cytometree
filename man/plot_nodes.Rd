@@ -5,8 +5,13 @@
 \title{Plot the distribution of the observed cells at each node 
 of the binary tree built using CytomeTree.}
 \usage{
-plot_nodes(CytomeTreeObj, nodes = NULL, nodesPerCol = NULL,
-  nodesPerRow = NULL, ...)
+plot_nodes(
+  CytomeTreeObj,
+  nodes = NULL,
+  nodesPerCol = NULL,
+  nodesPerRow = NULL,
+  ...
+)
 }
 \arguments{
 \item{CytomeTreeObj}{An object of class CytomeTree.}

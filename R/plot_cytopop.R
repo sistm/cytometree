@@ -19,6 +19,8 @@
 #' 
 #' @import ggplot2
 #' 
+#' @importFrom methods is
+#' 
 #' @export
 #' 
 #' @examples 
@@ -39,44 +41,25 @@ plot_cytopop <- function(AnnotObj, nbpop = 10, mincount = 1, maxcount = NULL, y_
     y_axis <- y_axis[1]
   }
 
-  if (class(AnnotObj)!="Annotation") {
-    
+  if(!methods::is(AnnotObj, "Annotation")){
     stop("AnnotObj must be class of Annotation")
-    
   }
-  
-  if (!is.null(nbpop)) {
-    
-    if (class(nbpop)!="numeric") {
-      
+  if(!is.null(nbpop)){
+    if(!methods::is(nbpop, "numeric")){
       stop("nbpop must be class of numeric")
-      
     }
-    
   }
-  
-  if (class(mincount)!="numeric") {
-    
+  if(!methods::is(mincount, "numeric")){
     stop("mincount must be class of numeric")
-    
   }
-  
-  if (!is.null(maxcount)) {
-    
-    if (class(maxcount)!="numeric") {
-      
+  if(!is.null(maxcount)) {
+    if(!methods::is(maxcount, "numeric")){
       stop("maxcount must be class of numeric")
-      
     }else{
-      
       if (maxcount<=mincount) {
-        
         stop("maxcount must be higher than mincount")
-        
       }
-      
     }
-    
   }
     
   data <- data.frame(AnnotObj$combinations[,c("leaves","count", "prop")])

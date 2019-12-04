@@ -4,10 +4,12 @@
 #'
 #'@importFrom stats var
 #'
+#'@importFrom methods is
+#'
 #'@keywords internal
 CytEM <- function(M, indices, minleaf, level, t, force_marker = NULL){
   
-  if(class(M)!="matrix"){
+  if(!methods::is(M, "matrix")){
     warning("M is not a matrix, this should not happen\n Please let the package maintainer know that ', drop=FALSE' is probably missing somewhere...")
     M <- as.matrix(M)
   }

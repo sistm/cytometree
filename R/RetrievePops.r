@@ -15,24 +15,22 @@
 #'with potentially merged leaves.}
 #'}
 #'
-#'@author Chariff Alkhassim
+#'@importFrom methods is
+#'
+#'@author Chariff Alkhassim, Boris Hejblum
 #'
 #'@export 
 RetrievePops <-function(AnnotationObj, phenotypes)
 {
-  if(class(AnnotationObj)!="Annotation")
-  {
+  if(!methods::is(AnnotationObj, "Annotation")){
     stop("AnnotationObj must be of class Annotation.")
   }
-  if(class(phenotypes)=="list")
-  {
-    if(class(phenotypes[[1]])!="matrix")
-    {
+  if(methods::is(phenotypes, "list")){
+    if(!methods::is(phenotypes[[1]], "matrix")){
       stop("Elements of phenotypes should be of class matrix.") 
     }
   }
-  else
-  {
+  else{
     stop("phenotypes should be of class list.")
   }
   labels <- AnnotationObj$labels

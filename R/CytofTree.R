@@ -47,6 +47,8 @@
 #'the two families.
 #'@author Anthony Devaux, Boris Hejblum
 #'
+#'@importFrom methods is
+#'
 #'@export
 #'
 #'@examples
@@ -75,10 +77,10 @@
 CytofTree <- function(M, minleaf = 1, t = .1, verbose = TRUE, force_first_markers = NULL, 
                       transformation = c("asinh", "biexp", "log10", "none"), 
                       num_col = 1:ncol(M)){
-  if(class(M) == "data.frame"){
+  if(methods::is(M, "data.frame")){
     M <- as.matrix(M)
   }
-  if(class(M) != "matrix" | mode(M) != "numeric"){
+  if(!methods::is(M, "matrix") | mode(M) != "numeric"){
     stop("M should be a numeric matrix")
   }
   n <- nrow(M)

@@ -44,6 +44,7 @@
 #'@import ggplot2 graphics mclust
 #'
 #'@importFrom stats dnorm sd
+#'@importFrom methods is
 #'
 #'@export
 Annotation <- function(CytomeTreeObj, K2markers = NULL, 
@@ -51,20 +52,16 @@ Annotation <- function(CytomeTreeObj, K2markers = NULL,
                        remove_outliers_inplot = TRUE,
                        center_fun = c("median", "mean"))
 {
-  if(class(CytomeTreeObj) != "CytomeTree")
-  {
+  if(!methods::is(CytomeTreeObj, "CytomeTree")){
     stop("CytometreeObj must be of class CytomeTree.")
   }
-  if(!is.null(K3markers))
-  {
-    if(class(K3markers)!="character")
-    {
+  if(!is.null(K3markers)){
+    if(!methods::is(K3markers, "character")){
       stop("K3markers must be of class character.")
     }
   }
   
-  if(is.null(t))
-  {
+  if(is.null(t)){
     t <- CytomeTreeObj$t
   }
   M <- CytomeTreeObj$M

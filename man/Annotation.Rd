@@ -4,9 +4,15 @@
 \alias{Annotation}
 \title{Annotates cell populations found using CytomeTree.}
 \usage{
-Annotation(CytomeTreeObj, K2markers = NULL, K3markers = NULL,
-  plot = TRUE, t = 0.2, remove_outliers_inplot = TRUE,
-  center_fun = c("median", "mean"))
+Annotation(
+  CytomeTreeObj,
+  K2markers = NULL,
+  K3markers = NULL,
+  plot = TRUE,
+  t = 0.2,
+  remove_outliers_inplot = TRUE,
+  center_fun = c("median", "mean")
+)
 }
 \arguments{
 \item{CytomeTreeObj}{An object of class CytomeTree.}
