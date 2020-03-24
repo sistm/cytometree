@@ -72,6 +72,7 @@ RetrievePops <-function(AnnotationObj, phenotypes)
     if(!length(tempres)){
       outlist[[l]][["phenotype"]] <- apply(temp[, 1:2, drop=FALSE], 1, paste, collapse="-") 
       outlist[[l]][["proportion"]] <- NA
+      outlist[[l]][["cells"]] <- NA
       outlist[[l]][["Mergedlabels"]] <- NA
       outlist[[l]][["Newlabel"]] <- NA
     }
@@ -79,6 +80,7 @@ RetrievePops <-function(AnnotationObj, phenotypes)
       leaves <- combinations[,c("leaves")][tempres]
       outlist[[l]][["phenotype"]] <- apply(temp[,1:2, drop=FALSE],1,paste,collapse="-") 
       outlist[[l]][["proportion"]] <- sum(Prop[tempres])
+      outlist[[l]][["cells"]] <- which(AnnotationObj$labels %in% leaves)
       if(length(tempres) > 1) {
         outlist[[l]][["Mergedlabels"]] <- leaves
         outlist[[l]][["Newlabel"]] <- maxlab + 1
