@@ -34,5 +34,6 @@ Suggests:
     knitr,
     formatR,
     rmarkdown,
-    viridis
+    viridis,
+    testthat
 VignetteBuilder: knitr
