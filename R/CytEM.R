@@ -40,8 +40,8 @@ CytEM <- function(M, indices, minleaf, level, t, force_marker = NULL){
       }
       mc_uni <- Mclust(M_j, G=1, verbose = FALSE)
       mc_mix <- Mclust(M_j, G=2, modelNames = "E", verbose = FALSE)
-      ind1 <- mc_mix$classification == 1
-      ind2 <- mc_mix$classification == 2
+      ind1 <- which(mc_mix$classification == 1)
+      ind2 <- which(mc_mix$classification == 2)
       if(length(ind1) < minleaf | length(ind2) < minleaf | is.null(mc_mix)){
         mark_not_dis <- append(mark_not_dis, colnames(M)[j])
         next()
@@ -100,8 +100,8 @@ CytEM <- function(M, indices, minleaf, level, t, force_marker = NULL){
     
     mc_uni <- Mclust(M_j, G=1, verbose = FALSE)
     mc_mix <- Mclust(M_j, G=2, modelNames = "E", verbose = FALSE)
-    ind1 <- mc_mix$classification == 1
-    ind2 <- mc_mix$classification == 2
+    ind1 <- which(mc_mix$classification == 1)
+    ind2 <- which(mc_mix$classification == 2)
     if(sum(ind1)<1 | sum(ind2)<1){
       message(paste0("Unable to force split on ", force_marker, " for some node at level", level))
     }else{
