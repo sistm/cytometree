@@ -1,7 +1,7 @@
 
 <!-- README.Rmd generates from README.Rmd. Please generate that file once done editing -->
 
-# cytometree
+# cytometree <a><img src='man/figures/logo.svg' align="right" height="139" /></a>
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cytometree)](https://cran.r-project.org/package=cytometree)
 [![Travis-CI Build
