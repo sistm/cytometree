@@ -1,9 +1,23 @@
 Package: cytometree
 Type: Package
 Title: Automated Cytometry Gating and Annotation
-Version: 2.0.2
-Date: 2019-12-04
-Author: Chariff Alkhassim, Boris P Hejblum, Anthony Devaux, Van Hung Huynh Tran
+Version: 2.0.3
+Date: 2020-04-04
+Authors@R: 
+    c(person(given = "Chariff",
+             family = "Alkhassim",
+             role = c("aut")),
+      person(given = "Boris P",
+             family = "Hejblum",
+             email = "boris.hejblum@u-bordeaux.fr",
+             role = c("cre", "aut")),
+      person(given = "Anthony",
+             family = "Devaux",
+             role = c("aut")),
+      person(given = "Van Hung Huynh",
+             family = "Tran",
+             role = c("aut"))
+             )
 Maintainer: Boris P Hejblum <boris.hejblum@u-bordeaux.fr>
 LinkingTo: Rcpp, RcppArmadillo
 Description: Given the hypothesis of a bi-modal distribution of cells for
@@ -27,7 +41,7 @@ Imports:
     stats,
     cowplot,
     GoFKernel
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 BugReports: https://github.com/sistm/Cytometree/issues
 Encoding: UTF-8
 Suggests:
