@@ -1,8 +1,8 @@
 Package: cytometree
 Type: Package
 Title: Automated Cytometry Gating and Annotation
-Version: 2.0.3
-Date: 2020-04-04
+Version: 2.0.4
+Date: 2020-08-12
 Authors@R: 
     c(person(given = "Chariff",
              family = "Alkhassim",
@@ -16,6 +16,9 @@ Authors@R:
              role = c("aut")),
       person(given = "Van Hung Huynh",
              family = "Tran",
+             role = c("aut")),
+      person(given = "Melany",
+             family = "Durand",
              role = c("aut"))
              )
 Maintainer: Boris P Hejblum <boris.hejblum@u-bordeaux.fr>
