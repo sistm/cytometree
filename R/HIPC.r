@@ -13,7 +13,7 @@
 #'@details This immunophenotyping T cell panel from the Lyoplate HIPC dataset 
 #'was used as part of the FlowCAP III Lyoplate challenge.
 #'
-#'@reference Maecker HT, McCoy JP & Nussenblatt R (2012). Standardizing 
+#'@references Maecker HT, McCoy JP & Nussenblatt R (2012). Standardizing 
 #'immunophenotyping for the human immunology project. Nature Reviews Immunology, 
 #'12(3):191--200. DOI: 10.1038/nri3158
 #'
