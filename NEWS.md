@@ -12,10 +12,10 @@
 * improved `plot_nodes()` function
 * added `plot_cytopop()` function for displaying populations counts
 
-# cytometree 1.1.1  (2017-10-22)
+# cytometree 1.1.1
 * Added a 3 component Gaussian mixture option
 
-# cytometree 1.1.0  (2017-10-10)
+# cytometree 1.1.0
 * Improved the annotation process allowing for 3 levels of expression and using the tree
 * Added a `NEWS.md` file to track changes to the package.
 * Added a vignette `autogating_cytometree`

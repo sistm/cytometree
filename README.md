@@ -1,7 +1,7 @@
 
 <!-- README.Rmd generates from README.Rmd. Please generate that file once done editing -->
 
-# cytometree <a><img src='man/figures/logo.svg' align="right" height="139" /></a>
+# cytometree <a><img src='man/figures/logo.png' align="right" width="139" /></a>
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/cytometree)](https://cran.r-project.org/package=cytometree)
 [![R-CMD-check](https://github.com/sistm/cytometree/workflows/R-CMD-check/badge.svg)](https://github.com/sistm/cytometree/actions)
@@ -53,5 +53,3 @@ Or to get the development version from
 #install.packages("devtools")
 devtools::install_github("sistm/cytometree")
 ```
-
-– Chariff Alkhassim & Boris Hejblum

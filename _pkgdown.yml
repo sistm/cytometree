@@ -1,4 +1,9 @@
 url: https://sistm.github.io/cytometree/
 template:
   bootstrap: 5
+  bootswatch: cosmo
 
+
+authors:
+  Boris P Hejblum:
+    href: https://borishejblum.science
