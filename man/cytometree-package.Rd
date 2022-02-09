@@ -8,13 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-Given the hypothesis of a bi-modal distribution of cells for
-    each marker, the algorithm constructs a binary tree, the nodes of which are
-    subpopulations of cells. At each node, observed cells and markers are modeled
-    by both a family of normal distributions and a family of bi-modal normal mixture
-    distributions. Splitting is done according to a normalized difference of AIC
-    between the two families. Method is detailed in: Commenges, Alkhassim, Gottardo, 
-    Hejblum & Thiebaut (2018) <doi: 10.1002/cyto.a.23601>.
+Given the hypothesis of a bi-modal distribution of cells for each marker, the algorithm constructs a binary tree, the nodes of which are subpopulations of cells. At each node, observed cells and markers are modeled by both a family of normal distributions and a family of bi-modal normal mixture distributions. Splitting is done according to a normalized difference of AIC between the two families. Method is detailed in: Commenges, Alkhassim, Gottardo, Hejblum & Thiebaut (2018) <doi: 10.1002/cyto.a.23601>.
 }
 \details{
 The main function in this package is \code{\link{CytomeTree}}.

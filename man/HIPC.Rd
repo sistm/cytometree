@@ -3,9 +3,9 @@
 \docType{data}
 \name{HIPC}
 \alias{HIPC}
-\title{HIPC T cell panel data set from HIPC program, patient 12828. The data was analyzed and gated by Stanford.}
+\title{HIPC T cell panel data set from HIPC program, patient 1369. The data was analyzed and gated by Stanford.}
 \format{
-A data frame with 33992 cell events and 6 markers.
+A data frame with 33992 cell events and 7 markers.
 }
 \source{
 \url{https://www.immuneprofiling.org/} \url{https://www.immunespace.org/} 
@@ -15,7 +15,7 @@ A data frame with 33992 cell events and 6 markers.
 data(HIPC)
 }
 \description{
-HIPC T cell panel data set from HIPC program, patient 12828. The data was analyzed and gated by Stanford.
+HIPC T cell panel data set from HIPC program, patient 1369. The data was analyzed and gated by Stanford.
 }
 \details{
 This immunophenotyping T cell panel from the Lyoplate HIPC dataset 

@@ -44,7 +44,7 @@ Imports:
     stats,
     cowplot,
     GoFKernel
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.2
 BugReports: https://github.com/sistm/Cytometree/issues
 Encoding: UTF-8
 Suggests:

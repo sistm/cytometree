@@ -1,4 +1,4 @@
-#' HIPC T cell panel data set from HIPC program, patient 12828. The data was analyzed and gated by Stanford.
+#' HIPC T cell panel data set from HIPC program, patient 1369. The data was analyzed and gated by Stanford.
 #'
 #'@docType data
 #'
@@ -8,7 +8,7 @@
 #'
 #'@usage data(HIPC)
 #'
-#'@format A data frame with 33992 cell events and 6 markers.
+#'@format A data frame with 33992 cell events and 7 markers.
 #'
 #'@details This immunophenotyping T cell panel from the Lyoplate HIPC dataset 
 #'was used as part of the FlowCAP III Lyoplate challenge.
