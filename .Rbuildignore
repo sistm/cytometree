@@ -11,3 +11,6 @@ R/plot_HMpop.R
 temp_Hung.rmd
 ^CRAN-RELEASE$
 ^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

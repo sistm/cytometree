@@ -50,3 +50,4 @@ inst/doc
 temp_Hung.rmd
 vignettes/*.R
 vignettes/*.html
+docs

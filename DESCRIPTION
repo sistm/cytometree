@@ -54,3 +54,4 @@ Suggests:
     viridis,
     testthat
 VignetteBuilder: knitr
+URL: https://sistm.github.io/cytometree/
