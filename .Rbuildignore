@@ -9,3 +9,5 @@
 R/plot_HMpop.R
 ^cran-comments\.md$
 temp_Hung.rmd
+^CRAN-RELEASE$
+^\.github$
