@@ -81,7 +81,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>`cytoftree`: extension of `cytometree` to analyze mass cytometry data</h1>
                         <h4 data-toc-skip class="author">Anthony Devaux, Boris Hejblum</h4>
             
-            <h4 data-toc-skip class="date">2022-02-09</h4>
+            <h4 data-toc-skip class="date">2022-03-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/sistm/Cytometree/blob/HEAD/vignettes/cytoftree.Rmd" class="external-link"><code>vignettes/cytoftree.Rmd</code></a></small>
       <div class="d-none name"><code>cytoftree.Rmd</code></div>
@@ -197,59 +197,59 @@
 <code class="sourceCode R"><span class="va">annot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Annotation.html">Annotation</a></span><span class="op">(</span><span class="va">tree</span>, plot <span class="op">=</span> <span class="cn">FALSE</span>, K2markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">IMdata</span><span class="op">)</span><span class="op">)</span>
 <span class="va">annot</span><span class="op">$</span><span class="va">combinations</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span></code></pre></div>
 <pre><code><span class="co">##     Time Cell_length (In113)Dd_CD57 (In115)Dd_Dead (Ce140)Dd_Bead</span>
-<span class="co">## 785    1           0              0              0              0</span>
-<span class="co">## 591    1           0              0              0              0</span>
+<span class="co">## 787    1           0              0              0              0</span>
+<span class="co">## 593    1           0              0              0              0</span>
 <span class="co">## 622    1           0              0              0              0</span>
 <span class="co">## 818    1           0              0              0              0</span>
 <span class="co">## 636    1           0              0              0              0</span>
 <span class="co">##     (Nd142)Dd_CD19 (Nd143)Dd_CD4 (Nd144)Dd_CD8 (Nd146)Dd_IgD (Sm147)Dd_CD85j</span>
-<span class="co">## 785              0             1             0             0               0</span>
-<span class="co">## 591              0             0             1             0               0</span>
+<span class="co">## 787              0             1             0             0               0</span>
+<span class="co">## 593              0             0             1             0               0</span>
 <span class="co">## 622              1             0             0             1               1</span>
 <span class="co">## 818              0             1             0             0               0</span>
 <span class="co">## 636              0             0             0             0               0</span>
 <span class="co">##     (Nd148)Dd_CD11c (Sm149)Dd_CD16 (Nd150)Dd_CD3 (Eu151)Dd_CD38 (Sm152)Dd_CD27</span>
-<span class="co">## 785               0              0             1              0              1</span>
-<span class="co">## 591               0              0             1              0              1</span>
+<span class="co">## 787               0              0             1              0              1</span>
+<span class="co">## 593               0              0             1              0              1</span>
 <span class="co">## 622               0              0             0              0              0</span>
 <span class="co">## 818               0              0             1              0              1</span>
 <span class="co">## 636               0              0             0              0              0</span>
 <span class="co">##     (Eu153)Dd_CD11b (Sm154)Dd_CD14 (Gd155)Dd_CCR6 (Gd156)Dd_CD94 (Gd157)Dd_CD86</span>
-<span class="co">## 785               0              0              0              0              0</span>
-<span class="co">## 591               0              0              0              0              0</span>
+<span class="co">## 787               0              0              0              0              0</span>
+<span class="co">## 593               0              0              0              0              0</span>
 <span class="co">## 622               0              0              1              0              0</span>
 <span class="co">## 818               0              0              0              0              0</span>
 <span class="co">## 636               0              0              0              0              0</span>
 <span class="co">##     (Gd158)Dd_CXCR5 (Tb159)Dd_CXCR3 (Gd160)Dd_CCR7 (Dy162)Dd_CD45RA</span>
-<span class="co">## 785               0               0              1                1</span>
-<span class="co">## 591               0               0              1                1</span>
+<span class="co">## 787               0               0              1                1</span>
+<span class="co">## 593               0               0              1                1</span>
 <span class="co">## 622               1               0              0                1</span>
 <span class="co">## 818               0               0              1                0</span>
 <span class="co">## 636               0               0              0                0</span>
 <span class="co">##     (Dy164)Dd_CD20 (Ho165)Dd_CD127 (Er166)Dd_CD33 (Er167)Dd_CD28 (Er168)Dd_CD24</span>
-<span class="co">## 785              0               0              0              1              0</span>
-<span class="co">## 591              0               0              0              1              0</span>
+<span class="co">## 787              0               0              0              1              0</span>
+<span class="co">## 593              0               0              0              1              0</span>
 <span class="co">## 622              1               0              0              0              0</span>
 <span class="co">## 818              0               0              0              1              0</span>
 <span class="co">## 636              0               0              0              0              0</span>
 <span class="co">##     (Tm169)Dd_ICOS (Er170)Dd_CD161 (Yb171)Dd_TCRgd (Yb172)Dd_PD-1</span>
-<span class="co">## 785              0               0               0              0</span>
-<span class="co">## 591              0               0               0              0</span>
+<span class="co">## 787              0               0               0              0</span>
+<span class="co">## 593              0               0               0              0</span>
 <span class="co">## 622              0               0               0              0</span>
 <span class="co">## 818              0               0               0              0</span>
 <span class="co">## 636              0               0               0              0</span>
 <span class="co">##     (Yb173)Dd_CD123 (Yb174)Dd_CD56 (Lu175)Dd_HLADR (Yb176)Dd_CD25</span>
-<span class="co">## 785               0              0               0              0</span>
-<span class="co">## 591               0              0               0              0</span>
+<span class="co">## 787               0              0               0              0</span>
+<span class="co">## 593               0              0               0              0</span>
 <span class="co">## 622               0              0               1              0</span>
 <span class="co">## 818               0              0               0              0</span>
 <span class="co">## 636               0              0               0              0</span>
 <span class="co">##     (Ir191)Dd_DNA1 (Ir193)Dd_DNA2 leaves count   prop</span>
-<span class="co">## 785              1              1    785   357 0.0357</span>
-<span class="co">## 591              1              1    591   182 0.0182</span>
+<span class="co">## 787              1              1    787   357 0.0357</span>
+<span class="co">## 593              1              1    593   182 0.0182</span>
 <span class="co">## 622              1              1    622   119 0.0119</span>
 <span class="co">## 818              1              1    818    96 0.0096</span>
-<span class="co">## 636              0              0    636    92 0.0092</span></code></pre>
+<span class="co">## 636              0              0    636    93 0.0093</span></code></pre>
 <p>Due to the high number of sub-populations, it’s recommended to use <code>RetrievePops</code> function which provide informations for particular sub-populations.</p>
 </div>
 <div class="section level3">
@@ -422,13 +422,13 @@
 <span class="co">## [1947] 9980 9981 9988 9989 9990 9992 9994</span>
 <span class="co">## </span>
 <span class="co">## $Mergedlabels</span>
-<span class="co">##   [1] 785 818 784 817 731 770 385 698 473 713 814 824 801 471 806 802 618 640</span>
-<span class="co">##  [19] 643 787 808 771 822 561 671 220 821 323 804 820 474 555 642 711  66 529</span>
-<span class="co">##  [37] 556 615 714 767 171 472 712 811 819 215 617 619 646 733 248 357 382 501</span>
-<span class="co">##  [55] 669 697 816 176 216 353 557 558 667 670 672 699 700 716 717 769 807 324</span>
-<span class="co">##  [73] 355 584 647 666 673 764 812 815 174 181 183 354 358 387 500 559 560 620</span>
-<span class="co">##  [91] 644 645 648 715 768 805 113 170 172 175 182 219 221 247 283 386 468 530</span>
-<span class="co">## [109] 554 668 786</span>
+<span class="co">##   [1] 787 818 786 817 739 773 385 697 471 714 814 824 801 469 806 802 618 640</span>
+<span class="co">##  [19] 643 789 808 774 822 562 670 220 821 326 804 820 472 556 642 712  66 528</span>
+<span class="co">##  [37] 557 615 715 770 171 470 713 811 819 215 617 619 646 741 247 355 382 501</span>
+<span class="co">##  [55] 668 696 816 176 216 351 558 559 666 669 671 698 699 717 718 772 807 327</span>
+<span class="co">##  [73] 353 586 647 665 672 767 812 815 174 181 183 352 356 387 500 560 561 620</span>
+<span class="co">##  [91] 644 645 648 716 771 805 113 170 172 175 182 219 221 246 284 386 466 529</span>
+<span class="co">## [109] 555 667 788</span>
 <span class="co">## </span>
 <span class="co">## $Newlabel</span>
 <span class="co">## [1] 825</span></code></pre>
@@ -497,10 +497,10 @@
 <span class="co">## [751] 9978 9993</span>
 <span class="co">## </span>
 <span class="co">## $Mergedlabels</span>
-<span class="co">##  [1] 591 674 701 621 476 536 589 186 220 586 288 507 562 428 533 585 588 676 180</span>
-<span class="co">## [20] 215 254 326 389 506 535 362 391 564 565  68 114 179 187 216 290 364 388 475</span>
-<span class="co">## [39] 563 718 734 735 327 361 363 390 531 178 181 183 289 392 534 182 185 477 532</span>
-<span class="co">## [58] 590</span>
+<span class="co">##  [1] 593 673 700 621 474 535 591 186 220 588 289 507 563 429 532 587 590 675 180</span>
+<span class="co">## [20] 215 253 329 389 506 534 360 391 565 566  68 114 179 187 216 291 362 388 473</span>
+<span class="co">## [39] 564 719 742 743 330 359 361 390 530 178 181 183 290 392 533 182 185 475 531</span>
+<span class="co">## [58] 592</span>
 <span class="co">## </span>
 <span class="co">## $Newlabel</span>
 <span class="co">## [1] 826</span></code></pre>
