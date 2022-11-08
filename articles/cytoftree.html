@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="`cytoftree`: extension of `cytometree` to analyze mass cytometry data">
 <meta property="og:description" content="cytometree">
@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cytometree</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,11 +77,11 @@
 
 
 <script src="cytoftree_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>`cytoftree`: extension of `cytometree` to analyze mass cytometry data</h1>
                         <h4 data-toc-skip class="author">Anthony Devaux, Boris Hejblum</h4>
             
-            <h4 data-toc-skip class="date">2022-03-09</h4>
+            <h4 data-toc-skip class="date">2022-11-08</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/sistm/Cytometree/blob/HEAD/vignettes/cytoftree.Rmd" class="external-link"><code>vignettes/cytoftree.Rmd</code></a></small>
       <div class="d-none name"><code>cytoftree.Rmd</code></div>
@@ -123,48 +123,48 @@
 </h3>
 <p>First, we can look the structure and the markers of the data.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sistm.github.io/cytometree/">cytometree</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">IMdata</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">IMdata</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] 10000    39</span></code></pre>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sistm.github.io/cytometree/">cytometree</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">IMdata</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">IMdata</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 10000    39</span></span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">IMdata</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##  [1] "Time"             "Cell_length"      "(In113)Dd_CD57"   "(In115)Dd_Dead"  </span>
-<span class="co">##  [5] "(Ce140)Dd_Bead"   "(Nd142)Dd_CD19"   "(Nd143)Dd_CD4"    "(Nd144)Dd_CD8"   </span>
-<span class="co">##  [9] "(Nd146)Dd_IgD"    "(Sm147)Dd_CD85j"  "(Nd148)Dd_CD11c"  "(Sm149)Dd_CD16"  </span>
-<span class="co">## [13] "(Nd150)Dd_CD3"    "(Eu151)Dd_CD38"   "(Sm152)Dd_CD27"   "(Eu153)Dd_CD11b" </span>
-<span class="co">## [17] "(Sm154)Dd_CD14"   "(Gd155)Dd_CCR6"   "(Gd156)Dd_CD94"   "(Gd157)Dd_CD86"  </span>
-<span class="co">## [21] "(Gd158)Dd_CXCR5"  "(Tb159)Dd_CXCR3"  "(Gd160)Dd_CCR7"   "(Dy162)Dd_CD45RA"</span>
-<span class="co">## [25] "(Dy164)Dd_CD20"   "(Ho165)Dd_CD127"  "(Er166)Dd_CD33"   "(Er167)Dd_CD28"  </span>
-<span class="co">## [29] "(Er168)Dd_CD24"   "(Tm169)Dd_ICOS"   "(Er170)Dd_CD161"  "(Yb171)Dd_TCRgd" </span>
-<span class="co">## [33] "(Yb172)Dd_PD-1"   "(Yb173)Dd_CD123"  "(Yb174)Dd_CD56"   "(Lu175)Dd_HLADR" </span>
-<span class="co">## [37] "(Yb176)Dd_CD25"   "(Ir191)Dd_DNA1"   "(Ir193)Dd_DNA2"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">IMdata</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##  [1] "Time"             "Cell_length"      "(In113)Dd_CD57"   "(In115)Dd_Dead"  </span></span>
+<span><span class="co">##  [5] "(Ce140)Dd_Bead"   "(Nd142)Dd_CD19"   "(Nd143)Dd_CD4"    "(Nd144)Dd_CD8"   </span></span>
+<span><span class="co">##  [9] "(Nd146)Dd_IgD"    "(Sm147)Dd_CD85j"  "(Nd148)Dd_CD11c"  "(Sm149)Dd_CD16"  </span></span>
+<span><span class="co">## [13] "(Nd150)Dd_CD3"    "(Eu151)Dd_CD38"   "(Sm152)Dd_CD27"   "(Eu153)Dd_CD11b" </span></span>
+<span><span class="co">## [17] "(Sm154)Dd_CD14"   "(Gd155)Dd_CCR6"   "(Gd156)Dd_CD94"   "(Gd157)Dd_CD86"  </span></span>
+<span><span class="co">## [21] "(Gd158)Dd_CXCR5"  "(Tb159)Dd_CXCR3"  "(Gd160)Dd_CCR7"   "(Dy162)Dd_CD45RA"</span></span>
+<span><span class="co">## [25] "(Dy164)Dd_CD20"   "(Ho165)Dd_CD127"  "(Er166)Dd_CD33"   "(Er167)Dd_CD28"  </span></span>
+<span><span class="co">## [29] "(Er168)Dd_CD24"   "(Tm169)Dd_ICOS"   "(Er170)Dd_CD161"  "(Yb171)Dd_TCRgd" </span></span>
+<span><span class="co">## [33] "(Yb172)Dd_PD-1"   "(Yb173)Dd_CD123"  "(Yb174)Dd_CD56"   "(Lu175)Dd_HLADR" </span></span>
+<span><span class="co">## [37] "(Yb176)Dd_CD25"   "(Ir191)Dd_DNA1"   "(Ir193)Dd_DNA2"</span></span></code></pre>
 <p>Then, we also check the proportion of zero for each marker, particularity of mass cytometry data.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">zero_proportion</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">IMdata</span><span class="op">[</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">]</span>, MARGIN <span class="op">=</span> <span class="fl">2</span>, FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html" class="external-link">prop.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="st">"TRUE"</span><span class="op">]</span> <span class="op">*</span> <span class="fl">100</span>, <span class="fl">2</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span>
-<span class="va">zero_proportion</span></code></pre></div>
-<pre><code><span class="co">##   (In113)Dd_CD57   (In115)Dd_Dead   (Ce140)Dd_Bead   (Nd142)Dd_CD19 </span>
-<span class="co">##            76.26            60.55            91.00            70.34 </span>
-<span class="co">##    (Nd143)Dd_CD4    (Nd144)Dd_CD8    (Nd146)Dd_IgD  (Sm147)Dd_CD85j </span>
-<span class="co">##            38.92            45.04            70.61            55.14 </span>
-<span class="co">##  (Nd148)Dd_CD11c   (Sm149)Dd_CD16    (Nd150)Dd_CD3   (Eu151)Dd_CD38 </span>
-<span class="co">##            54.75            63.78            18.75            16.30 </span>
-<span class="co">##   (Sm152)Dd_CD27  (Eu153)Dd_CD11b   (Sm154)Dd_CD14   (Gd155)Dd_CCR6 </span>
-<span class="co">##            23.19            33.66            56.47            68.81 </span>
-<span class="co">##   (Gd156)Dd_CD94   (Gd157)Dd_CD86  (Gd158)Dd_CXCR5  (Tb159)Dd_CXCR3 </span>
-<span class="co">##            63.89            57.71            56.91            52.07 </span>
-<span class="co">##   (Gd160)Dd_CCR7 (Dy162)Dd_CD45RA   (Dy164)Dd_CD20  (Ho165)Dd_CD127 </span>
-<span class="co">##            29.54             8.67            49.11            34.57 </span>
-<span class="co">##   (Er166)Dd_CD33   (Er167)Dd_CD28   (Er168)Dd_CD24   (Tm169)Dd_ICOS </span>
-<span class="co">##            39.43            31.08            64.00            74.00 </span>
-<span class="co">##  (Er170)Dd_CD161  (Yb171)Dd_TCRgd   (Yb172)Dd_PD-1  (Yb173)Dd_CD123 </span>
-<span class="co">##            76.15            90.25            81.13            75.48 </span>
-<span class="co">##   (Yb174)Dd_CD56  (Lu175)Dd_HLADR   (Yb176)Dd_CD25   (Ir191)Dd_DNA1 </span>
-<span class="co">##            66.72            45.16            56.40             1.42 </span>
-<span class="co">##   (Ir193)Dd_DNA2 </span>
-<span class="co">##             2.63</span></code></pre>
+<code class="sourceCode R"><span><span class="va">zero_proportion</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">IMdata</span><span class="op">[</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">]</span>, MARGIN <span class="op">=</span> <span class="fl">2</span>, FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html" class="external-link">prop.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="st">"TRUE"</span><span class="op">]</span> <span class="op">*</span> <span class="fl">100</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="va">zero_proportion</span></span></code></pre></div>
+<pre><code><span><span class="co">##   (In113)Dd_CD57   (In115)Dd_Dead   (Ce140)Dd_Bead   (Nd142)Dd_CD19 </span></span>
+<span><span class="co">##            76.26            60.55            91.00            70.34 </span></span>
+<span><span class="co">##    (Nd143)Dd_CD4    (Nd144)Dd_CD8    (Nd146)Dd_IgD  (Sm147)Dd_CD85j </span></span>
+<span><span class="co">##            38.92            45.04            70.61            55.14 </span></span>
+<span><span class="co">##  (Nd148)Dd_CD11c   (Sm149)Dd_CD16    (Nd150)Dd_CD3   (Eu151)Dd_CD38 </span></span>
+<span><span class="co">##            54.75            63.78            18.75            16.30 </span></span>
+<span><span class="co">##   (Sm152)Dd_CD27  (Eu153)Dd_CD11b   (Sm154)Dd_CD14   (Gd155)Dd_CCR6 </span></span>
+<span><span class="co">##            23.19            33.66            56.47            68.81 </span></span>
+<span><span class="co">##   (Gd156)Dd_CD94   (Gd157)Dd_CD86  (Gd158)Dd_CXCR5  (Tb159)Dd_CXCR3 </span></span>
+<span><span class="co">##            63.89            57.71            56.91            52.07 </span></span>
+<span><span class="co">##   (Gd160)Dd_CCR7 (Dy162)Dd_CD45RA   (Dy164)Dd_CD20  (Ho165)Dd_CD127 </span></span>
+<span><span class="co">##            29.54             8.67            49.11            34.57 </span></span>
+<span><span class="co">##   (Er166)Dd_CD33   (Er167)Dd_CD28   (Er168)Dd_CD24   (Tm169)Dd_ICOS </span></span>
+<span><span class="co">##            39.43            31.08            64.00            74.00 </span></span>
+<span><span class="co">##  (Er170)Dd_CD161  (Yb171)Dd_TCRgd   (Yb172)Dd_PD-1  (Yb173)Dd_CD123 </span></span>
+<span><span class="co">##            76.15            90.25            81.13            75.48 </span></span>
+<span><span class="co">##   (Yb174)Dd_CD56  (Lu175)Dd_HLADR   (Yb176)Dd_CD25   (Ir191)Dd_DNA1 </span></span>
+<span><span class="co">##            66.72            45.16            56.40             1.42 </span></span>
+<span><span class="co">##   (Ir193)Dd_DNA2 </span></span>
+<span><span class="co">##             2.63</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="cytoftree-function">CytofTree function<a class="anchor" aria-label="anchor" href="#cytoftree-function"></a>
@@ -172,17 +172,17 @@
 <p>According to the available markers, a gating strategy may be considered. In this example, we have a gating strategy to conserve only viable cells by splitting on the following markers : <code>DNA1</code>, <code>DNA2</code>, <code>Cell_length</code>, <code>Bead</code> and <code>Dead</code>. This way, we can be as close as possible to manual gating. To do this, we have to force the markers with the <code>force_first_marker</code> option (semi-supervised gating).</p>
 <p>Then, to improve the performance of automating gating, we decided to transform data with <code>asinh</code> transformation (default transformation). Then, we have to choose which markers should be transformed using <code>num_col</code> argument. The columns <code>Time</code> et <code>Cell_length</code> are not mass cytometry measure and shouldn’t be transformed.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">num_col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">IMdata</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CytofTree.html">CytofTree</a></span><span class="op">(</span>M <span class="op">=</span> <span class="va">IMdata</span>, minleaf <span class="op">=</span> <span class="fl">1</span>, t <span class="op">=</span> <span class="fl">0.1</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, force_first_markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Ir191)Dd_DNA1"</span>,
-    <span class="st">"(Ir193)Dd_DNA2"</span>, <span class="st">"Cell_length"</span>, <span class="st">"(Ce140)Dd_Bead"</span>, <span class="st">"(In115)Dd_Dead"</span><span class="op">)</span>, transformation <span class="op">=</span> <span class="st">"asinh"</span>,
-    num_col <span class="op">=</span> <span class="va">num_col</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## Unable to force split on (In115)Dd_Dead for some node at level5</span>
-<span class="co">## Unable to force split on (In115)Dd_Dead for some node at level5</span></code></pre>
-<pre><code><span class="co">## It works !</span></code></pre>
+<code class="sourceCode R"><span><span class="va">num_col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">IMdata</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CytofTree.html">CytofTree</a></span><span class="op">(</span>M <span class="op">=</span> <span class="va">IMdata</span>, minleaf <span class="op">=</span> <span class="fl">1</span>, t <span class="op">=</span> <span class="fl">0.1</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, force_first_markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Ir191)Dd_DNA1"</span>,</span>
+<span>    <span class="st">"(Ir193)Dd_DNA2"</span>, <span class="st">"Cell_length"</span>, <span class="st">"(Ce140)Dd_Bead"</span>, <span class="st">"(In115)Dd_Dead"</span><span class="op">)</span>, transformation <span class="op">=</span> <span class="st">"asinh"</span>,</span>
+<span>    num_col <span class="op">=</span> <span class="va">num_col</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Unable to force split on (In115)Dd_Dead for some node at level5</span></span>
+<span><span class="co">## Unable to force split on (In115)Dd_Dead for some node at level5</span></span></code></pre>
+<pre><code><span><span class="co">## It works !</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">tree</span><span class="op">$</span><span class="va">labels</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] 824</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">tree</span><span class="op">$</span><span class="va">labels</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 824</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="high-dimensional-issues">High dimensional issues<a class="anchor" aria-label="anchor" href="#high-dimensional-issues"></a>
@@ -194,62 +194,62 @@
 </h3>
 <p>The <code>annotation</code> function allows to recover the incomplete annotation on sub-populations. <code>combinations</code> option provides the complete annotation on each sub-population.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">annot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Annotation.html">Annotation</a></span><span class="op">(</span><span class="va">tree</span>, plot <span class="op">=</span> <span class="cn">FALSE</span>, K2markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">IMdata</span><span class="op">)</span><span class="op">)</span>
-<span class="va">annot</span><span class="op">$</span><span class="va">combinations</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span></code></pre></div>
-<pre><code><span class="co">##     Time Cell_length (In113)Dd_CD57 (In115)Dd_Dead (Ce140)Dd_Bead</span>
-<span class="co">## 787    1           0              0              0              0</span>
-<span class="co">## 593    1           0              0              0              0</span>
-<span class="co">## 622    1           0              0              0              0</span>
-<span class="co">## 818    1           0              0              0              0</span>
-<span class="co">## 636    1           0              0              0              0</span>
-<span class="co">##     (Nd142)Dd_CD19 (Nd143)Dd_CD4 (Nd144)Dd_CD8 (Nd146)Dd_IgD (Sm147)Dd_CD85j</span>
-<span class="co">## 787              0             1             0             0               0</span>
-<span class="co">## 593              0             0             1             0               0</span>
-<span class="co">## 622              1             0             0             1               1</span>
-<span class="co">## 818              0             1             0             0               0</span>
-<span class="co">## 636              0             0             0             0               0</span>
-<span class="co">##     (Nd148)Dd_CD11c (Sm149)Dd_CD16 (Nd150)Dd_CD3 (Eu151)Dd_CD38 (Sm152)Dd_CD27</span>
-<span class="co">## 787               0              0             1              0              1</span>
-<span class="co">## 593               0              0             1              0              1</span>
-<span class="co">## 622               0              0             0              0              0</span>
-<span class="co">## 818               0              0             1              0              1</span>
-<span class="co">## 636               0              0             0              0              0</span>
-<span class="co">##     (Eu153)Dd_CD11b (Sm154)Dd_CD14 (Gd155)Dd_CCR6 (Gd156)Dd_CD94 (Gd157)Dd_CD86</span>
-<span class="co">## 787               0              0              0              0              0</span>
-<span class="co">## 593               0              0              0              0              0</span>
-<span class="co">## 622               0              0              1              0              0</span>
-<span class="co">## 818               0              0              0              0              0</span>
-<span class="co">## 636               0              0              0              0              0</span>
-<span class="co">##     (Gd158)Dd_CXCR5 (Tb159)Dd_CXCR3 (Gd160)Dd_CCR7 (Dy162)Dd_CD45RA</span>
-<span class="co">## 787               0               0              1                1</span>
-<span class="co">## 593               0               0              1                1</span>
-<span class="co">## 622               1               0              0                1</span>
-<span class="co">## 818               0               0              1                0</span>
-<span class="co">## 636               0               0              0                0</span>
-<span class="co">##     (Dy164)Dd_CD20 (Ho165)Dd_CD127 (Er166)Dd_CD33 (Er167)Dd_CD28 (Er168)Dd_CD24</span>
-<span class="co">## 787              0               0              0              1              0</span>
-<span class="co">## 593              0               0              0              1              0</span>
-<span class="co">## 622              1               0              0              0              0</span>
-<span class="co">## 818              0               0              0              1              0</span>
-<span class="co">## 636              0               0              0              0              0</span>
-<span class="co">##     (Tm169)Dd_ICOS (Er170)Dd_CD161 (Yb171)Dd_TCRgd (Yb172)Dd_PD-1</span>
-<span class="co">## 787              0               0               0              0</span>
-<span class="co">## 593              0               0               0              0</span>
-<span class="co">## 622              0               0               0              0</span>
-<span class="co">## 818              0               0               0              0</span>
-<span class="co">## 636              0               0               0              0</span>
-<span class="co">##     (Yb173)Dd_CD123 (Yb174)Dd_CD56 (Lu175)Dd_HLADR (Yb176)Dd_CD25</span>
-<span class="co">## 787               0              0               0              0</span>
-<span class="co">## 593               0              0               0              0</span>
-<span class="co">## 622               0              0               1              0</span>
-<span class="co">## 818               0              0               0              0</span>
-<span class="co">## 636               0              0               0              0</span>
-<span class="co">##     (Ir191)Dd_DNA1 (Ir193)Dd_DNA2 leaves count   prop</span>
-<span class="co">## 787              1              1    787   357 0.0357</span>
-<span class="co">## 593              1              1    593   182 0.0182</span>
-<span class="co">## 622              1              1    622   119 0.0119</span>
-<span class="co">## 818              1              1    818    96 0.0096</span>
-<span class="co">## 636              0              0    636    93 0.0093</span></code></pre>
+<code class="sourceCode R"><span><span class="va">annot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Annotation.html">Annotation</a></span><span class="op">(</span><span class="va">tree</span>, plot <span class="op">=</span> <span class="cn">FALSE</span>, K2markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">IMdata</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">annot</span><span class="op">$</span><span class="va">combinations</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">##     Time Cell_length (In113)Dd_CD57 (In115)Dd_Dead (Ce140)Dd_Bead</span></span>
+<span><span class="co">## 787    1           0              0              0              0</span></span>
+<span><span class="co">## 593    1           0              0              0              0</span></span>
+<span><span class="co">## 622    1           0              0              0              0</span></span>
+<span><span class="co">## 818    1           0              0              0              0</span></span>
+<span><span class="co">## 636    1           0              0              0              0</span></span>
+<span><span class="co">##     (Nd142)Dd_CD19 (Nd143)Dd_CD4 (Nd144)Dd_CD8 (Nd146)Dd_IgD (Sm147)Dd_CD85j</span></span>
+<span><span class="co">## 787              0             1             0             0               0</span></span>
+<span><span class="co">## 593              0             0             1             0               0</span></span>
+<span><span class="co">## 622              1             0             0             1               1</span></span>
+<span><span class="co">## 818              0             1             0             0               0</span></span>
+<span><span class="co">## 636              0             0             0             0               0</span></span>
+<span><span class="co">##     (Nd148)Dd_CD11c (Sm149)Dd_CD16 (Nd150)Dd_CD3 (Eu151)Dd_CD38 (Sm152)Dd_CD27</span></span>
+<span><span class="co">## 787               0              0             1              0              1</span></span>
+<span><span class="co">## 593               0              0             1              0              1</span></span>
+<span><span class="co">## 622               0              0             0              0              0</span></span>
+<span><span class="co">## 818               0              0             1              0              1</span></span>
+<span><span class="co">## 636               0              0             0              0              0</span></span>
+<span><span class="co">##     (Eu153)Dd_CD11b (Sm154)Dd_CD14 (Gd155)Dd_CCR6 (Gd156)Dd_CD94 (Gd157)Dd_CD86</span></span>
+<span><span class="co">## 787               0              0              0              0              0</span></span>
+<span><span class="co">## 593               0              0              0              0              0</span></span>
+<span><span class="co">## 622               0              0              1              0              0</span></span>
+<span><span class="co">## 818               0              0              0              0              0</span></span>
+<span><span class="co">## 636               0              0              0              0              0</span></span>
+<span><span class="co">##     (Gd158)Dd_CXCR5 (Tb159)Dd_CXCR3 (Gd160)Dd_CCR7 (Dy162)Dd_CD45RA</span></span>
+<span><span class="co">## 787               0               0              1                1</span></span>
+<span><span class="co">## 593               0               0              1                1</span></span>
+<span><span class="co">## 622               1               0              0                1</span></span>
+<span><span class="co">## 818               0               0              1                0</span></span>
+<span><span class="co">## 636               0               0              0                0</span></span>
+<span><span class="co">##     (Dy164)Dd_CD20 (Ho165)Dd_CD127 (Er166)Dd_CD33 (Er167)Dd_CD28 (Er168)Dd_CD24</span></span>
+<span><span class="co">## 787              0               0              0              1              0</span></span>
+<span><span class="co">## 593              0               0              0              1              0</span></span>
+<span><span class="co">## 622              1               0              0              0              0</span></span>
+<span><span class="co">## 818              0               0              0              1              0</span></span>
+<span><span class="co">## 636              0               0              0              0              0</span></span>
+<span><span class="co">##     (Tm169)Dd_ICOS (Er170)Dd_CD161 (Yb171)Dd_TCRgd (Yb172)Dd_PD-1</span></span>
+<span><span class="co">## 787              0               0               0              0</span></span>
+<span><span class="co">## 593              0               0               0              0</span></span>
+<span><span class="co">## 622              0               0               0              0</span></span>
+<span><span class="co">## 818              0               0               0              0</span></span>
+<span><span class="co">## 636              0               0               0              0</span></span>
+<span><span class="co">##     (Yb173)Dd_CD123 (Yb174)Dd_CD56 (Lu175)Dd_HLADR (Yb176)Dd_CD25</span></span>
+<span><span class="co">## 787               0              0               0              0</span></span>
+<span><span class="co">## 593               0              0               0              0</span></span>
+<span><span class="co">## 622               0              0               1              0</span></span>
+<span><span class="co">## 818               0              0               0              0</span></span>
+<span><span class="co">## 636               0              0               0              0</span></span>
+<span><span class="co">##     (Ir191)Dd_DNA1 (Ir193)Dd_DNA2 leaves count   prop</span></span>
+<span><span class="co">## 787              1              1    787   357 0.0357</span></span>
+<span><span class="co">## 593              1              1    593   182 0.0182</span></span>
+<span><span class="co">## 622              1              1    622   119 0.0119</span></span>
+<span><span class="co">## 818              1              1    818    96 0.0096</span></span>
+<span><span class="co">## 636              0              0    636    93 0.0093</span></span></code></pre>
 <p>Due to the high number of sub-populations, it’s recommended to use <code>RetrievePops</code> function which provide informations for particular sub-populations.</p>
 </div>
 <div class="section level3">
@@ -258,252 +258,252 @@
 </h3>
 <p><code>RetrievePops</code> provides several informations on specific sub-populations, in particular the proportions and the sub-populations merged.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">phenotypes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">phenotypes</span><span class="op">[[</span><span class="st">"CD4+"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Ir191)Dd_DNA1"</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Ir193)Dd_DNA2"</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Cell_length"</span>,
-    <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Ce140)Dd_Bead"</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(In115)Dd_Dead"</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Sm154)Dd_CD14"</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Er166)Dd_CD33"</span>,
-    <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Nd150)Dd_CD3"</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Nd143)Dd_CD4"</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">phenotypes</span><span class="op">[[</span><span class="st">"CD8+"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Ir191)Dd_DNA1"</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Ir193)Dd_DNA2"</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Cell_length"</span>,
-    <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Ce140)Dd_Bead"</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(In115)Dd_Dead"</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Sm154)Dd_CD14"</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Er166)Dd_CD33"</span>,
-    <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Nd150)Dd_CD3"</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Nd144)Dd_CD8"</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">pheno_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/RetrievePops.html">RetrievePops</a></span><span class="op">(</span><span class="va">annot</span>, phenotypes <span class="op">=</span> <span class="va">phenotypes</span><span class="op">)</span>
-
-<span class="co"># CD4+</span>
-<span class="va">pheno_result</span><span class="op">$</span><span class="va">phenotypesinfo</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></code></pre></div>
-<pre><code><span class="co">## $phenotype</span>
-<span class="co">## [1] "(Ir191)Dd_DNA1-1" "(Ir193)Dd_DNA2-1" "Cell_length-0"    "(Ce140)Dd_Bead-0"</span>
-<span class="co">## [5] "(In115)Dd_Dead-0" "(Sm154)Dd_CD14-0" "(Er166)Dd_CD33-0" "(Nd150)Dd_CD3-1" </span>
-<span class="co">## [9] "(Nd143)Dd_CD4-1" </span>
-<span class="co">## </span>
-<span class="co">## $proportion</span>
-<span class="co">## [1] 0.1953</span>
-<span class="co">## </span>
-<span class="co">## $cells</span>
-<span class="co">##    [1]    2    9   25   30   34   35   40   43   47   48   52   53   59   69</span>
-<span class="co">##   [15]   84   85   87   88   90   98  115  118  123  125  130  134  136  144</span>
-<span class="co">##   [29]  161  170  183  187  190  193  196  206  207  208  213  223  228  236</span>
-<span class="co">##   [43]  241  242  253  262  269  270  280  283  286  294  304  307  313  315</span>
-<span class="co">##   [57]  318  319  320  325  348  353  356  377  379  385  386  389  397  401</span>
-<span class="co">##   [71]  406  413  414  422  424  425  427  436  439  466  476  483  490  496</span>
-<span class="co">##   [85]  503  504  525  538  547  548  549  551  556  559  568  569  578  580</span>
-<span class="co">##   [99]  582  597  601  603  612  614  615  617  619  628  631  637  638  640</span>
-<span class="co">##  [113]  641  649  658  660  661  662  666  671  682  695  700  702  703  705</span>
-<span class="co">##  [127]  709  711  712  714  722  724  726  730  739  741  749  752  761  764</span>
-<span class="co">##  [141]  793  798  799  800  801  803  812  824  835  840  849  851  855  860</span>
-<span class="co">##  [155]  862  866  878  883  886  889  895  908  910  921  931  932  935  936</span>
-<span class="co">##  [169]  937  949  954  955  956  959  961  979  980  988  999 1001 1014 1026</span>
-<span class="co">##  [183] 1039 1045 1046 1052 1060 1066 1075 1081 1086 1097 1099 1103 1108 1112</span>
-<span class="co">##  [197] 1126 1128 1132 1133 1136 1145 1146 1157 1168 1171 1174 1185 1190 1193</span>
-<span class="co">##  [211] 1196 1197 1207 1208 1212 1215 1216 1219 1221 1224 1231 1235 1236 1238</span>
-<span class="co">##  [225] 1239 1248 1254 1262 1267 1274 1275 1276 1277 1285 1288 1289 1290 1303</span>
-<span class="co">##  [239] 1310 1311 1317 1320 1322 1331 1333 1343 1349 1351 1354 1355 1371 1372</span>
-<span class="co">##  [253] 1376 1380 1391 1405 1406 1407 1408 1409 1411 1412 1416 1426 1429 1437</span>
-<span class="co">##  [267] 1440 1444 1445 1449 1450 1456 1457 1459 1468 1475 1476 1479 1484 1487</span>
-<span class="co">##  [281] 1491 1496 1497 1498 1500 1503 1510 1514 1515 1529 1530 1531 1536 1537</span>
-<span class="co">##  [295] 1557 1559 1563 1567 1568 1573 1574 1575 1580 1582 1585 1591 1596 1601</span>
-<span class="co">##  [309] 1602 1632 1633 1637 1640 1641 1663 1667 1670 1679 1681 1682 1685 1693</span>
-<span class="co">##  [323] 1709 1710 1731 1734 1737 1738 1753 1764 1766 1768 1773 1775 1778 1779</span>
-<span class="co">##  [337] 1780 1781 1784 1787 1789 1791 1795 1800 1801 1803 1806 1811 1825 1834</span>
-<span class="co">##  [351] 1835 1839 1842 1846 1847 1848 1857 1864 1873 1880 1905 1906 1908 1919</span>
-<span class="co">##  [365] 1920 1923 1933 1934 1940 1954 1956 1965 1972 1991 1992 1998 2004 2008</span>
-<span class="co">##  [379] 2013 2016 2020 2023 2024 2030 2032 2033 2034 2043 2044 2050 2062 2074</span>
-<span class="co">##  [393] 2080 2084 2096 2097 2103 2109 2112 2124 2132 2133 2135 2142 2154 2155</span>
-<span class="co">##  [407] 2163 2170 2171 2175 2189 2192 2196 2203 2207 2209 2212 2217 2218 2235</span>
-<span class="co">##  [421] 2245 2261 2269 2271 2285 2287 2291 2297 2298 2301 2302 2309 2311 2319</span>
-<span class="co">##  [435] 2320 2322 2327 2330 2345 2346 2349 2361 2365 2393 2400 2402 2413 2416</span>
-<span class="co">##  [449] 2418 2423 2428 2429 2433 2434 2440 2445 2449 2456 2462 2465 2469 2477</span>
-<span class="co">##  [463] 2490 2492 2495 2510 2511 2513 2518 2521 2524 2529 2530 2543 2549 2551</span>
-<span class="co">##  [477] 2553 2554 2559 2562 2563 2568 2571 2572 2583 2585 2593 2611 2615 2626</span>
-<span class="co">##  [491] 2629 2633 2641 2644 2646 2652 2656 2661 2668 2670 2675 2679 2681 2682</span>
-<span class="co">##  [505] 2683 2690 2698 2701 2703 2704 2706 2707 2709 2710 2712 2716 2717 2729</span>
-<span class="co">##  [519] 2733 2737 2738 2748 2759 2773 2784 2786 2793 2797 2812 2829 2834 2837</span>
-<span class="co">##  [533] 2839 2841 2848 2856 2857 2863 2868 2874 2879 2883 2890 2909 2912 2915</span>
-<span class="co">##  [547] 2924 2926 2927 2932 2936 2938 2942 2950 2959 2963 2969 2970 2980 2982</span>
-<span class="co">##  [561] 2984 2987 2993 2994 2997 2999 3000 3005 3011 3012 3013 3016 3019 3022</span>
-<span class="co">##  [575] 3024 3029 3031 3041 3042 3044 3047 3048 3051 3056 3061 3068 3072 3073</span>
-<span class="co">##  [589] 3074 3075 3076 3079 3082 3090 3093 3106 3115 3117 3129 3139 3140 3142</span>
-<span class="co">##  [603] 3144 3150 3152 3162 3165 3168 3169 3173 3176 3177 3181 3185 3189 3191</span>
-<span class="co">##  [617] 3193 3216 3217 3223 3231 3241 3242 3246 3251 3252 3253 3260 3262 3263</span>
-<span class="co">##  [631] 3269 3272 3274 3286 3288 3299 3302 3313 3315 3319 3320 3323 3334 3336</span>
-<span class="co">##  [645] 3337 3350 3351 3358 3361 3363 3364 3368 3390 3393 3394 3396 3401 3424</span>
-<span class="co">##  [659] 3430 3441 3448 3452 3455 3461 3462 3474 3479 3484 3486 3487 3494 3497</span>
-<span class="co">##  [673] 3510 3517 3522 3523 3524 3530 3533 3536 3537 3540 3550 3559 3560 3568</span>
-<span class="co">##  [687] 3580 3584 3587 3599 3603 3604 3611 3612 3614 3616 3618 3620 3624 3627</span>
-<span class="co">##  [701] 3632 3638 3641 3645 3647 3649 3655 3671 3674 3676 3677 3682 3692 3698</span>
-<span class="co">##  [715] 3699 3718 3720 3723 3737 3742 3744 3746 3759 3762 3764 3769 3773 3796</span>
-<span class="co">##  [729] 3799 3804 3806 3807 3810 3813 3815 3818 3821 3825 3837 3839 3858 3864</span>
-<span class="co">##  [743] 3868 3869 3871 3879 3904 3905 3908 3913 3921 3922 3923 3934 3937 3949</span>
-<span class="co">##  [757] 3950 3951 3954 3955 3959 3962 3967 3980 3990 3997 4002 4004 4011 4020</span>
-<span class="co">##  [771] 4024 4025 4026 4029 4030 4032 4035 4039 4044 4045 4046 4047 4048 4049</span>
-<span class="co">##  [785] 4057 4058 4059 4060 4061 4068 4069 4072 4073 4092 4093 4095 4096 4100</span>
-<span class="co">##  [799] 4105 4115 4122 4133 4138 4142 4144 4161 4171 4178 4180 4181 4182 4186</span>
-<span class="co">##  [813] 4193 4195 4199 4206 4219 4225 4233 4236 4237 4249 4264 4275 4280 4281</span>
-<span class="co">##  [827] 4295 4298 4300 4303 4304 4309 4312 4313 4317 4318 4334 4338 4339 4341</span>
-<span class="co">##  [841] 4345 4347 4348 4349 4356 4360 4362 4367 4378 4388 4389 4395 4396 4402</span>
-<span class="co">##  [855] 4416 4420 4428 4430 4433 4438 4441 4445 4452 4456 4457 4458 4462 4464</span>
-<span class="co">##  [869] 4467 4472 4473 4474 4476 4483 4498 4501 4503 4506 4509 4510 4514 4516</span>
-<span class="co">##  [883] 4520 4524 4535 4537 4542 4543 4544 4546 4551 4557 4559 4566 4569 4572</span>
-<span class="co">##  [897] 4575 4582 4583 4587 4592 4599 4605 4606 4609 4614 4618 4632 4635 4636</span>
-<span class="co">##  [911] 4638 4644 4654 4658 4671 4673 4678 4683 4686 4687 4713 4715 4717 4718</span>
-<span class="co">##  [925] 4719 4724 4725 4728 4730 4734 4738 4744 4753 4759 4765 4768 4769 4777</span>
-<span class="co">##  [939] 4783 4786 4801 4804 4809 4812 4813 4823 4824 4843 4851 4852 4862 4867</span>
-<span class="co">##  [953] 4873 4874 4876 4883 4898 4899 4900 4919 4929 4936 4945 4956 4964 4966</span>
-<span class="co">##  [967] 4969 4970 4973 4976 4980 4981 4983 4984 4990 5003 5005 5012 5016 5020</span>
-<span class="co">##  [981] 5024 5025 5027 5028 5048 5058 5060 5063 5068 5070 5080 5082 5084 5087</span>
-<span class="co">##  [995] 5088 5094 5096 5097 5104 5121 5124 5126 5131 5136 5142 5146 5149 5161</span>
-<span class="co">## [1009] 5164 5171 5174 5176 5184 5191 5196 5201 5203 5205 5209 5211 5227 5228</span>
-<span class="co">## [1023] 5230 5231 5232 5233 5238 5240 5242 5243 5255 5256 5260 5262 5264 5265</span>
-<span class="co">## [1037] 5271 5285 5292 5296 5300 5304 5314 5315 5316 5322 5326 5334 5337 5345</span>
-<span class="co">## [1051] 5346 5348 5353 5354 5361 5362 5368 5369 5373 5379 5381 5382 5387 5393</span>
-<span class="co">## [1065] 5398 5406 5411 5412 5416 5421 5425 5426 5428 5429 5437 5442 5444 5446</span>
-<span class="co">## [1079] 5453 5457 5461 5463 5464 5468 5471 5475 5487 5494 5500 5502 5503 5511</span>
-<span class="co">## [1093] 5516 5518 5523 5530 5531 5533 5539 5540 5545 5548 5549 5553 5556 5558</span>
-<span class="co">## [1107] 5560 5566 5572 5573 5584 5586 5590 5595 5600 5605 5607 5609 5614 5617</span>
-<span class="co">## [1121] 5618 5619 5620 5625 5634 5636 5651 5652 5655 5657 5660 5677 5685 5690</span>
-<span class="co">## [1135] 5694 5699 5700 5708 5709 5714 5716 5718 5726 5734 5735 5736 5738 5742</span>
-<span class="co">## [1149] 5744 5753 5754 5756 5758 5767 5776 5787 5788 5791 5792 5797 5801 5811</span>
-<span class="co">## [1163] 5815 5825 5830 5835 5836 5839 5845 5852 5853 5862 5863 5864 5874 5876</span>
-<span class="co">## [1177] 5878 5881 5888 5902 5907 5909 5912 5917 5925 5926 5929 5933 5935 5939</span>
-<span class="co">## [1191] 5945 5948 5952 5954 5961 5964 5989 6002 6009 6015 6016 6017 6019 6021</span>
-<span class="co">## [1205] 6028 6040 6041 6045 6065 6074 6085 6086 6090 6093 6098 6099 6101 6113</span>
-<span class="co">## [1219] 6116 6130 6132 6135 6137 6142 6158 6159 6165 6168 6170 6173 6174 6175</span>
-<span class="co">## [1233] 6181 6182 6185 6187 6189 6192 6193 6194 6208 6210 6222 6224 6242 6243</span>
-<span class="co">## [1247] 6248 6253 6265 6269 6275 6276 6287 6292 6293 6295 6297 6299 6305 6307</span>
-<span class="co">## [1261] 6309 6311 6314 6323 6332 6336 6345 6354 6367 6368 6372 6377 6378 6387</span>
-<span class="co">## [1275] 6388 6389 6394 6400 6402 6405 6410 6419 6424 6428 6429 6453 6463 6472</span>
-<span class="co">## [1289] 6487 6490 6506 6525 6528 6531 6534 6537 6538 6540 6541 6547 6551 6570</span>
-<span class="co">## [1303] 6574 6575 6578 6579 6599 6605 6608 6619 6633 6636 6640 6641 6650 6659</span>
-<span class="co">## [1317] 6663 6675 6680 6681 6699 6705 6708 6717 6718 6720 6742 6751 6753 6761</span>
-<span class="co">## [1331] 6781 6784 6790 6791 6796 6799 6802 6804 6809 6831 6834 6845 6847 6850</span>
-<span class="co">## [1345] 6856 6857 6863 6866 6875 6880 6881 6883 6884 6885 6886 6890 6897 6899</span>
-<span class="co">## [1359] 6900 6903 6906 6911 6920 6922 6923 6932 6934 6946 6958 6959 6966 6968</span>
-<span class="co">## [1373] 6974 6976 6978 6981 7003 7005 7008 7011 7012 7020 7024 7026 7027 7030</span>
-<span class="co">## [1387] 7035 7041 7044 7053 7070 7073 7088 7091 7093 7112 7116 7120 7121 7125</span>
-<span class="co">## [1401] 7129 7132 7136 7137 7142 7149 7157 7160 7172 7179 7182 7190 7193 7198</span>
-<span class="co">## [1415] 7205 7210 7212 7216 7224 7225 7226 7231 7232 7252 7256 7257 7261 7266</span>
-<span class="co">## [1429] 7271 7276 7285 7286 7291 7293 7294 7299 7307 7308 7311 7324 7326 7328</span>
-<span class="co">## [1443] 7330 7336 7351 7352 7356 7357 7360 7362 7363 7368 7374 7384 7387 7394</span>
-<span class="co">## [1457] 7418 7426 7443 7451 7467 7470 7472 7476 7479 7485 7495 7497 7499 7510</span>
-<span class="co">## [1471] 7521 7526 7527 7528 7539 7540 7542 7544 7546 7547 7554 7575 7578 7587</span>
-<span class="co">## [1485] 7599 7604 7605 7606 7615 7616 7620 7629 7631 7632 7633 7640 7647 7649</span>
-<span class="co">## [1499] 7654 7655 7661 7664 7665 7667 7668 7669 7676 7678 7682 7683 7696 7702</span>
-<span class="co">## [1513] 7703 7709 7713 7727 7735 7737 7741 7744 7746 7747 7758 7761 7768 7783</span>
-<span class="co">## [1527] 7786 7789 7797 7798 7806 7811 7819 7831 7832 7833 7834 7842 7845 7851</span>
-<span class="co">## [1541] 7852 7853 7854 7857 7859 7863 7865 7871 7876 7880 7881 7887 7895 7902</span>
-<span class="co">## [1555] 7903 7907 7911 7915 7916 7917 7920 7930 7934 7975 7981 7992 7995 8005</span>
-<span class="co">## [1569] 8017 8021 8027 8032 8038 8039 8049 8058 8061 8071 8077 8098 8100 8106</span>
-<span class="co">## [1583] 8111 8118 8120 8121 8132 8133 8137 8138 8151 8152 8154 8156 8159 8162</span>
-<span class="co">## [1597] 8169 8172 8182 8183 8184 8186 8194 8202 8206 8207 8208 8213 8215 8236</span>
-<span class="co">## [1611] 8239 8242 8247 8254 8268 8272 8273 8276 8277 8284 8293 8295 8304 8305</span>
-<span class="co">## [1625] 8313 8319 8348 8349 8352 8353 8359 8361 8365 8369 8370 8376 8381 8403</span>
-<span class="co">## [1639] 8406 8415 8421 8425 8426 8434 8445 8458 8467 8468 8481 8486 8495 8497</span>
-<span class="co">## [1653] 8499 8514 8517 8518 8519 8530 8532 8534 8536 8541 8542 8545 8550 8554</span>
-<span class="co">## [1667] 8565 8567 8573 8580 8585 8593 8594 8604 8622 8624 8629 8632 8635 8638</span>
-<span class="co">## [1681] 8639 8641 8644 8650 8653 8656 8660 8661 8664 8671 8682 8688 8692 8697</span>
-<span class="co">## [1695] 8703 8705 8706 8728 8745 8747 8749 8754 8765 8784 8788 8790 8796 8799</span>
-<span class="co">## [1709] 8800 8802 8808 8809 8816 8817 8819 8823 8827 8834 8838 8843 8845 8855</span>
-<span class="co">## [1723] 8857 8874 8881 8885 8898 8903 8906 8909 8917 8921 8924 8938 8939 8940</span>
-<span class="co">## [1737] 8942 8947 8949 8950 8954 8958 8959 8960 8975 8982 8993 8994 8997 9011</span>
-<span class="co">## [1751] 9019 9024 9031 9043 9057 9058 9060 9063 9064 9067 9073 9074 9075 9076</span>
-<span class="co">## [1765] 9082 9083 9087 9088 9098 9108 9116 9120 9123 9127 9131 9132 9138 9139</span>
-<span class="co">## [1779] 9145 9163 9166 9169 9171 9172 9181 9195 9196 9198 9199 9206 9211 9215</span>
-<span class="co">## [1793] 9226 9227 9228 9233 9236 9237 9252 9256 9258 9265 9270 9273 9294 9305</span>
-<span class="co">## [1807] 9306 9314 9318 9321 9322 9323 9328 9331 9335 9337 9351 9355 9360 9370</span>
-<span class="co">## [1821] 9378 9380 9388 9389 9390 9394 9399 9405 9406 9416 9419 9420 9421 9424</span>
-<span class="co">## [1835] 9426 9450 9459 9462 9472 9473 9479 9480 9481 9485 9488 9490 9507 9508</span>
-<span class="co">## [1849] 9518 9541 9542 9550 9558 9560 9561 9566 9572 9575 9582 9583 9588 9591</span>
-<span class="co">## [1863] 9598 9605 9610 9612 9626 9632 9635 9636 9638 9640 9643 9650 9651 9656</span>
-<span class="co">## [1877] 9660 9661 9663 9670 9673 9675 9676 9679 9687 9692 9693 9694 9696 9706</span>
-<span class="co">## [1891] 9709 9713 9718 9732 9733 9734 9742 9747 9749 9756 9757 9759 9765 9766</span>
-<span class="co">## [1905] 9771 9776 9793 9802 9806 9810 9812 9813 9843 9853 9855 9858 9859 9868</span>
-<span class="co">## [1919] 9869 9872 9873 9878 9885 9889 9892 9893 9897 9899 9900 9901 9903 9904</span>
-<span class="co">## [1933] 9908 9913 9930 9935 9937 9938 9940 9945 9950 9959 9961 9970 9973 9977</span>
-<span class="co">## [1947] 9980 9981 9988 9989 9990 9992 9994</span>
-<span class="co">## </span>
-<span class="co">## $Mergedlabels</span>
-<span class="co">##   [1] 787 818 786 817 739 773 385 697 471 714 814 824 801 469 806 802 618 640</span>
-<span class="co">##  [19] 643 789 808 774 822 562 670 220 821 326 804 820 472 556 642 712  66 528</span>
-<span class="co">##  [37] 557 615 715 770 171 470 713 811 819 215 617 619 646 741 247 355 382 501</span>
-<span class="co">##  [55] 668 696 816 176 216 351 558 559 666 669 671 698 699 717 718 772 807 327</span>
-<span class="co">##  [73] 353 586 647 665 672 767 812 815 174 181 183 352 356 387 500 560 561 620</span>
-<span class="co">##  [91] 644 645 648 716 771 805 113 170 172 175 182 219 221 246 284 386 466 529</span>
-<span class="co">## [109] 555 667 788</span>
-<span class="co">## </span>
-<span class="co">## $Newlabel</span>
-<span class="co">## [1] 825</span></code></pre>
+<code class="sourceCode R"><span><span class="va">phenotypes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">phenotypes</span><span class="op">[[</span><span class="st">"CD4+"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Ir191)Dd_DNA1"</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Ir193)Dd_DNA2"</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Cell_length"</span>,</span>
+<span>    <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Ce140)Dd_Bead"</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(In115)Dd_Dead"</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Sm154)Dd_CD14"</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Er166)Dd_CD33"</span>,</span>
+<span>    <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Nd150)Dd_CD3"</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Nd143)Dd_CD4"</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">phenotypes</span><span class="op">[[</span><span class="st">"CD8+"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Ir191)Dd_DNA1"</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Ir193)Dd_DNA2"</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Cell_length"</span>,</span>
+<span>    <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Ce140)Dd_Bead"</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(In115)Dd_Dead"</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Sm154)Dd_CD14"</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Er166)Dd_CD33"</span>,</span>
+<span>    <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Nd150)Dd_CD3"</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Nd144)Dd_CD8"</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pheno_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/RetrievePops.html">RetrievePops</a></span><span class="op">(</span><span class="va">annot</span>, phenotypes <span class="op">=</span> <span class="va">phenotypes</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># CD4+</span></span>
+<span><span class="va">pheno_result</span><span class="op">$</span><span class="va">phenotypesinfo</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">## $phenotype</span></span>
+<span><span class="co">## [1] "(Ir191)Dd_DNA1-1" "(Ir193)Dd_DNA2-1" "Cell_length-0"    "(Ce140)Dd_Bead-0"</span></span>
+<span><span class="co">## [5] "(In115)Dd_Dead-0" "(Sm154)Dd_CD14-0" "(Er166)Dd_CD33-0" "(Nd150)Dd_CD3-1" </span></span>
+<span><span class="co">## [9] "(Nd143)Dd_CD4-1" </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $proportion</span></span>
+<span><span class="co">## [1] 0.1953</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $cells</span></span>
+<span><span class="co">##    [1]    2    9   25   30   34   35   40   43   47   48   52   53   59   69</span></span>
+<span><span class="co">##   [15]   84   85   87   88   90   98  115  118  123  125  130  134  136  144</span></span>
+<span><span class="co">##   [29]  161  170  183  187  190  193  196  206  207  208  213  223  228  236</span></span>
+<span><span class="co">##   [43]  241  242  253  262  269  270  280  283  286  294  304  307  313  315</span></span>
+<span><span class="co">##   [57]  318  319  320  325  348  353  356  377  379  385  386  389  397  401</span></span>
+<span><span class="co">##   [71]  406  413  414  422  424  425  427  436  439  466  476  483  490  496</span></span>
+<span><span class="co">##   [85]  503  504  525  538  547  548  549  551  556  559  568  569  578  580</span></span>
+<span><span class="co">##   [99]  582  597  601  603  612  614  615  617  619  628  631  637  638  640</span></span>
+<span><span class="co">##  [113]  641  649  658  660  661  662  666  671  682  695  700  702  703  705</span></span>
+<span><span class="co">##  [127]  709  711  712  714  722  724  726  730  739  741  749  752  761  764</span></span>
+<span><span class="co">##  [141]  793  798  799  800  801  803  812  824  835  840  849  851  855  860</span></span>
+<span><span class="co">##  [155]  862  866  878  883  886  889  895  908  910  921  931  932  935  936</span></span>
+<span><span class="co">##  [169]  937  949  954  955  956  959  961  979  980  988  999 1001 1014 1026</span></span>
+<span><span class="co">##  [183] 1039 1045 1046 1052 1060 1066 1075 1081 1086 1097 1099 1103 1108 1112</span></span>
+<span><span class="co">##  [197] 1126 1128 1132 1133 1136 1145 1146 1157 1168 1171 1174 1185 1190 1193</span></span>
+<span><span class="co">##  [211] 1196 1197 1207 1208 1212 1215 1216 1219 1221 1224 1231 1235 1236 1238</span></span>
+<span><span class="co">##  [225] 1239 1248 1254 1262 1267 1274 1275 1276 1277 1285 1288 1289 1290 1303</span></span>
+<span><span class="co">##  [239] 1310 1311 1317 1320 1322 1331 1333 1343 1349 1351 1354 1355 1371 1372</span></span>
+<span><span class="co">##  [253] 1376 1380 1391 1405 1406 1407 1408 1409 1411 1412 1416 1426 1429 1437</span></span>
+<span><span class="co">##  [267] 1440 1444 1445 1449 1450 1456 1457 1459 1468 1475 1476 1479 1484 1487</span></span>
+<span><span class="co">##  [281] 1491 1496 1497 1498 1500 1503 1510 1514 1515 1529 1530 1531 1536 1537</span></span>
+<span><span class="co">##  [295] 1557 1559 1563 1567 1568 1573 1574 1575 1580 1582 1585 1591 1596 1601</span></span>
+<span><span class="co">##  [309] 1602 1632 1633 1637 1640 1641 1663 1667 1670 1679 1681 1682 1685 1693</span></span>
+<span><span class="co">##  [323] 1709 1710 1731 1734 1737 1738 1753 1764 1766 1768 1773 1775 1778 1779</span></span>
+<span><span class="co">##  [337] 1780 1781 1784 1787 1789 1791 1795 1800 1801 1803 1806 1811 1825 1834</span></span>
+<span><span class="co">##  [351] 1835 1839 1842 1846 1847 1848 1857 1864 1873 1880 1905 1906 1908 1919</span></span>
+<span><span class="co">##  [365] 1920 1923 1933 1934 1940 1954 1956 1965 1972 1991 1992 1998 2004 2008</span></span>
+<span><span class="co">##  [379] 2013 2016 2020 2023 2024 2030 2032 2033 2034 2043 2044 2050 2062 2074</span></span>
+<span><span class="co">##  [393] 2080 2084 2096 2097 2103 2109 2112 2124 2132 2133 2135 2142 2154 2155</span></span>
+<span><span class="co">##  [407] 2163 2170 2171 2175 2189 2192 2196 2203 2207 2209 2212 2217 2218 2235</span></span>
+<span><span class="co">##  [421] 2245 2261 2269 2271 2285 2287 2291 2297 2298 2301 2302 2309 2311 2319</span></span>
+<span><span class="co">##  [435] 2320 2322 2327 2330 2345 2346 2349 2361 2365 2393 2400 2402 2413 2416</span></span>
+<span><span class="co">##  [449] 2418 2423 2428 2429 2433 2434 2440 2445 2449 2456 2462 2465 2469 2477</span></span>
+<span><span class="co">##  [463] 2490 2492 2495 2510 2511 2513 2518 2521 2524 2529 2530 2543 2549 2551</span></span>
+<span><span class="co">##  [477] 2553 2554 2559 2562 2563 2568 2571 2572 2583 2585 2593 2611 2615 2626</span></span>
+<span><span class="co">##  [491] 2629 2633 2641 2644 2646 2652 2656 2661 2668 2670 2675 2679 2681 2682</span></span>
+<span><span class="co">##  [505] 2683 2690 2698 2701 2703 2704 2706 2707 2709 2710 2712 2716 2717 2729</span></span>
+<span><span class="co">##  [519] 2733 2737 2738 2748 2759 2773 2784 2786 2793 2797 2812 2829 2834 2837</span></span>
+<span><span class="co">##  [533] 2839 2841 2848 2856 2857 2863 2868 2874 2879 2883 2890 2909 2912 2915</span></span>
+<span><span class="co">##  [547] 2924 2926 2927 2932 2936 2938 2942 2950 2959 2963 2969 2970 2980 2982</span></span>
+<span><span class="co">##  [561] 2984 2987 2993 2994 2997 2999 3000 3005 3011 3012 3013 3016 3019 3022</span></span>
+<span><span class="co">##  [575] 3024 3029 3031 3041 3042 3044 3047 3048 3051 3056 3061 3068 3072 3073</span></span>
+<span><span class="co">##  [589] 3074 3075 3076 3079 3082 3090 3093 3106 3115 3117 3129 3139 3140 3142</span></span>
+<span><span class="co">##  [603] 3144 3150 3152 3162 3165 3168 3169 3173 3176 3177 3181 3185 3189 3191</span></span>
+<span><span class="co">##  [617] 3193 3216 3217 3223 3231 3241 3242 3246 3251 3252 3253 3260 3262 3263</span></span>
+<span><span class="co">##  [631] 3269 3272 3274 3286 3288 3299 3302 3313 3315 3319 3320 3323 3334 3336</span></span>
+<span><span class="co">##  [645] 3337 3350 3351 3358 3361 3363 3364 3368 3390 3393 3394 3396 3401 3424</span></span>
+<span><span class="co">##  [659] 3430 3441 3448 3452 3455 3461 3462 3474 3479 3484 3486 3487 3494 3497</span></span>
+<span><span class="co">##  [673] 3510 3517 3522 3523 3524 3530 3533 3536 3537 3540 3550 3559 3560 3568</span></span>
+<span><span class="co">##  [687] 3580 3584 3587 3599 3603 3604 3611 3612 3614 3616 3618 3620 3624 3627</span></span>
+<span><span class="co">##  [701] 3632 3638 3641 3645 3647 3649 3655 3671 3674 3676 3677 3682 3692 3698</span></span>
+<span><span class="co">##  [715] 3699 3718 3720 3723 3737 3742 3744 3746 3759 3762 3764 3769 3773 3796</span></span>
+<span><span class="co">##  [729] 3799 3804 3806 3807 3810 3813 3815 3818 3821 3825 3837 3839 3858 3864</span></span>
+<span><span class="co">##  [743] 3868 3869 3871 3879 3904 3905 3908 3913 3921 3922 3923 3934 3937 3949</span></span>
+<span><span class="co">##  [757] 3950 3951 3954 3955 3959 3962 3967 3980 3990 3997 4002 4004 4011 4020</span></span>
+<span><span class="co">##  [771] 4024 4025 4026 4029 4030 4032 4035 4039 4044 4045 4046 4047 4048 4049</span></span>
+<span><span class="co">##  [785] 4057 4058 4059 4060 4061 4068 4069 4072 4073 4092 4093 4095 4096 4100</span></span>
+<span><span class="co">##  [799] 4105 4115 4122 4133 4138 4142 4144 4161 4171 4178 4180 4181 4182 4186</span></span>
+<span><span class="co">##  [813] 4193 4195 4199 4206 4219 4225 4233 4236 4237 4249 4264 4275 4280 4281</span></span>
+<span><span class="co">##  [827] 4295 4298 4300 4303 4304 4309 4312 4313 4317 4318 4334 4338 4339 4341</span></span>
+<span><span class="co">##  [841] 4345 4347 4348 4349 4356 4360 4362 4367 4378 4388 4389 4395 4396 4402</span></span>
+<span><span class="co">##  [855] 4416 4420 4428 4430 4433 4438 4441 4445 4452 4456 4457 4458 4462 4464</span></span>
+<span><span class="co">##  [869] 4467 4472 4473 4474 4476 4483 4498 4501 4503 4506 4509 4510 4514 4516</span></span>
+<span><span class="co">##  [883] 4520 4524 4535 4537 4542 4543 4544 4546 4551 4557 4559 4566 4569 4572</span></span>
+<span><span class="co">##  [897] 4575 4582 4583 4587 4592 4599 4605 4606 4609 4614 4618 4632 4635 4636</span></span>
+<span><span class="co">##  [911] 4638 4644 4654 4658 4671 4673 4678 4683 4686 4687 4713 4715 4717 4718</span></span>
+<span><span class="co">##  [925] 4719 4724 4725 4728 4730 4734 4738 4744 4753 4759 4765 4768 4769 4777</span></span>
+<span><span class="co">##  [939] 4783 4786 4801 4804 4809 4812 4813 4823 4824 4843 4851 4852 4862 4867</span></span>
+<span><span class="co">##  [953] 4873 4874 4876 4883 4898 4899 4900 4919 4929 4936 4945 4956 4964 4966</span></span>
+<span><span class="co">##  [967] 4969 4970 4973 4976 4980 4981 4983 4984 4990 5003 5005 5012 5016 5020</span></span>
+<span><span class="co">##  [981] 5024 5025 5027 5028 5048 5058 5060 5063 5068 5070 5080 5082 5084 5087</span></span>
+<span><span class="co">##  [995] 5088 5094 5096 5097 5104 5121 5124 5126 5131 5136 5142 5146 5149 5161</span></span>
+<span><span class="co">## [1009] 5164 5171 5174 5176 5184 5191 5196 5201 5203 5205 5209 5211 5227 5228</span></span>
+<span><span class="co">## [1023] 5230 5231 5232 5233 5238 5240 5242 5243 5255 5256 5260 5262 5264 5265</span></span>
+<span><span class="co">## [1037] 5271 5285 5292 5296 5300 5304 5314 5315 5316 5322 5326 5334 5337 5345</span></span>
+<span><span class="co">## [1051] 5346 5348 5353 5354 5361 5362 5368 5369 5373 5379 5381 5382 5387 5393</span></span>
+<span><span class="co">## [1065] 5398 5406 5411 5412 5416 5421 5425 5426 5428 5429 5437 5442 5444 5446</span></span>
+<span><span class="co">## [1079] 5453 5457 5461 5463 5464 5468 5471 5475 5487 5494 5500 5502 5503 5511</span></span>
+<span><span class="co">## [1093] 5516 5518 5523 5530 5531 5533 5539 5540 5545 5548 5549 5553 5556 5558</span></span>
+<span><span class="co">## [1107] 5560 5566 5572 5573 5584 5586 5590 5595 5600 5605 5607 5609 5614 5617</span></span>
+<span><span class="co">## [1121] 5618 5619 5620 5625 5634 5636 5651 5652 5655 5657 5660 5677 5685 5690</span></span>
+<span><span class="co">## [1135] 5694 5699 5700 5708 5709 5714 5716 5718 5726 5734 5735 5736 5738 5742</span></span>
+<span><span class="co">## [1149] 5744 5753 5754 5756 5758 5767 5776 5787 5788 5791 5792 5797 5801 5811</span></span>
+<span><span class="co">## [1163] 5815 5825 5830 5835 5836 5839 5845 5852 5853 5862 5863 5864 5874 5876</span></span>
+<span><span class="co">## [1177] 5878 5881 5888 5902 5907 5909 5912 5917 5925 5926 5929 5933 5935 5939</span></span>
+<span><span class="co">## [1191] 5945 5948 5952 5954 5961 5964 5989 6002 6009 6015 6016 6017 6019 6021</span></span>
+<span><span class="co">## [1205] 6028 6040 6041 6045 6065 6074 6085 6086 6090 6093 6098 6099 6101 6113</span></span>
+<span><span class="co">## [1219] 6116 6130 6132 6135 6137 6142 6158 6159 6165 6168 6170 6173 6174 6175</span></span>
+<span><span class="co">## [1233] 6181 6182 6185 6187 6189 6192 6193 6194 6208 6210 6222 6224 6242 6243</span></span>
+<span><span class="co">## [1247] 6248 6253 6265 6269 6275 6276 6287 6292 6293 6295 6297 6299 6305 6307</span></span>
+<span><span class="co">## [1261] 6309 6311 6314 6323 6332 6336 6345 6354 6367 6368 6372 6377 6378 6387</span></span>
+<span><span class="co">## [1275] 6388 6389 6394 6400 6402 6405 6410 6419 6424 6428 6429 6453 6463 6472</span></span>
+<span><span class="co">## [1289] 6487 6490 6506 6525 6528 6531 6534 6537 6538 6540 6541 6547 6551 6570</span></span>
+<span><span class="co">## [1303] 6574 6575 6578 6579 6599 6605 6608 6619 6633 6636 6640 6641 6650 6659</span></span>
+<span><span class="co">## [1317] 6663 6675 6680 6681 6699 6705 6708 6717 6718 6720 6742 6751 6753 6761</span></span>
+<span><span class="co">## [1331] 6781 6784 6790 6791 6796 6799 6802 6804 6809 6831 6834 6845 6847 6850</span></span>
+<span><span class="co">## [1345] 6856 6857 6863 6866 6875 6880 6881 6883 6884 6885 6886 6890 6897 6899</span></span>
+<span><span class="co">## [1359] 6900 6903 6906 6911 6920 6922 6923 6932 6934 6946 6958 6959 6966 6968</span></span>
+<span><span class="co">## [1373] 6974 6976 6978 6981 7003 7005 7008 7011 7012 7020 7024 7026 7027 7030</span></span>
+<span><span class="co">## [1387] 7035 7041 7044 7053 7070 7073 7088 7091 7093 7112 7116 7120 7121 7125</span></span>
+<span><span class="co">## [1401] 7129 7132 7136 7137 7142 7149 7157 7160 7172 7179 7182 7190 7193 7198</span></span>
+<span><span class="co">## [1415] 7205 7210 7212 7216 7224 7225 7226 7231 7232 7252 7256 7257 7261 7266</span></span>
+<span><span class="co">## [1429] 7271 7276 7285 7286 7291 7293 7294 7299 7307 7308 7311 7324 7326 7328</span></span>
+<span><span class="co">## [1443] 7330 7336 7351 7352 7356 7357 7360 7362 7363 7368 7374 7384 7387 7394</span></span>
+<span><span class="co">## [1457] 7418 7426 7443 7451 7467 7470 7472 7476 7479 7485 7495 7497 7499 7510</span></span>
+<span><span class="co">## [1471] 7521 7526 7527 7528 7539 7540 7542 7544 7546 7547 7554 7575 7578 7587</span></span>
+<span><span class="co">## [1485] 7599 7604 7605 7606 7615 7616 7620 7629 7631 7632 7633 7640 7647 7649</span></span>
+<span><span class="co">## [1499] 7654 7655 7661 7664 7665 7667 7668 7669 7676 7678 7682 7683 7696 7702</span></span>
+<span><span class="co">## [1513] 7703 7709 7713 7727 7735 7737 7741 7744 7746 7747 7758 7761 7768 7783</span></span>
+<span><span class="co">## [1527] 7786 7789 7797 7798 7806 7811 7819 7831 7832 7833 7834 7842 7845 7851</span></span>
+<span><span class="co">## [1541] 7852 7853 7854 7857 7859 7863 7865 7871 7876 7880 7881 7887 7895 7902</span></span>
+<span><span class="co">## [1555] 7903 7907 7911 7915 7916 7917 7920 7930 7934 7975 7981 7992 7995 8005</span></span>
+<span><span class="co">## [1569] 8017 8021 8027 8032 8038 8039 8049 8058 8061 8071 8077 8098 8100 8106</span></span>
+<span><span class="co">## [1583] 8111 8118 8120 8121 8132 8133 8137 8138 8151 8152 8154 8156 8159 8162</span></span>
+<span><span class="co">## [1597] 8169 8172 8182 8183 8184 8186 8194 8202 8206 8207 8208 8213 8215 8236</span></span>
+<span><span class="co">## [1611] 8239 8242 8247 8254 8268 8272 8273 8276 8277 8284 8293 8295 8304 8305</span></span>
+<span><span class="co">## [1625] 8313 8319 8348 8349 8352 8353 8359 8361 8365 8369 8370 8376 8381 8403</span></span>
+<span><span class="co">## [1639] 8406 8415 8421 8425 8426 8434 8445 8458 8467 8468 8481 8486 8495 8497</span></span>
+<span><span class="co">## [1653] 8499 8514 8517 8518 8519 8530 8532 8534 8536 8541 8542 8545 8550 8554</span></span>
+<span><span class="co">## [1667] 8565 8567 8573 8580 8585 8593 8594 8604 8622 8624 8629 8632 8635 8638</span></span>
+<span><span class="co">## [1681] 8639 8641 8644 8650 8653 8656 8660 8661 8664 8671 8682 8688 8692 8697</span></span>
+<span><span class="co">## [1695] 8703 8705 8706 8728 8745 8747 8749 8754 8765 8784 8788 8790 8796 8799</span></span>
+<span><span class="co">## [1709] 8800 8802 8808 8809 8816 8817 8819 8823 8827 8834 8838 8843 8845 8855</span></span>
+<span><span class="co">## [1723] 8857 8874 8881 8885 8898 8903 8906 8909 8917 8921 8924 8938 8939 8940</span></span>
+<span><span class="co">## [1737] 8942 8947 8949 8950 8954 8958 8959 8960 8975 8982 8993 8994 8997 9011</span></span>
+<span><span class="co">## [1751] 9019 9024 9031 9043 9057 9058 9060 9063 9064 9067 9073 9074 9075 9076</span></span>
+<span><span class="co">## [1765] 9082 9083 9087 9088 9098 9108 9116 9120 9123 9127 9131 9132 9138 9139</span></span>
+<span><span class="co">## [1779] 9145 9163 9166 9169 9171 9172 9181 9195 9196 9198 9199 9206 9211 9215</span></span>
+<span><span class="co">## [1793] 9226 9227 9228 9233 9236 9237 9252 9256 9258 9265 9270 9273 9294 9305</span></span>
+<span><span class="co">## [1807] 9306 9314 9318 9321 9322 9323 9328 9331 9335 9337 9351 9355 9360 9370</span></span>
+<span><span class="co">## [1821] 9378 9380 9388 9389 9390 9394 9399 9405 9406 9416 9419 9420 9421 9424</span></span>
+<span><span class="co">## [1835] 9426 9450 9459 9462 9472 9473 9479 9480 9481 9485 9488 9490 9507 9508</span></span>
+<span><span class="co">## [1849] 9518 9541 9542 9550 9558 9560 9561 9566 9572 9575 9582 9583 9588 9591</span></span>
+<span><span class="co">## [1863] 9598 9605 9610 9612 9626 9632 9635 9636 9638 9640 9643 9650 9651 9656</span></span>
+<span><span class="co">## [1877] 9660 9661 9663 9670 9673 9675 9676 9679 9687 9692 9693 9694 9696 9706</span></span>
+<span><span class="co">## [1891] 9709 9713 9718 9732 9733 9734 9742 9747 9749 9756 9757 9759 9765 9766</span></span>
+<span><span class="co">## [1905] 9771 9776 9793 9802 9806 9810 9812 9813 9843 9853 9855 9858 9859 9868</span></span>
+<span><span class="co">## [1919] 9869 9872 9873 9878 9885 9889 9892 9893 9897 9899 9900 9901 9903 9904</span></span>
+<span><span class="co">## [1933] 9908 9913 9930 9935 9937 9938 9940 9945 9950 9959 9961 9970 9973 9977</span></span>
+<span><span class="co">## [1947] 9980 9981 9988 9989 9990 9992 9994</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $Mergedlabels</span></span>
+<span><span class="co">##   [1] 787 818 786 817 739 773 385 697 471 714 814 824 801 469 806 802 618 640</span></span>
+<span><span class="co">##  [19] 643 789 808 774 822 562 670 220 821 326 804 820 472 556 642 712  66 528</span></span>
+<span><span class="co">##  [37] 557 615 715 770 171 470 713 811 819 215 617 619 646 741 247 355 382 501</span></span>
+<span><span class="co">##  [55] 668 696 816 176 216 351 558 559 666 669 671 698 699 717 718 772 807 327</span></span>
+<span><span class="co">##  [73] 353 586 647 665 672 767 812 815 174 181 183 352 356 387 500 560 561 620</span></span>
+<span><span class="co">##  [91] 644 645 648 716 771 805 113 170 172 175 182 219 221 246 284 386 466 529</span></span>
+<span><span class="co">## [109] 555 667 788</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $Newlabel</span></span>
+<span><span class="co">## [1] 825</span></span></code></pre>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># CD8+</span>
-<span class="va">pheno_result</span><span class="op">$</span><span class="va">phenotypesinfo</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></code></pre></div>
-<pre><code><span class="co">## $phenotype</span>
-<span class="co">## [1] "(Ir191)Dd_DNA1-1" "(Ir193)Dd_DNA2-1" "Cell_length-0"    "(Ce140)Dd_Bead-0"</span>
-<span class="co">## [5] "(In115)Dd_Dead-0" "(Sm154)Dd_CD14-0" "(Er166)Dd_CD33-0" "(Nd150)Dd_CD3-1" </span>
-<span class="co">## [9] "(Nd144)Dd_CD8-1" </span>
-<span class="co">## </span>
-<span class="co">## $proportion</span>
-<span class="co">## [1] 0.0752</span>
-<span class="co">## </span>
-<span class="co">## $cells</span>
-<span class="co">##   [1]    2    7    8   19   32   60   74   83   96  113  117  122  133  137  143</span>
-<span class="co">##  [16]  158  166  175  224  245  247  253  255  258  274  278  285  314  323  335</span>
-<span class="co">##  [31]  347  372  375  395  405  411  419  420  425  432  437  445  452  453  456</span>
-<span class="co">##  [46]  465  486  503  510  513  516  530  541  553  558  597  608  609  621  635</span>
-<span class="co">##  [61]  657  677  681  691  727  737  738  745  777  795  842  855  856  857  861</span>
-<span class="co">##  [76]  877  909  914  922  924  996 1008 1009 1012 1029 1031 1032 1042 1065 1078</span>
-<span class="co">##  [91] 1079 1096 1100 1110 1127 1130 1141 1163 1228 1230 1237 1242 1287 1297 1302</span>
-<span class="co">## [106] 1358 1359 1374 1428 1472 1505 1522 1525 1527 1540 1541 1551 1556 1579 1595</span>
-<span class="co">## [121] 1605 1607 1634 1646 1671 1672 1677 1690 1705 1711 1745 1750 1755 1818 1829</span>
-<span class="co">## [136] 1842 1853 1857 1862 1877 1891 1896 1909 1916 1918 1946 1947 1957 2041 2058</span>
-<span class="co">## [151] 2068 2073 2095 2101 2110 2131 2144 2147 2152 2167 2172 2173 2176 2213 2243</span>
-<span class="co">## [166] 2249 2251 2253 2304 2329 2341 2346 2366 2374 2389 2392 2395 2399 2403 2410</span>
-<span class="co">## [181] 2417 2426 2437 2444 2481 2482 2487 2514 2516 2523 2525 2527 2528 2557 2563</span>
-<span class="co">## [196] 2569 2603 2604 2613 2624 2627 2636 2638 2647 2680 2689 2718 2724 2727 2748</span>
-<span class="co">## [211] 2756 2777 2789 2823 2833 2849 2853 2859 2860 2862 2872 2881 2908 2917 2928</span>
-<span class="co">## [226] 2934 2939 2944 2951 2954 2965 2976 2992 2996 3001 3020 3024 3038 3094 3120</span>
-<span class="co">## [241] 3121 3124 3131 3145 3160 3165 3172 3201 3214 3220 3267 3275 3293 3345 3355</span>
-<span class="co">## [256] 3389 3404 3405 3447 3450 3453 3458 3468 3469 3486 3496 3498 3502 3534 3571</span>
-<span class="co">## [271] 3578 3579 3591 3597 3601 3604 3622 3628 3653 3654 3672 3686 3714 3724 3736</span>
-<span class="co">## [286] 3747 3761 3769 3778 3787 3800 3801 3803 3817 3820 3825 3829 3831 3847 3889</span>
-<span class="co">## [301] 3897 3900 3919 3925 3941 3952 3953 3969 3981 3995 4010 4036 4046 4064 4081</span>
-<span class="co">## [316] 4090 4098 4101 4105 4106 4116 4154 4184 4224 4234 4256 4262 4263 4273 4291</span>
-<span class="co">## [331] 4299 4308 4380 4444 4448 4449 4459 4475 4480 4481 4513 4517 4527 4541 4550</span>
-<span class="co">## [346] 4570 4590 4593 4616 4638 4648 4651 4717 4720 4723 4735 4737 4758 4767 4772</span>
-<span class="co">## [361] 4794 4818 4819 4840 4850 4861 4866 4882 4886 4893 4926 4931 4934 4943 4953</span>
-<span class="co">## [376] 4967 5002 5004 5009 5035 5045 5069 5070 5107 5136 5137 5141 5147 5159 5160</span>
-<span class="co">## [391] 5167 5172 5175 5193 5204 5217 5228 5235 5237 5257 5258 5268 5289 5327 5370</span>
-<span class="co">## [406] 5386 5389 5391 5400 5405 5407 5409 5420 5451 5472 5473 5494 5546 5561 5568</span>
-<span class="co">## [421] 5570 5593 5599 5600 5630 5633 5656 5663 5686 5707 5741 5772 5786 5793 5821</span>
-<span class="co">## [436] 5832 5835 5847 5887 5889 5894 5901 5909 5910 5916 5946 5947 5997 6000 6008</span>
-<span class="co">## [451] 6012 6020 6042 6048 6052 6057 6065 6070 6084 6091 6092 6123 6124 6137 6145</span>
-<span class="co">## [466] 6164 6172 6179 6188 6196 6201 6210 6211 6212 6227 6228 6238 6245 6279 6303</span>
-<span class="co">## [481] 6310 6312 6341 6364 6376 6383 6401 6403 6427 6430 6449 6475 6481 6491 6514</span>
-<span class="co">## [496] 6515 6520 6527 6565 6582 6598 6606 6611 6630 6631 6638 6658 6671 6675 6686</span>
-<span class="co">## [511] 6691 6705 6706 6714 6723 6731 6755 6762 6765 6779 6807 6828 6829 6849 6854</span>
-<span class="co">## [526] 6882 6894 6895 6906 6912 6914 6927 6928 6929 6943 6961 6973 7012 7016 7076</span>
-<span class="co">## [541] 7085 7107 7122 7151 7168 7220 7240 7253 7283 7312 7390 7414 7417 7425 7448</span>
-<span class="co">## [556] 7475 7482 7486 7487 7525 7532 7534 7537 7538 7577 7583 7584 7586 7627 7643</span>
-<span class="co">## [571] 7652 7673 7678 7700 7704 7710 7714 7715 7751 7787 7791 7820 7823 7824 7826</span>
-<span class="co">## [586] 7837 7870 7875 7879 7883 7901 7902 7938 7959 7970 7989 8002 8004 8016 8035</span>
-<span class="co">## [601] 8050 8064 8066 8069 8070 8086 8095 8105 8109 8112 8130 8139 8201 8204 8224</span>
-<span class="co">## [616] 8229 8232 8248 8254 8279 8306 8308 8316 8329 8333 8338 8339 8364 8372 8384</span>
-<span class="co">## [631] 8385 8388 8401 8405 8417 8419 8423 8428 8437 8445 8476 8477 8511 8517 8519</span>
-<span class="co">## [646] 8522 8543 8559 8584 8587 8592 8625 8648 8653 8671 8694 8711 8715 8719 8741</span>
-<span class="co">## [661] 8742 8760 8773 8777 8807 8818 8864 8873 8895 8904 8916 8922 8928 8929 8943</span>
-<span class="co">## [676] 8946 8948 8959 8965 8974 8995 9009 9018 9027 9028 9033 9051 9080 9081 9118</span>
-<span class="co">## [691] 9130 9137 9141 9146 9159 9177 9178 9210 9216 9257 9263 9314 9316 9321 9338</span>
-<span class="co">## [706] 9342 9361 9363 9365 9367 9369 9419 9431 9435 9437 9445 9489 9503 9526 9531</span>
-<span class="co">## [721] 9540 9565 9571 9574 9581 9595 9599 9622 9625 9641 9644 9648 9677 9683 9687</span>
-<span class="co">## [736] 9702 9740 9776 9787 9791 9828 9832 9834 9894 9904 9920 9942 9958 9966 9972</span>
-<span class="co">## [751] 9978 9993</span>
-<span class="co">## </span>
-<span class="co">## $Mergedlabels</span>
-<span class="co">##  [1] 593 673 700 621 474 535 591 186 220 588 289 507 563 429 532 587 590 675 180</span>
-<span class="co">## [20] 215 253 329 389 506 534 360 391 565 566  68 114 179 187 216 291 362 388 473</span>
-<span class="co">## [39] 564 719 742 743 330 359 361 390 530 178 181 183 290 392 533 182 185 475 531</span>
-<span class="co">## [58] 592</span>
-<span class="co">## </span>
-<span class="co">## $Newlabel</span>
-<span class="co">## [1] 826</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># CD8+</span></span>
+<span><span class="va">pheno_result</span><span class="op">$</span><span class="va">phenotypesinfo</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">## $phenotype</span></span>
+<span><span class="co">## [1] "(Ir191)Dd_DNA1-1" "(Ir193)Dd_DNA2-1" "Cell_length-0"    "(Ce140)Dd_Bead-0"</span></span>
+<span><span class="co">## [5] "(In115)Dd_Dead-0" "(Sm154)Dd_CD14-0" "(Er166)Dd_CD33-0" "(Nd150)Dd_CD3-1" </span></span>
+<span><span class="co">## [9] "(Nd144)Dd_CD8-1" </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $proportion</span></span>
+<span><span class="co">## [1] 0.0752</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $cells</span></span>
+<span><span class="co">##   [1]    2    7    8   19   32   60   74   83   96  113  117  122  133  137  143</span></span>
+<span><span class="co">##  [16]  158  166  175  224  245  247  253  255  258  274  278  285  314  323  335</span></span>
+<span><span class="co">##  [31]  347  372  375  395  405  411  419  420  425  432  437  445  452  453  456</span></span>
+<span><span class="co">##  [46]  465  486  503  510  513  516  530  541  553  558  597  608  609  621  635</span></span>
+<span><span class="co">##  [61]  657  677  681  691  727  737  738  745  777  795  842  855  856  857  861</span></span>
+<span><span class="co">##  [76]  877  909  914  922  924  996 1008 1009 1012 1029 1031 1032 1042 1065 1078</span></span>
+<span><span class="co">##  [91] 1079 1096 1100 1110 1127 1130 1141 1163 1228 1230 1237 1242 1287 1297 1302</span></span>
+<span><span class="co">## [106] 1358 1359 1374 1428 1472 1505 1522 1525 1527 1540 1541 1551 1556 1579 1595</span></span>
+<span><span class="co">## [121] 1605 1607 1634 1646 1671 1672 1677 1690 1705 1711 1745 1750 1755 1818 1829</span></span>
+<span><span class="co">## [136] 1842 1853 1857 1862 1877 1891 1896 1909 1916 1918 1946 1947 1957 2041 2058</span></span>
+<span><span class="co">## [151] 2068 2073 2095 2101 2110 2131 2144 2147 2152 2167 2172 2173 2176 2213 2243</span></span>
+<span><span class="co">## [166] 2249 2251 2253 2304 2329 2341 2346 2366 2374 2389 2392 2395 2399 2403 2410</span></span>
+<span><span class="co">## [181] 2417 2426 2437 2444 2481 2482 2487 2514 2516 2523 2525 2527 2528 2557 2563</span></span>
+<span><span class="co">## [196] 2569 2603 2604 2613 2624 2627 2636 2638 2647 2680 2689 2718 2724 2727 2748</span></span>
+<span><span class="co">## [211] 2756 2777 2789 2823 2833 2849 2853 2859 2860 2862 2872 2881 2908 2917 2928</span></span>
+<span><span class="co">## [226] 2934 2939 2944 2951 2954 2965 2976 2992 2996 3001 3020 3024 3038 3094 3120</span></span>
+<span><span class="co">## [241] 3121 3124 3131 3145 3160 3165 3172 3201 3214 3220 3267 3275 3293 3345 3355</span></span>
+<span><span class="co">## [256] 3389 3404 3405 3447 3450 3453 3458 3468 3469 3486 3496 3498 3502 3534 3571</span></span>
+<span><span class="co">## [271] 3578 3579 3591 3597 3601 3604 3622 3628 3653 3654 3672 3686 3714 3724 3736</span></span>
+<span><span class="co">## [286] 3747 3761 3769 3778 3787 3800 3801 3803 3817 3820 3825 3829 3831 3847 3889</span></span>
+<span><span class="co">## [301] 3897 3900 3919 3925 3941 3952 3953 3969 3981 3995 4010 4036 4046 4064 4081</span></span>
+<span><span class="co">## [316] 4090 4098 4101 4105 4106 4116 4154 4184 4224 4234 4256 4262 4263 4273 4291</span></span>
+<span><span class="co">## [331] 4299 4308 4380 4444 4448 4449 4459 4475 4480 4481 4513 4517 4527 4541 4550</span></span>
+<span><span class="co">## [346] 4570 4590 4593 4616 4638 4648 4651 4717 4720 4723 4735 4737 4758 4767 4772</span></span>
+<span><span class="co">## [361] 4794 4818 4819 4840 4850 4861 4866 4882 4886 4893 4926 4931 4934 4943 4953</span></span>
+<span><span class="co">## [376] 4967 5002 5004 5009 5035 5045 5069 5070 5107 5136 5137 5141 5147 5159 5160</span></span>
+<span><span class="co">## [391] 5167 5172 5175 5193 5204 5217 5228 5235 5237 5257 5258 5268 5289 5327 5370</span></span>
+<span><span class="co">## [406] 5386 5389 5391 5400 5405 5407 5409 5420 5451 5472 5473 5494 5546 5561 5568</span></span>
+<span><span class="co">## [421] 5570 5593 5599 5600 5630 5633 5656 5663 5686 5707 5741 5772 5786 5793 5821</span></span>
+<span><span class="co">## [436] 5832 5835 5847 5887 5889 5894 5901 5909 5910 5916 5946 5947 5997 6000 6008</span></span>
+<span><span class="co">## [451] 6012 6020 6042 6048 6052 6057 6065 6070 6084 6091 6092 6123 6124 6137 6145</span></span>
+<span><span class="co">## [466] 6164 6172 6179 6188 6196 6201 6210 6211 6212 6227 6228 6238 6245 6279 6303</span></span>
+<span><span class="co">## [481] 6310 6312 6341 6364 6376 6383 6401 6403 6427 6430 6449 6475 6481 6491 6514</span></span>
+<span><span class="co">## [496] 6515 6520 6527 6565 6582 6598 6606 6611 6630 6631 6638 6658 6671 6675 6686</span></span>
+<span><span class="co">## [511] 6691 6705 6706 6714 6723 6731 6755 6762 6765 6779 6807 6828 6829 6849 6854</span></span>
+<span><span class="co">## [526] 6882 6894 6895 6906 6912 6914 6927 6928 6929 6943 6961 6973 7012 7016 7076</span></span>
+<span><span class="co">## [541] 7085 7107 7122 7151 7168 7220 7240 7253 7283 7312 7390 7414 7417 7425 7448</span></span>
+<span><span class="co">## [556] 7475 7482 7486 7487 7525 7532 7534 7537 7538 7577 7583 7584 7586 7627 7643</span></span>
+<span><span class="co">## [571] 7652 7673 7678 7700 7704 7710 7714 7715 7751 7787 7791 7820 7823 7824 7826</span></span>
+<span><span class="co">## [586] 7837 7870 7875 7879 7883 7901 7902 7938 7959 7970 7989 8002 8004 8016 8035</span></span>
+<span><span class="co">## [601] 8050 8064 8066 8069 8070 8086 8095 8105 8109 8112 8130 8139 8201 8204 8224</span></span>
+<span><span class="co">## [616] 8229 8232 8248 8254 8279 8306 8308 8316 8329 8333 8338 8339 8364 8372 8384</span></span>
+<span><span class="co">## [631] 8385 8388 8401 8405 8417 8419 8423 8428 8437 8445 8476 8477 8511 8517 8519</span></span>
+<span><span class="co">## [646] 8522 8543 8559 8584 8587 8592 8625 8648 8653 8671 8694 8711 8715 8719 8741</span></span>
+<span><span class="co">## [661] 8742 8760 8773 8777 8807 8818 8864 8873 8895 8904 8916 8922 8928 8929 8943</span></span>
+<span><span class="co">## [676] 8946 8948 8959 8965 8974 8995 9009 9018 9027 9028 9033 9051 9080 9081 9118</span></span>
+<span><span class="co">## [691] 9130 9137 9141 9146 9159 9177 9178 9210 9216 9257 9263 9314 9316 9321 9338</span></span>
+<span><span class="co">## [706] 9342 9361 9363 9365 9367 9369 9419 9431 9435 9437 9445 9489 9503 9526 9531</span></span>
+<span><span class="co">## [721] 9540 9565 9571 9574 9581 9595 9599 9622 9625 9641 9644 9648 9677 9683 9687</span></span>
+<span><span class="co">## [736] 9702 9740 9776 9787 9791 9828 9832 9834 9894 9904 9920 9942 9958 9966 9972</span></span>
+<span><span class="co">## [751] 9978 9993</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $Mergedlabels</span></span>
+<span><span class="co">##  [1] 593 673 700 621 474 535 591 186 220 588 289 507 563 429 532 587 590 675 180</span></span>
+<span><span class="co">## [20] 215 253 329 389 506 534 360 391 565 566  68 114 179 187 216 291 362 388 473</span></span>
+<span><span class="co">## [39] 564 719 742 743 330 359 361 390 530 178 181 183 290 392 533 182 185 475 531</span></span>
+<span><span class="co">## [58] 592</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $Newlabel</span></span>
+<span><span class="co">## [1] 826</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="proportions-comparison-between-manual-and-automatic-gating">Proportions comparison between manual and automatic gating<a class="anchor" aria-label="anchor" href="#proportions-comparison-between-manual-and-automatic-gating"></a>
@@ -544,7 +544,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>
