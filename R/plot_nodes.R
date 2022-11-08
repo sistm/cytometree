@@ -20,6 +20,9 @@
 #'@details if both \code{nodesPerCol} and \code{nodesPerRow} are \code{NULL}
 #'then all the nodes are plotted on a single page.
 #'
+#'\code{"GM"} stands for "Gaussian mixture" and \code{"KDE"} stands for 
+#'"Kernel Density Estimation".
+#'
 #'@return a list of \code{ggplot2} plot objects, containing each node plot.
 #'
 #'@author Chariff Alkhassim, Boris Hejblum
@@ -98,11 +101,11 @@ plot_nodes <- function(CytomeTreeObj, nodes=NULL, nodesPerCol = NULL,
       ggplot2::geom_line(ggplot2::aes_string(colour = "Estimator"), lwd = 1) +  
       ggplot2::geom_polygon(ggplot2::aes_string(fill = "Estimator"), alpha=0.3, data = df_fill[[ind]]) +
       ggplot2::scale_colour_manual(name = "",
-                                   values = c("blue","red"),
-                                   labels = c("GM", "KDE")) + 
+                                   values = c("blue","red2"),
+                                   labels = c("Gaussian Mixture", "Kernel Density")) + 
       ggplot2::scale_fill_manual(name = "",
                                  values = c("lightblue","darkred"),
-                                 labels = c("GM", "KDE")) + 
+                                 labels = c("Gaussian Mixture", "Kernel Density")) + 
       ggplot2::facet_wrap(~ Marker, nrow = nodesPerRow, ncol = nodesPerCol, 
                           scales = "free", drop=FALSE) +
       ggplot2::theme_bw() +

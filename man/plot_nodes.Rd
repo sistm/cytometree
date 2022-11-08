@@ -40,6 +40,9 @@ of the binary tree built using CytomeTree.
 \details{
 if both \code{nodesPerCol} and \code{nodesPerRow} are \code{NULL}
 then all the nodes are plotted on a single page.
+
+\code{"GM"} stands for "Gaussian mixture" and \code{"KDE"} stands for 
+"Kernel Density Estimation".
 }
 \examples{
 

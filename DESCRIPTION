@@ -1,8 +1,8 @@
 Package: cytometree
 Type: Package
 Title: Automated Cytometry Gating and Annotation
-Version: 2.0.4
-Date: 2020-08-12
+Version: 2.0.5
+Date: 2022-11-08
 Authors@R: 
     c(person(given = "Chariff",
              family = "Alkhassim",
@@ -44,7 +44,7 @@ Imports:
     stats,
     cowplot,
     GoFKernel
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 BugReports: https://github.com/sistm/Cytometree/issues
 Encoding: UTF-8
 Suggests:
