@@ -29,7 +29,7 @@
 #'\item{\code{mark_tree}}{ A two level list containing markers used
 #'for node splitting.}
 #'\item{pl_list}{ A list of density estimations for each node used in 
-#'\link{\code{plot_nodes}} for visualization purposes}
+#'\code{\link{plot_nodes}} for visualization purposes}
 #' }
 #'
 #'@details The algorithm is based on the construction of a binary tree,

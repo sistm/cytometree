@@ -40,6 +40,7 @@ Cytometry Part A, 93(11):1132-1140. <doi: 10.1002/cyto.a.23601>
 Useful links:
 \itemize{
   \item \url{https://sistm.github.io/cytometree/}
+  \item \url{https://github.com/sistm/Cytometree/}
   \item Report bugs at \url{https://github.com/sistm/Cytometree/issues}
 }
 
