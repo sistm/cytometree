@@ -1,7 +1,7 @@
 url: https://sistm.github.io/cytometree/
 template:
   bootstrap: 5
-  bootswatch: cosmo
+  bootswatch: minty
 
 
 authors:
