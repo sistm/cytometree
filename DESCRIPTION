@@ -45,6 +45,7 @@ Imports:
     cowplot,
     GoFKernel
 RoxygenNote: 7.2.1
+URL: https://sistm.github.io/cytometree/, https://github.com/sistm/Cytometree/
 BugReports: https://github.com/sistm/Cytometree/issues
 Encoding: UTF-8
 Suggests:
