@@ -15,7 +15,7 @@
 #'
 #'@references Maecker HT, McCoy JP & Nussenblatt R (2012). Standardizing 
 #'immunophenotyping for the human immunology project. Nature Reviews Immunology, 
-#'12(3):191--200. DOI: 10.1038/nri3158
+#'12(3):191--200 <doi: 10.1038/nri3158>.
 #'
 #'Finak G, Langweiler M, Jaimes M, Malek M, Taghiyar J, Korin Y, Raddassi K, 
 #'Devine L, Obermoser G, Pekalski ML, Pontikos N, Diaz A, Heck S, Villanova F, 
@@ -26,6 +26,6 @@
 #'ImmunoPhenotyping Consortium. Scientific Reports. 10(6):20686. DOI: 10.1038/srep20686.
 #'
 #'
-#'@source \url{https://www.immuneprofiling.org/} \url{https://www.immunespace.org/} 
-#'\url{https://www.immunespace.org/project/HIPC/Lyoplate/begin.view?pageId=study.DATA_ANALYSIS}
+#'@source \url{https://immunespace.org/about-us/}
+#'\url{https://datatools.immunespace.org/study/HIPC/Lyoplate/dataset.view?datasetId=5001}
 "HIPC"

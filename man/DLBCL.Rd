@@ -8,7 +8,7 @@
 A data frame with 5524 cell events and 3 markers.
 }
 \source{
-\url{http://flowcap.flowsite.org/}
+\url{http://flowrepository.org/id/FR-FCM-ZZYY}
 }
 \usage{
 data(DLBCL)

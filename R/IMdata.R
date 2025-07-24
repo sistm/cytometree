@@ -14,5 +14,5 @@
 #'
 #'@format A data frame with 10,000 rows and 39 variables:
 #' 
-#'@source \url{https://www.immunespace.org/project/Studies/SDY478/begin.view?}
+#'@source \url{https://immunespace.org/query/study/SDY478}
 "IMdata"

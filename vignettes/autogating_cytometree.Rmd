@@ -45,7 +45,7 @@ Given the unsupervised nature of the binary tree, some of the available markers 
 
 ## Diffuse large B-cell lymphoma dataset with 3 markers
 
-In this example, we will use a diffuse large B-cell lymphoma dataset (from the [FlowCAP-I challenge](http://flowcap.flowsite.org/), with only 3 markers.
+In this example, we will use a diffuse large B-cell lymphoma dataset (from the [FlowCAP-I challenge](http://flowrepository.org/id/FR-FCM-ZZYY), with only 3 markers.
 
 ### Automatic gating step
 
@@ -128,7 +128,7 @@ PhenoInfos$phenotypesinfo
 
 ### Comparison between manual and automatic gating
 
-Finally, we can compare the automatic gating obtained using `cytometree` to the original manual gating (which had `r sum(manual_labels==0)` events inconsistently gated across different operators performing the manual gating on those very same data - so those `r sum(manual_labels==0)` cells were identified as outliers in the reference label and were kept out of the evaluation criteria in the [FlowCAP-I challenge](http://flowcap.flowsite.org/)):
+Finally, we can compare the automatic gating obtained using `cytometree` to the original manual gating (which had `r sum(manual_labels==0)` events inconsistently gated across different operators performing the manual gating on those very same data – so those `r sum(manual_labels==0)` cells were identified as outliers in the reference label and were kept out of the evaluation criteria in the [FlowCAP-I challenge](https://doi.org/10.1038/nmeth.2365)):
 
 ```{r, echo=FALSE, small.mar=TRUE, fig.width=6.5, fig.height=4, message=FALSE}
 # F-measure ignoring cells labeled 0 as in FlowCAP-I.
@@ -168,7 +168,7 @@ p
 
 ## PBMC sample from the Human Immunology Project
 
-In this example, we will use a dataset from the HIPC ([Human Immunology Project Consortium](https://www.immuneprofiling.org/) program where a PBMC sample from patient 12828 was analyzed by Stanford. 
+In this example, we will use a dataset from the HIPC ([Human Immunology Project Consortium](https://immunespace.org/about-us/) program where a PBMC sample from patient `12828` was analyzed by Stanford. 
 
 ### Automatic gating step
 

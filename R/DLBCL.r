@@ -10,5 +10,5 @@
 #'
 #'@format A data frame with 5524 cell events and 3 markers.
 #'
-#'@source \url{http://flowcap.flowsite.org/}
+#'@source \url{http://flowrepository.org/id/FR-FCM-ZZYY}
 NULL

@@ -42,7 +42,7 @@ Given the unsupervised nature of the binary tree, some of the available markers 
 
 # Influenza vaccine response dataset analysis with `cytoftree`
 
-In this example, we will use an influenza vaccine response dataset (from [ImmuneSpace](https://www.immunespace.org/project/Studies/SDY478/begin.view?)), with 39 markers. To speed-up the computation, we sampled 10 000 cells from this dataset.
+In this example, we will use an influenza vaccine response dataset (from [ImmuneSpace study SDY478](https://immunespace.org/query/study/SDY478)), with 39 markers. To speed-up the computation, we sampled 10 000 cells from this dataset.
 
 ## Data preparation
 
