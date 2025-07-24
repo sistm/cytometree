@@ -1,4 +1,4 @@
-# This is a minor update of the cytometree package
+# This is a minor update of the cytometree package. All NOTES from CRAN check results have been fixed.
 
 ## Test environments  
  * local R installation, R 4.4.3
