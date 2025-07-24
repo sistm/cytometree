@@ -2,7 +2,7 @@ Package: cytometree
 Type: Package
 Title: Automated Cytometry Gating and Annotation
 Version: 2.0.5
-Date: 2022-11-08
+Date: 2025-24-07
 Authors@R: c(person(given = "Chariff",
              family = "Alkhassim",
              role = c("aut")),
