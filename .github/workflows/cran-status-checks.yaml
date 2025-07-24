@@ -1,4 +1,4 @@
-name: cran-status-checks.yaml
+name: cran-status-checks
 #Check CRAN status periodically
 
 on:
