@@ -43,7 +43,6 @@ Default is \code{1:ncol(M)} to transform all the data.}
 \value{
 An object of class 'cytomeTree' providing a partitioning
 of the set of n cells.
-\itemize{
 \item{\code{annotation}}{ A \code{data.frame} containing the annotation of each 
 cell population underlying the tree pattern.}
 \item{\code{labels}}{ The partitioning of the set of n cells.}
@@ -52,7 +51,6 @@ cell population underlying the tree pattern.}
 for node splitting.}
 \item{\code{transformation}}{ Transformation used}
 \item{\code{num_col}}{ Indexes of columns transformed}
-}
 }
 \description{
 Binary tree algorithm for mass cytometry data analysis.

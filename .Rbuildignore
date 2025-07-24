@@ -14,3 +14,4 @@ temp_Hung.rmd
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^codecov\.yml$

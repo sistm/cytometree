@@ -3,8 +3,7 @@ Type: Package
 Title: Automated Cytometry Gating and Annotation
 Version: 2.0.5
 Date: 2022-11-08
-Authors@R: 
-    c(person(given = "Chariff",
+Authors@R: c(person(given = "Chariff",
              family = "Alkhassim",
              role = c("aut")),
       person(given = "Boris P",
@@ -44,7 +43,7 @@ Imports:
     stats,
     cowplot,
     GoFKernel
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.2
 URL: https://sistm.github.io/cytometree/, https://github.com/sistm/Cytometree/
 BugReports: https://github.com/sistm/Cytometree/issues
 Encoding: UTF-8

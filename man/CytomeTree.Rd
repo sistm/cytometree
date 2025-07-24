@@ -29,7 +29,6 @@ the clustering algorithm is unsupervised.}
 \value{
 An object of class 'CytomeTree' providing a partitioning
 of the set of n cells.
-\itemize{
 \item{\code{annotation}}{ A \code{data.frame} containing the annotation of each 
 cell population underlying the tree pattern.}
 \item{\code{labels}}{ The partitioning of the set of n cells.}
@@ -38,7 +37,6 @@ cell population underlying the tree pattern.}
 for node splitting.}
 \item{pl_list}{ A list of density estimations for each node used in 
 \code{\link{plot_nodes}} for visualization purposes}
-}
 }
 \description{
 Binary tree algorithm for cytometry data analysis.

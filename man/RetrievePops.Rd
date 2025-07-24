@@ -15,13 +15,11 @@ columns where the name of a used marker is associated to a value
 chosen between 0, 1 and 2. 0 translates to -, 1 to + and 2 to ++.}
 }
 \value{
-A \code{list} of two elements.
-\itemize{
+A \code{list} of two elements:
 \item{\code{phenotypesinfo}}{ A \code{list} containing informations 
 about sought populations.}
 \item{\code{Mergedleaves}}{ The partitioning of the set of n cells
 with potentially merged leaves.}
-}
 }
 \description{
 Retrieve cell populations found using Annotation.

@@ -25,9 +25,8 @@
 #'@param num_col An integer vector of index indicating the columns to be transform. 
 #'Default is \code{1:ncol(M)} to transform all the data. 
 #'
-#'@return An object of class 'cytomeTree' providing a partitioning
+#'@returns An object of class 'cytomeTree' providing a partitioning
 #'of the set of n cells.
-#'\itemize{
 #'\item{\code{annotation}}{ A \code{data.frame} containing the annotation of each 
 #'cell population underlying the tree pattern.}
 #'\item{\code{labels}}{ The partitioning of the set of n cells.}
@@ -36,7 +35,6 @@
 #'for node splitting.}
 #'\item{\code{transformation}}{ Transformation used}
 #'\item{\code{num_col}}{ Indexes of columns transformed}
-#' }
 #'
 #'@details First of all, data can be transformed using different transformations. 
 #'The algorithm is based on the construction of a binary tree,
