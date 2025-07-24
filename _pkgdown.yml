@@ -2,8 +2,7 @@ url: https://sistm.github.io/cytometree/
 template:
   bootstrap: 5
   bootswatch: minty
-
-
 authors:
   Boris P Hejblum:
     href: https://borishejblum.science
+    
