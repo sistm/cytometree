@@ -6,8 +6,8 @@
 #'\tabular{ll}{
 #'Package: \tab cytometree\cr
 #'Type: \tab Package\cr
-#'Version: \tab 2.0.5\cr
-#'Date: \tab 2025-11-08\cr
+#'Version: \tab 2.0.6\cr
+#'Date: \tab 2025-07-24\cr
 #'License:\tab \href{http://www.gnu.org/licenses/lgpl.txt}{LGPL-3}\cr
 #'}
 #'The algorithm is based on the construction of a binary tree, 

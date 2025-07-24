@@ -15,3 +15,4 @@ temp_Hung.rmd
 ^docs$
 ^pkgdown$
 ^codecov\.yml$
+^CRAN-SUBMISSION$
