@@ -1,10 +1,8 @@
-# This is an update of the cytometree package to fix errors in R 4.0.0 checks
+# This is a minor update of the cytometree package
 
 ## Test environments  
-* local macOS 10.15.1 install, R 3.6.1
-* macOS 10.13.3 (on travis-ci), R release
-* ubuntu 16.04.6 (on travis-ci), R devel and release
-* Windows Visual Studio 2015 (on appveyor), R devel and release
+ * local R installation, R 4.4.3
+ * Linux (Ubuntu 24.04), macOS (14.7) and Windows (Server 2022 10.0), R devel and release (through GitHub Actions)
 
 
 ## R CMD check results  
