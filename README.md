@@ -4,8 +4,9 @@
 # cytometree <a><img src='man/figures/logo.png' align="right" width="139" /></a>
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/cytometree)](https://cran.r-project.org/package=cytometree)
-[![R-CMD-check](https://github.com/sistm/cytometree/workflows/R-CMD-check/badge.svg)](https://github.com/sistm/cytometree/actions)
-[![codecov.io](https://codecov.io/github/sistm/Cytometree/coverage.svg?branch=master)](https://codecov.io/github/sistm/Cytometree?branch=master)
+[![R-CMD-check](https://github.com/sistm/cytometree/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sistm/cytometree/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/sistm/cytometree/graph/badge.svg)](https://app.codecov.io/gh/sistm/cytometree)
 [![Downloads](https://cranlogs.r-pkg.org/badges/cytometree?color=blue)](https://www.r-pkg.org/pkg/cytometree)
 
 ## Overview
@@ -35,7 +36,7 @@ The following article explains in more details how `cytometree` works:
 > Commenges D, Alkhassim C, Gottardo R, Hejblum BP, Thiébaut R (2018).
 > cytometree: a binary tree algorithm for automatic gating in cytometry
 > analysis. *Cytometry Part A* **93**(11):1132-1140. [\<doi:
-> 10.1002/cyto.a.23601>](https://doi.org/10.1002/cyto.a.23601)
+> 10.1002/cyto.a.23601\>](https://doi.org/10.1002/cyto.a.23601)
 
 ## Installation
 
