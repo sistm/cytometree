@@ -1,5 +1,6 @@
-# cytometree 2.0.2 
-* better args checks for R 4.0.0
+# cytometree 2.0.5 
+* better args checks for R > v4
+* fixed documentation NOTE
 
 # cytometree 2.0.0  
 * CyTOF data support through `CytofTree()` 
