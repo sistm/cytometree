@@ -19,7 +19,7 @@
 #'and forcing the split at every node. Default is \code{NULL}, in which case
 #'the clustering algorithm is unsupervised.
 #'
-#'@return An object of class 'CytomeTree' providing a partitioning
+#'@returns An object of class 'CytomeTree' providing a partitioning
 #'of the set of n cells.
 #'\item{\code{annotation}}{ A \code{data.frame} containing the annotation of each 
 #'cell population underlying the tree pattern.}
