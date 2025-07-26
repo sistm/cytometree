@@ -16,3 +16,4 @@ temp_Hung.rmd
 ^pkgdown$
 ^codecov\.yml$
 ^CRAN-SUBMISSION$
+^url_whitelist
