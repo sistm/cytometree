@@ -23,18 +23,13 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::urlchecker, any::yyjsonr
+          extra-packages: any::urlchecker, any::dplyr, any::cli
           
       - name: URL check
         run: |
           urls_checks <- urlchecker::url_check()
           if(nrow(urls_checks)>0){
-          whitelist <- readLines("url_whitelist")
-          for(i in nrow(urls_checks)){
-            if(! urls_checks[i, "URL"] %in% whitelist){
-              stop(print(urls_checks))
-            }
-          }
+            stop(print(urls_checks))
           }else{
             print(urls_checks)
           }
@@ -45,41 +40,49 @@ jobs:
         id: cran-check-status
         run: |
           pkg <- "cytometree"
-          fp <- paste0("https://ricochet-rs.github.io/cran-checks/", pkg, ".json")
+          cli::cli_alert_info("Fetching check results from CRAN")
+          results <- tools::CRAN_check_results() |>
+            dplyr::as_tibble()
 
-          json <- tryCatch(readLines(fp),
-            warning = function(e) {
-              stop("Package ", pkg, " not found in CRAN checks", call. = FALSE)
-            }
-          )
+          cli::cli_alert_info("Fetching additional issues from CRAN")
 
-          res <- yyjsonr::read_json_str(json)
+          problems <- tools::CRAN_check_issues() |>
+            dplyr::as_tibble() |>
+            dplyr::group_by(Package) |>
+            dplyr::summarise(issues = list(data.frame(kind, href))) 
+
+          # join problems onto the check results
+          res <- dplyr::left_join(results, problems, by = "Package") |>
+            dplyr::filter(Package == pkg)
           
-          if (any("ERROR" %in% res$results[[1]]$check_status)) {
+          if (any("ERROR" %in% res$Status)) {
             stop(
               "Errors found in CRAN checks",
               "\n",
               "Review logs at ", 
               "https://cran.r-project.org/web/checks/check_results_", pkg, ".html"
             )
-          } else if (any(grepl("WARN", res$results[[1]]$check_status))) {
+          } else if (any(grepl("WARN", res$Status))) {
             stop(
               "Warnings found in CRAN checks",
               "\n",
               "Review logs at ", 
               "https://cran.r-project.org/web/checks/check_results_", pkg, ".html"
             )
-          } else if (!is.data.frame(res$issues)) {
-            issues <- res$issues[[1]]
-            stop(
-              "Additional issues detected:\n",
-              sprintf("  - %s: %s\n", issues$kind, issues$href)
-            )
           } else if (any(grepl("NOTE", res$results[[1]]$check_status))) {
             stop(
               "NOTES found in CRAN checks",
               "\n",
               "Review logs at ", 
+              "https://cran.r-project.org/web/checks/check_results_", pkg, ".html"
+            )
+          } else if (!any(sapply(res$issues, is.null))) {
+            issues <- res$issues[[1]]
+            stop(
+              "Additional issues detected:\n",
+              sprintf("  - %s: %s\n", issues$kind, issues$href),
+              "\n",
+              "Review logs at ",
               "https://cran.r-project.org/web/checks/check_results_", pkg, ".html"
             )
           }
