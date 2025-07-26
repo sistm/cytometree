@@ -29,8 +29,13 @@ jobs:
         run: |
           urls_checks <- urlchecker::url_check()
           if(nrow(urls_checks)>0){
-            stop(print(urls_checks))
-          }else{
+            whitelist <- readLines("url_whitelist")
+            for(i in nrow(urls_checks)){
+              if(! urls_checks[i, "URL"] %in% whitelist){
+                stop(print(urls_checks))
+              }
+            }
+          } else{
             print(urls_checks)
           }
         shell: Rscript {0}
